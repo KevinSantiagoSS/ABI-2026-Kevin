@@ -155,3 +155,7 @@ Route::middleware(['auth', 'role:committee_leader'])->group(function () {
     Route::get('professor/projects/approved/{project}', [BankApprovedIdeasForProfessorsController::class, 'show'])
         ->name('professor.projects.approved.show');
 });
+
+// Temporary manual-testing URL for the reports module preview view.
+    Route::view('reports/module-overview', 'reports.module-overview')
+        ->name('reports.module-overview');
