@@ -1,38 +1,37 @@
 # ABI 
 
-Un sistema web integral para la gestión de contenidos y proyectos de grado, desarrollado con Laravel y Tablar, que permite administrar frameworks de investigación, contenidos académicos, estudiantes, profesores y proyectos educativos. 
+Plataforma web para la gestión y trazabilidad del banco de ideas y proyectos de grado. El sistema centraliza el registro de ideas, su evaluación por comité, la consulta del banco de ideas aprobadas, la asignación de estudiantes y el manejo de catálogos académicos relacionados con investigación.
 
-## 🚀 Tecnologías Utilizadas
+## 🚀 Tecnologías utilizadas
 
 ### Backend
-- **Laravel Framework 10.x** - Framework PHP robusto y escalable
-- **PHP 8.1+** - Lenguaje de programación del lado del servidor
-- **MySQL** - Base de datos relacional 
-- **Laravel Sanctum** - Autenticación API
-- **Laravel Tinker** - REPL interactivo para Laravel
+- **Laravel 10**
+- **PHP 8.1 o superior**
+- **MySQL / MariaDB**
+- **Laravel Tinker**
+- **Laravel Sanctum** para endpoints API autenticados
 
 ### Frontend
-- **Tablar** - Kit de interfaz de usuario moderno y responsivo para Laravel
-- **Bootstrap 5.3.1** - Framework CSS para diseño responsivo
-- **Vite** - Build tool moderno para assets
-- **jQuery 3.7** - Librería JavaScript para interactividad
-- **ApexCharts** - Librería de gráficos y visualizaciones
-- **Bootstrap Icons** - Sistema de iconografía
+- **Blade** como motor de plantillas
+- **Tablar** como base visual de la interfaz administrativa
+- **Bootstrap 5.3.1**
+- **Vite** para compilación de assets
+- **jQuery 3.7**
+- **ApexCharts**
+- **Bootstrap Icons**
 
-### Librerías Especializadas
-- **DomPDF** - Generación de documentos PDF
-- **Maatwebsite Excel** - Exportación e importación de Excel
-- **PhpSpreadsheet** - Manipulación de hojas de cálculo
-- **TCPDF & FPDF** - Generación avanzada de PDFs
-- **TinyMCE** - Editor de texto enriquecido
-- **Filepond** - Subida de archivos con vista previa
+### Librerías complementarias
+- **DomPDF**, **TCPDF**, **FPDF**
+- **PhpSpreadsheet** y librerías de Excel
+- **TinyMCE / Jodit** para edición enriquecida
+- **Filepond** para carga de archivos
 
-### Herramientas de Desarrollo
-- **Laravel Pint** - Formateador de código PHP
-- **Laravel Sail** - Entorno de desarrollo con Docker
-- **PHPUnit** - Testing framework
-- **Faker** - Generación de datos de prueba
-- **Tablar CRUD Generator** - Generador automático de CRUDs para interfaz Tablar
+### Herramientas de desarrollo
+- **Composer**
+- **Node.js y npm**
+- **Laravel Pint**
+- **PHPUnit**
+- **Faker**
 
 ## 📁 Arquitectura del Proyecto
 
@@ -55,339 +54,364 @@ abi-mio/
 └── storage/                      # Almacenamiento de archivos
 ```
 
-### Modelo de Datos
+### Modelo de datos
 
-El sistema ABI gestiona las siguientes entidades principales:
+El modelo de datos del aplicativo está orientado al banco de ideas y a la trazabilidad de proyectos de grado. Las entidades principales son estas:
 
-#### 🏛️ Estructura Académica
-- **Departamentos** - Departamentos universitarios
-- **Ciudades** - Localidades geográficas donde se implementa el programa bilingüe
-- **Programas** - Programas académicos bilingües
-- **Grupos de Investigación** - Grupos de investigación en educación bilingüe
+#### 1. Usuarios y perfiles
+- **users**: credenciales de acceso, estado del usuario y rol.
+- **students**: perfil de estudiante vinculado a `users` y a un `city_program`.
+- **professors**: perfil docente vinculado a `users` y a un `city_program`. El campo `committee_leader` diferencia al docente líder de comité.
+- **research_staff**: perfil del personal de investigación vinculado a `users`.
 
-#### 👥 Usuarios del Sistema
-- **Usuarios** - Sistema de autenticación con roles (admin/user)
-- **Estudiantes** - Estudiantes en programas bilingües vinculados a proyectos
-- **Profesores** - Docentes bilingües supervisores de proyectos
+#### 2. Estructura académica
+- **departments**: departamentos.
+- **cities**: ciudades asociadas a un departamento.
+- **research_groups**: grupos de investigación.
+- **programs**: programas académicos asociados a un grupo de investigación.
+- **city_program**: relación entre programa y ciudad.
+- **investigation_lines**: líneas de investigación asociadas a grupos de investigación.
+- **thematic_areas**: áreas temáticas asociadas a líneas de investigación.
 
-#### 📚 Gestión de Contenido Bilingüe
-- **Frameworks** - Marcos pedagógicos y metodológicos de enseñanza bilingüe
-- **Contenidos** - Material académico bilingüe y recursos interactivos
-- **Proyectos** - Proyectos educativos bilingües e interactivos
-- **Versiones** - Control de versiones de contenidos bilingües
+#### 3. Banco de ideas y proyectos
+- **project_statuses**: estados del proyecto o idea, por ejemplo pendiente, aprobado, rechazado, devuelto para corrección y asignado.
+- **projects**: idea o proyecto de grado, con título, criterios de evaluación, área temática y estado.
+- **student_project**: relación muchos a muchos entre estudiantes y proyectos.
+- **professor_project**: relación muchos a muchos entre docentes y proyectos.
+- **versions**: versiones o snapshots de un proyecto. Cada versión puede guardar `snapshot` y el usuario que la creó.
 
-#### 🔗 Relaciones Principales
-- **Content Framework Project** - Vinculación entre contenidos, frameworks y proyectos
-- **Student Project** - Asignación de estudiantes a proyectos
-- **Professor Project** - Asignación de profesores a proyectos
-- **City Program** - Relación entre ciudades y programas académicos
+#### 4. Marcos y contenidos
+- **frameworks**: marcos de referencia.
+- **content_frameworks**: contenidos definidos dentro de un framework.
+- **content_framework_project**: relación entre contenidos de framework y proyectos.
+- **contents**: catálogo de campos o contenidos diligenciables en una versión.
+- **content_version**: valor diligenciado de un contenido dentro de una versión concreta.
 
-### Patrón de Arquitectura
+### Relaciones principales
 
-El proyecto sigue el patrón **MVC (Model-View-Controller)** de Laravel:
+```text
+users 1 --- 1 students
+users 1 --- 1 professors
+users 1 --- 1 research_staff
 
-- **Modelos (Models)**: Representan la lógica de negocio y la interacción con la base de datos
-- **Vistas (Views)**: Plantillas Blade para la presentación de datos
-- **Controladores (Controllers)**: Manejan las peticiones HTTP y coordinan entre modelos y vistas
+departments 1 --- N cities
+research_groups 1 --- N programs
+research_groups 1 --- N investigation_lines
+investigation_lines 1 --- N thematic_areas
+cities N --- N programs (mediante city_program)
+city_program 1 --- N students
+city_program 1 --- N professors
 
-## 🛠️ Instalación y Configuración
+thematic_areas 1 --- N projects
+project_statuses 1 --- N projects
+projects N --- N students (mediante student_project)
+projects N --- N professors (mediante professor_project)
+projects 1 --- N versions
+frameworks 1 --- N content_frameworks
+projects N --- N content_frameworks (mediante content_framework_project)
+versions N --- N contents (mediante content_version, almacenando value)
+```
+
+## 🛠️ Instalación y configuración
 
 ### Prerrequisitos
 
-- **PHP 8.1 o superior**
-- **Composer** - Gestor de dependencias PHP
-- **Node.js y npm** - Para assets del frontend
-- **MySQL 5.7 o superior**
-- **Apache/Nginx** - Servidor web
+Para ejecutar el proyecto en local, **usa XAMPP**. No instales PHP, MySQL ni Apache por separado para evitar conflictos.
 
-### Pasos de Instalación
+- **XAMPP**, con:
+  - **PHP 8.1 o superior**
+  - **MySQL o MariaDB**
+  - **Apache**
+- **Composer**, para instalar dependencias de PHP
+- **Node.js y npm**, para compilar los assets del frontend
 
-1. **Clonar el repositorio**
-   ```bash
-   git clone <url-del-repositorio>
-   cd abi-mio
-   ```
+> **Importante:** este proyecto asume en Windows que XAMPP está instalado en `C:\xampp`. Si lo instalaste en otra ruta, debes ajustar los scripts o la variable PATH.
 
-2. **Instalar dependencias PHP**
-   ```bash
-   composer install
-   ```
+### Instalación local en Windows con XAMPP
 
-3. **Instalar dependencias JavaScript**
-   ```bash
-   npm install
-   ```
+#### 1. Instala XAMPP
+Instala XAMPP y, al terminar, abre el panel de control de XAMPP.
 
-4. **Configurar variables de entorno**
-   ```bash
-   cp .env.example .env
-   ```
-   
-   Editar el archivo `.env` con la configuración de tu entorno:
-   ```env
-   APP_NAME=ABI
-   APP_ENV=local
-   APP_KEY=
-   APP_DEBUG=true
-   APP_URL=http://localhost
-   
-   DB_CONNECTION=mysql
-   DB_HOST=127.0.0.1
-   DB_PORT=3306
-   DB_DATABASE=nombre_base_datos
-   DB_USERNAME=usuario_mysql
-   DB_PASSWORD=contraseña_mysql
-   ```
+#### 2. Inicia servicios
+En el panel de XAMPP, inicia:
+- **Apache**
+- **MySQL**
 
-5. **Generar clave de aplicación**
-   ```bash
-   php artisan key:generate
-   ```
+#### 3. Verifica que estás usando el PHP de XAMPP
+Antes de ejecutar comandos de Laravel, abre **PowerShell** y asegúrate de que `php` apunte al PHP de XAMPP.
 
-6. **Levantamiento de la base de datos**
-   ```bash
-   # En Windows powershell desde la raíz del proyecto
-   .\scripts\set-db-roles.ps1
+Puedes hacerlo temporalmente en la terminal actual con:
 
-   # En linux desde la raíz del proyecto
-   bash scripts/set-db-roles.sh
-   ./scripts/set-db-roles.sh
-   ```
+```powershell
+$env:Path = "C:\xampp\php;C:\xampp\mysql\bin;" + $env:Path
+php --ini
+```
 
-7. **Compilar assets del frontend**
-   ```bash
-   npm run build
-   ```
+La salida de `php --ini` debe apuntar a un `php.ini` dentro de `C:\xampp\php`.
 
-8. **Iniciar servidor de desarrollo**
-   ```bash
-   php artisan serve
-   ```
+> **No uses otro PHP instalado aparte**, porque eso suele causar errores como `could not find driver` al correr migraciones.
 
-La aplicación estará disponible en `http://localhost:8000`
+#### 4. Clona el repositorio
+```bash
+git clone <url-del-repositorio>
+cd ABI-2026-main
+```
 
-### Configuración de Base de Datos
+#### 5. Instala dependencias de PHP
+```bash
+composer install
+```
 
-El sistema ABI requiere una base de datos MySQL. Las migraciones incluyen:
+#### 6. Instala dependencias del frontend
+```bash
+npm install
+```
 
-- Tablas de autenticación (usuarios, tokens, etc.)
-- Estructura académica bilingüe (departamentos, ciudades, programas)
-- Gestión de proyectos y contenidos bilingües
-- Relaciones entre entidades del sistema educativo
-
-## 👤 Sistema de Autenticación
-
-El sistema implementa autenticación basada en roles:
-
-### Roles Disponibles
-- **Admin**: Acceso completo al sistema
-- **User**: Acceso limitado a funcionalidades específicas
-
-### Funcionalidades por Rol
-
-#### Administrador
-- Gestión completa de departamentos y ciudades
-- Administración de frameworks y contenidos
-- Control de usuarios y perfiles
-- Acceso a todos los reportes y estadísticas
-
-#### Usuario
-- Consulta de información académica
-- Acceso limitado a funcionalidades específicas
-
-## 🎯 Funcionalidades Principales
-
-### 📊 Gestión de Frameworks
-- **CRUD completo** de frameworks de investigación
-- **Búsqueda y filtrado** por nombre, descripción o año
-- **Validación avanzada** de datos
-- **Control de integridad** referencial
-
-### 🏗️ Gestión de Proyectos
-- Creación y administración de proyectos académicos
-- Asignación de estudiantes y profesores
-- Vinculación con frameworks y contenidos
-- Control de estados y versiones
-
-### 👥 Gestión de Usuarios
-- Sistema de registro y autenticación
-- Gestión de perfiles de estudiantes y profesores
-- Control de acceso basado en roles
-
-### 📈 Reportes y Exportación
-- Generación de reportes en PDF
-- Exportación de datos a Excel
-- Visualización de estadísticas con gráficos
-
-## 🎨 Interfaz Tablar para CRUDs
-
-El sistema utiliza **Tablar** como framework de UI, que proporciona una interfaz moderna y responsiva para todas las operaciones CRUD:
-
-### Características de Tablar
-- **Diseño Responsivo**: Se adapta automáticamente a dispositivos móviles y desktop
-- **Componentes Preconstruidos**: Formularios, tablas, modales y botones estilizados
-- **Navegación Intuitiva**: Breadcrumbs y menús laterales organizados
-- **Alertas y Notificaciones**: Sistema integrado de mensajes de éxito/error
-- **Paginación Automática**: Manejo eficiente de grandes conjuntos de datos
-
-### Generación de CRUDs con Tablar
-El proyecto incluye **Tablar CRUD Generator** para crear automáticamente interfaces completas:
+#### 7. Configura el archivo `.env`
+Si vas a trabajar con base de datos local:
 
 ```bash
-# Generar CRUD completo para un modelo
-php artisan make:tablar-crud ModelName 
-
-# Generar solo el controlador con interfaz Tablar
-php artisan make:tablar-controller ModelController
-
-# Generar vistas Tablar para un modelo existente
-php artisan make:tablar-views ModelName
+copy .env.example .env
 ```
 
-### Estructura de Vistas Tablar
-Cada CRUD generado incluye:
-- **index.blade.php**: Listado con búsqueda, filtros y paginación
-- **create.blade.php**: Formulario de creación con validación
-- **edit.blade.php**: Formulario de edición con datos precargados
-- **show.blade.php**: Vista detallada del registro
-- **form.blade.php**: Componente reutilizable de formulario
+Si vas a usar base de datos en la nube:
 
-### Personalización de la Interfaz
-```php
-// En el controlador, personalizar la vista
-public function index()
-{
-    $items = Model::paginate(10);
-    
-    return view('tablar::models.index', [
-        'items' => $items,
-        'title' => 'Gestión de Items',
-        'create_route' => 'models.create',
-        'show_route' => 'models.show'
-    ]);
-}
+```bash
+copy .env.examplenube .env
 ```
 
-## 🔧 Comandos Útiles
+#### 8. Ajusta las variables de entorno
+Si trabajas en local, revisa como mínimo estos valores en `.env`:
+
+```env
+APP_NAME=ABI
+APP_ENV=local
+APP_DEBUG=true
+APP_URL=http://127.0.0.1:8000
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=laravel
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+Si tu usuario `root` en MySQL tiene contraseña, colócala en `DB_PASSWORD`.
+
+#### 9. Genera la clave de la aplicación
+```bash
+php artisan key:generate
+```
+
+#### 10. Inicializa la base de datos local
+Este paso solo aplica si estás usando `.env` local.
+
+En Windows PowerShell, desde la raíz del proyecto:
+
+```powershell
+.\scripts\set-db-roles.ps1
+```
+
+Ese script realiza dos acciones:
+- ejecuta migraciones y seeders
+- crea los usuarios y permisos de MySQL usados por el sistema
+
+> **Importante:** si vas a usar base de datos en la nube, omite este paso.
+
+#### 11. Compila los assets
+```bash
+npm run build
+```
+
+#### 12. Inicia el servidor de desarrollo
+```bash
+php artisan serve
+```
+
+La aplicación quedará disponible en:
+
+```text
+http://127.0.0.1:8000
+```
+
+### Instalación local en Linux
+
+1. Instala PHP 8.1+, Composer, Node.js y MySQL/MariaDB.
+2. Copia `.env.example` a `.env`.
+3. Ajusta credenciales de base de datos.
+4. Ejecuta:
+
+```bash
+composer install
+npm install
+php artisan key:generate
+bash scripts/set-db-roles.sh
+npm run build
+php artisan serve
+```
+
+## 👤 Sistema de autenticación
+
+La autenticación principal del sistema es **web, basada en sesión**, usando los controladores de autenticación de Laravel para inicio y cierre de sesión.
+
+### Cómo está modelada
+
+- La tabla **users** almacena credenciales, estado y rol.
+- La información personal y académica no se guarda completa en `users`, sino en tablas de perfil:
+  - `students`
+  - `professors`
+  - `research_staff`
+- El rol **committee_leader** comparte la tabla `professors`, diferenciándose por el campo `committee_leader` y por el valor del rol en `users`.
+
+### Roles actuales del sistema
+
+- **research_staff**
+- **professor**
+- **committee_leader**
+- **student**
+
+> El valor `user` existe en el enum de la tabla `users`, pero no es el rol principal del flujo funcional actual del aplicativo.
+
+### Control de acceso
+
+El acceso se controla con middleware:
+
+- `auth`: exige usuario autenticado
+- `role`: restringe módulos por rol
+
+### Comportamiento actual
+
+- El **inicio de sesión** se realiza por correo y contraseña.
+- Los usuarios inactivos no pueden ingresar.
+- El **registro de usuarios** está pensado para ser gestionado por **personal de investigación**.
+- Todos los usuarios autenticados pueden consultar su perfil.
+- La administración de usuarios y la activación/inactivación de cuentas se realiza desde el módulo de usuarios.
+
+### API
+
+El proyecto también expone rutas en `routes/api.php`. La autenticación API con Sanctum está disponible para los escenarios donde se requiera consumo autenticado, aunque el flujo principal del sistema es web.
+
+## 🎯 Funcionalidades principales del proyecto
+
+### Gestión de usuarios y perfiles
+- Registro de usuarios por rol
+- Edición, activación e inactivación de cuentas
+- Perfiles de estudiante, docente, comité líder y personal de investigación
+- Consulta de perfil del usuario autenticado
+
+### Estructura académica e investigación
+- Gestión de departamentos y ciudades
+- Gestión de programas académicos
+- Relación programa-ciudad
+- Gestión de grupos de investigación
+- Gestión de líneas de investigación
+- Gestión de áreas temáticas
+
+### Marcos y contenidos
+- Gestión de frameworks
+- Gestión de contenidos de framework
+- Catálogo de contenidos diligenciables
+- Gestión de versiones y valores de contenido por versión
+
+### Banco de ideas y proyectos
+- Registro de ideas o proyectos por estudiantes y docentes
+- Asociación de docentes participantes
+- Asociación de estudiantes a proyectos
+- Consulta de proyectos según el rol autenticado
+- Filtros por estado, búsqueda por título y filtrado por programa en algunos roles
+
+### Evaluación por comité
+- Vista de evaluación para comité líder
+- Cambio de estado de la idea
+- Estados manejados por el sistema: pendiente de aprobación, aprobado, rechazado, devuelto para corrección y asignado
+- Registro de observaciones y criterios de evaluación
+
+### Banco de ideas aprobadas
+- Vista de ideas aprobadas para estudiantes
+- Vista de ideas aprobadas para docentes
+- Consulta detallada del proyecto aprobado
+- Selección y asignación de idea por parte del estudiante, según reglas del estado actual
+
+### Trazabilidad y versionamiento
+- Historial de versiones por proyecto
+- Snapshot de información del proyecto por versión
+- Relación entre versiones y contenidos diligenciados
+
+### Notificaciones
+- Envío de correos cuando una idea es evaluada
+- Plantillas diferenciadas para aprobación, rechazo o devolución para corrección
+
+## 🎨 Interfaz de usuario
+
+La interfaz del sistema está construida principalmente con **Blade + Tablar**, apoyándose en componentes de Bootstrap.
+
+### Características de la interfaz
+- Diseño administrativo responsivo
+- Listados con filtros y paginación
+- Formularios de creación y edición
+- Vistas separadas según rol y módulo
+- Plantillas de correo personalizadas para notificaciones
+
+## 🔧 Comandos útiles
 
 ### Desarrollo
 ```bash
-# Servidor de desarrollo
 php artisan serve
-
-# Compilar assets en desarrollo
 npm run dev
-
-# Limpiar caché
 php artisan cache:clear
 php artisan config:clear
 php artisan view:clear
 ```
 
+### Base de datos
+```bash
+php artisan migrate
+php artisan migrate:rollback
+php artisan migrate:refresh
+php artisan db:seed
+```
+
 ### Producción
 ```bash
-# Optimizar aplicación
-php artisan optimize
+composer install --optimize-autoloader --no-dev
 php artisan config:cache
 php artisan route:cache
 php artisan view:cache
-
-# Compilar assets para producción
 npm run build
-```
-
-### Base de Datos
-```bash
-# Ejecutar migraciones
-php artisan migrate
-
-# Rollback migraciones
-php artisan migrate:rollback
-
-# Refrescar base de datos
-php artisan migrate:refresh
 ```
 
 ## 🚀 Despliegue
 
-### Preparación para Producción
-
-1. **Configurar variables de entorno**
-   ```env
-   APP_ENV=production
-   APP_DEBUG=false
-   ```
-
-2. **Optimizar aplicación**
-   ```bash
-   composer install --optimize-autoloader --no-dev
-   php artisan config:cache
-   php artisan route:cache
-   php artisan view:cache
-   ```
-
-3. **Configurar permisos**
-   ```bash
-   chmod -R 775 storage bootstrap/cache
-   chown -R www-data:www-data storage bootstrap/cache
-   ```
-
-### Servidor Web
-
-#### Apache
-```apache
-<VirtualHost *:80>
-    DocumentRoot /path/to/abi-mio/public
-    <Directory /path/to/abi-mio/public>
-        AllowOverride All
-        Require all granted
-    </Directory>
-</VirtualHost>
+### Variables recomendadas para producción
+```env
+APP_ENV=production
+APP_DEBUG=false
 ```
 
-#### Nginx
-```nginx
-server {
-    listen 80;
-    root /path/to/abi-mio/public;
-    index index.php;
-
-    location / {
-        try_files $uri $uri/ /index.php?$query_string;
-    }
-
-    location ~ \.php$ {
-        fastcgi_pass unix:/var/run/php/php8.1-fpm.sock;
-        fastcgi_index index.php;
-        fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
-        include fastcgi_params;
-    }
-}
-```
+### Recomendaciones generales
+- Configurar correctamente las conexiones de base de datos por rol si se usarán cuentas restringidas.
+- Validar colas y correo si se van a usar las notificaciones de evaluación.
+- Compilar assets antes de desplegar.
 
 ## 🔒 Seguridad
 
-El sistema implementa las siguientes medidas de seguridad:
+El sistema incorpora medidas como:
 
-- **Autenticación Laravel Sanctum**
-- **Protección CSRF**
-- **Validación de datos de entrada**
-- **Control de acceso basado en roles**
-- **Sanitización de datos**
+- autenticación web por sesión
+- control de acceso por rol
+- validación de formularios
+- uso de passwords hasheadas
+- usuarios de MySQL con permisos diferenciados para ciertos escenarios
+- protección CSRF en formularios web
 
 ## 🤝 Contribución
 
-Para contribuir al proyecto:
-
-1. Fork el repositorio
-2. Crea una rama para tu funcionalidad (`git checkout -b feature/nueva-funcionalidad`)
-3. Commit tus cambios (`git commit -am 'Añadir nueva funcionalidad'`)
-4. Push a la rama (`git push origin feature/nueva-funcionalidad`)
-5. Crea un Pull Request
+1. Crea una rama para tu cambio.
+2. Realiza tus ajustes.
+3. Ejecuta pruebas y valida el flujo afectado.
+4. Abre un Pull Request con la descripción del cambio.
 
 ## 📄 Licencia
 
-Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más detalles.
-
-
-
+Este proyecto está bajo la licencia MIT. Revisa el archivo `LICENSE` para más detalles.

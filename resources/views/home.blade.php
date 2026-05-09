@@ -34,7 +34,7 @@
                         <img src="{{ asset('udi-logo.png') }}" alt="Logo UDI" class="img-fluid">
                     </span>
                     <h1 class="card-title mb-3">Hola, {{ $displayName }}</h1>
-                    <p>{{$userProgram}}</p>
+                    <p>{{ $userTypeLabel }}</p>
                     <p class="text-muted mb-4">Último acceso: <strong>{{ now()->format('d/m/Y H:i') }}</strong></p>
                     <div class="text-muted fs-5 mb-4">
                         ABI es un sistema web para la gestión de ideas de proyectos de grado. Aquí podrás realizar todo el proceso de propuesta, selección, evaluación y seguimiento general de las ideas de proyecto de grado.

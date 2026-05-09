@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\AuthUserHelper;
+use App\Models\AcademicPeriod;
+use App\Models\AcademicProcessWindow;
 use App\Models\City;
 use App\Models\CityProgram;
 use App\Models\Content;
 use App\Models\ContentVersion;
+use App\Models\Framework;
 use App\Models\InvestigationLine;
 use App\Models\Professor;
 use App\Models\Program;
@@ -15,9 +19,13 @@ use App\Models\Student;
 use App\Models\ThematicArea;
 use App\Models\User;
 use App\Models\Version;
+use App\Services\AcademicCalendar\AcademicCalendarService;
+use App\Services\Projects\ProjectAgeReviewService;
+use App\Services\Projects\TeacherIdeaBalanceService;
+use App\Services\Students\StudentAcademicProgressService;
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Builder; // Added to share the participants base query between the HTML preload and the JSON endpoint.
-use Illuminate\Http\JsonResponse; // Added to type-hint JSON responses for the professor search endpoint.
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -25,33 +33,26 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
-use App\Helpers\AuthUserHelper;
-use App\Models\Framework;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
-/**
- * Controller responsible for managing the project proposal lifecycle for students and professors.
- *
- * The controller renders the Tablar views already present in the application and enriches them
- * with the business rules requested for RF01 and RF03.
- */
 class ProjectController extends Controller
 {
     /**
-     * Cache of content identifiers keyed by their human readable name.
+     * Cache of content identifiers keyed by normalized name.
      *
      * @var array<string, int>
      */
     protected array $contentCache = [];
 
     /**
-     * Cached identifier for the "waiting evaluation" status to avoid repeated lookups.
+     * Cached identifier for the "waiting evaluation" status.
      */
     protected ?int $waitingStatusId = null;
 
     /**
      * Display a paginated list of projects for the authenticated user.
      */
-    public function index(Request $request): View
+    public function index(Request $request): View|StreamedResponse
     {
         $user = AuthUserHelper::fullUser();
 
@@ -74,10 +75,14 @@ class ProjectController extends Controller
             $query->where('title', 'like', "%{$search}%");
         }
 
-        // Filtro por estado del proyecto
         $statusFilter = $request->input('status_id');
         if ($statusFilter) {
             $query->where('project_status_id', $statusFilter);
+        }
+
+        $pendingReviewDueToAge = $request->boolean('pending_review_due_to_age');
+        if ($user?->role === 'research_staff' && $pendingReviewDueToAge) {
+            $query->pendingReviewDueToAge();
         }
 
         $cityPrograms = CityProgram::with(['program', 'city'])->get();
@@ -89,57 +94,62 @@ class ProjectController extends Controller
             });
         }
 
-        if ($user?->role === 'professor' && $user->professor) {
+        if (in_array($user?->role, ['professor', 'committee_leader'], true) && $user->professor) {
             $professorId = $user->professor->id;
+
             $query->whereHas('professors', static function ($relation) use ($professorId) {
                 $relation->where('professors.id', $professorId);
             });
         } elseif ($user?->role === 'student' && $user->student) {
             $studentId = $user->student->id;
+
             $query->whereHas('students', static function ($relation) use ($studentId) {
                 $relation->where('students.id', $studentId);
             });
-        } elseif ($user?->role === 'committee_leader' && $user->professor && $user->professor->cityProgram) {
-            $programId = $user->professor->cityProgram->program_id;
-
-            // Un proyecto será visible si tiene profesor O estudiante del mismo programa
-            $query->where(function ($q) use ($programId) {
-                $q->whereHas('professors.cityProgram', function ($p) use ($programId) {
-                    $p->where('program_id', $programId);
-                })
-                ->orWhereHas('students.cityProgram', function ($s) use ($programId) {
-                    $s->where('program_id', $programId);
-                });
-            });
         }
 
-        /** @var LengthAwarePaginator $projects */
         $projects = $query->paginate(10)->withQueryString();
+        $reportState = $this->emptyProjectReportState();
+
+        if ($user?->role === 'research_staff') {
+            $reportState = $this->buildProjectReportState($request, $user);
+
+            if ($reportState['export'] === 'csv') {
+                return $this->streamProjectReportCsv(
+                    $reportState['reportKey'],
+                    $reportState['reportLabel'],
+                    $reportState['reportData']
+                );
+            }
+        }
+
+        $projectAgeReviewService = app(ProjectAgeReviewService::class);
+        $projects->getCollection()->transform(function (Project $project) use ($projectAgeReviewService) {
+            $project->setAttribute('pending_review_due_to_age', $projectAgeReviewService->shouldFlag($project));
+            $project->setAttribute('elapsed_periods_since_proposal', $projectAgeReviewService->elapsedAcademicPeriods($project));
+
+            return $project;
+        });
 
         $programCatalog = collect();
         if ($user?->role === 'committee_leader') {
             $programCatalog = Program::query()->orderBy('name')->get();
         }
 
-        // NUEVO: Obtener todos los estados para el filtro
-        $projectStatuses = \App\Models\ProjectStatus::orderBy('name')->get();
+        $projectStatuses = ProjectStatus::orderBy('name')->get();
 
-        /**
-         * ✅ Determine if student can create/select a new idea
-         */
+        $proposalWindow = AcademicCalendarService::currentWindowForProcess(AcademicProcessWindow::PROCESS_IDEA_PROPOSAL);
+        $proposalWindowOpen = $proposalWindow !== null;
+        $proposalWindowMessage = $proposalWindowOpen
+            ? null
+            : AcademicCalendarService::processWindowUnavailableMessage(AcademicProcessWindow::PROCESS_IDEA_PROPOSAL);
+        $activeAcademicPeriod = AcademicCalendarService::currentActivePeriod();
+        $studentAcademicProgress = app(StudentAcademicProgressService::class);
+
         $enableButtonStudent = true;
 
         if ($user?->role === 'student' && $user->student) {
-            $studentProjects = $user->student->projects()
-                ->with('projectStatus')
-                ->get();
-
-            if ($studentProjects->isNotEmpty()) {
-                // If any project is NOT rejected → disable the button
-                $enableButtonStudent = $studentProjects->every(function ($project) {
-                    return strtolower($project->projectStatus->name) === 'rechazado';
-                });
-            }
+            $enableButtonStudent = $studentAcademicProgress->canCreateProposal($user->student, $activeAcademicPeriod);
         }
 
         return view('projects.index', [
@@ -155,67 +165,458 @@ class ProjectController extends Controller
             'selectedStatus' => $statusFilter,
             'cityPrograms' => $cityPrograms,
             'selectedCityProgram' => $selectedCityProgram,
+            'pendingReviewDueToAge' => $pendingReviewDueToAge,
+            'proposalWindow' => $proposalWindow,
+            'proposalWindowOpen' => $proposalWindowOpen,
+            'proposalWindowMessage' => $proposalWindowMessage,
+            'activeAcademicPeriod' => $activeAcademicPeriod,
+            'canCreateProject' => (in_array($user?->role, ['professor', 'committee_leader'], true) || ($user?->role === 'student' && $enableButtonStudent)) && $proposalWindowOpen,
+            'reportModules' => $this->projectReportModules(),
+            'reportFilters' => $reportState['filters'],
+            'reportData' => $reportState['reportData'],
+            'reportSegments' => $reportState['segments'],
+            'activeReportKey' => $reportState['reportKey'],
+            'reportProgramOptions' => Program::query()
+                ->selectRaw('MIN(id) as id, name')
+                ->groupBy('name')
+                ->orderBy('name')
+                ->get(),
         ]);
     }
 
+    /**
+     * Build the report state rendered below the projects list.
+     *
+     * @return array{
+     *     filters: array{report_key:string,report_search:?string,report_from:?string,report_to:?string,report_program_id:?int},
+     *     reportKey: string,
+     *     reportLabel: string,
+     *     reportData: array{categories: array<int, string>, values: array<int, int>, percentages: array<int, float>, total: int},
+     *     segments: array<int, array{label: string, value: int, percentage: float, color: string}>,
+     *     export: ?string
+     * }
+     */
+    protected function buildProjectReportState(Request $request, ?User $user): array
+    {
+        $filters = $request->validate([
+            'report_key' => ['nullable', Rule::in(array_keys($this->projectReportModules()))],
+            'report_search' => ['nullable', 'string', 'max:120'],
+            'report_from' => ['nullable', 'date'],
+            'report_to' => ['nullable', 'date', 'after_or_equal:report_from'],
+            'report_program_id' => ['nullable', 'integer', 'exists:programs,id'],
+            'report_export' => ['nullable', Rule::in(['csv'])],
+        ]);
+
+        $reportKey = $filters['report_key'] ?? 'projects_by_status';
+        $reportModules = $this->projectReportModules();
+        $reportLabel = $reportModules[$reportKey]['label'] ?? $reportModules['projects_by_status']['label'];
+        $normalizedFilters = [
+            'report_key' => $reportKey,
+            'report_search' => isset($filters['report_search']) ? trim((string) $filters['report_search']) : null,
+            'report_from' => $filters['report_from'] ?? null,
+            'report_to' => $filters['report_to'] ?? null,
+            'report_program_id' => isset($filters['report_program_id']) ? (int) $filters['report_program_id'] : null,
+        ];
+
+        $reportData = $this->generateProjectDistributionReport($reportKey, $normalizedFilters, $user);
+
+        return [
+            'filters' => $normalizedFilters,
+            'reportKey' => $reportKey,
+            'reportLabel' => $reportLabel,
+            'reportData' => $reportData,
+            'segments' => $this->buildProjectReportSegments($reportData),
+            'export' => $filters['report_export'] ?? null,
+        ];
+    }
+
+    /**
+     * @return array{
+     *     filters: array{report_key:string,report_search:?string,report_from:?string,report_to:?string,report_program_id:?int},
+     *     reportKey: string,
+     *     reportLabel: string,
+     *     reportData: array{categories: array<int, string>, values: array<int, int>, percentages: array<int, float>, total: int},
+     *     segments: array<int, array{label: string, value: int, percentage: float, color: string}>,
+     *     export: null
+     * }
+     */
+    protected function emptyProjectReportState(): array
+    {
+        return [
+            'filters' => [
+                'report_key' => 'projects_by_status',
+                'report_search' => null,
+                'report_from' => null,
+                'report_to' => null,
+                'report_program_id' => null,
+            ],
+            'reportKey' => 'projects_by_status',
+            'reportLabel' => 'Proyectos por estado',
+            'reportData' => [
+                'categories' => [],
+                'values' => [],
+                'percentages' => [],
+                'total' => 0,
+            ],
+            'segments' => [],
+            'export' => null,
+        ];
+    }
+
+    /**
+     * @return array<string, array{label: string, description: string}>
+     */
+    protected function projectReportModules(): array
+    {
+        return [
+            'projects_by_status' => [
+                'label' => 'Proyectos por estado',
+                'description' => 'Compara la distribucion de proyectos segun su estado actual.',
+            ],
+            'projects_by_author_type' => [
+                'label' => 'Proyectos por tipo de autor',
+                'description' => 'Clasifica cada proyecto segun si participan estudiantes, docentes o ambos tipos de autores.',
+            ],
+            'projects_by_thematic_area' => [
+                'label' => 'Proyectos por area tematica',
+                'description' => 'Muestra que areas tematicas concentran mayor cantidad de proyectos.',
+            ],
+            'projects_by_investigation_line' => [
+                'label' => 'Proyectos por linea de investigacion',
+                'description' => 'Permite comparar los proyectos agrupados por linea de investigacion.',
+            ],
+        ];
+    }
+
+    /**
+     * @param  array{report_key:string,report_search:?string,report_from:?string,report_to:?string,report_program_id:?int}  $filters
+     * @return array{categories: array<int, string>, values: array<int, int>, percentages: array<int, float>, total: int}
+     */
+    protected function generateProjectDistributionReport(string $reportKey, array $filters, ?User $user): array
+    {
+        $query = $this->baseProjectReportQuery($user);
+
+        match ($reportKey) {
+            'projects_by_author_type' => $this->applyAuthorTypeDistribution($query),
+            'projects_by_thematic_area' => $this->applyThematicAreaDistribution($query),
+            'projects_by_investigation_line' => $this->applyInvestigationLineDistribution($query),
+            default => $this->applyStatusDistribution($query),
+        };
+
+        $this->applyProjectReportFilters($query, $filters, $reportKey);
+
+        $rows = $query->get();
+        $categories = [];
+        $values = [];
+
+        foreach ($rows as $row) {
+            $categories[] = (string) $row->category;
+            $values[] = (int) $row->total;
+        }
+
+        $total = array_sum($values);
+        $percentages = array_map(
+            static fn (int $value): float => $total > 0 ? round(($value / $total) * 100, 2) : 0.0,
+            $values
+        );
+
+        return [
+            'categories' => $categories,
+            'values' => $values,
+            'percentages' => $percentages,
+            'total' => $total,
+        ];
+    }
+
+    protected function baseProjectReportQuery(?User $user): Builder
+    {
+        $query = Project::query()->from('projects');
+
+        if (in_array($user?->role, ['professor', 'committee_leader'], true) && $user?->professor) {
+            $professorId = $user->professor->id;
+
+            $query->whereHas('professors', static function (Builder $relation) use ($professorId) {
+                $relation->where('professors.id', $professorId);
+            });
+        } elseif ($user?->role === 'student' && $user->student) {
+            $studentId = $user->student->id;
+
+            $query->whereHas('students', static function (Builder $relation) use ($studentId) {
+                $relation->where('students.id', $studentId);
+            });
+        }
+
+        return $query;
+    }
+
+    protected function applyStatusDistribution(Builder $query): void
+    {
+        $query
+            ->leftJoin('project_statuses', 'project_statuses.id', '=', 'projects.project_status_id')
+            ->selectRaw("COALESCE(project_statuses.name, 'Sin estado') as category")
+            ->selectRaw('COUNT(projects.id) as total')
+            ->groupBy('category')
+            ->orderByDesc('total');
+    }
+
+    protected function applyThematicAreaDistribution(Builder $query): void
+    {
+        $query
+            ->leftJoin('thematic_areas', 'thematic_areas.id', '=', 'projects.thematic_area_id')
+            ->selectRaw("COALESCE(thematic_areas.name, 'Sin area tematica') as category")
+            ->selectRaw('COUNT(projects.id) as total')
+            ->groupBy('category')
+            ->orderByDesc('total');
+    }
+
+    protected function applyAuthorTypeDistribution(Builder $query): void
+    {
+        $categoryExpression = $this->projectAuthorTypeCategoryExpression();
+
+        $query
+            ->selectRaw("{$categoryExpression} as category")
+            ->selectRaw('COUNT(projects.id) as total')
+            ->groupBy('category')
+            ->orderByRaw(
+                "CASE {$categoryExpression}
+                    WHEN 'Estudiante' THEN 1
+                    WHEN 'Docente' THEN 2
+                    WHEN 'Mixto' THEN 3
+                    ELSE 4
+                END"
+            );
+    }
+
+    protected function projectAuthorTypeCategoryExpression(): string
+    {
+        return <<<SQL
+CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM student_project
+        WHERE student_project.project_id = projects.id
+    ) AND EXISTS (
+        SELECT 1
+        FROM professor_project
+        WHERE professor_project.project_id = projects.id
+    ) THEN 'Mixto'
+    WHEN EXISTS (
+        SELECT 1
+        FROM student_project
+        WHERE student_project.project_id = projects.id
+    ) THEN 'Estudiante'
+    WHEN EXISTS (
+        SELECT 1
+        FROM professor_project
+        WHERE professor_project.project_id = projects.id
+    ) THEN 'Docente'
+    ELSE 'Sin autores'
+END
+SQL;
+    }
+
+    protected function applyInvestigationLineDistribution(Builder $query): void
+    {
+        $query
+            ->leftJoin('thematic_areas', 'thematic_areas.id', '=', 'projects.thematic_area_id')
+            ->leftJoin('investigation_lines', 'investigation_lines.id', '=', 'thematic_areas.investigation_line_id')
+            ->selectRaw("COALESCE(investigation_lines.name, 'Sin linea de investigacion') as category")
+            ->selectRaw('COUNT(projects.id) as total')
+            ->groupBy('category')
+            ->orderByDesc('total');
+    }
+
+    /**
+     * @param  array{report_key:string,report_search:?string,report_from:?string,report_to:?string,report_program_id:?int}  $filters
+     */
+    protected function applyProjectReportFilters(Builder $query, array $filters, string $reportKey): void
+    {
+        if ($filters['report_program_id']) {
+            $programId = $filters['report_program_id'];
+
+            $query->where(function (Builder $builder) use ($programId): void {
+                $builder
+                    ->whereHas('professors.cityProgram', static function (Builder $relation) use ($programId): void {
+                        $relation->where('program_id', $programId);
+                    })
+                    ->orWhereHas('students.cityProgram', static function (Builder $relation) use ($programId): void {
+                        $relation->where('program_id', $programId);
+                    });
+            });
+        }
+
+        if ($filters['report_from']) {
+            $from = $filters['report_from'];
+
+            $query->where(static function (Builder $builder) use ($from): void {
+                $builder
+                    ->whereDate('projects.proposed_at', '>=', $from)
+                    ->orWhere(static function (Builder $fallback) use ($from): void {
+                        $fallback
+                            ->whereNull('projects.proposed_at')
+                            ->whereDate('projects.created_at', '>=', $from);
+                    });
+            });
+        }
+
+        if ($filters['report_to']) {
+            $to = $filters['report_to'];
+
+            $query->where(static function (Builder $builder) use ($to): void {
+                $builder
+                    ->whereDate('projects.proposed_at', '<=', $to)
+                    ->orWhere(static function (Builder $fallback) use ($to): void {
+                        $fallback
+                            ->whereNull('projects.proposed_at')
+                            ->whereDate('projects.created_at', '<=', $to);
+                    });
+            });
+        }
+
+        if ($filters['report_search']) {
+            $term = '%' . $filters['report_search'] . '%';
+
+            $query->where(function (Builder $builder) use ($term, $reportKey): void {
+                $builder->where('projects.title', 'like', $term);
+
+                match ($reportKey) {
+                    'projects_by_author_type' => $builder->orWhereRaw($this->projectAuthorTypeCategoryExpression() . ' like ?', [$term]),
+                    'projects_by_thematic_area' => $builder->orWhere('thematic_areas.name', 'like', $term),
+                    'projects_by_investigation_line' => $builder
+                        ->orWhere('thematic_areas.name', 'like', $term)
+                        ->orWhere('investigation_lines.name', 'like', $term),
+                    default => $builder->orWhere('project_statuses.name', 'like', $term),
+                };
+            });
+        }
+    }
+
+    /**
+     * @param  array{categories: array<int, string>, values: array<int, int>, percentages: array<int, float>, total: int}  $reportData
+     * @return array<int, array{label: string, value: int, percentage: float, color: string}>
+     */
+    protected function buildProjectReportSegments(array $reportData): array
+    {
+        $palette = [
+            '#0f766e',
+            '#1d4ed8',
+            '#b45309',
+            '#be123c',
+            '#7c3aed',
+            '#0891b2',
+            '#4d7c0f',
+            '#c2410c',
+        ];
+
+        $segments = [];
+
+        foreach ($reportData['categories'] as $index => $category) {
+            $segments[] = [
+                'label' => $category,
+                'value' => $reportData['values'][$index] ?? 0,
+                'percentage' => $reportData['percentages'][$index] ?? 0.0,
+                'color' => $palette[$index % count($palette)],
+            ];
+        }
+
+        return $segments;
+    }
+
+    /**
+     * @param  array{categories: array<int, string>, values: array<int, int>, percentages: array<int, float>, total: int}  $reportData
+     */
+    protected function streamProjectReportCsv(string $reportKey, string $reportLabel, array $reportData): StreamedResponse
+    {
+        $filename = sprintf(
+            'reporte-%s-%s.csv',
+            str_replace('_', '-', $reportKey),
+            now()->format('Ymd-His')
+        );
+
+        return response()->streamDownload(function () use ($reportLabel, $reportData): void {
+            $handle = fopen('php://output', 'wb');
+
+            if ($handle === false) {
+                return;
+            }
+
+            fputcsv($handle, [$reportLabel]);
+            fputcsv($handle, ['Categoria', 'Valor', 'Porcentaje']);
+
+            foreach ($reportData['categories'] as $index => $category) {
+                fputcsv($handle, [
+                    $category,
+                    $reportData['values'][$index] ?? 0,
+                    $reportData['percentages'][$index] ?? 0,
+                ]);
+            }
+
+            fputcsv($handle, ['Total', $reportData['total'], 100]);
+            fclose($handle);
+        }, $filename, [
+            'Content-Type' => 'text/csv; charset=UTF-8',
+        ]);
+    }
 
     /**
      * Ensure the current user is allowed to interact with the projects module.
      *
-     * @return array{0: \App\Models\User, 1: bool, 2: bool, 3: bool}
+     * @return array{0:\App\Models\User|null,1:bool,2:bool,3:bool,4:bool}
      */
     protected function ensureRoleAccess(bool $allowResearchStaff = false): array
     {
         $user = AuthUserHelper::fullUser();
-        $isProfessor = in_array($user?->role, ['professor', 'committee_leader'], true); // Treat committee leaders exactly like professors for access checks.
+        $isProfessor = in_array($user?->role, ['professor', 'committee_leader'], true);
         $isStudent = $user?->role === 'student';
-        $isCommitteeLeader = $user?->role === 'committee_leader'; // Track the role for downstream logic that needs to know the exact profile type.
         $isResearchStaff = $user?->role === 'research_staff';
+        $isCommitteeLeader = $user?->role === 'committee_leader';
 
         if (! $isProfessor && ! $isStudent && ! ($allowResearchStaff && $isResearchStaff)) {
-            abort(403, 'This action is only available for professors, committee leaders or students.'); // Updated message to mention the new allowed role.
+            abort(403, 'This action is only available for professors, committee leaders or students.');
         }
 
-        return [$user, $isProfessor, $isStudent, $isResearchStaff, $isCommitteeLeader]; // Include the explicit role flag so callers can adapt the UI.
+        return [$user, $isProfessor, $isStudent, $isResearchStaff, $isCommitteeLeader];
     }
 
     /**
      * Show the form used to create a new project idea.
      */
-    public function create(): View
+    public function create(): View|RedirectResponse
     {
-        [$user, $isProfessor, $isStudent, $isResearchStaff, $isCommitteeLeader] = $this->ensureRoleAccess(true); // Capture the committee leader flag to mirror professor permissions later.
-        $activeProfessor = $this->resolveProfessorProfile($user); // Locate the professor profile even when the relationship is not eager loaded (committee leaders share the same model).
+        [$user, $isProfessor, $isStudent, $isResearchStaff, $isCommitteeLeader] = $this->ensureRoleAccess(true);
+        $activeProfessor = $this->resolveProfessorProfile($user);
 
         if ($isResearchStaff) {
             abort(403, 'Research staff members cannot create project ideas.');
         }
 
+        if (! AcademicCalendarService::isProcessWindowOpen(AcademicProcessWindow::PROCESS_IDEA_PROPOSAL)) {
+            return view(
+                'academic-calendar.unavailable',
+                AcademicCalendarService::unavailableActivityViewData(AcademicProcessWindow::PROCESS_IDEA_PROPOSAL)
+            );
+        }
+
+        $proposalWindow = AcademicCalendarService::currentWindowForProcess(AcademicProcessWindow::PROCESS_IDEA_PROPOSAL);
+        $activeAcademicPeriod = AcademicCalendarService::currentActivePeriod();
+
+        if (! $proposalWindow || ! $activeAcademicPeriod) {
+            return view(
+                'academic-calendar.unavailable',
+                AcademicCalendarService::unavailableActivityViewData(AcademicProcessWindow::PROCESS_IDEA_PROPOSAL)
+            );
+        }
+
         if ($isProfessor) {
             $researchGroupId = $activeProfessor?->cityProgram?->program?->research_group_id;
         } else {
-             $student = $user->student;
-            // Obtener los estados bloqueantes
-            $blockedStatuses = [
-                'Aprobado',
-                'Asignado',
-                'Pendiente de aprobación',
-                'Devuelto para corrección',
-            ];
+            $student = $user->student;
+            $studentAcademicProgress = app(StudentAcademicProgressService::class);
 
-            $hasBlocked = $student->projects()
-                ->whereHas('projectStatus', fn($q) => $q->whereIn('name', $blockedStatuses))
-                ->exists();
-
-            /**
-             *  Bloquear si:
-             * - Tiene algún proyecto en estado bloqueante
-             */
-            if ($hasBlocked) {
-                abort(403, 'No puedes crear una nueva idea porque ya tienes proyectos registrados.');
+            if (! $studentAcademicProgress->canCreateProposal($student, $activeAcademicPeriod)) {
+                abort(403, $studentAcademicProgress->blockedProposalMessage($student, $activeAcademicPeriod));
             }
 
-            // Si no tiene proyectos o solo rechazados → puede crear
             $researchGroupId = $student?->cityProgram?->program?->research_group_id;
         }
 
@@ -228,7 +629,7 @@ class ProjectController extends Controller
 
         $year = now()->year;
 
-        $frameworks = \App\Models\Framework::with('contentFrameworks')
+        $frameworks = Framework::with('contentFrameworks')
             ->where('start_year', '<=', $year)
             ->where('end_year', '>=', $year)
             ->orderBy('name')
@@ -240,6 +641,7 @@ class ProjectController extends Controller
 
         $availableStudents = collect();
         $availableProfessors = collect();
+        $ideaBalanceRecommendations = null;
 
         if ($isProfessor) {
             $professor = $activeProfessor;
@@ -258,7 +660,9 @@ class ProjectController extends Controller
 
             $availableProfessors = $this->participantQuery($professor->id)
                 ->get()
-                ->map(fn (Professor $participant) => $this->presentParticipant($participant)); // Provide the full catalog so the picker can render every eligible participant without pagination.
+                ->map(fn (Professor $participant) => $this->presentParticipant($participant));
+
+            $ideaBalanceRecommendations = app(TeacherIdeaBalanceService::class)->recommendationsForUser($user);
         } else {
             $student = $user->student;
             if (! $student) {
@@ -280,24 +684,15 @@ class ProjectController extends Controller
                 'research_group' => $researchGroup?->name,
             ]);
 
-            // Obtener compañeros elegibles (solo mismo city_program)
             $availableStudents = Student::query()
                 ->where('city_program_id', $student->city_program_id)
                 ->where('id', '!=', $student->id)
                 ->where(function ($q) {
-                    $q->whereDoesntHave('projects') // sin proyectos
-                    ->orWhere(function ($q2) {
-                        $q2->whereHas('projects', fn($p) =>
-                                $p->whereHas('projectStatus', fn($s) =>
-                                    $s->where('name', 'Rechazado')
-                                )
-                            )
-                            ->whereDoesntHave('projects', fn($p) =>
-                                $p->whereHas('projectStatus', fn($s) =>
-                                    $s->whereNot('name', 'Rechazado')
-                                )
-                            );
-                    });
+                    $q->whereDoesntHave('projects')
+                        ->orWhere(function ($q2) {
+                            $q2->whereHas('projects', fn ($p) => $p->whereHas('projectStatus', fn ($s) => $s->where('name', 'Rechazado')))
+                                ->whereDoesntHave('projects', fn ($p) => $p->whereHas('projectStatus', fn ($s) => $s->whereNot('name', 'Rechazado')));
+                        });
                 })
                 ->orderBy('last_name')
                 ->orderBy('name')
@@ -313,59 +708,70 @@ class ProjectController extends Controller
             'prefill' => $prefill,
             'isProfessor' => $isProfessor,
             'isStudent' => $isStudent,
-            'isCommitteeLeader' => $isCommitteeLeader, // Expose the new role so the Blade template can adjust the UI consistently.
+            'isCommitteeLeader' => $isCommitteeLeader,
             'availableStudents' => $availableStudents,
-            'availableProfessors' => $availableProfessors
+            'availableProfessors' => $availableProfessors,
+            'activeAcademicPeriod' => $activeAcademicPeriod,
+            'proposalWindow' => $proposalWindow,
+            'ideaBalanceRecommendations' => $ideaBalanceRecommendations,
         ]);
     }
-
 
     /**
      * Persist a new project idea following the role specific business rules.
      */
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request): View|RedirectResponse
     {
-        [$user, $isProfessor, $isStudent, $isResearchStaff] = $this->ensureRoleAccess(true); // The committee leader flag is not required here because store() delegates immediately.
+        [$user, $isProfessor, $isStudent, $isResearchStaff] = $this->ensureRoleAccess(true);
 
         try {
-            if ($isProfessor) {
-                $professorProfile = $this->resolveProfessorProfile($user); // Ensure committee leaders leverage the same professor record to persist the project.
-
-                return $this->persistProfessorProject($request, $professorProfile);
-            }
-
             if ($isResearchStaff) {
                 abort(403, 'Research staff members cannot create project ideas.');
             }
 
-            $blockedStatuses = [
-                'Aprobado',
-                'Asignado',
-                'Pendiente de aprobación',
-                'Devuelto para corrección',
-            ];
-
-            $hasBlocked = $user->student->projects()
-                ->whereHas('projectStatus', fn($q) => $q->whereIn('name', $blockedStatuses))
-                ->exists();
-
-            /**
-             *  Bloquear si:
-             * - Tiene algún proyecto en estado bloqueante
-             */
-            if ($hasBlocked) {
-                abort(403, 'No puedes crear una nueva idea porque ya tienes proyectos registrados.');
+            if (! AcademicCalendarService::isProcessWindowOpen(AcademicProcessWindow::PROCESS_IDEA_PROPOSAL)) {
+                return view(
+                    'academic-calendar.unavailable',
+                    AcademicCalendarService::unavailableActivityViewData(AcademicProcessWindow::PROCESS_IDEA_PROPOSAL)
+                );
             }
 
-            return $this->persistStudentProject($request, $user->student);
+            $activeAcademicPeriod = AcademicCalendarService::currentActivePeriod();
+            $proposalWindow = AcademicCalendarService::currentWindowForProcess(AcademicProcessWindow::PROCESS_IDEA_PROPOSAL);
+
+            if (! $activeAcademicPeriod || ! $proposalWindow) {
+                return view(
+                    'academic-calendar.unavailable',
+                    AcademicCalendarService::unavailableActivityViewData(AcademicProcessWindow::PROCESS_IDEA_PROPOSAL)
+                );
+            }
+
+            if ($isProfessor) {
+                $professorProfile = $this->resolveProfessorProfile($user);
+
+                return $this->persistProfessorProject($request, $professorProfile, null, $activeAcademicPeriod, $proposalWindow);
+            }
+
+            $studentAcademicProgress = app(StudentAcademicProgressService::class);
+
+            if (! $studentAcademicProgress->canCreateProposal($user->student, $activeAcademicPeriod)) {
+                abort(403, $studentAcademicProgress->blockedProposalMessage($user->student, $activeAcademicPeriod));
+            }
+
+            return $this->persistStudentProject($request, $user->student, null, $activeAcademicPeriod, $proposalWindow);
         } catch (\Throwable $exception) {
             Log::error('Failed to register project idea.', [
-                'exception' => $exception,
+                'message' => $exception->getMessage(),
+                'file' => $exception->getFile(),
+                'line' => $exception->getLine(),
+                'trace' => $exception->getTraceAsString(),
             ]);
 
             return back()
                 ->withInput()
-                ->with('error', 'Unexpected error. Please try again later.');
+                ->with('error', app()->environment('local')
+                    ? $exception->getMessage()
+                    : 'Unexpected error. Please try again later.');
         }
     }
 
@@ -377,10 +783,10 @@ class ProjectController extends Controller
         $project->load([
             'thematicArea.investigationLine',
             'projectStatus',
-            'professors.user', // Eager load the user to expose a reliable email address on the detail page.
-            'professors.cityProgram.program', // Preload the program so committee leaders can see contextual data without extra queries.
+            'professors.user',
+            'professors.cityProgram.program',
             'students',
-            'contentFrameworks.framework', // ← Añadido
+            'contentFrameworks.framework',
             'versions' => static fn ($relation) => $relation
                 ->with(['contentVersions.content'])
                 ->orderByDesc('created_at'),
@@ -389,10 +795,10 @@ class ProjectController extends Controller
         $latestVersion = $project->versions->first();
         $contentValues = $this->mapContentValues($latestVersion);
 
-        $normalizedStatus = Str::lower($project->projectStatus->name ?? '');
+        $normalizedStatus = $this->normalizeStatusName($project->projectStatus->name ?? '');
         $reviewComment = null;
 
-        if ($normalizedStatus === 'devuelto para corrección' && $latestVersion) {
+        if ($normalizedStatus === 'devuelto para correccion' && $latestVersion) {
             $reviewContent = $latestVersion->contentVersions
                 ->first(static function (ContentVersion $contentVersion): bool {
                     return Str::lower($contentVersion->content->name ?? '') === 'comentarios';
@@ -402,23 +808,23 @@ class ProjectController extends Controller
         }
 
         $user = AuthUserHelper::fullUser();
-
         $statusName = $project->projectStatus->name ?? 'Sin estado';
-        $canEdit = Str::lower($statusName) === 'devuelto para corrección';
+        $canEdit = $this->isReturnedForCorrection($project);
 
         return view('projects.show', [
             'project' => $project,
             'latestVersion' => $latestVersion,
             'contentValues' => $contentValues,
             'frameworksSelected' => $project->contentFrameworks,
-            'isProfessor' => in_array($user?->role, ['professor', 'committee_leader'], true), // Allow committee leaders to reuse the professor-specific UI controls.
+            'isProfessor' => in_array($user?->role, ['professor', 'committee_leader'], true),
             'isStudent' => $user?->role === 'student',
-            'isCommitteeLeader' => $user?->role === 'committee_leader', // Expose the role explicitly so the Blade can toggle actions if needed.
-            'isResearchStaff' =>  $user?->role === 'research_staff',
+            'isCommitteeLeader' => $user?->role === 'committee_leader',
+            'isResearchStaff' => $user?->role === 'research_staff',
             'reviewComment' => $reviewComment,
             'canEdit' => $canEdit,
-            'statusName' => $statusName
-        ]); 
+            'statusName' => $statusName,
+            'canViewVersionHistory' => $this->canViewVersionHistory($project, $user),
+        ]);
     }
 
     /**
@@ -426,10 +832,10 @@ class ProjectController extends Controller
      */
     public function participants(Request $request): JsonResponse
     {
-        [$user, $isProfessor] = $this->ensureRoleAccess(); // Reuse the shared guard to ensure only professors and committee leaders reach this endpoint.
+        [$user, $isProfessor] = $this->ensureRoleAccess();
 
         if (! $isProfessor) {
-            abort(403, 'Only professors and committee leaders can browse participants.'); // Keep unauthorized roles from enumerating the catalog.
+            abort(403, 'Only professors and committee leaders can browse participants.');
         }
 
         $requestedIds = collect($request->input('ids', []))
@@ -447,11 +853,11 @@ class ProjectController extends Controller
                     ->map(fn (Professor $professor) => $this->presentParticipant($professor))
                     ->values(),
                 'meta' => null,
-            ]); // Return a flat payload so the client can restore selections after validation errors while keeping numeric indexes in the JSON response.
+            ]);
         }
 
-        $activeProfessor = $this->resolveProfessorProfile($user); // Resolve the shared professor profile so committee leaders also receive consistent exclusions.
-        $excludeId = $activeProfessor?->id; // Exclude the authenticated profile from the suggestion list to avoid redundant chips.
+        $activeProfessor = $this->resolveProfessorProfile($user);
+        $excludeId = $activeProfessor?->id;
         $term = trim((string) $request->input('q', ''));
 
         $query = $this->participantQuery($excludeId);
@@ -459,6 +865,7 @@ class ProjectController extends Controller
         $programFilter = $request->input('program_id');
         if ($programFilter !== null && $programFilter !== '') {
             $programId = (int) $programFilter;
+
             $query->whereHas('cityProgram', static function (Builder $builder) use ($programId) {
                 $builder->where('program_id', $programId);
             });
@@ -475,7 +882,7 @@ class ProjectController extends Controller
                     ->orWhereHas('user', static function (Builder $userQuery) use ($normalizedTerm) {
                         $userQuery->whereRaw('LOWER(email) like ?', ["%{$normalizedTerm}%"]);
                     });
-            }); // Allow filtering by name, last name, document or email regardless of casing.
+            });
         }
 
         $participants = $query->get();
@@ -485,7 +892,7 @@ class ProjectController extends Controller
                 ->map(fn (Professor $professor) => $this->presentParticipant($professor))
                 ->values(),
             'meta' => null,
-        ]); // Return the full catalog so the frontend can display all available participants without pagination and with sequential indexes for the JavaScript consumer.
+        ]);
     }
 
     /**
@@ -493,12 +900,14 @@ class ProjectController extends Controller
      */
     public function participantsPage(): View
     {
-        [$user, $isProfessor] = $this->ensureRoleAccess();
+        [, $isProfessor] = $this->ensureRoleAccess();
+
         if (! $isProfessor) {
             abort(403);
         }
 
         $programs = Program::orderBy('name')->get();
+
         return view('participants.index', [
             'programs' => $programs,
         ]);
@@ -515,12 +924,12 @@ class ProjectController extends Controller
             ->whereHas('user', static function (Builder $builder) {
                 $builder->whereIn('role', ['professor', 'committee_leader', 'committe_leader']);
             })
-            ->whereNull('professors.deleted_at') // Skip soft-deleted records so they do not appear in the picker or JSON endpoint.
+            ->whereNull('professors.deleted_at')
             ->when($excludeProfessorId, static function (Builder $builder, int $exclude) {
                 $builder->where('professors.id', '!=', $exclude);
             })
             ->orderBy('professors.last_name')
-            ->orderBy('professors.name'); // Keep ordering consistent between the initial HTML payload and the AJAX requests.
+            ->orderBy('professors.name');
     }
 
     /**
@@ -536,11 +945,11 @@ class ProjectController extends Controller
             'program' => optional($professor->cityProgram?->program)->name,
             'program_id' => $professor->cityProgram?->program_id,
             'program_city' => optional($professor->cityProgram?->city)->name,
-        ]; // Include the email, program and city so the interface can display richer context while selecting collaborators.
+        ];
     }
 
     /**
-     * Resolve the professor profile associated with the authenticated user, covering committee leaders too.
+     * Resolve the professor profile associated with the authenticated user.
      */
     protected function resolveProfessorProfile(?User $user): ?Professor
     {
@@ -557,37 +966,35 @@ class ProjectController extends Controller
         return Professor::query()->where('user_id', $user->id)->first();
     }
 
-
     /**
      * Display the edit form with the existing project information.
      */
     public function edit(Project $project): View
     {
+        $statusName = $this->normalizeStatusName($project->projectStatus->name ?? '');
 
-        $statusName = Str::lower($project->projectStatus->name ?? ''); // Normalize the status name to apply guards consistently.
-
-        if ($statusName === 'pendiente de aprobación') {
-            abort(403, 'Projects pending approval cannot be edited.'); // Block editing attempts when the project is waiting for approval.
+        if ($statusName === 'pendiente de aprobacion') {
+            abort(403, 'Projects pending approval cannot be edited.');
         }
 
-        if ($project->projectStatus?->name !== 'Devuelto para corrección') {
-            abort(403, 'Solo los proyectos devueltos para corrección pueden ser editados.');
+        if (! $this->isReturnedForCorrection($project)) {
+            abort(403, 'Solo los proyectos devueltos para correccion pueden ser editados.');
         }
 
-        [$user, $isProfessor, $isStudent, $isResearchStaff, $isCommitteeLeader] = $this->ensureRoleAccess(true); // Include committee leaders in the edit flow to mirror professor capabilities.
-        $activeProfessor = $this->resolveProfessorProfile($user); // Resolve the shared professor profile so committee leaders can reuse the same datasets without additional queries.
+        [$user, $isProfessor, $isStudent, $isResearchStaff, $isCommitteeLeader] = $this->ensureRoleAccess(true);
+        $activeProfessor = $this->resolveProfessorProfile($user);
         $this->authorizeProjectAccess($project, $user->id, $isProfessor, $isStudent, $isResearchStaff);
 
         if ($isResearchStaff) {
             abort(403, 'El personal de investigaciones no puede editar proyectos.');
         }
+
         if ($isProfessor) {
             $researchGroupId = $activeProfessor?->cityProgram?->program?->research_group_id;
         } else {
             $researchGroupId = $user->student?->cityProgram?->program?->research_group_id;
         }
 
-        
         $project->load([
             'thematicArea',
             'professors',
@@ -600,11 +1007,11 @@ class ProjectController extends Controller
         $latestVersion = $project->versions->first();
         $contentValues = $this->mapContentValues($latestVersion);
 
-        // Extraer comentario si existe
         $versionComment = null;
         if ($latestVersion) {
-            $commentContent = $latestVersion->contentVersions
-                ->firstWhere(fn ($cv) => $cv->content->name === 'Comentarios');
+            $commentContent = $latestVersion->contentVersions->first(function ($cv) {
+                return $this->normalizeContentName($cv->content->name ?? '') === 'comentarios';
+            });
 
             $versionComment = $commentContent->value ?? null;
         }
@@ -618,13 +1025,14 @@ class ProjectController extends Controller
         $selectedInvestigationLineId = $project->thematicArea->investigation_line_id ?? null;
         $selectedThematicAreaId = $project->thematic_area_id ?? null;
 
-
         $prefill = [
             'delivery_date' => Carbon::now()->format('Y-m-d'),
         ];
 
         $availableStudents = collect();
         $availableProfessors = collect();
+        $frameworks = collect();
+        $selectedContentFrameworkIds = [];
 
         $hasProfessorParticipants = $project->professors->isNotEmpty();
         $hasStudentParticipants = $project->students->isNotEmpty();
@@ -652,7 +1060,6 @@ class ProjectController extends Controller
                 ->orderBy('name')
                 ->get();
 
-            // Content frameworks seleccionados del proyecto
             $selectedContentFrameworkIds = $project
                 ->contentFrameworkProjects()
                 ->pluck('content_framework_id')
@@ -660,7 +1067,7 @@ class ProjectController extends Controller
 
             $availableProfessors = $this->participantQuery(optional($contextProfessor)->id)
                 ->get()
-                ->map(fn (Professor $participant) => $this->presentParticipant($participant)); // Share the full catalog so editing uses the same dataset as creation.
+                ->map(fn (Professor $participant) => $this->presentParticipant($participant));
         } elseif ($useStudentForm) {
             $contextStudent = $isStudent ? $user->student : $project->students->first();
             if (! $contextStudent) {
@@ -671,13 +1078,11 @@ class ProjectController extends Controller
             $program = $cityProgram?->program;
             $researchGroup = $program?->researchGroup;
 
-            // Frameworks disponibles
             $frameworks = Framework::with('contentFrameworks')
                 ->where('end_year', '>=', now()->year)
                 ->orderBy('name')
                 ->get();
 
-            // Content frameworks seleccionados del proyecto
             $selectedContentFrameworkIds = $project
                 ->contentFrameworkProjects()
                 ->pluck('content_framework_id')
@@ -702,7 +1107,6 @@ class ProjectController extends Controller
                 ->orderBy('last_name')
                 ->orderBy('name')
                 ->get();
-
         } else {
             abort(403, 'Project participants are required to edit this proposal.');
         }
@@ -717,7 +1121,7 @@ class ProjectController extends Controller
             'contentValues' => $contentValues,
             'isProfessor' => $useProfessorForm,
             'isStudent' => $useStudentForm,
-            'isCommitteeLeader' => $isCommitteeLeader, // Allow the Blade to know when the editor is a committee leader for UI constraints.
+            'isCommitteeLeader' => $isCommitteeLeader,
             'isResearchStaff' => $isResearchStaff,
             'availableStudents' => $availableStudents,
             'availableProfessors' => $availableProfessors,
@@ -735,14 +1139,14 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project): RedirectResponse
     {
-        $statusName = Str::lower($project->projectStatus->name ?? ''); // Normalize again on update to avoid duplicated string comparisons.
+        $statusName = $this->normalizeStatusName($project->projectStatus->name ?? '');
 
-        if ($statusName === 'pendiente de aprobación') {
-            abort(403, 'Projects pending approval cannot be edited.'); // Prevent updates when the UI should hide the edit button.
+        if ($statusName === 'pendiente de aprobacion') {
+            abort(403, 'Projects pending approval cannot be edited.');
         }
 
-        if ($project->projectStatus?->name !== 'Devuelto para corrección') {
-            abort(403, 'Solo los proyectos devueltos para corrección pueden ser editados.');
+        if (! $this->isReturnedForCorrection($project)) {
+            abort(403, 'Solo los proyectos devueltos para correccion pueden ser editados.');
         }
 
         [$user, $isProfessor, $isStudent, $isResearchStaff] = $this->ensureRoleAccess(true);
@@ -752,7 +1156,7 @@ class ProjectController extends Controller
 
         try {
             if ($isProfessor) {
-                return $this->persistProfessorProject($request, $user->professor, $project);
+                return $this->persistProfessorProject($request, $this->resolveProfessorProfile($user), $project);
             }
 
             if ($isStudent) {
@@ -760,17 +1164,22 @@ class ProjectController extends Controller
             }
 
             if ($isResearchStaff) {
-                abort(403, 'Pidele al creador del proyecto que lo edite y envie a revision de nuevo');
+                abort(403, 'Pidele al creador del proyecto que lo edite y envie a revision de nuevo.');
             }
         } catch (\Throwable $exception) {
             Log::error('Failed to update project idea.', [
                 'project_id' => $project->id,
-                'exception' => $exception,
+                'message' => $exception->getMessage(),
+                'file' => $exception->getFile(),
+                'line' => $exception->getLine(),
+                'trace' => $exception->getTraceAsString(),
             ]);
 
             return back()
                 ->withInput()
-                ->with('error', 'Unexpected error. Please try again later.');
+                ->with('error', app()->environment('local')
+                    ? $exception->getMessage()
+                    : 'Unexpected error. Please try again later.');
         }
     }
 
@@ -784,14 +1193,14 @@ class ProjectController extends Controller
         }
 
         if ($isProfessor) {
-            $user =  AuthUserHelper::fullUser();
-            $professor = $user->professor;
-            
+            $user = AuthUserHelper::fullUser();
+            $professor = $this->resolveProfessorProfile($user);
+
             if (! $professor || ! $project->professors->contains('id', $professor->id)) {
                 abort(403, 'You are not assigned to this project.');
             }
         } elseif ($isStudent) {
-            $user =  AuthUserHelper::fullUser();
+            $user = AuthUserHelper::fullUser();
             $student = $user->student;
 
             if (! $student || ! $project->students->contains('id', $student->id)) {
@@ -815,15 +1224,22 @@ class ProjectController extends Controller
      */
     protected function contentId(string $name): int
     {
-        if (! array_key_exists($name, $this->contentCache)) {
-            $content = Content::query()->where('name', $name)->first();
-            if (! $content) {
-                throw new \RuntimeException("Content '{$name}' not found in catalog.");
-            }
-            $this->contentCache[$name] = $content->id;
+        $normalizedName = $this->normalizeContentName($name);
+
+        if (empty($this->contentCache)) {
+            $this->contentCache = Content::query()
+                ->get(['id', 'name'])
+                ->mapWithKeys(function (Content $content) {
+                    return [$this->normalizeContentName($content->name) => $content->id];
+                })
+                ->toArray();
         }
 
-        return $this->contentCache[$name];
+        if (! array_key_exists($normalizedName, $this->contentCache)) {
+            throw new \RuntimeException("Content '{$name}' not found in catalog.");
+        }
+
+        return $this->contentCache[$normalizedName];
     }
 
     /**
@@ -836,7 +1252,7 @@ class ProjectController extends Controller
         }
 
         $status = ProjectStatus::query()
-            ->whereIn('name', ['waiting evaluation', 'Pendiente de aprobación'])
+            ->whereIn('name', ['waiting evaluation', 'Pendiente de aprobacion'])
             ->orderByRaw("CASE WHEN name = 'waiting evaluation' THEN 0 ELSE 1 END")
             ->first();
 
@@ -861,8 +1277,9 @@ class ProjectController extends Controller
         }
 
         return $version->contentVersions
-            ->mapWithKeys(static function (ContentVersion $contentVersion) {
-                return [$contentVersion->content->name => $contentVersion->value];
+            ->filter(static fn (ContentVersion $contentVersion) => $contentVersion->content !== null)
+            ->mapWithKeys(function (ContentVersion $contentVersion) {
+                return [$this->contentDisplayName($contentVersion->content->name) => $contentVersion->value];
             })
             ->toArray();
     }
@@ -870,23 +1287,29 @@ class ProjectController extends Controller
     /**
      * Persist the project data for a professor either creating or updating a record.
      */
-    protected function persistProfessorProject(Request $request, ?Professor $professor, ?Project $project = null): RedirectResponse
+    protected function persistProfessorProject(
+        Request $request,
+        ?Professor $professor,
+        ?Project $project = null,
+        ?AcademicPeriod $activeAcademicPeriod = null,
+        ?AcademicProcessWindow $proposalWindow = null
+    ): RedirectResponse
     {
         if (! $professor) {
             abort(403, 'Professor profile required to complete this action.');
         }
 
-        $assignedProgramId = optional($professor->cityProgram)->program_id; // Retrieve the immutable program linked to the authenticated professor or committee leader.
+        $assignedProgramId = optional($professor->cityProgram)->program_id;
 
         if (! $assignedProgramId) {
-            abort(403, 'A program assignment is required before submitting projects.'); // Stop early when the profile is incomplete.
+            abort(403, 'A program assignment is required before submitting projects.');
         }
 
-        $request->merge(['program_id' => $assignedProgramId]); // Force the incoming request to honour the assigned program regardless of client-side manipulation.
+        $request->merge(['program_id' => $assignedProgramId]);
 
         $baseRules = [
             'city_id' => ['required', 'exists:cities,id'],
-            'program_id' => ['required', 'integer', Rule::in([$assignedProgramId])], // Ensure the locked program cannot be altered on submission.
+            'program_id' => ['required', 'integer', Rule::in([$assignedProgramId])],
             'investigation_line_id' => ['required', 'exists:investigation_lines,id'],
             'thematic_area_id' => [
                 'required',
@@ -906,8 +1329,8 @@ class ProjectController extends Controller
             'contact_last_name' => ['required', 'string', 'max:50'],
             'contact_email' => ['required', 'email', 'max:255'],
             'contact_phone' => ['required', 'string', 'max:20'],
-            'associated_professors' => ['nullable', 'array'], // Capture the selected co-professors from the dynamic chips component.
-            'associated_professors.*' => ['integer', Rule::exists('professors', 'id')->whereNull('deleted_at')], // Ensure every id belongs to an active professor record.
+            'associated_professors' => ['nullable', 'array'],
+            'associated_professors.*' => ['integer', Rule::exists('professors', 'id')->whereNull('deleted_at')],
             'content_frameworks' => ['required', 'array'],
             'content_frameworks.*' => ['required', Rule::exists('content_frameworks', 'id')],
         ];
@@ -917,7 +1340,7 @@ class ProjectController extends Controller
         $normalizedTitle = $this->normalizeTitle($validated['title']);
 
         $professorIds = collect($validated['associated_professors'] ?? [])
-            ->filter(static fn ($id) => $id !== null) // Remove empty array slots left by the client script.
+            ->filter(static fn ($id) => $id !== null)
             ->push($professor->id)
             ->unique()
             ->values()
@@ -941,6 +1364,11 @@ class ProjectController extends Controller
                 ->withInput()
                 ->with('error', 'A project with the same title and professor team already exists.');
         }
+
+        $activeAcademicPeriod ??= AcademicCalendarService::currentActivePeriodOrFail();
+        $proposalWindow ??= AcademicCalendarService::ensureProcessWindowOpenOrFail(
+            AcademicProcessWindow::PROCESS_IDEA_PROPOSAL
+        );
 
         DB::beginTransaction();
 
@@ -970,30 +1398,40 @@ class ProjectController extends Controller
                     'evaluation_criteria' => $validated['evaluation_criteria'],
                     'thematic_area_id' => $validated['thematic_area_id'],
                     'project_status_id' => $this->waitingEvaluationStatusId(),
+                    'proposal_academic_period_id' => $activeAcademicPeriod->id,
+                    'proposed_at' => now(),
                 ]);
             }
 
             $project->professors()->sync($professorIds);
 
-            // Guardar los content frameworks
             $contentFrameworkIds = array_values(array_filter($validated['content_frameworks'] ?? []));
             $project->contentFrameworks()->sync($contentFrameworkIds);
 
-            $version = $project->versions()->create();
-
             $contentMap = [
-                'Título' => $project->title,
+                'Titulo' => $project->title,
                 'Cantidad de estudiantes' => (string) $validated['students_count'],
-                'Tiempo de ejecución' => $validated['execution_time'],
+                'Tiempo de ejecucion' => $validated['execution_time'],
                 'Viabilidad' => $validated['viability'],
-                'Pertinencia con el grupo de investigación y con el programa' => $validated['relevance'],
-                'Disponibilidad de docentes para su dirección y calificación' => $validated['teacher_availability'],
-                'Calidad y correspondencia entre título y objetivo' => $validated['title_objectives_quality'],
+                'Pertinencia con el grupo de investigacion y con el programa' => $validated['relevance'],
+                'Disponibilidad de docentes para su direccion y calificacion' => $validated['teacher_availability'],
+                'Calidad y correspondencia entre titulo y objetivo' => $validated['title_objectives_quality'],
                 'Objetivo general del proyecto' => $validated['general_objective'],
-                'Descripción del proyecto de investigación' => $validated['description'],
+                'Descripcion del proyecto de investigacion' => $validated['description'],
             ];
 
-            $this->storeContentValues($version, $contentMap);
+            $this->storeProjectVersion($project, $contentMap, $professor->user_id);
+
+            if (! $isUpdate) {
+                AcademicCalendarService::recordProjectStage(
+                    $project,
+                    'proposal_created',
+                    $activeAcademicPeriod,
+                    $professor->user_id,
+                    'Proyecto propuesto por profesor.',
+                    ['proposal_window_id' => $proposalWindow->id]
+                );
+            }
 
             DB::commit();
         } catch (\Throwable $exception) {
@@ -1013,7 +1451,13 @@ class ProjectController extends Controller
     /**
      * Persist the project data for a student either creating or updating a record.
      */
-    protected function persistStudentProject(Request $request, ?Student $student, ?Project $project = null): RedirectResponse
+    protected function persistStudentProject(
+        Request $request,
+        ?Student $student,
+        ?Project $project = null,
+        ?AcademicPeriod $activeAcademicPeriod = null,
+        ?AcademicProcessWindow $proposalWindow = null
+    ): RedirectResponse
     {
         if (! $student) {
             abort(403, 'Student profile required to complete this action.');
@@ -1053,8 +1497,7 @@ class ProjectController extends Controller
         $validated = $request->validate($baseRules);
         $isUpdate = $project !== null;
 
-        // Validar que los compañeros no tengan otros proyectos vinculados
-        if (!empty($validated['teammate_ids'])) {
+        if (! empty($validated['teammate_ids'])) {
             $hasOtherProjects = Student::query()
                 ->whereIn('id', $validated['teammate_ids'])
                 ->whereHas('projects', function ($query) use ($project) {
@@ -1068,7 +1511,7 @@ class ProjectController extends Controller
             if ($hasOtherProjects) {
                 return back()
                     ->withInput()
-                    ->with('error', 'Uno o más compañeros seleccionados ya tienen un proyecto registrado.');
+                    ->with('error', 'Uno o mas companeros seleccionados ya tienen un proyecto registrado.');
             }
         }
 
@@ -1096,7 +1539,7 @@ class ProjectController extends Controller
         }
 
         $activeStatusIds = ProjectStatus::query()
-            ->whereIn('name', ['waiting evaluation', 'Pendiente de aprobación'])
+            ->whereIn('name', ['waiting evaluation', 'Pendiente de aprobacion'])
             ->pluck('id');
 
         $hasActive = $student->projects()
@@ -1126,6 +1569,11 @@ class ProjectController extends Controller
                 ->with('error', 'A project with the same title and student team already exists.');
         }
 
+        $activeAcademicPeriod ??= AcademicCalendarService::currentActivePeriodOrFail();
+        $proposalWindow ??= AcademicCalendarService::ensureProcessWindowOpenOrFail(
+            AcademicProcessWindow::PROCESS_IDEA_PROPOSAL
+        );
+
         DB::beginTransaction();
 
         try {
@@ -1154,24 +1602,34 @@ class ProjectController extends Controller
                     'evaluation_criteria' => null,
                     'thematic_area_id' => $validated['thematic_area_id'],
                     'project_status_id' => $this->waitingEvaluationStatusId(),
+                    'proposal_academic_period_id' => $activeAcademicPeriod->id,
+                    'proposed_at' => now(),
                 ]);
             }
 
             $project->students()->sync($studentIds);
 
-            // Guardar los content frameworks
             $contentFrameworkIds = array_values(array_filter($validated['content_frameworks'] ?? []));
             $project->contentFrameworks()->sync($contentFrameworkIds);
 
-            $version = $project->versions()->create();
-
             $contentMap = [
-                'Título' => $project->title,
+                'Titulo' => $project->title,
                 'Objetivo general del proyecto' => $validated['general_objective'],
-                'Descripción del proyecto de investigación' => $validated['description'],
+                'Descripcion del proyecto de investigacion' => $validated['description'],
             ];
 
-            $this->storeContentValues($version, $contentMap);
+            $this->storeProjectVersion($project, $contentMap, $student->user_id);
+
+            if (! $isUpdate) {
+                AcademicCalendarService::recordProjectStage(
+                    $project,
+                    'proposal_created',
+                    $activeAcademicPeriod,
+                    $student->user_id,
+                    'Proyecto propuesto por estudiante.',
+                    ['proposal_window_id' => $proposalWindow->id]
+                );
+            }
 
             DB::commit();
         } catch (\Throwable $exception) {
@@ -1186,6 +1644,216 @@ class ProjectController extends Controller
         return redirect()
             ->route('projects.index')
             ->with('success', $message);
+    }
+
+    /**
+     * Determine whether the authenticated user can consult the version history.
+     */
+    protected function canViewVersionHistory(Project $project, ?User $user): bool
+    {
+        return $user !== null;
+    }
+
+    /**
+     * Normalize project status names so comparisons survive accent and casing differences.
+     */
+    protected function normalizeStatusName(?string $name): string
+    {
+        return Str::of((string) $name)
+            ->ascii()
+            ->lower()
+            ->squish()
+            ->toString();
+    }
+
+    /**
+     * Determine whether the project is currently pending approval.
+     */
+    protected function isPendingApproval(Project $project): bool
+    {
+        return $this->normalizeStatusName($project->projectStatus->name ?? '') === 'pendiente de aprobacion';
+    }
+
+    /**
+     * Determine whether the project can be corrected and resubmitted.
+     */
+    protected function isReturnedForCorrection(Project $project): bool
+    {
+        return $this->normalizeStatusName($project->projectStatus->name ?? '') === 'devuelto para correccion';
+    }
+
+    /**
+     * Normalize content names so the code works with accented and plain-text catalog values.
+     */
+    protected function normalizeContentName(?string $name): string
+    {
+        return Str::of((string) $name)
+            ->ascii()
+            ->lower()
+            ->replace('-', ' ')
+            ->squish()
+            ->toString();
+    }
+
+    /**
+     * Convert catalog names into the labels expected by the project forms and history screens.
+     */
+    protected function contentDisplayName(?string $name): string
+    {
+        $normalizedName = $this->normalizeContentName($name);
+
+        return [
+            'titulo' => 'Titulo',
+            'cantidad de estudiantes' => 'Cantidad de estudiantes',
+            'tiempo de ejecucion' => 'Tiempo de ejecucion',
+            'viabilidad' => 'Viabilidad',
+            'pertinencia con el grupo de investigacion y con el programa' => 'Pertinencia con el grupo de investigacion y con el programa',
+            'disponibilidad de docentes para su direccion y calificacion' => 'Disponibilidad de docentes para su direccion y calificacion',
+            'calidad y correspondencia entre titulo y objetivo' => 'Calidad y correspondencia entre titulo y objetivo',
+            'objetivo general del proyecto' => 'Objetivo general del proyecto',
+            'descripcion del proyecto de investigacion' => 'Descripcion del proyecto de investigacion',
+            'comentarios' => 'Comentarios',
+        ][$normalizedName] ?? (string) $name;
+    }
+
+    /**
+     * Create a version record that captures the current project snapshot.
+     */
+    protected function storeProjectVersion(Project $project, array $contentMap, ?int $createdByUserId): Version
+    {
+        $project->load([
+            'projectStatus',
+            'thematicArea.investigationLine',
+            'contentFrameworks.framework',
+            'professors.user',
+            'students.user',
+        ]);
+
+        $version = $project->versions()->create([
+            'created_by_user_id' => $createdByUserId,
+            'snapshot' => $this->sanitizeSnapshot($this->buildProjectVersionSnapshot($project, $contentMap)),
+        ]);
+
+        $this->storeContentValues($version, $contentMap);
+
+        return $version;
+    }
+
+    /**
+     * Build a portable snapshot so each version preserves the project state of that moment.
+     */
+    protected function buildProjectVersionSnapshot(Project $project, array $contentMap): array
+    {
+        return [
+            'title' => $project->title,
+            'evaluation_criteria' => $project->evaluation_criteria,
+            'project_status' => [
+                'id' => $project->projectStatus?->id,
+                'name' => $project->projectStatus?->name,
+            ],
+            'thematic_area' => [
+                'id' => $project->thematicArea?->id,
+                'name' => $project->thematicArea?->name,
+            ],
+            'investigation_line' => [
+                'id' => $project->thematicArea?->investigationLine?->id,
+                'name' => $project->thematicArea?->investigationLine?->name,
+            ],
+            'contents' => collect($contentMap)
+                ->mapWithKeys(function ($value, $label) {
+                    return [$this->contentDisplayName($label) => (string) $value];
+                })
+                ->toArray(),
+            'frameworks' => $project->contentFrameworks
+                ->map(function ($contentFramework) {
+                    return [
+                        'id' => $contentFramework->id,
+                        'name' => $contentFramework->name,
+                        'framework' => [
+                            'id' => $contentFramework->framework?->id,
+                            'name' => $contentFramework->framework?->name,
+                        ],
+                    ];
+                })
+                ->values()
+                ->all(),
+            'participants' => [
+                'professors' => $project->professors
+                    ->map(function (Professor $professor) {
+                        return [
+                            'id' => $professor->id,
+                            'name' => trim(($professor->name ?? '') . ' ' . ($professor->last_name ?? '')),
+                            'email' => $professor->mail ?? $professor->user?->email,
+                            'phone' => $professor->phone,
+                        ];
+                    })
+                    ->values()
+                    ->all(),
+                'students' => $project->students
+                    ->map(function (Student $student) {
+                        return [
+                            'id' => $student->id,
+                            'name' => trim(($student->name ?? '') . ' ' . ($student->last_name ?? '')),
+                            'card_id' => $student->card_id,
+                            'phone' => $student->phone,
+                        ];
+                    })
+                    ->values()
+                    ->all(),
+            ],
+        ];
+    }
+
+    /**
+     * Sanitize the snapshot payload so it can always be stored as valid UTF-8 JSON.
+     */
+    protected function sanitizeSnapshot(array $snapshot): array
+    {
+        return $this->sanitizeSnapshotValue($snapshot);
+    }
+
+    /**
+     * Recursively normalize keys and values before JSON encoding them.
+     */
+    protected function sanitizeSnapshotValue(mixed $value): mixed
+    {
+        if (is_array($value)) {
+            $sanitized = [];
+
+            foreach ($value as $key => $item) {
+                $sanitizedKey = is_string($key)
+                    ? $this->sanitizeSnapshotString($key)
+                    : $key;
+
+                $sanitized[$sanitizedKey] = $this->sanitizeSnapshotValue($item);
+            }
+
+            return $sanitized;
+        }
+
+        if (is_string($value)) {
+            return $this->sanitizeSnapshotString($value);
+        }
+
+        return $value;
+    }
+
+    /**
+     * Normalize strings that may contain mixed encodings before storing JSON snapshots.
+     */
+    protected function sanitizeSnapshotString(string $value): string
+    {
+        if (mb_check_encoding($value, 'UTF-8')) {
+            return $value;
+        }
+
+        $sanitized = @iconv('Windows-1252', 'UTF-8//IGNORE', $value);
+
+        if ($sanitized !== false && $sanitized !== '') {
+            return $sanitized;
+        }
+
+        return mb_convert_encoding($value, 'UTF-8', 'Windows-1252');
     }
 
     /**

@@ -45,8 +45,13 @@
                 <div class="alert alert-danger">{{ session('error') }}</div>
             @endif
 
+            <div class="alert alert-info mb-3">
+                <strong>Periodo vigente:</strong> {{ $activeAcademicPeriod->name ?? 'No configurado' }}.<br>
+                <strong>Ventana de propuesta:</strong> {{ optional($proposalWindow->start_at)->format('d/m/Y H:i') }} a {{ optional($proposalWindow->end_at)->format('d/m/Y H:i') }}.
+            </div>
+
             <div class="row g-3">
-                <div class="col-12 col-lg-8">
+                <div class="col-12 {{ ($isProfessor ?? false) ? 'col-lg-8' : 'col-lg-8' }}">
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Información del proyecto</h3>
@@ -79,6 +84,12 @@
                         </div>
                     </div>
                 </div>
+
+                @if ($isProfessor ?? false)
+                    <div class="col-12 col-lg-4">
+                        @include('projects.partials.idea-balance-alerts', ['ideaBalance' => $ideaBalanceRecommendations ?? null])
+                    </div>
+                @endif
             </div>
         </div>
     </div>

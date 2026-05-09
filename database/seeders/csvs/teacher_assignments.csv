@@ -1,0 +1,5 @@
+academic_period_id,program_id,professor_id,assigned_hours,observations,created_by_user_id,updated_by_user_id,created_at,updated_at
+1,4,3,12,Asignacion base para Ingenieria de Sistemas en 2026-1,61,61,2026-04-10 09:00:00,2026-04-10 09:00:00
+1,11,9,10,Asignacion base para Criminalistica en 2026-1,61,61,2026-04-10 09:05:00,2026-04-10 09:05:00
+1,14,12,8,Asignacion base para Psicologia en 2026-1,61,61,2026-04-10 09:10:00,2026-04-10 09:10:00
+1,20,17,9,Asignacion base para Ingenieria de Sistemas presencial en 2026-1,61,61,2026-04-10 09:15:00,2026-04-10 09:15:00

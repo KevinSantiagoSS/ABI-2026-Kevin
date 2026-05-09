@@ -32,6 +32,8 @@
                     <a href="{{ route('students.projects.approved.index') }}" class="btn btn-outline-secondary">Volver al listado</a>
                     @if($canSelectProject)
                         <a href="{{ route('projects.student.select', $project) }}" class="btn btn-success">Seleccionar proyecto</a>
+                    @else
+                        <button type="button" class="btn btn-success" disabled>Seleccionar proyecto</button>
                     @endif
                 </div>
             </div>
@@ -46,6 +48,16 @@
             @if (session('error'))
                 <div class="alert alert-danger">{{ session('error') }}</div>
             @endif
+
+            <div class="alert {{ $selectionWindowOpen ? 'alert-info' : 'alert-warning' }} mb-3">
+                <strong>Ventana de seleccion:</strong>
+                @if ($selectionWindowOpen && $selectionWindow)
+                    {{ optional($activeAcademicPeriod)->name ?? 'Periodo activo' }} ·
+                    {{ optional($selectionWindow->start_at)->format('d/m/Y H:i') }} a {{ optional($selectionWindow->end_at)->format('d/m/Y H:i') }}.
+                @else
+                    {{ $selectionWindowMessage }}
+                @endif
+            </div>
 
             <div class="row g-3">
                 <div class="col-12 col-lg-8">

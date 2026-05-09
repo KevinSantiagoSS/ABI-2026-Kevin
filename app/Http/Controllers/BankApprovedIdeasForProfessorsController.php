@@ -1,85 +1,94 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Professor;
 use App\Models\Project;
-use Illuminate\Support\Facades\Auth;
+use App\Models\ThematicArea;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BankApprovedIdeasForProfessorsController extends Controller
 {
     /**
-     * Muestra los proyectos aprobados relacionados con el estudiante autenticado.
+     * Los profesores pueden consultar el banco de ideas aprobadas
+     * sin depender de la ventana del calendario.
      */
     public function index(Request $request)
     {
-        // 1️⃣ Obtener el profesor autenticado
         $professor = Professor::where('user_id', Auth::id())
             ->whereNull('deleted_at')
             ->first();
 
-        if (!$professor || !$professor->city_program_id) {
-            $perPage = $request->input('per_page', 10);
-            $thematicAreas = collect();
-            $projects = Project::whereRaw('1 = 0')->paginate($perPage);
+        if (! $professor || ! $professor->city_program_id) {
+            $perPage = (int) $request->input('per_page', 10);
+
             return view('projects.professor.approved', [
-                'projects' => $projects,
-                'thematicAreas' => $thematicAreas,
+                'projects' => Project::whereRaw('1 = 0')->paginate($perPage),
+                'thematicAreas' => collect(),
                 'thematicAreaId' => null,
                 'perPage' => $perPage,
-            ])->with('error', 'Completa tu asignación de programa para ver proyectos aprobados.');
+            ])->with('error', 'Completa tu asignacion de programa para ver el banco de ideas aprobadas.');
         }
 
-        $perPage = $request->input('per_page', 10);
-        $cityProgramId = $professor->city_program_id;
+        $perPage = (int) $request->input('per_page', 10);
         $thematicAreaId = $request->input('thematic_area_id');
 
-        // Obtener CityProgram → Programa → Grupo de investigación
-        $cityProgram = \App\Models\CityProgram::find($cityProgramId);
-        $program = $cityProgram?->program;
-        $researchGroup = $program?->researchGroup;
+        $program = $professor->cityProgram?->program;
+        $researchGroupId = $program?->research_group_id;
 
-        // Áreas temáticas del grupo
         $thematicAreas = collect();
-        if ($researchGroup) {
-            $thematicAreas = \App\Models\ThematicArea::whereHas('investigationLine', function ($q) use ($researchGroup) {
-                    $q->where('research_group_id', $researchGroup->id);
+
+        if ($researchGroupId) {
+            $thematicAreas = ThematicArea::query()
+                ->whereHas('investigationLine', function ($query) use ($researchGroupId) {
+                    $query->where('research_group_id', $researchGroupId);
                 })
                 ->whereNull('deleted_at')
                 ->orderBy('name')
                 ->get();
         }
 
-        // 🔥 SOLO proyectos aprobados creados por docentes del mismo City Program
-        $projects = Project::whereHas('projectStatus', fn($q) => $q->where('name', 'Aprobado'))
-            ->whereHas('professors', function ($q) use ($cityProgramId) {
-                $q->where('city_program_id', $cityProgramId);
-            })
+        $projectsQuery = Project::query()
+            ->whereHas('projectStatus', fn ($query) => $query->where('name', 'Aprobado'))
+            ->whereHas('professors', function ($query) use ($professor) {
+                $query->where('city_program_id', $professor->city_program_id);
+            });
+
+        if (! empty($thematicAreaId)) {
+            $projectsQuery->where('thematic_area_id', $thematicAreaId);
+        }
+
+        $projects = $projectsQuery
             ->with([
                 'projectStatus',
                 'thematicArea.investigationLine',
                 'versions.contentVersions.content',
                 'contentFrameworkProjects.contentFramework.framework',
-                'professors' // no se cargan students porque ya no son relevantes
+                'professors',
+                'students',
             ])
-            ->paginate($perPage);
+            ->paginate($perPage)
+            ->withQueryString();
 
         return view('projects.professor.approved', [
             'projects' => $projects,
             'thematicAreas' => $thematicAreas,
             'thematicAreaId' => $thematicAreaId,
-            'perPage' => $perPage
+            'perPage' => $perPage,
         ]);
     }
 
+    /**
+     * Los profesores pueden ver el detalle de una idea aprobada
+     * sin depender de la ventana del calendario.
+     */
     public function show(Project $project)
     {
-        // Obtener el profesor autenticado
         $professor = Professor::where('user_id', Auth::id())
             ->whereNull('deleted_at')
             ->firstOrFail();
 
-        // Verificar si el proyecto pertenece al mismo programa del profesor
         $sameProgram = $project->students()
                 ->where('city_program_id', $professor->city_program_id)
                 ->exists()
@@ -91,7 +100,6 @@ class BankApprovedIdeasForProfessorsController extends Controller
             abort(403, 'No tienes permiso para ver este proyecto.');
         }
 
-        // Cargar relaciones necesarias
         $project->load([
             'projectStatus',
             'thematicArea.investigationLine',
@@ -101,26 +109,19 @@ class BankApprovedIdeasForProfessorsController extends Controller
             'professors',
         ]);
 
-        // Obtener la última versión del proyecto
         $latestVersion = $project->versions()->latest('created_at')->first();
 
-        // Mapear contenidos para que la vista los muestre como label => valor
         $contentValues = [];
         if ($latestVersion) {
             $contentValues = $latestVersion->contentVersions
-                ->mapWithKeys(function ($cv) {
-                    return [$cv->content->name => $cv->value];
-                })
+                ->mapWithKeys(fn ($contentVersion) => [$contentVersion->content->name => $contentVersion->value])
                 ->toArray();
         }
 
-        // Marcos seleccionados
         $frameworksSelected = $project->contentFrameworkProjects()
             ->with('contentFramework.framework')
             ->get()
-            ->map(function ($item) {
-                return $item->contentFramework;
-            });
+            ->map(fn ($item) => $item->contentFramework);
 
         return view('projects.professor.show', compact(
             'project',

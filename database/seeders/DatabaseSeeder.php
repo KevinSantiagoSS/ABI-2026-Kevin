@@ -11,13 +11,13 @@ use Illuminate\Database\Seeder;
  * a specific table with initial data from CSV files.
  *
  * The seeders follow a consistent pattern:
- * - Each extends CsvSeeder to efficiently import data from CSV.
+ * - Each extends CsvUpsertSeeder to efficiently import data from CSV.
  * - The CSV file name matches the target table name (convention over configuration).
  * - Data is inserted without truncating existing records (to allow repeated execution).
  *
  * To add a new seeder:
  * 1. Create a corresponding CSV file in /database/seeders/csvs/
- * 2. Create a new seeder class extending CsvSeeder
+ * 2. Create a new seeder class extending CsvUpsertSeeder
  * 3. Add the seeder class to the $this->call() array below
  */
 class DatabaseSeeder extends Seeder
@@ -41,6 +41,8 @@ class DatabaseSeeder extends Seeder
             CityProgramTableSeeder::class,
             ProfessorsTableSeeder::class,
             StudentsTableSeeder::class,
+            AcademicPeriodsTableSeeder::class,
+            AcademicProcessWindowsTableSeeder::class,
             InvestigationLinesTableSeeder::class,
             ThematicAreasTableSeeder::class,
             ProjectStatusesTableSeeder::class,
@@ -53,6 +55,9 @@ class DatabaseSeeder extends Seeder
             VersionsTableSeeder::class,
             ContentsTableSeeder::class,
             ContentVersionTableSeeder::class,
+            ProjectStageHistoriesTableSeeder::class,
+            LoadProjectionsTableSeeder::class,
+            TeacherAssignmentsTableSeeder::class,
         ]);
     }
 }

@@ -2,14 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Student;
+use App\Models\AcademicProcessWindow;
 use App\Models\Project;
+use App\Models\Student;
 use App\Models\ThematicArea;
-use Illuminate\Support\Facades\Auth;
+use App\Services\AcademicCalendar\AcademicCalendarService;
+use App\Services\Students\StudentAcademicProgressService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BankApprovedIdeasForStudentsController extends Controller
 {
+    public function __construct(private readonly StudentAcademicProgressService $academicProgress)
+    {
+    }
+
     /**
      * Muestra los proyectos aprobados relacionados con el estudiante autenticado.
      */
@@ -19,37 +26,39 @@ class BankApprovedIdeasForStudentsController extends Controller
             ->whereNull('deleted_at')
             ->first();
 
-        if (!$student || !$student->city_program_id) {
-            abort(403, 'No se pudo determinar el programa académico del estudiante.');
+        if (! $student || ! $student->city_program_id) {
+            abort(403, 'No se pudo determinar el programa academico del estudiante.');
+        }
+
+        $activeAcademicPeriod = AcademicCalendarService::currentActivePeriod();
+
+        if (! $this->academicProgress->canAccessIdeaBank($student, $activeAcademicPeriod)) {
+            abort(403, $this->academicProgress->blockedIdeaBankMessage($student, $activeAcademicPeriod));
         }
 
         $perPage = $request->input('per_page', 10);
         $thematicAreaId = $request->input('thematic_area_id');
 
-        // Obtener grupo de investigación a través del programa del estudiante
         $program = $student->cityProgram?->program;
         $researchGroupId = $program?->research_group_id;
 
-        if (!$researchGroupId) {
-            abort(403, 'Tu programa académico no tiene un grupo de investigación asociado.');
+        if (! $researchGroupId) {
+            abort(403, 'Tu programa academico no tiene un grupo de investigacion asociado.');
         }
 
-        // Obtener TODAS las áreas temáticas del grupo del estudiante
         $thematicAreas = ThematicArea::whereHas('investigationLine', function ($q) use ($researchGroupId) {
-                $q->where('research_group_id', $researchGroupId);
-            })
+            $q->where('research_group_id', $researchGroupId);
+        })
             ->whereNull('deleted_at')
             ->orderBy('name')
             ->get();
 
-        // --- QUERY PROYECTOS APROBADOS ---
-        $projectsQuery = Project::whereHas('projectStatus', fn($q) => $q->where('name', 'Aprobado'))
+        $projectsQuery = Project::whereHas('projectStatus', fn ($q) => $q->where('name', 'Aprobado'))
             ->whereHas('professors', function ($q) use ($student) {
                 $q->where('city_program_id', $student->city_program_id);
             });
 
-        // Aplicar filtro dinámico
-        if (!empty($thematicAreaId)) {
+        if (! empty($thematicAreaId)) {
             $projectsQuery->where('thematic_area_id', $thematicAreaId);
         }
 
@@ -60,28 +69,44 @@ class BankApprovedIdeasForStudentsController extends Controller
                 'versions.contentVersions.content',
                 'contentFrameworkProjects.contentFramework.framework',
                 'professors',
-                'students'
+                'students',
             ])
             ->paginate($perPage)
-            ->withQueryString(); // mantiene filtros entre páginas
+            ->withQueryString();
+
+        $selectionWindow = AcademicCalendarService::currentWindowForProcess(AcademicProcessWindow::PROCESS_IDEA_SELECTION);
+
+        if (! $selectionWindow) {
+            return view(
+                'academic-calendar.unavailable',
+                AcademicCalendarService::unavailableActivityViewData(AcademicProcessWindow::PROCESS_IDEA_SELECTION)
+            );
+        }
 
         return view('projects.student.approved', [
             'projects' => $projects,
             'thematicAreas' => $thematicAreas,
             'thematicAreaId' => $thematicAreaId,
-            'perPage' => $perPage
+            'perPage' => $perPage,
+            'selectionWindow' => $selectionWindow,
+            'selectionWindowOpen' => true,
+            'selectionWindowMessage' => null,
+            'activeAcademicPeriod' => $activeAcademicPeriod,
         ]);
     }
 
-
     public function show(Project $project)
     {
-        // Obtener el estudiante autenticado
         $student = Student::where('user_id', Auth::id())
             ->whereNull('deleted_at')
             ->firstOrFail();
 
-        // Validar que pertenece al mismo programa
+        $activeAcademicPeriod = AcademicCalendarService::currentActivePeriod();
+
+        if (! $this->academicProgress->canAccessIdeaBank($student, $activeAcademicPeriod)) {
+            abort(403, $this->academicProgress->blockedIdeaBankMessage($student, $activeAcademicPeriod));
+        }
+
         $sameProgram = $project->students()
                 ->where('city_program_id', $student->city_program_id)
                 ->exists()
@@ -93,50 +118,52 @@ class BankApprovedIdeasForStudentsController extends Controller
             abort(403, 'No tienes permiso para ver este proyecto.');
         }
 
-        // Cargar relaciones
         $project->load([
             'projectStatus',
             'thematicArea.investigationLine',
             'versions.contentVersions.content',
             'contentFrameworkProjects.contentFramework.framework',
             'students',
-            'professors'
+            'professors',
         ]);
 
-        // Última versión
         $latestVersion = $project->versions()->latest('created_at')->first();
 
-        // Mapear contenidos para mostrar como label => valor
         $contentValues = [];
         if ($latestVersion) {
             $contentValues = $latestVersion->contentVersions
-                ->mapWithKeys(fn($cv) => [$cv->content->name => $cv->value])
+                ->mapWithKeys(fn ($cv) => [$cv->content->name => $cv->value])
                 ->toArray();
         }
 
-        // Marcos seleccionados
         $frameworksSelected = $project->contentFrameworkProjects()
             ->with('contentFramework.framework')
             ->get()
-            ->map(fn($item) => $item->contentFramework);
+            ->map(fn ($item) => $item->contentFramework);
 
-        /**
-         * El estudiante NO podrá seleccionar un proyecto si ya tiene uno en estado "Asignado".
-         */
-        $hasAssignedProject = $student->projects()
-            ->whereHas('projectStatus', fn($q) => $q->where('name', 'Asignado'))
-            ->exists();
+        $selectionWindow = AcademicCalendarService::currentWindowForProcess(AcademicProcessWindow::PROCESS_IDEA_SELECTION);
 
-        // Si NO tiene proyecto asignado => puede ver botón (true)
-        $canSelectProject = ! $hasAssignedProject;
+        if (! $selectionWindow) {
+            return view(
+                'academic-calendar.unavailable',
+                AcademicCalendarService::unavailableActivityViewData(AcademicProcessWindow::PROCESS_IDEA_SELECTION)
+            );
+        }
+
+        $canSelectProject = true;
+        $selectionWindowOpen = true;
+        $selectionWindowMessage = null;
 
         return view('projects.student.show', compact(
             'project',
             'latestVersion',
             'contentValues',
             'frameworksSelected',
-            'canSelectProject'
+            'canSelectProject',
+            'selectionWindow',
+            'selectionWindowOpen',
+            'selectionWindowMessage',
+            'activeAcademicPeriod'
         ));
     }
-
 }

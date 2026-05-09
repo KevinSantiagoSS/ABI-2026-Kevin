@@ -1,4 +1,5 @@
 <?php
+use App\Models\AcademicProcessWindow;
 use Illuminate\Support\Facades\Auth;
 
 return [
@@ -81,7 +82,7 @@ return [
     //boxed, combo, condensed, fluid, fluid-vertical, horizontal, navbar-overlap, navbar-sticky, rtl, vertical, vertical-right, vertical-transparent
 
     'layout_light_sidebar' => null,
-    'layout_light_topbar' => true,
+    'layout_light_topbar' => null,
     'layout_enable_top_header' => false,
 
     /*
@@ -190,11 +191,17 @@ return [
         'hasAnyRole' => ['student', 'professor', 'committee_leader'],
     ],
     [
+        'text' => 'Mi Carga',
+        'icon' => 'ti ti-chart-bar',
+        'route' => 'projects.my-load',
+        'hasAnyRole' => ['professor', 'committee_leader'],
+    ],
+    [
         'text' => 'Crear Proyecto',
         'icon' => 'ti ti-book-2',
         'route' => 'projects.create',
-        // Solo student y professor pueden crear
-        'hasAnyRole' => ['student', 'professor'],
+        // Solo student, professor y committee_leader pueden crear
+        'hasAnyRole' => ['student', 'professor', 'committee_leader'],
     ],
     [
         'text' => 'Evaluar Proyectos',
@@ -203,24 +210,11 @@ return [
         'hasRole' => 'committee_leader',
     ],
     [
-        'text' => 'Banco de Ideas Aprobadas',
-        'icon' => 'ti ti-bulb',
-        'submenu' => [
-            [
-                'text' => 'Ver Ideas (Estudiante)',
-                'icon' => 'ti ti-eye',
-                'route' => 'students.projects.approved.index',
-                'hasRole' => 'student',
-            ],
-            [
-                'text' => 'Ver Ideas (Profesor)',
-                'icon' => 'ti ti-eye',
-                'route' => 'professor.projects.approved.index',
-                'hasRole' => 'professor',
-            ],
-        ],
-        'hasAnyRole' => ['student', 'professor'],
-    ],
+    'text' => 'Banco de Ideas Aprobadas',
+    'icon' => 'ti ti-bulb',
+    'route' => 'students.projects.approved.index',
+    'hasRole' => 'student',
+],
 
     // =================================================================
     // SECCIÓN: GESTIÓN ACADÉMICA (Research Staff)
@@ -275,6 +269,16 @@ return [
                 'icon' => 'ti ti-stack-2',
                 'route' => 'thematic-areas.index',
             ],
+            [
+                'text' => 'Periodos Académicos',
+                'icon' => 'ti ti-calendar-event',
+                'route' => 'academic-periods.index',
+            ],
+            [
+                'text' => 'Calendario Académico',
+                'icon' => 'ti ti-calendar-time',
+                'route' => 'academic-process-windows.index',
+            ],
         ],
     ],
     [
@@ -316,9 +320,44 @@ return [
             ],
         ],
     ],
+    [
+        'text' => 'Proyecciones',
+        'icon' => 'ti ti-chart-histogram',
+        'hasRole' => 'research_staff',
+        'submenu' => [
+            [
+                'text' => 'Proyeccion de carga',
+                'icon' => 'ti ti-chart-bar',
+                'route' => 'projections.load-projections.index',
+                'calendar_process_key' => AcademicProcessWindow::PROCESS_TEACHER_LOAD_PROJECTION,
+            ],
+            [
+                'text' => 'Asignacion docente',
+                'icon' => 'ti ti-users-group',
+                'route' => 'projections.teacher-assignments.index',
+                'calendar_process_key' => AcademicProcessWindow::PROCESS_TEACHER_ASSIGNMENT,
+            ],
+            [
+                'text' => 'Demanda de ideas',
+                'icon' => 'ti ti-bulb',
+                'route' => 'projections.idea-demand.index',
+                'calendar_process_key' => AcademicProcessWindow::PROCESS_IDEA_DEMAND_PROJECTION,
+            ],
+            [
+                'text' => 'Estudiantes',
+                'icon' => 'ti ti-school',
+                'route' => 'projections.students.index',
+            ],
+            [
+                'text' => 'Docentes',
+                'icon' => 'ti ti-user-star',
+                'route' => 'projections.professors.index',
+            ],
+        ],
+    ],
 
     // =================================================================
-    // SECCIÓN: USUARIOS Y FORMULARIOS (Research Staff)
+    // SECCIÓN: USUARIOS (Research Staff)
     // =================================================================
     [
         'header' => 'Administración',
@@ -330,26 +369,7 @@ return [
         'route' => 'users.index',
         'hasRole' => 'research_staff',
     ],
-    [
-        'text' => 'Formularios',
-        'icon' => 'ti ti-file-pencil',
-        'route' => 'formulario.index',
-        'hasRole' => 'research_staff',
-    ],
 
-    // =================================================================
-    // SECCIÓN: CONSULTAS (Professor y Committee Leader)
-    // =================================================================
-    [
-        'header' => 'Consultas',
-        'hasAnyRole' => ['professor', 'committee_leader'],
-    ],
-    [
-        'text' => 'Participantes',
-        'icon' => 'ti ti-users-group',
-        'route' => 'participants.index',
-        'hasAnyRole' => ['professor', 'committee_leader'],
-    ],
     // Se elimina el menú "Recursos" por no tener vistas funcionales
 ],
 

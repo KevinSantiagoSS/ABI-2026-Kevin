@@ -3,6 +3,7 @@
 namespace App\Models\ResearchStaff;
 
 use App\Models\Program;
+use Illuminate\Support\Collection;
 
 /**
  * Extended model that keeps program queries under the research staff
@@ -13,4 +14,45 @@ class ResearchStaffProgram extends Program
     protected $table = 'programs';
 
     protected $connection = 'mysql_research_staff';
+
+    public static function uniqueOptions(): Collection
+    {
+        return static::query()
+            ->orderBy('name')
+            ->orderBy('id')
+            ->get()
+            ->groupBy(fn (self $program) => mb_strtolower(trim((string) $program->name)))
+            ->map(function (Collection $programs) {
+                $primaryProgram = $programs->first();
+                $primaryProgram->duplicate_ids = $programs
+                    ->pluck('id')
+                    ->map(fn ($id) => (int) $id)
+                    ->values()
+                    ->all();
+
+                return $primaryProgram;
+            })
+            ->values();
+    }
+
+    public static function equivalentIds(?int $programId): array
+    {
+        if (! $programId) {
+            return [];
+        }
+
+        $program = static::query()->find($programId);
+
+        if (! $program || blank($program->name)) {
+            return [$programId];
+        }
+
+        return static::query()
+            ->where('name', $program->name)
+            ->orderBy('id')
+            ->pluck('id')
+            ->map(fn ($id) => (int) $id)
+            ->values()
+            ->all();
+    }
 }

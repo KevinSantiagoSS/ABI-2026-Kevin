@@ -34,6 +34,12 @@
             <div class="alert alert-danger">{{ session('error') }}</div>
         @endif
 
+        <div class="alert alert-info mb-3">
+            <strong>Ventana de seleccion:</strong>
+            {{ optional($activeAcademicPeriod)->name ?? 'Periodo activo' }} ·
+            {{ optional($selectionWindow->start_at)->format('d/m/Y H:i') }} a {{ optional($selectionWindow->end_at)->format('d/m/Y H:i') }}.
+        </div>
+
         <form method="POST" action="{{ route('projects.student.assign', $project) }}">
             @csrf
 

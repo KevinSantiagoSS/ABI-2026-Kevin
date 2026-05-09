@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\File;
 
 /**
  * Seeder for populating the users table from a CSV file.
@@ -28,20 +27,35 @@ class UsersTableSeeder extends Seeder
     {
         $csvFile = database_path('seeders/csvs/users.csv');
         $data = array_map('str_getcsv', file($csvFile));
+        $seededAt = '2026-04-13 00:00:00';
 
         $header = array_shift($data); // First row = headers
 
         foreach ($data as $row) {
             $record = array_combine($header, $row);
+            $existingUser = DB::table('users')
+                ->where('email', $record['email'])
+                ->first();
 
-            DB::table('users')->insert([
+            $payload = [
                 'email' => $record['email'],
-                'state' => $record['state'],
+                'state' => (bool) $record['state'],
                 'role' => $record['role'],
-                'password' => Hash::make($record['password']), // Encrypted
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]);
+                'updated_at' => $seededAt,
+            ];
+
+            if (! $existingUser) {
+                $payload['password'] = Hash::make($record['password']); // Encrypted
+                $payload['created_at'] = $seededAt;
+
+                DB::table('users')->insert($payload);
+
+                continue;
+            }
+
+            DB::table('users')
+                ->where('id', $existingUser->id)
+                ->update($payload);
         }
     }
 }

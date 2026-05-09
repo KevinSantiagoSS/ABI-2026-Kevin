@@ -4,51 +4,37 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 
-/**
- * project table model, manages communication with the database using the root user, 
- * should not be used by any end user, 
- * always use an inherited model with the connection specific to each role.
- */
 class Project extends Model
 {
     use HasFactory, SoftDeletes;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'title',
         'evaluation_criteria',
         'thematic_area_id',
         'project_status_id',
+        'proposal_academic_period_id',
+        'assignment_academic_period_id',
+        'proposed_at',
+        'assigned_at',
     ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array<string, string>
-     */
     protected $casts = [
         'thematic_area_id' => 'integer',
         'project_status_id' => 'integer',
+        'proposal_academic_period_id' => 'integer',
+        'assignment_academic_period_id' => 'integer',
+        'proposed_at' => 'datetime',
+        'assigned_at' => 'datetime',
     ];
 
-    /**
-     * Set the title attribute with proper formatting.
-     *
-     * Formats the title by removing extra whitespace and applying title case.
-     * If the value is null, it remains null.
-     *
-     * @param string|null $value The title value to set
-     * @return void
-     */
     public function setTitleAttribute($value): void
     {
         $this->attributes['title'] = is_null($value)
@@ -56,54 +42,65 @@ class Project extends Model
             : Str::of($value)->squish()->title()->toString();
     }
 
-    /**
-     * Get the status associated with the project.
-     */
-    public function projectStatus()
+    public function projectStatus(): BelongsTo
     {
         return $this->belongsTo(ProjectStatus::class, 'project_status_id', 'id');
     }
 
-    /**
-     * Get the thematic area associated with the project.
-     */
     public function thematicArea(): BelongsTo
     {
         return $this->belongsTo(ThematicArea::class, 'thematic_area_id', 'id');
     }
 
-    /**
-     * Get all versions registered for this project.
-     */
+    public function proposalAcademicPeriod(): BelongsTo
+    {
+        return $this->belongsTo(AcademicPeriod::class, 'proposal_academic_period_id', 'id');
+    }
+
+    public function assignmentAcademicPeriod(): BelongsTo
+    {
+        return $this->belongsTo(AcademicPeriod::class, 'assignment_academic_period_id', 'id');
+    }
+
+    public function scopePendingReviewDueToAge(Builder $query, ?int $thresholdPeriods = null): Builder
+    {
+        return app(\App\Services\Projects\ProjectAgeReviewService::class)
+            ->applyPendingReviewDueToAge($query, $thresholdPeriods);
+    }
+
+    public function isPendingReviewDueToAge(?int $thresholdPeriods = null): bool
+    {
+        return app(\App\Services\Projects\ProjectAgeReviewService::class)
+            ->shouldFlag($this, $thresholdPeriods);
+    }
+
     public function versions(): HasMany
     {
         return $this->hasMany(Version::class, 'project_id', 'id');
     }
 
-    public function professors()
+    public function stageHistories(): HasMany
+    {
+        return $this->hasMany(ProjectStageHistory::class, 'project_id', 'id')->orderByDesc('event_at');
+    }
+
+    public function professors(): BelongsToMany
     {
         return $this->belongsToMany(Professor::class, 'professor_project', 'project_id', 'professor_id');
     }
 
-    public function students()
+    public function students(): BelongsToMany
     {
         return $this->belongsToMany(Student::class, 'student_project', 'project_id', 'student_id');
     }
 
-    public function contentFrameworkProjects()
+    public function contentFrameworkProjects(): HasMany
     {
         return $this->hasMany(ContentFrameworkProject::class, 'project_id', 'id');
     }
 
-    public function contentFrameworks()
+    public function contentFrameworks(): BelongsToMany
     {
-        return $this->belongsToMany(
-            ContentFramework::class,
-            'content_framework_project',
-            'project_id',
-            'content_framework_id'
-        );
+        return $this->belongsToMany(ContentFramework::class, 'content_framework_project', 'project_id', 'content_framework_id');
     }
-
 }
-

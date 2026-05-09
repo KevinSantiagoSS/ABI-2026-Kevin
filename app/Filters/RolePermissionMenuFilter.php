@@ -2,6 +2,7 @@
 
 namespace App\Filters;
 
+use App\Services\AcademicCalendar\AcademicCalendarService;
 use Illuminate\Support\Facades\Auth;
 use TakiElias\Tablar\Menu\Filters\FilterInterface;
 
@@ -9,7 +10,15 @@ class RolePermissionMenuFilter implements FilterInterface
 {
     public function transform($item)
     {
-        return $this->isVisible($item) ? ($item['header'] ?? $item) : false;
+        if (! $this->isVisible($item)) {
+            return false;
+        }
+
+        if (isset($item['calendar_process_key'])) {
+            $item = $this->applyCalendarAvailability($item);
+        }
+
+        return $item['header'] ?? $item;
     }
 
     protected function isVisible($item)
@@ -25,5 +34,23 @@ class RolePermissionMenuFilter implements FilterInterface
         }
 
         return true;
+    }
+
+    protected function applyCalendarAvailability(array $item): array
+    {
+        static $windowAvailability = [];
+
+        $processKey = (string) $item['calendar_process_key'];
+        $isOpen = $windowAvailability[$processKey] ??= AcademicCalendarService::isProcessWindowOpen($processKey);
+
+        if ($isOpen) {
+            return $item;
+        }
+
+        $item['href'] = '#';
+        $item['icon_color'] = 'secondary';
+        $item['text'] = rtrim((string) ($item['text'] ?? '')) . ' (no disponible)';
+
+        return $item;
     }
 }

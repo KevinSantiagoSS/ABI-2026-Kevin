@@ -17,6 +17,60 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
+  <script>
+    (function () {
+      const storageKey = 'tablerTheme';
+      const validThemes = ['light', 'dark'];
+      const root = document.documentElement;
+
+      function normalizeTheme(theme) {
+        return validThemes.includes(theme) ? theme : 'light';
+      }
+
+      function readThemeFromUrl() {
+        try {
+          const url = new URL(window.location.href);
+          const theme = url.searchParams.get('theme');
+
+          if (!validThemes.includes(theme)) {
+            return null;
+          }
+
+          localStorage.setItem(storageKey, theme);
+          url.searchParams.delete('theme');
+          const nextUrl = url.pathname + (url.searchParams.toString() ? '?' + url.searchParams.toString() : '') + url.hash;
+          window.history.replaceState({}, '', nextUrl);
+
+          return theme;
+        } catch (error) {
+          return null;
+        }
+      }
+
+      function readStoredTheme() {
+        try {
+          return localStorage.getItem(storageKey);
+        } catch (error) {
+          return null;
+        }
+      }
+
+      const selectedTheme = normalizeTheme(readThemeFromUrl() ?? readStoredTheme());
+
+      root.setAttribute('data-bs-theme', selectedTheme);
+      root.classList.toggle('theme-dark', selectedTheme === 'dark');
+      root.style.colorScheme = selectedTheme;
+    })();
+  </script>
+
+  <style>
+    html.theme-changing *,
+    html.theme-changing *::before,
+    html.theme-changing *::after {
+      transition: none !important;
+    }
+  </style>
+
   {{--
     Primary stylesheet served from the Tabler CDN to keep the UI consistent
     across all pages without bundling the library locally.

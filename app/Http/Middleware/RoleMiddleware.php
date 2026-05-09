@@ -12,18 +12,37 @@ class RoleMiddleware
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
-     * @param  string  $role
+     * @param  string  ...$roles
      * @return mixed
      */
-    public function handle($request, Closure $next, $role)
+    public function handle($request, Closure $next, ...$roles)
     {
         $user = Auth::user();
 
-        // Verifica si el usuario tiene el rol requerido
-        if (!$user || $user->role !== $role) {
-            return redirect('/')->with('error', 'No tienes permiso para acceder a esta sección.');
+        if (! $user) {
+            return redirect('/')->with('error', 'No tienes permiso para acceder a esta seccion.');
+        }
+
+        $allowedRoles = collect($roles)
+            ->flatMap(fn (string $role) => explode(',', $role))
+            ->map(fn (string $role) => trim($role))
+            ->filter()
+            ->map(fn (string $role) => $this->normalizeRole($role))
+            ->unique()
+            ->values();
+
+        if ($allowedRoles->isNotEmpty() && ! $allowedRoles->contains($this->normalizeRole((string) $user->role))) {
+            return redirect('/')->with('error', 'No tienes permiso para acceder a esta seccion.');
         }
 
         return $next($request);
+    }
+
+    protected function normalizeRole(string $role): string
+    {
+        return match ($role) {
+            'committe_leader' => 'committee_leader',
+            default => $role,
+        };
     }
 }

@@ -5,7 +5,6 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\DepartmentController;
-use App\Http\Controllers\FormularioController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\FrameworkController;
@@ -18,10 +17,19 @@ use App\Http\Controllers\ThematicAreaController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectEvaluationController;
+use App\Http\Controllers\ProjectVersionController;
 use App\Http\Controllers\BankApprovedIdeasForStudentsController;
 use App\Http\Controllers\BankApprovedIdeasForProfessorsController;
 use App\Http\Controllers\CityProgramController;
 use App\Http\Controllers\BankApprovedIdeasAssignController;
+use App\Http\Controllers\AcademicPeriodController;
+use App\Http\Controllers\AcademicProcessWindowController;
+use App\Http\Controllers\IdeaDemandController;
+use App\Http\Controllers\LoadProjectionController;
+use App\Http\Controllers\ProjectionProfessorController;
+use App\Http\Controllers\ProjectionStudentController;
+use App\Http\Controllers\TeacherAssignmentController;
+use App\Http\Controllers\TeacherLoadController;
 
 Route::get('/', function () {
     return redirect()->route('login');
@@ -62,14 +70,22 @@ Route::middleware(['auth', 'role:research_staff'])->group(function () {
     Route::get('/obtener-ciudades-por-departamento/{id}', [DepartmentController::class, 'ciudadesPorDepartamento'])->name('obtener-ciudades-por-departamento');
     // End of added routes
 
-    // Forms
-    Route::resource('/formulario', FormularioController::class);
-
     // Academic part structure
     Route::resource('research-groups', ResearchGroupController::class);
     Route::resource('programs', ProgramController::class);
     Route::resource('investigation-lines', InvestigationLineController::class);
     Route::resource('thematic-areas', ThematicAreaController::class);
+    Route::resource('academic-periods', AcademicPeriodController::class);
+    Route::put('academic-periods/{academic_period}/activate', [AcademicPeriodController::class, 'activate'])->name('academic-periods.activate');
+    Route::put('academic-periods/{academic_period}/close', [AcademicPeriodController::class, 'close'])->name('academic-periods.close');
+    Route::resource('academic-process-windows', AcademicProcessWindowController::class);
+    Route::prefix('projections')->name('projections.')->group(function () {
+        Route::resource('load-projections', LoadProjectionController::class)->except(['show', 'destroy']);
+        Route::resource('teacher-assignments', TeacherAssignmentController::class)->except(['show', 'destroy']);
+        Route::get('idea-demand', [IdeaDemandController::class, 'index'])->name('idea-demand.index');
+        Route::get('students', [ProjectionStudentController::class, 'index'])->name('students.index');
+        Route::get('professors', [ProjectionProfessorController::class, 'index'])->name('professors.index');
+    });
 
     // Catálogo de contenidos y versiones (interfaces Tablar)
     Route::view('contents', 'contents.index')->name('contents.index');
@@ -108,16 +124,27 @@ Route::middleware(['auth'])->group(function () {
     // Perfil (vista de solo lectura para cualquier usuario autenticado)
     Route::get('/perfil', [PerfilController::class, 'show'])->name('perfil.show');
 
+    Route::get('projects/my-load', [TeacherLoadController::class, 'index'])
+        ->middleware('role:professor,committee_leader')
+        ->name('projects.my-load');
+
     Route::get('projects/participants', [ProjectController::class, 'participants'])
         ->middleware('role:professor,committee_leader') // Keep the catalog restricted to professors and committee leaders.
         ->name('projects.participants');
 
     // Vista navegable para participantes
     Route::get('consultas/participantes', [ProjectController::class, 'participantsPage'])
-        ->middleware('role:professor,committee_leader')
-        ->name('participants.index');
+    ->middleware('role:committee_leader')
+    ->name('participants.index');
 
     Route::resource('projects', ProjectController::class)->except(['destroy']);
+
+    Route::prefix('projects/{project}/versions')->name('projects.versions.')->group(function () {
+        Route::get('/', [ProjectVersionController::class, 'index'])->name('index');
+        Route::get('/create', [ProjectVersionController::class, 'create'])->name('create');
+        Route::get('/{version}', [ProjectVersionController::class, 'show'])->name('show');
+        Route::get('/{version}/edit', [ProjectVersionController::class, 'edit'])->name('edit');
+    });
 });
 
 Route::middleware(['auth', 'role:committee_leader'])->prefix('comite/projects/evaluation')->name('projects.evaluation.')->group(function () {
@@ -140,13 +167,7 @@ Route::middleware(['auth', 'role:student'])->prefix('students/projects')->group(
         ->name('projects.student.assign');
 });
 
-Route::middleware(['auth', 'role:professor'])->group(function () {
-    Route::get('professor/projects/approved', [BankApprovedIdeasForProfessorsController::class, 'index'])
-        ->name('professor.projects.approved.index');
 
-    Route::get('professor/projects/approved/{project}', [BankApprovedIdeasForProfessorsController::class, 'show'])
-        ->name('professor.projects.approved.show');
-});
 
 Route::middleware(['auth', 'role:committee_leader'])->group(function () {
     Route::get('professor/projects/approved', [BankApprovedIdeasForProfessorsController::class, 'index'])

@@ -80,7 +80,7 @@ class User extends Authenticatable
      */
     public function hasRole($role)
     {
-        return $this->role === $role;
+        return $this->normalizeRole($this->role) === $this->normalizeRole($role);
     }
 
     /**
@@ -91,6 +91,18 @@ class User extends Authenticatable
      */
     public function hasAnyRole($roles)
     {
-        return in_array($this->role, (array)$roles);
+        $normalizedCurrentRole = $this->normalizeRole($this->role);
+
+        return collect((array) $roles)
+            ->map(fn ($role) => $this->normalizeRole($role))
+            ->contains($normalizedCurrentRole);
+    }
+
+    protected function normalizeRole($role)
+    {
+        return match ((string) $role) {
+            'committe_leader' => 'committee_leader',
+            default => (string) $role,
+        };
     }
 }

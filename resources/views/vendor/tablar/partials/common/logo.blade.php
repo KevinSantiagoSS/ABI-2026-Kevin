@@ -1,4 +1,12 @@
-<a href="{{ config('tablar.dashboard_url', 'home') }}">
+@php($dashboard_url = View::getSection('dashboard_url') ?? config('tablar.dashboard_url', 'home'))
+
+@if (config('tablar.use_route_url', true))
+    @php($dashboard_url = $dashboard_url ? route($dashboard_url) : '')
+@else
+    @php($dashboard_url = $dashboard_url ? url($dashboard_url) : '')
+@endif
+
+<a href="{{ $dashboard_url }}">
     @if(config('tablar.logo_img.path'))
         <img src="{{ asset(config('tablar.logo_img.path', 'assets/logo.svg')) }}"
              width="{{ config('tablar.logo_img.width', 110) }}"

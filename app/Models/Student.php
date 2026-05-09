@@ -16,6 +16,9 @@ class Student extends Model
 {
     use HasFactory, SoftDeletes;
 
+    public const PG_STAGE_PG1 = 'pg1';
+    public const PG_STAGE_PG2 = 'pg2';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -27,8 +30,13 @@ class Student extends Model
         'last_name',
         'phone',
         'semester',
+        'pg_stage',
         'city_program_id',
         'user_id',
+    ];
+
+    protected $casts = [
+        'semester' => 'integer',
     ];
 
     /**

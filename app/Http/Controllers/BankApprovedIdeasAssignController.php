@@ -2,145 +2,147 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use App\Models\AcademicProcessWindow;
 use App\Models\Project;
-use App\Models\Student;
 use App\Models\ProjectStatus;
+use App\Models\Student;
+use App\Services\AcademicCalendar\AcademicCalendarService;
+use App\Services\Students\StudentAcademicProgressService;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
+use Illuminate\View\View;
 
 class BankApprovedIdeasAssignController extends Controller
 {
-    /**
-     * Muestra la pantalla para seleccionar compañeros antes de tomar una idea aprobada.
-     */
-    public function select(Project $project)
+    public function __construct(private readonly StudentAcademicProgressService $academicProgress)
     {
+    }
+
+    public function select(Project $project): View|RedirectResponse
+    {
+        if (! AcademicCalendarService::isProcessWindowOpen(AcademicProcessWindow::PROCESS_IDEA_SELECTION)) {
+            return view(
+                'academic-calendar.unavailable',
+                AcademicCalendarService::unavailableActivityViewData(AcademicProcessWindow::PROCESS_IDEA_SELECTION)
+            );
+        }
+
         $student = Student::where('user_id', Auth::id())
             ->whereNull('deleted_at')
             ->firstOrFail();
 
-        // Validar que el proyecto sea elegible
+        $activeAcademicPeriod = AcademicCalendarService::currentActivePeriod();
+
+        if (! $this->academicProgress->canAccessIdeaBank($student, $activeAcademicPeriod)) {
+            abort(403, $this->academicProgress->blockedIdeaBankMessage($student, $activeAcademicPeriod));
+        }
+
         if ($project->projectStatus?->name !== 'Aprobado') {
-            abort(403, 'Solo puedes seleccionar ideas que estén en estado Aprobado.');
+            abort(403, 'Solo puedes seleccionar ideas que esten en estado Aprobado.');
         }
 
-        // Verificar que el estudiante no esté bloqueado por otro proyecto
-        $currentStatus = $student->projects()->latest()->first()?->projectStatus?->name;
-
-        if (in_array($currentStatus, ['Asignado', 'Aprobado', 'Devuelto para corrección', 'Pendiente de aprobación'])) {
-            abort(403, 'Ya tienes un proyecto activo. No puedes seleccionar uno nuevo.');
-        }
-
-        // Obtener compañeros elegibles (solo mismo city_program)
         $availableStudents = Student::query()
             ->where('city_program_id', $student->city_program_id)
             ->where('id', '!=', $student->id)
             ->where(function ($q) {
-                $q->whereDoesntHave('projects') // sin proyectos
-                ->orWhere(function ($q2) {
-                    $q2->whereHas('projects', fn($p) =>
-                            $p->whereHas('projectStatus', fn($s) =>
-                                $s->where('name', 'Rechazado')
-                            )
-                        )
-                        ->whereDoesntHave('projects', fn($p) =>
-                            $p->whereHas('projectStatus', fn($s) =>
-                                $s->whereNot('name', 'Rechazado')
-                            )
-                        );
-                });
+                $q->whereDoesntHave('projects')
+                    ->orWhere(function ($q2) {
+                        $q2->whereHas('projects', fn ($p) => $p->whereHas('projectStatus', fn ($s) => $s->where('name', 'Rechazado')))
+                            ->whereDoesntHave('projects', fn ($p) => $p->whereHas('projectStatus', fn ($s) => $s->whereNot('name', 'Rechazado')));
+                    });
             })
             ->orderBy('last_name')
             ->orderBy('name')
             ->get();
 
-        return view('projects.student.select', compact('project', 'availableStudents'));
+        $selectionWindow = AcademicCalendarService::currentWindowForProcess(AcademicProcessWindow::PROCESS_IDEA_SELECTION);
+
+        return view('projects.student.select', compact('project', 'availableStudents', 'selectionWindow', 'activeAcademicPeriod'));
     }
 
-    /**
-     * Procesa la asignación del proyecto al estudiante y su equipo.
-     */
-    public function assign(Request $request, Project $project)
+    public function assign(Request $request, Project $project): View|RedirectResponse
     {
+        if (! AcademicCalendarService::isProcessWindowOpen(AcademicProcessWindow::PROCESS_IDEA_SELECTION)) {
+            return view(
+                'academic-calendar.unavailable',
+                AcademicCalendarService::unavailableActivityViewData(AcademicProcessWindow::PROCESS_IDEA_SELECTION)
+            );
+        }
+
+        $selectionWindow = AcademicCalendarService::currentWindowForProcess(AcademicProcessWindow::PROCESS_IDEA_SELECTION);
+        $activePeriod = AcademicCalendarService::currentActivePeriodOrFail();
+
         $student = Student::where('user_id', Auth::id())
             ->whereNull('deleted_at')
             ->firstOrFail();
 
-        $validated = $request->validate([
-            'teammate_ids' => ['nullable', 'array', 'max:2'],
-            'teammate_ids.*' => [
-                'integer',
-                Rule::exists('students', 'id')
-                    ->where(fn ($q) => $q->where('city_program_id', $student->city_program_id))
-            ],
-        ]);
-
-        // Validar que el proyecto esté disponible
-        if ($project->projectStatus?->name !== 'Aprobado') {
-            abort(403, 'Este proyecto ya no está disponible para asignación.');
+        if (! $this->academicProgress->canAccessIdeaBank($student, $activePeriod)) {
+            return back()->with('error', $this->academicProgress->blockedIdeaBankMessage($student, $activePeriod));
         }
 
-        // Estados permitidos para tomar otro proyecto
-        $allowedStatuses = ['Rechazado', 'Devuelto para corrección'];
+        $validated = $request->validate([
+            'teammate_ids' => ['nullable', 'array', 'max:2'],
+            'teammate_ids.*' => ['integer', Rule::exists('students', 'id')->where(fn ($q) => $q->where('city_program_id', $student->city_program_id))],
+        ]);
 
-        // 1️⃣ Validar que el estudiante NO tenga otro proyecto activo
+        if ($project->projectStatus?->name !== 'Aprobado') {
+            abort(403, 'Este proyecto ya no esta disponible para asignacion.');
+        }
+
+        $allowedStatuses = ['Rechazado', 'Devuelto para correccion'];
+
         $hasActiveUser = $student->projects()
             ->where('projects.id', '!=', $project->id)
-            ->whereHas('projectStatus', fn($status) =>
-                $status->whereNotIn('name', $allowedStatuses)
-            )
+            ->whereHas('projectStatus', fn ($status) => $status->whereNotIn('name', $allowedStatuses))
             ->exists();
 
         if ($hasActiveUser) {
-            return back()
-                ->with('error', 'No puedes asignarte a este proyecto porque ya tienes un proyecto activo.');
+            return back()->with('error', 'No puedes asignarte a este proyecto porque ya tienes un proyecto activo.');
         }
 
-        // 2️⃣ Validar compañeros seleccionados
-        if (!empty($validated['teammate_ids'])) {
+        if (! empty($validated['teammate_ids'])) {
             $hasActiveTeammates = Student::query()
                 ->whereIn('id', $validated['teammate_ids'])
-                ->whereHas('projects', fn($query) =>
-                    $query->where('projects.id', '!=', $project->id)
-                        ->whereHas('projectStatus', fn($status) =>
-                            $status->whereNotIn('name', $allowedStatuses)
-                        )
-                )
+                ->whereHas('projects', fn ($query) => $query->where('projects.id', '!=', $project->id)->whereHas('projectStatus', fn ($status) => $status->whereNotIn('name', $allowedStatuses)))
                 ->exists();
 
             if ($hasActiveTeammates) {
-                return back()
-                    ->with('error', 'Uno o más compañeros seleccionados ya tienen un proyecto activo.');
+                return back()->with('error', 'Uno o mas companeros seleccionados ya tienen un proyecto activo.');
             }
         }
 
         DB::beginTransaction();
 
         try {
-            // Cambiar estado del proyecto a “Asignado”
-            $assignedStatusId = ProjectStatus::where('name', 'Asignado')->first()->id;
-            $project->update(['project_status_id' => $assignedStatusId]);
+            $assignedStatusId = ProjectStatus::where('name', 'Asignado')->firstOrFail()->id;
+            $project->update([
+                'project_status_id' => $assignedStatusId,
+                'assignment_academic_period_id' => $activePeriod->id,
+                'assigned_at' => now(),
+            ]);
 
-            // Vincular estudiantes
-            $studentIds = collect($validated['teammate_ids'] ?? [])
-                ->push($student->id)
-                ->unique()
-                ->values()
-                ->all();
-
+            $studentIds = collect($validated['teammate_ids'] ?? [])->push($student->id)->unique()->values()->all();
             $project->students()->syncWithoutDetaching($studentIds);
+
+            AcademicCalendarService::recordProjectStage(
+                $project,
+                'assigned',
+                $activePeriod,
+                Auth::id(),
+                'Proyecto asignado durante la ventana de seleccion.',
+                ['selection_window_id' => $selectionWindow?->id, 'student_ids' => $studentIds]
+            );
 
             DB::commit();
         } catch (\Throwable $e) {
             DB::rollBack();
+
             return back()->with('error', 'Error al asignar el proyecto. Intenta de nuevo.');
         }
 
-        return redirect()
-            ->route('projects.index')
-            ->with('success', 'Proyecto asignado exitosamente. Ahora es tuyo para ejecutar.');
+        return redirect()->route('projects.index')->with('success', 'Proyecto asignado exitosamente. Ahora es tuyo para ejecutar.');
     }
 }

@@ -29,10 +29,8 @@ GRANT USAGE ON *.* TO 'db_user'@'%';
 
 -- Basic users can:
 GRANT SELECT ON {{DB_DATABASE}}.users TO 'db_user'@'%';
--- GRANT SELECT, INSERT, UPDATE, DELETE ON {{DB_DATABASE}}.password_resets TO 'db_user'@'%';
 -- GRANT SELECT, INSERT, UPDATE, DELETE ON {{DB_DATABASE}}.password_reset_tokens TO 'db_user'@'%';
 -- GRANT SELECT, INSERT, UPDATE, DELETE ON {{DB_DATABASE}}.personal_access_tokens TO 'db_user'@'%';
--- GRANT SELECT, INSERT, UPDATE, DELETE ON {{DB_DATABASE}}.sessions TO 'db_user'@'%';
 
 -- Create user for students
 DROP USER IF EXISTS 'db_student'@'%';
@@ -130,10 +128,8 @@ GRANT USAGE ON *.* TO 'db_user'@'localhost';
 
 -- Basic users can:
 GRANT SELECT ON {{DB_DATABASE}}.users TO 'db_user'@'localhost';
--- GRANT SELECT, INSERT, UPDATE, DELETE ON {{DB_DATABASE}}.password_resets TO 'db_user'@'localhost';
 -- GRANT SELECT, INSERT, UPDATE, DELETE ON {{DB_DATABASE}}.password_reset_tokens TO 'db_user'@'localhost';
 -- GRANT SELECT, INSERT, UPDATE, DELETE ON {{DB_DATABASE}}.personal_access_tokens TO 'db_user'@'localhost';
--- GRANT SELECT, INSERT, UPDATE, DELETE ON {{DB_DATABASE}}.sessions TO 'db_user'@'localhost';
 
 -- Create user for students
 DROP USER IF EXISTS 'db_student'@'localhost';
@@ -231,10 +227,8 @@ GRANT USAGE ON *.* TO 'db_user'@'127.0.0.1';
 
 -- Basic users can:
 GRANT SELECT ON {{DB_DATABASE}}.users TO 'db_user'@'127.0.0.1';
--- GRANT SELECT, INSERT, UPDATE, DELETE ON {{DB_DATABASE}}.password_resets TO 'db_user'@'127.0.0.1';
 -- GRANT SELECT, INSERT, UPDATE, DELETE ON {{DB_DATABASE}}.password_reset_tokens TO 'db_user'@'127.0.0.1';
 -- GRANT SELECT, INSERT, UPDATE, DELETE ON {{DB_DATABASE}}.personal_access_tokens TO 'db_user'@'127.0.0.1';
--- GRANT SELECT, INSERT, UPDATE, DELETE ON {{DB_DATABASE}}.sessions TO 'db_user'@'127.0.0.1';
 
 -- Create user for students
 DROP USER IF EXISTS 'db_student'@'127.0.0.1';

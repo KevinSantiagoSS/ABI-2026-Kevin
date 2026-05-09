@@ -33,6 +33,18 @@
     </div>
 </div>
 
+<div class="container-xl mt-3">
+    <div class="alert {{ $selectionWindowOpen ? 'alert-info' : 'alert-warning' }} mb-3">
+        <strong>Ventana de seleccion:</strong>
+        @if ($selectionWindowOpen && $selectionWindow)
+            {{ optional($activeAcademicPeriod)->name ?? 'Periodo activo' }} ·
+            {{ optional($selectionWindow->start_at)->format('d/m/Y H:i') }} a {{ optional($selectionWindow->end_at)->format('d/m/Y H:i') }}.
+        @else
+            {{ $selectionWindowMessage }}
+        @endif
+    </div>
+</div>
+
 <div class="card mb-3 container-xl">
     <div class="card-header">
         <h3 class="card-title">Filtros</h3>
@@ -44,7 +56,7 @@
                 <select name="thematic_area_id" id="thematic_area_id" class="form-select" onchange="this.form.submit()">
                     <option value="">Todas las áreas</option>
                     @foreach($thematicAreas as $area)
-                        <option value="{{ $area->id }}" {{ (int)($thematicAreaId ?? 0) === $area->id ? 'selected' : '' }}>
+                        <option value="{{ $area->id }}" {{ (int) ($thematicAreaId ?? 0) === $area->id ? 'selected' : '' }}>
                             {{ $area->name }}
                         </option>
                     @endforeach
@@ -55,7 +67,7 @@
                 <label for="per_page" class="form-label">Registros por página</label>
                 <select name="per_page" id="per_page" class="form-select" onchange="this.form.submit()">
                     @foreach([10, 25, 50] as $size)
-                        <option value="{{ $size }}" {{ (int)($perPage ?? 10) === $size ? 'selected' : '' }}>
+                        <option value="{{ $size }}" {{ (int) ($perPage ?? 10) === $size ? 'selected' : '' }}>
                             {{ $size }}
                         </option>
                     @endforeach
@@ -72,7 +84,6 @@
         </form>
     </div>
 </div>
-
 
 <div class="page-body">
     <div class="container-xl">
@@ -125,8 +136,7 @@
                                     @endforeach
                                 </td>
                                 <td>
-                                    <a href="{{ route('students.projects.approved.show', $project) }}" 
-                                       class="btn btn-sm btn-outline-success">
+                                    <a href="{{ route('students.projects.approved.show', $project) }}" class="btn btn-sm btn-outline-success">
                                        Ver detalles
                                     </a>
                                 </td>
@@ -153,12 +163,9 @@
                 @if($projects->hasPages())
                     <div class="card-footer">
                         <div class="d-flex flex-column flex-md-row align-items-center justify-content-between gap-2">
-                            {{-- Muestra el rango y el total de proyectos --}}
                             <p class="m-0 text-muted">
                                 Mostrando {{ $projects->firstItem() }}–{{ $projects->lastItem() }} de {{ $projects->total() }} resultados
                             </p>
-                            
-                            {{-- Controles de paginación (Bootstrap 5) --}}
                             {{ $projects->withQueryString()->links('vendor.pagination.bootstrap-5') }}
                         </div>
                     </div>
