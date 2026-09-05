@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ProjectIdeaEvaluated; // We can reuse this or create IdeaStatusChanged
 use App\Models\AcademicProcessWindow;
 use App\Models\Project;
 use App\Models\ProjectStatus;
@@ -23,11 +24,15 @@ class BankApprovedIdeasAssignController extends Controller
 
     public function select(Project $project): View|RedirectResponse
     {
-        if (! AcademicCalendarService::isProcessWindowOpen(AcademicProcessWindow::PROCESS_IDEA_SELECTION)) {
-            return view(
-                'academic-calendar.unavailable',
-                AcademicCalendarService::unavailableActivityViewData(AcademicProcessWindow::PROCESS_IDEA_SELECTION)
-            );
+        $selectionWindow = AcademicCalendarService::currentWindowForProcess(AcademicProcessWindow::PROCESS_IDEA_SELECTION);
+        
+        if (! $selectionWindow) {
+            return $this->academicProcessUnavailableView(AcademicProcessWindow::PROCESS_IDEA_SELECTION);
+        }
+
+        // Si la ventana requiere evaluación, NO permitimos entrar a la vista de selección directa
+        if ($selectionWindow->requires_evaluation) {
+            return redirect()->route('students.postulations.create', $project);
         }
 
         $student = Student::where('user_id', Auth::id())
@@ -65,14 +70,16 @@ class BankApprovedIdeasAssignController extends Controller
 
     public function assign(Request $request, Project $project): View|RedirectResponse
     {
-        if (! AcademicCalendarService::isProcessWindowOpen(AcademicProcessWindow::PROCESS_IDEA_SELECTION)) {
-            return view(
-                'academic-calendar.unavailable',
-                AcademicCalendarService::unavailableActivityViewData(AcademicProcessWindow::PROCESS_IDEA_SELECTION)
-            );
+        $selectionWindow = AcademicCalendarService::currentWindowForProcess(AcademicProcessWindow::PROCESS_IDEA_SELECTION);
+
+        if (! $selectionWindow) {
+            return $this->academicProcessUnavailableView(AcademicProcessWindow::PROCESS_IDEA_SELECTION);
         }
 
-        $selectionWindow = AcademicCalendarService::currentWindowForProcess(AcademicProcessWindow::PROCESS_IDEA_SELECTION);
+        if ($selectionWindow->requires_evaluation === true || $selectionWindow->requires_evaluation == 1) {
+            return redirect()->route('students.postulations.create', $project);
+        }
+
         $activePeriod = AcademicCalendarService::currentActivePeriodOrFail();
 
         $student = Student::where('user_id', Auth::id())
@@ -135,6 +142,13 @@ class BankApprovedIdeasAssignController extends Controller
                 'Proyecto asignado durante la ventana de seleccion.',
                 ['selection_window_id' => $selectionWindow?->id, 'student_ids' => $studentIds]
             );
+
+            // Disparar evento de notificación
+            event(new ProjectIdeaEvaluated(
+                $project->load(['students.user', 'professors.user']),
+                'Asignado',
+                'El proyecto ha sido seleccionado por un estudiante.'
+            ));
 
             DB::commit();
         } catch (\Throwable $e) {
