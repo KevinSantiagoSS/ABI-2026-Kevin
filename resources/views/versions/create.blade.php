@@ -109,7 +109,6 @@
         document.addEventListener('DOMContentLoaded', () => {
             const apiBase = '{{ url('/api/versions') }}';
             const projectsEndpoint = '{{ url('/api/projects') }}';
-            const csrfToken = '{{ csrf_token() }}';
             const form = document.getElementById('version-form');
             const projectInput = document.getElementById('project_id');
             const alertBox = document.getElementById('version-form-alert');
@@ -195,7 +194,6 @@
                         headers: {
                             'Content-Type': 'application/json',
                             'Accept': 'application/json',
-                            'X-CSRF-TOKEN': csrfToken,
                         },
                         body: JSON.stringify(payload),
                     });

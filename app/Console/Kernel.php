@@ -12,7 +12,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        $schedule->command('abi:notify-windows')->hourly();
+        // $schedule->command('inspire')->hourly();
     }
 
     /**

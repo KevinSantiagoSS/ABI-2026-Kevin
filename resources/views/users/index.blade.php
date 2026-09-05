@@ -11,211 +11,6 @@
 
 @section('title', 'Usuarios')
 
-@push('css')
-    <style>
-        .users-table-wrapper {
-            overflow-x: hidden;
-        }
-
-        .users-table {
-            width: 100%;
-            table-layout: fixed;
-            margin-bottom: 0;
-        }
-
-        .users-table col.col-index {
-            width: 4%;
-        }
-
-        .users-table col.col-email {
-            width: 17%;
-        }
-
-        .users-table col.col-role {
-            width: 10%;
-        }
-
-        .users-table col.col-state {
-            width: 10%;
-        }
-
-        .users-table col.col-name {
-            width: 14%;
-        }
-
-        .users-table col.col-card {
-            width: 10%;
-        }
-
-        .users-table col.col-program {
-            width: 16%;
-        }
-
-        .users-table col.col-semester {
-            width: 8%;
-        }
-
-        .users-table col.col-actions {
-            width: 11%;
-        }
-
-        .users-table th,
-        .users-table td {
-            min-width: 0;
-            vertical-align: middle;
-        }
-
-        .users-table__value {
-            min-width: 0;
-            display: block;
-            width: 100%;
-            overflow: hidden;
-        }
-
-        .users-table__truncate {
-            display: block;
-            width: 100%;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-
-        .users-table__wrap {
-            overflow: visible;
-            word-wrap: break-word;
-            word-break: break-word;
-        }
-
-        .users-table__wrap-badge {
-            white-space: normal;
-            min-width: 0;
-            max-width: 100%;
-        }
-
-        .users-table .users-table__value > .badge,
-        .users-table td > .badge {
-            white-space: nowrap;
-            min-width: min-content;
-        }
-
-        .users-table .users-table__wrap .users-table__wrap-badge {
-            white-space: normal;
-            min-width: 0;
-            max-width: 100%;
-        }
-
-        .users-table__actions {
-            justify-content: center;
-        }
-
-        @media (max-width: 767.98px) {
-            .users-table-wrapper {
-                overflow: visible;
-            }
-
-            .users-table thead {
-                display: none;
-            }
-
-            .users-table,
-            .users-table tbody,
-            .users-table tr,
-            .users-table td {
-                display: block;
-                width: 100%;
-            }
-
-            .users-table tbody {
-                display: grid;
-                gap: 1rem;
-            }
-
-            .users-table tr {
-                border: 1px solid var(--tblr-border-color);
-                border-radius: var(--tblr-border-radius-lg);
-                padding: 0.875rem 1rem;
-                background: var(--tblr-card-bg, var(--tblr-bg-surface));
-                box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
-            }
-
-            .users-table tr.users-table__empty-row {
-                padding: 0;
-            }
-
-            .users-table td {
-                display: flex;
-                align-items: flex-start;
-                justify-content: space-between;
-                gap: 0.75rem;
-                padding: 0.4rem 0;
-                border: 0;
-                text-align: right;
-            }
-
-            .users-table tr.users-table__empty-row td {
-                display: block;
-                padding: 1.5rem 1rem;
-                text-align: left;
-            }
-
-            .users-table td::before {
-                content: attr(data-label);
-                flex: 0 0 38%;
-                max-width: 38%;
-                font-size: 0.75rem;
-                font-weight: 700;
-                line-height: 1.4;
-                letter-spacing: 0.02em;
-                text-transform: uppercase;
-                color: var(--tblr-muted);
-                text-align: left;
-            }
-
-            .users-table td[data-label="Acciones"] {
-                align-items: stretch;
-                flex-direction: column;
-                text-align: left;
-            }
-
-            .users-table td[data-label="Acciones"]::before {
-                flex: none;
-                max-width: none;
-            }
-
-            .users-table__wrap-badge,
-            .users-table__value > .badge,
-            .users-table td > .badge {
-                white-space: nowrap;
-                min-width: min-content;
-            }
-
-            .users-table .users-table__wrap .users-table__wrap-badge {
-                white-space: normal;
-                min-width: 0;
-                max-width: 100%;
-            }
-
-            .users-table__value {
-                flex: 1 1 auto;
-            }
-
-            .users-table__truncate {
-                max-width: 100%;
-                text-align: right;
-            }
-
-            .users-table__actions {
-                justify-content: flex-start;
-                flex-wrap: wrap;
-            }
-
-            .users-table tr.users-table__empty-row td::before {
-                content: none;
-            }
-        }
-    </style>
-@endpush
-
 @section('content')
     <div class="page-header d-print-none">
         <div class="container-xl">
@@ -276,7 +71,7 @@
                             <label for="search" class="form-label">Buscar</label>
                             <div class="input-group">
                                 {{-- Input element used to capture the 'search' value. --}}
-                                <input type="text" name="search" id="search" value="{{ $search ?? '' }}" class="form-control" placeholder="Correo electrónico, nombre, cédula">
+                                <input type="text" name="search" id="search" value="{{ $search ?? '' }}" class="form-control" placeholder="Email, nombre, cédula">
                                 @if(!empty($search) || !empty($role) || !empty($state) || !empty($cityProgramId) || ($perPage ?? 10) != 10)
                                     <a href="{{ route('users.index') }}" class="input-group-text" title="Limpiar filtros">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -354,101 +149,86 @@
                         <span class="badge bg-azure">{{ $users->total() }}</span>
                     </div>
                 </div>
-                <div class="table-responsive users-table-wrapper">
+                <div class="table-responsive">
                     {{-- Table displays user attributes and quick management actions. --}}
-                    <table class="table card-table table-vcenter align-middle users-table" aria-label="Tabla de usuarios">
-                        <colgroup>
-                            <col class="col-index">
-                            <col class="col-email">
-                            <col class="col-role">
-                            <col class="col-state">
-                            <col class="col-name">
-                            <col class="col-card">
-                            <col class="col-program">
-                            <col class="col-semester">
-                            <col class="col-actions">
-                        </colgroup>
+                    <table class="table card-table table-vcenter align-middle" aria-label="Tabla de usuarios">
                         <thead>
                             <tr>
                                 <th class="w-1">#</th>
-                                <th><span class="users-table__truncate" title="Correo electrónico">Correo electrónico</span></th>
-                                <th><span class="users-table__truncate" title="Rol">Rol</span></th>
-                                <th><span class="users-table__truncate" title="Estado">Estado</span></th>
-                                <th><span class="users-table__truncate" title="Nombre">Nombre</span></th>
-                                <th><span class="users-table__truncate" title="Cédula">Cédula</span></th>
-                                <th><span class="users-table__truncate" title="Programa">Programa</span></th>
-                                <th><span class="users-table__truncate" title="Semestre">Semestre</span></th>
+                                <th class="text-truncate" style="max-width: 220px;">Email</th>
+                                <th class="text-truncate" style="max-width: 160px;">Rol</th>
+                                <th class="text-truncate" style="max-width: 140px;">Estado</th>
+                                <th class="text-truncate" style="max-width: 220px;">Nombre</th>
+                                <th class="text-truncate" style="max-width: 160px;">Cédula</th>
+                                <th class="text-truncate" style="max-width: 240px;">Programa</th>
+                                <th class="text-truncate" style="max-width: 160px;">Semestre</th>
                                 <th class="w-1 text-center">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                         @forelse($users as $index => $user)
                             <tr>
-                                <td class="text-muted" data-label="#">
-                                    <span class="users-table__value">{{ $users->firstItem() + $index }}</span>
+                                <td class="text-muted">{{ $users->firstItem() + $index }}</td>
+                                <td>
+                                    <span class="d-inline-block text-truncate" style="max-width: 220px;" title="{{ $user->email }}">{{ $user->email }}</span>
                                 </td>
-                                <td data-label="Correo electrónico">
-                                    <span class="users-table__value users-table__truncate" title="{{ $user->email }}">{{ $user->email }}</span>
-                                </td>
-                                <td data-label="Rol">
-                                     @php
+                                <td>
+                                    @php
                                         $roleLabel = \App\Helpers\UserRoleHelper::displayName($user, $user->details ?? null);
                                     @endphp
-                                    <span class="users-table__value users-table__wrap">
-                                        <span class="badge {{ \App\Helpers\UserRoleHelper::badgeClass($user->role) }} users-table__wrap-badge" title="{{ $roleLabel }}">
-                                            {{ $roleLabel }}
-                                        </span>
+                                    <span class="badge {{ \App\Helpers\UserRoleHelper::badgeClass($user->role) }}" title="{{ $roleLabel }}">
+                                        {{ $roleLabel }}
                                     </span>
                                 </td>
-                                <td data-label="Estado">
-                                     @if($user->state === '1' || $user->state === 1)
-                                        <span class="users-table__value users-table__wrap"><span class="badge bg-success-lt users-table__wrap-badge">Activo</span></span>
+                                <td>
+                                    @if($user->state === '1' || $user->state === 1)
+                                        <span class="badge bg-success-lt">Activo</span>
                                     @else
-                                        <span class="users-table__value users-table__wrap"><span class="badge bg-danger-lt users-table__wrap-badge">Inactivo</span></span>
+                                        <span class="badge bg-danger-lt">Inactivo</span>
                                     @endif
                                 </td>
-                                <td data-label="Nombre">
+                                <td>
                                     @if($user->details)
-                                        <span class="users-table__value users-table__truncate" title="{{ $user->details->name }} {{ $user->details->last_name }}">
+                                        <span class="d-inline-block text-truncate" style="max-width: 220px;" title="{{ $user->details->name }} {{ $user->details->last_name }}">
                                             {{ $user->details->name }} {{ $user->details->last_name }}
                                         </span>
                                     @else
-                                        <span class="users-table__value text-muted">Sin datos</span>
+                                        <span class="text-muted">Sin datos</span>
                                     @endif
                                 </td>
-                                <td data-label="Cédula">
+                                <td>
                                     @if($user->details)
-                                        <span class="users-table__value users-table__truncate" title="{{ $user->details->card_id }}">{{ $user->details->card_id }}</span>
+                                        <span class="d-inline-block text-truncate" style="max-width: 160px;" title="{{ $user->details->card_id }}">{{ $user->details->card_id }}</span>
                                     @else
-                                        <span class="users-table__value text-muted">Sin datos</span>
+                                        <span class="text-muted">Sin datos</span>
                                     @endif
                                 </td>
-                                <td data-label="Programa">
+                                <td>
                                     @if($user->details && in_array($user->role, ['student', 'professor', 'committee_leader']))
                                         @if(isset($user->details->cityProgram))
                                             {{-- Display both the program and city to contextualize the enrollment. --}}
-                                            <span class="users-table__value users-table__wrap" title="{{ $user->details->cityProgram->program->name ?? 'N/A' }} - {{ $user->details->cityProgram->city->name ?? 'N/A' }}">
+                                            <span class="d-inline-block text-truncate" style="max-width: 240px;" title="{{ $user->details->cityProgram->program->name ?? 'N/A' }} - {{ $user->details->cityProgram->city->name ?? 'N/A' }}">
                                                 {{ $user->details->cityProgram->program->name ?? 'N/A' }} - {{ $user->details->cityProgram->city->name ?? 'N/A' }}
                                             </span>
                                         @else
-                                            <span class="users-table__value text-muted">Sin programa</span>
+                                            <span class="text-muted">Sin programa</span>
                                         @endif
                                     @else
-                                        <span class="users-table__value text-muted">No aplica</span>
+                                        <span class="text-muted">No aplica</span>
                                     @endif
                                 </td>
-                                <td data-label="Semestre">
+                                <td>
                                     @if($user->role === 'student' && $user->details)
-                                        <span class="users-table__value"><span class="badge bg-blue-lt">Semestre {{ $user->details->semester }}</span></span>
+                                        <span class="badge bg-blue-lt">Semestre {{ $user->details->semester }}</span>
                                     @elseif(in_array($user->role, ['professor', 'committee_leader']) && $user->details)
                                         <span class="badge bg-secondary-lt">{{ $user->details->committee_leader ? 'Lí­der' : 'Docente' }}</span>
                                     @else
-                                        <span class="users-table__value text-muted">No aplica</span>
+                                        <span class="text-muted">No aplica</span>
                                     @endif
                                 </td>
-                                <td data-label="Acciones">
+                                <td>
                                     {{-- Action button cluster offers view, edit, and state toggles. --}}
-                                    <div class="btn-list flex-nowrap users-table__actions">
+                                    <div class="btn-list flex-nowrap justify-content-center">
                                         {{-- Opens the detail profile for additional information. --}}
                                         <a href="{{ route('users.show', $user) }}" class="btn btn-sm btn-outline-primary" title="Ver">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -499,7 +279,7 @@
                                 </td>
                             </tr>
                         @empty
-                            <tr class="users-table__empty-row">
+                            <tr>
                                 <td colspan="9">
                                     <div class="empty">
                                         <div class="empty-img">

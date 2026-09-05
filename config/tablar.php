@@ -210,23 +210,11 @@ return [
         'hasRole' => 'committee_leader',
     ],
     [
-        'text' => 'Evaluar Postulaciones',
-        'icon' => 'ti ti-clipboard-check',
-        'route' => 'projects.evaluation.postulations.index',
-        'hasRole' => 'committee_leader',
-    ],
-    [
-        'text' => 'Banco de Ideas Aprobadas',
-        'icon' => 'ti ti-bulb',
-        'route' => 'students.projects.approved.index',
-        'hasRole' => 'student',
-    ],
-    [
-        'text' => 'Mis Postulaciones',
-        'icon' => 'ti ti-file-text',
-        'route' => 'students.postulations.index',
-        'hasRole' => 'student',
-    ],
+    'text' => 'Banco de Ideas Aprobadas',
+    'icon' => 'ti ti-bulb',
+    'route' => 'students.projects.approved.index',
+    'hasRole' => 'student',
+],
 
     // =================================================================
     // SECCIÓN: GESTIÓN ACADÉMICA (Research Staff)
@@ -247,9 +235,19 @@ return [
         'hasRole' => 'research_staff',
         'submenu' => [
             [
-                'text' => 'Departamentos y Ciudades',
-                'icon' => 'ti ti-map-2',
-                'route' => 'departments-cities.index',
+                'text' => 'Departamentos',
+                'icon' => 'ti ti-building',
+                'route' => 'departments.index',
+            ],
+            [
+                'text' => 'Ciudades',
+                'icon' => 'ti ti-map-pin',
+                'route' => 'cities.index',
+            ],
+            [
+                'text' => 'Asignación Ciudad y Programa',
+                'icon' => 'ti ti-map-search',
+                'route' => 'city-program.index',
             ],
             [
                 'text' => 'Programas',

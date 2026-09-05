@@ -7,24 +7,24 @@
                 <div class="col col-login mx-auto">
                     <div class="text-center mb-1 mt-5">
                         <a href="" class="navbar-brand navbar-brand-autodark">
-                            <img src="{{ asset(config('tablar.auth_logo.img.path', 'assets/tablar-logo.png')) }}" height="36"
-                                 alt="Logo de autenticación"></a>
+                            <img src="{{asset(config('tablar.auth_logo.img.path','assets/logo.svg'))}}" height="36"
+                                 alt=""></a>
                     </div>
                     <form class="card" action="{{ route('password.email') }}" method="post" novalidate>
                         @csrf
                         <div class="card-body p-6">
-                            <div class="card-title">¿Olvidaste tu contraseña?</div>
+                            <div class="card-title">@lang('Forgot password')</div>
 
-                            <p class="text-muted">Ingresa tu correo electrónico.</p>
+                            <p class="text-muted">@lang('Enter your email address.')</p>
                             <div class="form-group">
-                                <label class="form-label" for="exampleInputEmail1">Correo electrónico</label>
+                                <label class="form-label" for="exampleInputEmail1">@lang('Email address')</label>
                                 <input
                                     type="email"
                                     class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"
                                     id="email"
                                     name="email"
                                     aria-describedby="emailHelp"
-                                    placeholder="Ingresa tu correo"
+                                    placeholder="Enter email"
                                     value="{{ old('email') }}"
                                     required
                                     autofocus>
@@ -36,12 +36,12 @@
                             </div>
                             <div class="form-footer">
                                 <button type="submit"
-                                        class="btn btn-primary btn-block">Enviar enlace de restablecimiento</button>
+                                        class="btn btn-primary btn-block">@lang('Send me new password')</button>
                             </div>
                         </div>
                     </form>
                     <div class="text-center text-muted">
-                        <a href="{{ route('login') }}">Volver al inicio de sesión</a>
+                        Forget it, <a href="{{ route('login') }}">send me back</a> to the sign in screen.
                     </div>
                 </div>
             </div>

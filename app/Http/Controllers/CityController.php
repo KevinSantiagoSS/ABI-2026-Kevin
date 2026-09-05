@@ -12,27 +12,41 @@ use Illuminate\View\View;
 
 class CityController extends Controller
 {
-    public function index(Request $request): RedirectResponse
+    public function index(Request $request): View
     {
-        $query = array_filter([
-            'selected_department_id' => $request->filled('department_id') ? $request->integer('department_id') : null,
-            'city_search' => $request->filled('search') ? $request->string('search')->toString() : null,
-            'cities_per_page' => $this->resolvePerPage($request->get('per_page', 10)) !== 10
-                ? $this->resolvePerPage($request->get('per_page', 10))
-                : null,
-        ]);
+        $search = $request->get('search');
+        $departmentId = $request->get('department_id');
+        $perPage = (int) $request->get('per_page', 10);
+        $perPage = $perPage > 0 ? min($perPage, 100) : 10;
 
-        return redirect()->route('departments-cities.index', $query);
+        $cities = ResearchStaffCity::query()
+            ->with('department')
+            ->when($search, function ($query, string $search) {
+                $query->where('name', 'like', "%{$search}%");
+            })
+            ->when($departmentId, function ($query, $departmentId) {
+                $query->where('department_id', $departmentId);
+            })
+            ->orderBy('name')
+            ->paginate($perPage)
+            ->appends($request->query());
+
+        $departments = ResearchStaffDepartment::orderBy('name')->pluck('name', 'id');
+
+        return view('city.index', [
+            'cities' => $cities,
+            'departments' => $departments,
+            'search' => $search,
+            'departmentId' => $departmentId,
+            'perPage' => $perPage,
+        ]);
     }
 
-    public function create(Request $request): View
+    public function create(): View
     {
         return view('city.create', [
-            'city' => new ResearchStaffCity([
-                'department_id' => $request->integer('department_id') ?: null,
-            ]),
+            'city' => new ResearchStaffCity(),
             'departments' => ResearchStaffDepartment::orderBy('name')->pluck('name', 'id'),
-            'redirectTo' => $this->resolveRedirectTarget($request),
         ]);
     }
 
@@ -45,25 +59,23 @@ class CityController extends Controller
 
         $city = ResearchStaffCity::create($data);
 
-        return $this->redirectToTarget($request, 'cities.index')
+        return redirect()
+            ->route('cities.index')
             ->with('success', "Ciudad '{$city->name}' creada correctamente.");
     }
 
-    public function show(Request $request, ResearchStaffCity $city): RedirectResponse
+    public function show(ResearchStaffCity $city): View
     {
-        return redirect()->route('departments-cities.index', [
-            'selected_department_id' => $city->department_id,
-        ] + ($request->filled('city_search')
-            ? ['city_search' => $request->string('city_search')->toString()]
-            : []));
+        $city->load('department');
+
+        return view('city.show', compact('city'));
     }
 
-    public function edit(Request $request, ResearchStaffCity $city): View
+    public function edit(ResearchStaffCity $city): View
     {
         return view('city.edit', [
             'city' => $city,
             'departments' => ResearchStaffDepartment::orderBy('name')->pluck('name', 'id'),
-            'redirectTo' => $this->resolveRedirectTarget($request),
         ]);
     }
 
@@ -76,26 +88,24 @@ class CityController extends Controller
 
         $city->update($data);
 
-        return $this->redirectToTarget($request, 'cities.index')
+        return redirect()
+            ->route('cities.index')
             ->with('success', "Ciudad '{$city->name}' actualizada correctamente.");
     }
 
-    public function destroy(Request $request, ResearchStaffCity $city): RedirectResponse
+    public function destroy(ResearchStaffCity $city): RedirectResponse
     {
-        if ($city->cityPrograms()->exists()) {
-            return $this->redirectToTarget($request, 'cities.index')
-                ->with('error', 'No se puede eliminar la ciudad porque tiene programas asociados.');
-        }
-
         try {
             $name = $city->name;
             $city->delete();
 
-            return $this->redirectToTarget($request, 'cities.index')
+            return redirect()
+                ->route('cities.index')
                 ->with('success', "Ciudad '{$name}' eliminada correctamente.");
         } catch (QueryException $exception) {
-            return $this->redirectToTarget($request, 'cities.index')
-                ->with('error', 'No se puede eliminar la ciudad porque tiene informacion relacionada.');
+            return redirect()
+                ->route('cities.index')
+                ->with('error', 'No se puede eliminar la ciudad porque tiene información relacionada.');
         }
     }
 
@@ -106,28 +116,5 @@ class CityController extends Controller
             ->pluck('name', 'id');
 
         return response()->json($cities);
-    }
-
-    private function resolvePerPage(mixed $perPage, int $default = 10): int
-    {
-        $perPage = (int) $perPage;
-
-        return $perPage > 0 ? min($perPage, 100) : $default;
-    }
-
-    private function resolveRedirectTarget(Request $request): ?string
-    {
-        $redirectTo = $request->input('redirect_to');
-
-        return is_string($redirectTo) && str_starts_with($redirectTo, '/') ? $redirectTo : null;
-    }
-
-    private function redirectToTarget(Request $request, string $fallbackRoute): RedirectResponse
-    {
-        $redirectTo = $this->resolveRedirectTarget($request);
-
-        return $redirectTo
-            ? redirect($redirectTo)
-            : redirect()->route($fallbackRoute);
     }
 }

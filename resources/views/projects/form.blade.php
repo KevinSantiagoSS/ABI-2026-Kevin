@@ -615,19 +615,18 @@
 
 
 <h4 class="mt-4">Datos de contacto</h4>
-<p class="text-muted mb-3">Solo puedes actualizar el número de teléfono.</p>
 @if ($isProfessor)
     <div class="row g-3">
         <div class="col-12 col-md-6">
             <label for="contact_first_name" class="form-label required">Nombres</label>
-            <input type="text" id="contact_first_name" name="contact_first_name" class="form-control @error('contact_first_name') is-invalid @enderror" value="{{ $prefill['first_name'] ?? '' }}" required readonly>
+            <input type="text" id="contact_first_name" name="contact_first_name" class="form-control @error('contact_first_name') is-invalid @enderror" value="{{ old('contact_first_name', $prefill['first_name'] ?? '') }}" required>
             @error('contact_first_name')
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
         </div>
         <div class="col-12 col-md-6">
             <label for="contact_last_name" class="form-label required">Apellidos</label>
-            <input type="text" id="contact_last_name" name="contact_last_name" class="form-control @error('contact_last_name') is-invalid @enderror" value="{{ $prefill['last_name'] ?? '' }}" required readonly>
+            <input type="text" id="contact_last_name" name="contact_last_name" class="form-control @error('contact_last_name') is-invalid @enderror" value="{{ old('contact_last_name', $prefill['last_name'] ?? '') }}" required>
             @error('contact_last_name')
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
@@ -636,7 +635,7 @@
     <div class="row g-3 mt-0">
         <div class="col-12 col-md-6">
             <label for="contact_email" class="form-label required">Correo electrónico</label>
-            <input type="email" id="contact_email" name="contact_email" class="form-control @error('contact_email') is-invalid @enderror" value="{{ $prefill['email'] ?? '' }}" required readonly>
+            <input type="email" id="contact_email" name="contact_email" class="form-control @error('contact_email') is-invalid @enderror" value="{{ old('contact_email', $prefill['email'] ?? '') }}" required>
             @error('contact_email')
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
@@ -653,14 +652,14 @@
     <div class="row g-3">
         <div class="col-12 col-md-6">
             <label for="student_first_name" class="form-label required">Nombres</label>
-            <input type="text" id="student_first_name" name="student_first_name" class="form-control @error('student_first_name') is-invalid @enderror" value="{{ $prefill['first_name'] ?? '' }}" required readonly>
+            <input type="text" id="student_first_name" name="student_first_name" class="form-control @error('student_first_name') is-invalid @enderror" value="{{ old('student_first_name', $prefill['first_name'] ?? '') }}" required>
             @error('student_first_name')
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
         </div>
         <div class="col-12 col-md-6">
             <label for="student_last_name" class="form-label required">Apellidos</label>
-            <input type="text" id="student_last_name" name="student_last_name" class="form-control @error('student_last_name') is-invalid @enderror" value="{{ $prefill['last_name'] ?? '' }}" required readonly>
+            <input type="text" id="student_last_name" name="student_last_name" class="form-control @error('student_last_name') is-invalid @enderror" value="{{ old('student_last_name', $prefill['last_name'] ?? '') }}" required>
             @error('student_last_name')
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
@@ -669,14 +668,14 @@
     <div class="row g-3 mt-0">
         <div class="col-12 col-md-6">
             <label for="student_card_id" class="form-label required">Cédula</label>
-            <input type="text" id="student_card_id" name="student_card_id" class="form-control @error('student_card_id') is-invalid @enderror" value="{{ $prefill['card_id'] ?? '' }}" required readonly>
+            <input type="text" id="student_card_id" name="student_card_id" class="form-control @error('student_card_id') is-invalid @enderror" value="{{ old('student_card_id', $prefill['card_id'] ?? '') }}" required>
             @error('student_card_id')
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
         </div>
         <div class="col-12 col-md-6">
             <label for="student_email" class="form-label required">Correo electrónico</label>
-            <input type="email" id="student_email" name="student_email" class="form-control @error('student_email') is-invalid @enderror" value="{{ $prefill['email'] ?? '' }}" required readonly>
+            <input type="email" id="student_email" name="student_email" class="form-control @error('student_email') is-invalid @enderror" value="{{ old('student_email', $prefill['email'] ?? '') }}" required>
             @error('student_email')
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
@@ -805,46 +804,6 @@ document.addEventListener('DOMContentLoaded', function () {
             selected = selected.filter(s => s.id !== id);
             renderSelected();
         }
-    });
-});
-//Funcion para desactivar alertas de falla en la sección de Crear Proyecto
-document.addEventListener('DOMContentLoaded', function () {
-    const form = document.querySelector('form[action="{{ route('projects.store') }}"], form[action*="/projects/"]');
-
-    if (!form) {
-        return;
-    }
-
-    const clearFieldValidationState = (field) => {
-        if (!field.classList.contains('is-invalid')) {
-            return;
-        }
-
-        const hasValue = field.type === 'checkbox' || field.type === 'radio'
-            ? field.checked
-            : String(field.value ?? '').trim() !== '';
-
-        if (!hasValue) {
-            return;
-        }
-
-        field.classList.remove('is-invalid');
-
-        const wrapper = field.closest('.col-12, .col-md-6, .col-md-12, .col-lg-6, .col-lg-12') ?? field.parentElement;
-        if (!wrapper) {
-            return;
-        }
-
-        wrapper.querySelectorAll('.invalid-feedback').forEach((feedback) => {
-            feedback.style.display = 'none';
-        });
-    };
-
-    const watchedFields = form.querySelectorAll('input, select, textarea');
-
-    watchedFields.forEach((field) => {
-        const eventName = field.tagName.toLowerCase() === 'select' ? 'change' : 'input';
-        field.addEventListener(eventName, () => clearFieldValidationState(field));
     });
 });
 </script>

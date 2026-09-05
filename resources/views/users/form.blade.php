@@ -16,7 +16,7 @@
 
 <div class="row g-3">
     <div class="col-12 col-lg-6">
-        <label for="email" class="form-label required">Correo electrónico</label>
+        <label for="email" class="form-label required">Email</label>
         <input
             type="email"
             id="email"
@@ -98,10 +98,6 @@
                 value="{{ old('card_id') }}"
                 required
                 autocomplete="off"
-                inputmode="numeric"
-                pattern="[0-9]*"
-                maxlength="20"
-                oninput="this.value = this.value.replace(/[^0-9]/g, '')"
             >
         @endif
         @error('card_id')
@@ -117,10 +113,6 @@
             class="form-control @error('phone') is-invalid @enderror"
             value="{{ old('phone', $detailsModel->phone ?? '') }}"
             required
-            inputmode="numeric"
-            pattern="[0-9]*"
-            maxlength="20"
-            oninput="this.value = this.value.replace(/[^0-9]/g, '')"
         >
         @error('phone')
             <div class="invalid-feedback">{{ $message }}</div>

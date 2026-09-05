@@ -6,5 +6,5 @@ class DepartmentsTableSeeder extends CsvUpsertSeeder
 {
     protected string $file = '/database/seeders/csvs/departments.csv';
 
-    protected array $uniqueBy = ['id'];
+    protected array $uniqueBy = ['name'];
 }

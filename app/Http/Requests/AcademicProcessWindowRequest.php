@@ -16,15 +16,9 @@ class AcademicProcessWindowRequest extends FormRequest
 
     protected function prepareForValidation(): void
     {
-        $processKey = $this->input('process_key');
-        $requiresEvaluation = $processKey === AcademicProcessWindow::PROCESS_IDEA_SELECTION
-            ? $this->boolean('requires_evaluation')
-            : false;
-
         $this->merge([
             'name' => trim((string) $this->input('name')),
             'notes' => trim((string) $this->input('notes')),
-            'requires_evaluation' => $requiresEvaluation,
         ]);
     }
 
@@ -47,8 +41,6 @@ class AcademicProcessWindowRequest extends FormRequest
             'start_at' => ['required', 'date'],
             'end_at' => ['required', 'date', 'after:start_at'],
             'notes' => ['nullable', 'string'],
-            'is_enabled' => ['required', 'boolean'],
-            'requires_evaluation' => ['required', 'boolean'],
         ];
     }
 

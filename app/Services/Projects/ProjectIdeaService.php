@@ -45,7 +45,7 @@ final class ProjectIdeaService
         $assignedProgramId = optional($professor->cityProgram)->program_id;
 
         if (! $assignedProgramId) {
-            throw new ProjectIdeaException('Debes tener un programa asignado antes de enviar proyectos.');
+            throw new ProjectIdeaException('A program assignment is required before submitting projects.');
         }
 
         $request->merge(['program_id' => $assignedProgramId]);
@@ -87,7 +87,7 @@ final class ProjectIdeaService
         sort($sortedProfessorIds);
 
         if ($this->hasDuplicateProfessorProject($project, $normalizedTitle, $sortedProfessorIds)) {
-            throw new ProjectIdeaException('Ya existe un proyecto con el mismo título y el mismo equipo de docentes.');
+            throw new ProjectIdeaException('A project with the same title and professor team already exists.');
         }
 
         DB::beginTransaction();
@@ -118,8 +118,8 @@ final class ProjectIdeaService
         }
 
         $message = $isUpdate
-            ? 'La idea de proyecto fue actualizada y quedó pendiente de evaluación.'
-            : 'La idea de proyecto fue registrada y quedó pendiente de evaluación.';
+            ? 'Project idea updated and set to waiting evaluation'
+            : 'Project idea registered and set to waiting evaluation';
 
         return new ProjectIdeaResult($project, $message);
     }
@@ -164,12 +164,12 @@ final class ProjectIdeaService
         $isUpdate = $project !== null;
 
         if (! empty($validated['teammate_ids']) && $this->teammatesHaveDifferentProjects($validated['teammate_ids'], $project)) {
-            throw new ProjectIdeaException('Uno o más compañeros ya tienen un proyecto registrado.');
+            throw new ProjectIdeaException('One or more teammates already have a registered project.');
         }
 
         $cityProgram = $student->cityProgram;
         if ($cityProgram && (int) $validated['city_id'] !== (int) $cityProgram->city_id) {
-            throw new ProjectIdeaException('La ciudad seleccionada no coincide con la asignación de tu programa.');
+            throw new ProjectIdeaException('The selected city does not match your program assignment.');
         }
 
         $normalizedTitle = $this->normalizeTitle($validated['title']);
@@ -178,15 +178,15 @@ final class ProjectIdeaService
         sort($sortedStudentIds);
 
         if (count($studentIds) > 3) {
-            throw new ProjectIdeaException('Un proyecto solo puede tener hasta 3 estudiantes participantes.');
+            throw new ProjectIdeaException('A project can only have up to 3 participating students.');
         }
 
         if ($this->studentHasActiveIdea($student, $project)) {
-            throw new ProjectIdeaException('Ya tienes una idea de proyecto pendiente de evaluación.');
+            throw new ProjectIdeaException('You already have a project idea waiting evaluation.');
         }
 
         if ($this->hasDuplicateStudentProject($project, $normalizedTitle, $sortedStudentIds)) {
-            throw new ProjectIdeaException('Ya existe un proyecto con el mismo título y el mismo equipo de estudiantes.');
+            throw new ProjectIdeaException('A project with the same title and student team already exists.');
         }
 
         DB::beginTransaction();
@@ -217,8 +217,8 @@ final class ProjectIdeaService
         }
 
         $message = $isUpdate
-            ? 'La idea de proyecto fue actualizada y quedó pendiente de evaluación.'
-            : 'La idea de proyecto fue registrada y quedó pendiente de evaluación.';
+            ? 'Project idea updated and set to waiting evaluation'
+            : 'Project idea registered and set to waiting evaluation';
 
         return new ProjectIdeaResult($project, $message);
     }
@@ -300,7 +300,7 @@ final class ProjectIdeaService
             ->first();
 
         if (! $status) {
-            throw new \RuntimeException('El estado de pendiente de evaluación no existe en el catálogo.');
+            throw new \RuntimeException('Waiting evaluation status is missing from the catalog.');
         }
 
         $this->waitingStatusId = $status->id;
@@ -416,8 +416,16 @@ final class ProjectIdeaService
     private function syncProfessorContactData(Professor $professor, array $validated): void
     {
         $professor->fill([
+            'name' => $validated['contact_first_name'],
+            'last_name' => $validated['contact_last_name'],
+            'mail' => $validated['contact_email'],
             'phone' => $validated['contact_phone'],
         ])->save();
+
+        if ($professor->user && $professor->user->email !== $validated['contact_email']) {
+            $professor->user->email = $validated['contact_email'];
+            $professor->user->save();
+        }
     }
 
     /**
@@ -428,8 +436,16 @@ final class ProjectIdeaService
     private function syncStudentContactData(Student $student, array $validated): void
     {
         $student->fill([
+            'name' => $validated['student_first_name'],
+            'last_name' => $validated['student_last_name'],
+            'card_id' => $validated['student_card_id'],
             'phone' => $validated['student_phone'],
         ])->save();
+
+        if ($student->user && $student->user->email !== $validated['student_email']) {
+            $student->user->email = $validated['student_email'];
+            $student->user->save();
+        }
     }
 
     /**

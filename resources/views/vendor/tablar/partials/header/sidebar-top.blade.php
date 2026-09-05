@@ -17,9 +17,7 @@
           <!-- Authenticated user menu -->
           <li class="nav-item">
             <a href="#" class="nav-link d-flex lh-1 text-reset p-0">
-              <span class="fw-bold fs-4">
-                {{ $authenticatedUserDisplayName !== '' ? 'Bienvenido, ' . $authenticatedUserDisplayName : 'Bienvenido' }}
-              </span>
+              <span class="fw-bold fs-4">Bienvenid@: {{ auth()->user()->name }}</span>
               <br>
            <!--    <span class="fw-bold fs-4">{{ auth()->user()->email }}</span> -->
             </a>

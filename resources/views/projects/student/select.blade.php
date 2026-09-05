@@ -40,22 +40,8 @@
             {{ optional($selectionWindow->start_at)->format('d/m/Y H:i') }} a {{ optional($selectionWindow->end_at)->format('d/m/Y H:i') }}.
         </div>
 
-        @if(isset($selectionWindow) && $selectionWindow->requires_evaluation)
-            <div class="alert alert-warning">
-                <h4 class="alert-title">¡Atención! Proceso de Postulación Activo</h4>
-                <div class="text-secondary">
-                    Para este periodo, no se permite la asignación directa. Debes enviar una postulación para que sea revisada por un evaluador.
-                </div>
-                <div class="mt-3">
-                    <a href="{{ route('students.postulations.create', $project) }}" class="btn btn-warning w-100">
-                        Ir al formulario de Postulación
-                    </a>
-                </div>
-            </div>
-        @else
-            <form method="POST" action="{{ route('projects.student.assign', $project) }}">
-                @csrf
-                {{-- ... resto del formulario --}}
+        <form method="POST" action="{{ route('projects.student.assign', $project) }}">
+            @csrf
 
             <div class="row g-3">
                 <div class="col-12 col-lg-8">
@@ -152,7 +138,6 @@
 
             </div>
         </form>
-        @endif
 
     </div>
 </div>

@@ -21,7 +21,6 @@ class ThematicAreaController extends Controller
 
         $thematicAreas = ResearchStaffThematicArea::query()
             ->with(['investigationLine.researchGroup'])
-            ->withCount('projects')
             ->when($search, function ($query, string $search) {
                 $query->where(function ($q) use ($search) {
                     $q->where('name', 'like', "%{$search}%")
@@ -113,12 +112,6 @@ class ThematicAreaController extends Controller
 
     public function destroy(ResearchStaffThematicArea $thematicArea): RedirectResponse
     {
-        if ($thematicArea->projects()->exists()) {
-            return redirect()
-                ->route('thematic-areas.index')
-                ->with('error', 'No se puede eliminar el área temática porque tiene proyectos asociados.');
-        }
-
         $name = $thematicArea->name;
         $thematicArea->delete();
 

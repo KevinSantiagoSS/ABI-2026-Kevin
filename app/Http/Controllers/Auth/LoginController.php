@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class LoginController extends Controller
@@ -38,11 +39,12 @@ class LoginController extends Controller
     {
         $this->validateLogin($request);
 
+        // Check if the user is inactive
         $user = \App\Models\User::where('email', $request->email)->first();
 
         if ($user && $user->state == 0) {
             return back()->withErrors([
-                'email' => 'Tu usuario está inactivo. Contacta al administrador.',
+                'email' => 'Tu usuario está inactivo. Contacta al administrador.'
             ]);
         }
 
@@ -64,7 +66,8 @@ class LoginController extends Controller
         } catch (\Exception $e) {
             Log::error('Database error: ' . $e->getMessage());
 
-            return redirect()->back()->withErrors(['db_error' => 'Inténtalo más tarde.']);
+            return redirect()->back()->withErrors(['db_error' => 'Inténtelo más tarde.']);
+            // dd($e->getMessage()); #ELIMINAR DESPUES DE PRUEBAS
         }
     }
 
@@ -77,10 +80,13 @@ class LoginController extends Controller
      */
     protected function authenticated(Request $request, $user)
     {
+        // Redirigir a la página de clientes si el usuario tiene el rol 'user'
         if ($user->role == 'user') {
-            return redirect()->route('home');
+            // return redirect()->route('clientes.index');
+            return redirect()->route('home'); #ELIMINAR DESPUES DE PRUEBAS
         }
 
+        // Redirigir a la página de inicio si no es un 'user'
         return redirect()->route('home');
     }
 

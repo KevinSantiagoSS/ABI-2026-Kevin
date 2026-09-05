@@ -1,5 +1,4 @@
-<button type="button" class="nav-link px-0 hide-theme-dark bg-transparent border-0" title="Activar modo oscuro"
-   aria-label="Activar modo oscuro"
+<button type="button" class="nav-link px-0 hide-theme-dark bg-transparent border-0" title="Enable dark mode"
    data-theme-value="dark"
    data-bs-toggle="tooltip"
    data-bs-placement="bottom">
@@ -11,8 +10,7 @@
         <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z"/>
     </svg>
 </button>
-<button type="button" class="nav-link px-0 hide-theme-light bg-transparent border-0" title="Activar modo claro"
-   aria-label="Activar modo claro"
+<button type="button" class="nav-link px-0 hide-theme-light bg-transparent border-0" title="Enable light mode"
    data-theme-value="light"
    data-bs-toggle="tooltip"
    data-bs-placement="bottom">

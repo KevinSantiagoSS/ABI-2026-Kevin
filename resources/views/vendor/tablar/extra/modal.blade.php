@@ -2,15 +2,15 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Nuevo reporte</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                <h5 class="modal-title">New report</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div class="mb-3">
-                    <label class="form-label">Nombre</label>
-                    <input type="text" class="form-control" name="example-text-input" placeholder="Nombre del reporte">
+                    <label class="form-label">Name</label>
+                    <input type="text" class="form-control" name="example-text-input" placeholder="Your report name">
                 </div>
-                <label class="form-label">Tipo de reporte</label>
+                <label class="form-label">Report type</label>
                 <div class="form-selectgroup-boxes row mb-3">
                     <div class="col-lg-6">
                         <label class="form-selectgroup-item">
@@ -21,7 +21,7 @@
                     </span>
                     <span class="form-selectgroup-label-content">
                       <span class="form-selectgroup-title strong mb-1">Simple</span>
-                      <span class="d-block text-muted">Incluye solo los datos básicos necesarios para el reporte</span>
+                      <span class="d-block text-muted">Provide only basic data needed for the report</span>
                     </span>
                   </span>
                         </label>
@@ -34,8 +34,8 @@
                       <span class="form-selectgroup-check"></span>
                     </span>
                     <span class="form-selectgroup-label-content">
-                      <span class="form-selectgroup-title strong mb-1">Avanzado</span>
-                      <span class="d-block text-muted">Incluye gráficos y análisis avanzados dentro del reporte</span>
+                      <span class="form-selectgroup-title strong mb-1">Advanced</span>
+                      <span class="d-block text-muted">Insert charts and additional advanced analyses to be inserted in the report</span>
                     </span>
                   </span>
                         </label>
@@ -44,7 +44,7 @@
                 <div class="row">
                     <div class="col-lg-8">
                         <div class="mb-3">
-                            <label class="form-label">URL del reporte</label>
+                            <label class="form-label">Report url</label>
                             <div class="input-group input-group-flat">
                     <span class="input-group-text">
                       https://tabler.io/reports/
@@ -55,11 +55,11 @@
                     </div>
                     <div class="col-lg-4">
                         <div class="mb-3">
-                            <label class="form-label">Visibilidad</label>
+                            <label class="form-label">Visibility</label>
                             <select class="form-select">
-                                <option value="1" selected>Privado</option>
-                                <option value="2">Público</option>
-                                <option value="3">Oculto</option>
+                                <option value="1" selected>Private</option>
+                                <option value="2">Public</option>
+                                <option value="3">Hidden</option>
                             </select>
                         </div>
                     </div>
@@ -69,19 +69,19 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="mb-3">
-                            <label class="form-label">Nombre del cliente</label>
+                            <label class="form-label">Client name</label>
                             <input type="text" class="form-control">
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="mb-3">
-                            <label class="form-label">Periodo del reporte</label>
+                            <label class="form-label">Reporting period</label>
                             <input type="date" class="form-control">
                         </div>
                     </div>
                     <div class="col-lg-12">
                         <div>
-                            <label class="form-label">Información adicional</label>
+                            <label class="form-label">Additional information</label>
                             <textarea class="form-control" rows="3"></textarea>
                         </div>
                     </div>
@@ -89,9 +89,10 @@
             </div>
             <div class="modal-footer">
                 <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
-                    Cancelar
+                    Cancel
                 </a>
                 <a href="#" class="btn btn-primary ms-auto" data-bs-dismiss="modal">
+                    <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
                          stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
                          stroke-linejoin="round">
@@ -99,7 +100,7 @@
                         <line x1="12" y1="5" x2="12" y2="19"/>
                         <line x1="5" y1="12" x2="19" y2="12"/>
                     </svg>
-                    Crear nuevo reporte
+                    Create new report
                 </a>
             </div>
         </div>

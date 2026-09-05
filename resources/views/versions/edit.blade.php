@@ -75,7 +75,6 @@
             const versionId = {{ (int) $versionId }};
             const apiBase = '{{ url('/api/versions') }}';
             const projectsEndpoint = '{{ url('/api/projects') }}';
-            const csrfToken = '{{ csrf_token() }}';
 
             const form = document.getElementById('version-edit-form');
             const projectInput = document.getElementById('project_id');
@@ -185,7 +184,6 @@
                         headers: {
                             'Content-Type': 'application/json',
                             'Accept': 'application/json',
-                            'X-CSRF-TOKEN': csrfToken,
                         },
                         body: JSON.stringify(payload),
                     });
