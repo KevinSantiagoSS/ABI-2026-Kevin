@@ -20,6 +20,7 @@ class Project extends Model
         'evaluation_criteria',
         'thematic_area_id',
         'project_status_id',
+        'approved_postulation_id',
         'proposal_academic_period_id',
         'assignment_academic_period_id',
         'proposed_at',
