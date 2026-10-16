@@ -24,4 +24,4 @@ docker-compose.yml
 
 .continue
 /database/sql/my-roles.sql
-/scripts/my-set-db-roles.ps1
+/scripts/set-db-roles.ps1
