@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Postulation;
 use App\Models\PostulationPriority;
 use App\Models\Professor;
+use App\Models\Project;
 use App\Models\ProjectStatus;
 use App\Services\AcademicCalendar\AcademicCalendarService;
 use Illuminate\Http\Request;
@@ -60,12 +61,39 @@ class PostulationEvaluationController extends Controller
             'review_comment' => 'required|string|max:1000',
         ]);
 
-        if ($postulation->status !== 'pending') {
-            return back()->with('error', 'Esta postulación ya ha sido evaluada.');
-        }
-
         DB::beginTransaction();
         try {
+            // Serializar las aprobaciones de un mismo proyecto para que dos
+            // evaluaciones simultáneas no puedan reemplazar la asignación.
+            $postulation = Postulation::whereKey($postulation->getKey())
+                ->lockForUpdate()
+                ->firstOrFail();
+
+            if ($postulation->status !== 'pending') {
+                DB::rollBack();
+
+                return back()->with('error', 'Esta postulación ya ha sido evaluada.');
+            }
+
+            $project = Project::whereKey($postulation->project_id)
+                ->lockForUpdate()
+                ->firstOrFail();
+
+            if ($request->status === 'approved') {
+                $assignedStatusId = ProjectStatus::where('name', 'Asignado')->value('id');
+                $alreadyAssigned = $project->approved_postulation_id !== null
+                    || ($assignedStatusId !== null && (int) $project->project_status_id === (int) $assignedStatusId);
+
+                if ($alreadyAssigned) {
+                    DB::rollBack();
+
+                    return back()->with(
+                        'error',
+                        'No se puede aprobar esta postulación: el proyecto ya fue asignado a otra postulación.'
+                    );
+                }
+            }
+
             $postulation->update([
                 'status' => $request->status,
                 'review_comment' => $request->review_comment,
@@ -77,7 +105,6 @@ class PostulationEvaluationController extends Controller
             }
 
             if ($request->status === 'approved') {
-                $project = $postulation->project;
                 $activePeriod = AcademicCalendarService::currentActivePeriodOrFail();
                 $assignedStatusId = ProjectStatus::where('name', 'Asignado')->firstOrFail()->id;
 
