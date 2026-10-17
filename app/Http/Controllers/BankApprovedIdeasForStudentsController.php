@@ -55,10 +55,7 @@ class BankApprovedIdeasForStudentsController extends Controller
             ->orderBy('name')
             ->get();
 
-        $projectsQuery = Project::whereHas('projectStatus', fn ($q) => $q->where('name', 'Aprobado'))
-            ->whereHas('professors', function ($q) use ($student) {
-                $q->where('city_program_id', $student->city_program_id);
-            });
+        $projectsQuery = Project::availableForStudent($student);
 
         if (! empty($thematicAreaId)) {
             $projectsQuery->where('thematic_area_id', $thematicAreaId);
@@ -154,8 +151,8 @@ if (! $this->academicProgress->canAccessIdeaBank($student, $activeAcademicPeriod
 
         $canSelectProject = true;
         
-        // Check if already assigned
-        if ($student->hasActiveProject()) {
+        // Check if already assigned, or the idea is no longer in the student's bank
+        if ($student->hasActiveProject() || ! $project->isAvailableForStudent($student)) {
             $canSelectProject = false;
         }
 

@@ -75,6 +75,21 @@ class Project extends Model
             ->shouldFlag($this, $thresholdPeriods);
     }
 
+    /**
+     * Ideas que el estudiante puede ver en su banco y a las que puede postularse:
+     * en estado "Aprobado" y propuestas por profesores de su mismo programa.
+     */
+    public function scopeAvailableForStudent(Builder $query, Student $student): Builder
+    {
+        return $query->whereHas('projectStatus', fn ($q) => $q->where('name', 'Aprobado'))
+            ->whereHas('professors', fn ($q) => $q->where('city_program_id', $student->city_program_id));
+    }
+
+    public function isAvailableForStudent(Student $student): bool
+    {
+        return static::whereKey($this->getKey())->availableForStudent($student)->exists();
+    }
+
     public function versions(): HasMany
     {
         return $this->hasMany(Version::class, 'project_id', 'id');
