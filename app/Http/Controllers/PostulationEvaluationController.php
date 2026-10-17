@@ -43,7 +43,9 @@ class PostulationEvaluationController extends Controller
 
         $postulation->load(['project', 'leadStudent', 'members.student', 'priorities']);
 
-        return view('postulations.evaluation.show', compact('postulation'));
+        $canApprove = $postulation->project->isAvailableForStudent($postulation->leadStudent);
+
+        return view('postulations.evaluation.show', compact('postulation', 'canApprove'));
     }
 
     public function evaluate(Request $request, Postulation $postulation)
@@ -90,6 +92,15 @@ class PostulationEvaluationController extends Controller
                     return back()->with(
                         'error',
                         'No se puede aprobar esta postulación: el proyecto ya fue asignado a otra postulación.'
+                    );
+                }
+
+                if (! $project->isAvailableForStudent($postulation->leadStudent)) {
+                    DB::rollBack();
+
+                    return back()->with(
+                        'error',
+                        'No se puede aprobar esta postulación: el proyecto no está disponible para postulación (debe estar "Aprobado" y pertenecer al programa del estudiante).'
                     );
                 }
             }
