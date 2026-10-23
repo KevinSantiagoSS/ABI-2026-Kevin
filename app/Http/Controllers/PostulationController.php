@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AcademicProcessWindow;
 use App\Models\Postulation;
 use App\Models\PostulationMember;
 use App\Models\PostulationPriority;
@@ -58,7 +59,12 @@ class PostulationController extends Controller
         $activePeriod = AcademicCalendarService::currentActivePeriod();
 
         if (! $this->academicProgress->canAccessIdeaBank($student, $activePeriod)) {
-            abort(403, $this->academicProgress->blockedIdeaBankMessage($student, $activePeriod));
+    return redirect('/students/projects/postulations')
+        ->with('error', $this->academicProgress->blockedIdeaBankMessage($student, $activePeriod));
+}
+
+        if ($unavailable = $this->ensureProjectIsAvailable($project, $student)) {
+            return $unavailable;
         }
 
         if ($student->hasActiveProject()) {
@@ -117,6 +123,10 @@ class PostulationController extends Controller
     {
         $student = Student::where('user_id', Auth::id())->firstOrFail();
         $project = Project::findOrFail($request->project_id);
+
+        if ($unavailable = $this->ensureProjectIsAvailable($project, $student)) {
+            return $unavailable;
+        }
 
         // Si ya existe una postulación rechazada para este mismo proyecto y este estudiante,
         // la eliminamos ANTES de validar para liberar la prioridad y evitar conflictos UNIQUE
@@ -225,6 +235,25 @@ class PostulationController extends Controller
 
             return back()->with('error', 'Ocurrió un error al procesar tu postulación: '.$e->getMessage());
         }
+    }
+
+    /**
+     * Aplica las mismas reglas del Banco de Ideas Aprobadas: la idea debe estar
+     * "Aprobado", ser del programa del estudiante y la ventana de selección abierta.
+     */
+    private function ensureProjectIsAvailable(Project $project, Student $student)
+    {
+        if (! AcademicCalendarService::currentWindowForProcess(AcademicProcessWindow::PROCESS_IDEA_SELECTION)) {
+            return redirect()->route('students.projects.approved.index')
+                ->with('error', 'La ventana de selección de ideas no está abierta.');
+        }
+
+        if (! $project->isAvailableForStudent($student)) {
+            return redirect()->route('students.projects.approved.index')
+                ->with('error', 'Este proyecto no está disponible para postulación.');
+        }
+
+        return null;
     }
 
     public function destroy(Postulation $postulation)

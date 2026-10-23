@@ -96,8 +96,13 @@ class ProjectEvaluationController extends Controller
         // Si es proyecto de estudiante y se aprueba, normalmente se asigna.
         // Si estamos en una fase distinta, este comportamiento se puede ajustar.
         // Sin embargo, si el estudiante propuso la idea, ya es suya.
+        $updateData = [];
+
         if ($statusName === 'Aprobado' && $isStudentProject) {
             $statusName = 'Asignado';
+            $activePeriod = AcademicCalendarService::currentActivePeriodOrFail();
+            $updateData['assignment_academic_period_id'] = $activePeriod->id;
+            $updateData['assigned_at'] = now();
         }
 
         $normalizedStatusName = Str::of($statusName)->ascii()->toString();
@@ -106,7 +111,9 @@ class ProjectEvaluationController extends Controller
             return back()->with('error', "No se encontro el estado '$statusName'.");
         }
 
-        $project->update(['project_status_id' => $status->id]);
+        $updateData['project_status_id'] = $status->id;
+
+        $project->update($updateData);
 
         if (in_array($statusName, ['Devuelto para correccion'], true)) {
             $latestVersion = $project->versions()->latest('created_at')->first();
@@ -122,7 +129,7 @@ class ProjectEvaluationController extends Controller
             }
         }
 
-        $activePeriod = \App\Models\AcademicPeriod::query()->active()->first() ?? $project->proposalAcademicPeriod;
+        $activePeriod ??= \App\Models\AcademicPeriod::query()->active()->first() ?? $project->proposalAcademicPeriod;
         $normalizedRequestedStatus = Str::of($validated['status'])->ascii()->lower()->toString();
         $stage = match ($normalizedRequestedStatus) {
             'aprobado' => 'approved',

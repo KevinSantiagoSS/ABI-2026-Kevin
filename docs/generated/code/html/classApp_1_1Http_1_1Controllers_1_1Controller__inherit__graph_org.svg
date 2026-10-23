@@ -1128,29 +1128,33 @@
 <g id="Node000029" class="node">
 <title>Node29</title>
 <g id="a_Node000029"><a xlink:href="classApp_1_1Http_1_1Controllers_1_1PostulationController.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="transparent" points="5476.5,-1150.5 5278.5,-1150.5 5278.5,-971.5 5476.5,-971.5 5476.5,-1150.5"/>
-<text text-anchor="start" x="5323" y="-1138" font-family="Helvetica,sans-Serif" font-size="10.00">App::Http::Controllers</text>
-<text text-anchor="start" x="5323" y="-1127" font-family="Helvetica,sans-Serif" font-size="10.00">::PostulationController</text>
-<text text-anchor="start" x="5375.5" y="-1112" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
-<text text-anchor="start" x="5282.5" y="-1097" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text text-anchor="start" x="5295.5" y="-1097" font-family="Helvetica,sans-Serif" font-size="10.00">__construct(private</text>
-<text text-anchor="start" x="5295.5" y="-1086" font-family="Helvetica,sans-Serif" font-size="10.00"> readonly StudentAcademicProgress</text>
-<text text-anchor="start" x="5295.5" y="-1075" font-family="Helvetica,sans-Serif" font-size="10.00">Service $academicProgress)</text>
-<text text-anchor="start" x="5282.5" y="-1060" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text text-anchor="start" x="5295.5" y="-1060" font-family="Helvetica,sans-Serif" font-size="10.00">create(Project $project)</text>
-<text text-anchor="start" x="5282.5" y="-1045" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text text-anchor="start" x="5295.5" y="-1045" font-family="Helvetica,sans-Serif" font-size="10.00">destroy(Postulation</text>
-<text text-anchor="start" x="5295.5" y="-1034" font-family="Helvetica,sans-Serif" font-size="10.00"> $postulation)</text>
-<text text-anchor="start" x="5282.5" y="-1019" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text text-anchor="start" x="5295.5" y="-1019" font-family="Helvetica,sans-Serif" font-size="10.00">index()</text>
-<text text-anchor="start" x="5282.5" y="-1004" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text text-anchor="start" x="5295.5" y="-1004" font-family="Helvetica,sans-Serif" font-size="10.00">show(Postulation </text>
-<text text-anchor="start" x="5295.5" y="-993" font-family="Helvetica,sans-Serif" font-size="10.00">$postulation)</text>
-<text text-anchor="start" x="5282.5" y="-978" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text text-anchor="start" x="5295.5" y="-978" font-family="Helvetica,sans-Serif" font-size="10.00">store(Request $request)</text>
-<polygon fill="#666666" stroke="#666666" points="5278.5,-1122 5278.5,-1122 5476.5,-1122 5476.5,-1122 5278.5,-1122"/>
-<polygon fill="#666666" stroke="#666666" points="5278.5,-1107 5278.5,-1107 5476.5,-1107 5476.5,-1107 5278.5,-1107"/>
-<polygon fill="none" stroke="#666666" points="5278.5,-971.5 5278.5,-1150.5 5476.5,-1150.5 5476.5,-971.5 5278.5,-971.5"/>
+<polygon fill="white" stroke="transparent" points="5476.5,-1169 5278.5,-1169 5278.5,-953 5476.5,-953 5476.5,-1169"/>
+<text text-anchor="start" x="5323" y="-1157" font-family="Helvetica,sans-Serif" font-size="10.00">App::Http::Controllers</text>
+<text text-anchor="start" x="5323" y="-1146" font-family="Helvetica,sans-Serif" font-size="10.00">::PostulationController</text>
+<text text-anchor="start" x="5375.5" y="-1131" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
+<text text-anchor="start" x="5282.5" y="-1116" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
+<text text-anchor="start" x="5295.5" y="-1116" font-family="Helvetica,sans-Serif" font-size="10.00">__construct(private</text>
+<text text-anchor="start" x="5295.5" y="-1105" font-family="Helvetica,sans-Serif" font-size="10.00"> readonly StudentAcademicProgress</text>
+<text text-anchor="start" x="5295.5" y="-1094" font-family="Helvetica,sans-Serif" font-size="10.00">Service $academicProgress)</text>
+<text text-anchor="start" x="5282.5" y="-1079" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
+<text text-anchor="start" x="5295.5" y="-1079" font-family="Helvetica,sans-Serif" font-size="10.00">create(Project $project)</text>
+<text text-anchor="start" x="5282.5" y="-1064" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
+<text text-anchor="start" x="5295.5" y="-1064" font-family="Helvetica,sans-Serif" font-size="10.00">destroy(Postulation</text>
+<text text-anchor="start" x="5295.5" y="-1053" font-family="Helvetica,sans-Serif" font-size="10.00"> $postulation)</text>
+<text text-anchor="start" x="5282.5" y="-1038" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
+<text text-anchor="start" x="5295.5" y="-1038" font-family="Helvetica,sans-Serif" font-size="10.00">index()</text>
+<text text-anchor="start" x="5282.5" y="-1023" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
+<text text-anchor="start" x="5295.5" y="-1023" font-family="Helvetica,sans-Serif" font-size="10.00">show(Postulation </text>
+<text text-anchor="start" x="5295.5" y="-1012" font-family="Helvetica,sans-Serif" font-size="10.00">$postulation)</text>
+<text text-anchor="start" x="5282.5" y="-997" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
+<text text-anchor="start" x="5295.5" y="-997" font-family="Helvetica,sans-Serif" font-size="10.00">store(Request $request)</text>
+<text text-anchor="start" x="5285" y="-982" font-family="Helvetica,sans-Serif" font-size="10.00">&#45;</text>
+<text text-anchor="start" x="5295.5" y="-982" font-family="Helvetica,sans-Serif" font-size="10.00">ensureProjectIsAvailable</text>
+<text text-anchor="start" x="5295.5" y="-971" font-family="Helvetica,sans-Serif" font-size="10.00">(Project $project, Student</text>
+<text text-anchor="start" x="5295.5" y="-960" font-family="Helvetica,sans-Serif" font-size="10.00"> $student)</text>
+<polygon fill="#666666" stroke="#666666" points="5278.5,-1141 5278.5,-1141 5476.5,-1141 5476.5,-1141 5278.5,-1141"/>
+<polygon fill="#666666" stroke="#666666" points="5278.5,-1126 5278.5,-1126 5476.5,-1126 5476.5,-1126 5278.5,-1126"/>
+<polygon fill="none" stroke="#666666" points="5278.5,-953 5278.5,-1169 5476.5,-1169 5476.5,-953 5278.5,-953"/>
 </a>
 </g>
 </g>
@@ -1158,7 +1162,7 @@
 <g id="edge28_Node000001_Node000029" class="edge">
 <title>Node1&#45;&gt;Node29</title>
 <g id="a_edge28_Node000001_Node000029"><a xlink:title=" ">
-<path fill="none" stroke="#63b8ff" d="M4113.25,-2204.24C4392.79,-2205.41 5186.9,-2201.63 5269.5,-2122 5537.67,-1863.46 5450.77,-1355.77 5401.48,-1150.88"/>
+<path fill="none" stroke="#63b8ff" d="M4113.25,-2204.24C4392.79,-2205.41 5186.9,-2201.63 5269.5,-2122 5530.02,-1870.84 5455.45,-1384.56 5405.78,-1169.16"/>
 <polygon fill="none" stroke="#63b8ff" points="4113.15,-2200.74 4103.13,-2204.19 4113.11,-2207.74 4113.15,-2200.74"/>
 </a>
 </g>
