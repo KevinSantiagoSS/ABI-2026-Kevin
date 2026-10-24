@@ -42,8 +42,9 @@ class BankApprovedIdeasAssignController extends Controller
         $activeAcademicPeriod = AcademicCalendarService::currentActivePeriod();
 
         if (! $this->academicProgress->canAccessIdeaBank($student, $activeAcademicPeriod)) {
-            abort(403, $this->academicProgress->blockedIdeaBankMessage($student, $activeAcademicPeriod));
-        }
+    return redirect('/students/projects/postulations')
+        ->with('error', $this->academicProgress->blockedIdeaBankMessage($student, $activeAcademicPeriod));
+}
 
         if (! $project->isAvailableForStudent($student)) {
             abort(403, 'Solo puedes seleccionar ideas aprobadas de tu programa academico.');
@@ -52,12 +53,8 @@ class BankApprovedIdeasAssignController extends Controller
         $availableStudents = Student::query()
             ->where('city_program_id', $student->city_program_id)
             ->where('id', '!=', $student->id)
-            ->where(function ($q) {
-                $q->whereDoesntHave('projects')
-                    ->orWhere(function ($q2) {
-                        $q2->whereHas('projects', fn ($p) => $p->whereHas('projectStatus', fn ($s) => $s->where('name', 'Rechazado')))
-                            ->whereDoesntHave('projects', fn ($p) => $p->whereHas('projectStatus', fn ($s) => $s->whereNot('name', 'Rechazado')));
-                    });
+            ->whereDoesntHave('projects', function ($q) {
+                $q->whereHas('projectStatus', fn ($s) => $s->whereNotIn('name', Student::INACTIVE_PROJECT_STATUSES));
             })
             ->orderBy('last_name')
             ->orderBy('name')
@@ -99,11 +96,9 @@ class BankApprovedIdeasAssignController extends Controller
             abort(403, 'Este proyecto no esta disponible para asignacion.');
         }
 
-        $allowedStatuses = ['Rechazado', 'Devuelto para correccion'];
-
         $hasActiveUser = $student->projects()
             ->where('projects.id', '!=', $project->id)
-            ->whereHas('projectStatus', fn ($status) => $status->whereNotIn('name', $allowedStatuses))
+            ->whereHas('projectStatus', fn ($status) => $status->whereNotIn('name', Student::INACTIVE_PROJECT_STATUSES))
             ->exists();
 
         if ($hasActiveUser) {
@@ -113,7 +108,7 @@ class BankApprovedIdeasAssignController extends Controller
         if (! empty($validated['teammate_ids'])) {
             $hasActiveTeammates = Student::query()
                 ->whereIn('id', $validated['teammate_ids'])
-                ->whereHas('projects', fn ($query) => $query->where('projects.id', '!=', $project->id)->whereHas('projectStatus', fn ($status) => $status->whereNotIn('name', $allowedStatuses)))
+                ->whereHas('projects', fn ($query) => $query->where('projects.id', '!=', $project->id)->whereHas('projectStatus', fn ($status) => $status->whereNotIn('name', Student::INACTIVE_PROJECT_STATUSES)))
                 ->exists();
 
             if ($hasActiveTeammates) {
