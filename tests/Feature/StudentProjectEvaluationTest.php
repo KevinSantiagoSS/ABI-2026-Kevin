@@ -339,6 +339,93 @@ class StudentProjectEvaluationTest extends TestCase
         $response->assertStatus(403);
     }
 
+    public function test_committee_cannot_reevaluate_assigned_project(): void
+    {
+        $department = Department::create(['name' => 'Santander']);
+        $city = City::create(['name' => 'Bucaramanga', 'department_id' => $department->id]);
+        $researchGroup = ResearchGroup::create(['name' => 'Grupo Test 5', 'initials' => 'GT5', 'description' => 'desc']);
+        $program = Program::create(['code' => 105328, 'name' => 'Ingeniería Test 5', 'research_group_id' => $researchGroup->id]);
+        $cityProgram = CityProgram::create(['city_id' => $city->id, 'program_id' => $program->id]);
+        $line = InvestigationLine::create(['name' => 'Línea Test 5', 'description' => 'desc', 'research_group_id' => $researchGroup->id]);
+        $thematicArea = ThematicArea::create(['name' => 'Área Test 5', 'description' => 'desc', 'investigation_line_id' => $line->id]);
+
+        $this->createStatus('Pendiente de aprobacion', 'Pendiente');
+        $this->createStatus('Rechazado', 'Rechazado');
+        $assignedStatus = $this->createStatus('Asignado', 'Asignado');
+
+        $activePeriod = AcademicPeriod::create([
+            'code' => '2026-1',
+            'name' => 'Periodo Académico 2026-1',
+            'start_date' => Carbon::now()->subDays(10)->toDateString(),
+            'end_date' => Carbon::now()->addMonths(5)->toDateString(),
+            'status' => 'active',
+            'is_active' => true,
+        ]);
+
+        $leaderUser = User::create([
+            'email' => 'leader5@test.com',
+            'password' => Hash::make('password123'),
+            'role' => 'committee_leader',
+            'state' => 1,
+        ]);
+        $leaderProfessor = new Professor();
+        $leaderProfessor->card_id = '10006';
+        $leaderProfessor->name = 'Natalia';
+        $leaderProfessor->last_name = 'Duarte';
+        $leaderProfessor->phone = '3000000009';
+        $leaderProfessor->committee_leader = true;
+        $leaderProfessor->city_program_id = $cityProgram->id;
+        $leaderProfessor->user_id = $leaderUser->id;
+        $leaderProfessor->save();
+
+        $studentUser = User::create([
+            'email' => 'student5@test.com',
+            'password' => Hash::make('password123'),
+            'role' => 'student',
+            'state' => 1,
+        ]);
+        $student = new Student();
+        $student->card_id = '20004';
+        $student->name = 'Laura';
+        $student->last_name = 'Rojas';
+        $student->phone = '3000000010';
+        $student->semester = 8;
+        $student->city_program_id = $cityProgram->id;
+        $student->user_id = $studentUser->id;
+        $student->save();
+
+        $assignedAt = Carbon::now()->subDay();
+        $project = Project::create([
+            'title' => 'Idea ya asignada',
+            'thematic_area_id' => $thematicArea->id,
+            'project_status_id' => $assignedStatus->id,
+            'proposal_academic_period_id' => $activePeriod->id,
+            'assignment_academic_period_id' => $activePeriod->id,
+            'assigned_at' => $assignedAt,
+            'proposed_at' => Carbon::now()->subDays(5),
+        ]);
+        $project->students()->sync([$student->id]);
+
+        $this->actingAs($leaderUser)
+            ->get(route('projects.evaluation.show', $project))
+            ->assertRedirect(route('projects.evaluation.index'))
+            ->assertSessionHas('error');
+
+        $response = $this->actingAs($leaderUser)
+            ->post(route('projects.evaluation.evaluate', $project), [
+                'status' => 'Rechazado',
+                'comments' => 'Intento de reevaluacion.',
+            ]);
+
+        $response->assertRedirect(route('projects.evaluation.index'));
+        $response->assertSessionHas('error');
+
+        $project->refresh();
+        $this->assertEquals($assignedStatus->id, $project->project_status_id);
+        $this->assertEquals($activePeriod->id, $project->assignment_academic_period_id);
+        $this->assertNotNull($project->assigned_at);
+    }
+
     private function createStatus(string $name, string $description): ProjectStatus
     {
         $status = new ProjectStatus();
