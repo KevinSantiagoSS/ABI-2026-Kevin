@@ -1577,40 +1577,43 @@
 <g id="Node000034" class="node">
 <title>Node34</title>
 <g id="a_Node000034"><a xlink:href="classApp_1_1Http_1_1Controllers_1_1ProjectEvaluationController.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="transparent" points="6555,-1263.5 6362,-1263.5 6362,-858.5 6555,-858.5 6555,-1263.5"/>
-<text text-anchor="start" x="6389" y="-1251" font-family="Helvetica,sans-Serif" font-size="10.00">App::Http::Controllers</text>
-<text text-anchor="start" x="6389" y="-1240" font-family="Helvetica,sans-Serif" font-size="10.00">::ProjectEvaluationController</text>
-<text text-anchor="start" x="6457" y="-1225" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
+<polygon fill="white" stroke="transparent" points="6555,-1289.5 6362,-1289.5 6362,-832.5 6555,-832.5 6555,-1289.5"/>
+<text text-anchor="start" x="6389" y="-1277" font-family="Helvetica,sans-Serif" font-size="10.00">App::Http::Controllers</text>
+<text text-anchor="start" x="6389" y="-1266" font-family="Helvetica,sans-Serif" font-size="10.00">::ProjectEvaluationController</text>
+<text text-anchor="start" x="6457" y="-1251" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
+<text text-anchor="start" x="6366.5" y="-1236" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
+<text text-anchor="start" x="6379.5" y="-1236" font-family="Helvetica,sans-Serif" font-size="10.00">evaluate(Request </text>
+<text text-anchor="start" x="6379.5" y="-1225" font-family="Helvetica,sans-Serif" font-size="10.00">$request, Project $project)</text>
 <text text-anchor="start" x="6366.5" y="-1210" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text text-anchor="start" x="6379.5" y="-1210" font-family="Helvetica,sans-Serif" font-size="10.00">evaluate(Request </text>
-<text text-anchor="start" x="6379.5" y="-1199" font-family="Helvetica,sans-Serif" font-size="10.00">$request, Project $project)</text>
-<text text-anchor="start" x="6366.5" y="-1184" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text text-anchor="start" x="6379.5" y="-1184" font-family="Helvetica,sans-Serif" font-size="10.00">index(Request $request)</text>
-<text text-anchor="start" x="6366.5" y="-1169" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text text-anchor="start" x="6379.5" y="-1169" font-family="Helvetica,sans-Serif" font-size="10.00">show(Project $project)</text>
-<text text-anchor="start" x="6366.5" y="-1154" font-family="Helvetica,sans-Serif" font-size="10.00">#</text>
-<text text-anchor="start" x="6379.5" y="-1154" font-family="Helvetica,sans-Serif" font-size="10.00">buildCommitteeReportState</text>
-<text text-anchor="start" x="6379.5" y="-1143" font-family="Helvetica,sans-Serif" font-size="10.00">(int $cityProgramId, int</text>
-<text text-anchor="start" x="6379.5" y="-1132" font-family="Helvetica,sans-Serif" font-size="10.00"> $pendingProjects)</text>
+<text text-anchor="start" x="6379.5" y="-1210" font-family="Helvetica,sans-Serif" font-size="10.00">index(Request $request)</text>
+<text text-anchor="start" x="6366.5" y="-1195" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
+<text text-anchor="start" x="6379.5" y="-1195" font-family="Helvetica,sans-Serif" font-size="10.00">show(Project $project)</text>
+<text text-anchor="start" x="6366.5" y="-1180" font-family="Helvetica,sans-Serif" font-size="10.00">#</text>
+<text text-anchor="start" x="6379.5" y="-1180" font-family="Helvetica,sans-Serif" font-size="10.00">buildCommitteeReportState</text>
+<text text-anchor="start" x="6379.5" y="-1169" font-family="Helvetica,sans-Serif" font-size="10.00">(int $cityProgramId, int</text>
+<text text-anchor="start" x="6379.5" y="-1158" font-family="Helvetica,sans-Serif" font-size="10.00"> $pendingProjects)</text>
+<text text-anchor="start" x="6366.5" y="-1143" font-family="Helvetica,sans-Serif" font-size="10.00">#</text>
+<text text-anchor="start" x="6379.5" y="-1143" font-family="Helvetica,sans-Serif" font-size="10.00">committeeReportInsights</text>
+<text text-anchor="start" x="6379.5" y="-1132" font-family="Helvetica,sans-Serif" font-size="10.00">(array $reportState)</text>
 <text text-anchor="start" x="6366.5" y="-1117" font-family="Helvetica,sans-Serif" font-size="10.00">#</text>
-<text text-anchor="start" x="6379.5" y="-1117" font-family="Helvetica,sans-Serif" font-size="10.00">committeeReportInsights</text>
+<text text-anchor="start" x="6379.5" y="-1117" font-family="Helvetica,sans-Serif" font-size="10.00">committeeReportVisuals</text>
 <text text-anchor="start" x="6379.5" y="-1106" font-family="Helvetica,sans-Serif" font-size="10.00">(array $reportState)</text>
 <text text-anchor="start" x="6366.5" y="-1091" font-family="Helvetica,sans-Serif" font-size="10.00">#</text>
-<text text-anchor="start" x="6379.5" y="-1091" font-family="Helvetica,sans-Serif" font-size="10.00">committeeReportVisuals</text>
-<text text-anchor="start" x="6379.5" y="-1080" font-family="Helvetica,sans-Serif" font-size="10.00">(array $reportState)</text>
-<text text-anchor="start" x="6366.5" y="-1065" font-family="Helvetica,sans-Serif" font-size="10.00">#</text>
-<text text-anchor="start" x="6379.5" y="-1065" font-family="Helvetica,sans-Serif" font-size="10.00">committeeStatusLabel</text>
-<text text-anchor="start" x="6379.5" y="-1054" font-family="Helvetica,sans-Serif" font-size="10.00">(?string $finalStatusName,</text>
-<text text-anchor="start" x="6379.5" y="-1043" font-family="Helvetica,sans-Serif" font-size="10.00"> ?string $stage, ?string</text>
-<text text-anchor="start" x="6379.5" y="-1032" font-family="Helvetica,sans-Serif" font-size="10.00"> $fallbackStatusName)</text>
-<text text-anchor="start" x="6366.5" y="-1017" font-family="Helvetica,sans-Serif" font-size="10.00">#</text>
-<text text-anchor="start" x="6379.5" y="-1017" font-family="Helvetica,sans-Serif" font-size="10.00">downloadCommitteeReport</text>
-<text text-anchor="start" x="6379.5" y="-1006" font-family="Helvetica,sans-Serif" font-size="10.00">Pdf(Professor $committeeLeader,</text>
-<text text-anchor="start" x="6379.5" y="-995" font-family="Helvetica,sans-Serif" font-size="10.00"> array $reportState)</text>
-<text text-anchor="start" x="6366.5" y="-980" font-family="Helvetica,sans-Serif" font-size="10.00">#</text>
-<text text-anchor="start" x="6379.5" y="-980" font-family="Helvetica,sans-Serif" font-size="10.00">ensureProjectBelongsToCommittee</text>
-<text text-anchor="start" x="6379.5" y="-969" font-family="Helvetica,sans-Serif" font-size="10.00">Program(Project $project,</text>
-<text text-anchor="start" x="6379.5" y="-958" font-family="Helvetica,sans-Serif" font-size="10.00"> int $cityProgramId)</text>
+<text text-anchor="start" x="6379.5" y="-1091" font-family="Helvetica,sans-Serif" font-size="10.00">committeeStatusLabel</text>
+<text text-anchor="start" x="6379.5" y="-1080" font-family="Helvetica,sans-Serif" font-size="10.00">(?string $finalStatusName,</text>
+<text text-anchor="start" x="6379.5" y="-1069" font-family="Helvetica,sans-Serif" font-size="10.00"> ?string $stage, ?string</text>
+<text text-anchor="start" x="6379.5" y="-1058" font-family="Helvetica,sans-Serif" font-size="10.00"> $fallbackStatusName)</text>
+<text text-anchor="start" x="6366.5" y="-1043" font-family="Helvetica,sans-Serif" font-size="10.00">#</text>
+<text text-anchor="start" x="6379.5" y="-1043" font-family="Helvetica,sans-Serif" font-size="10.00">downloadCommitteeReport</text>
+<text text-anchor="start" x="6379.5" y="-1032" font-family="Helvetica,sans-Serif" font-size="10.00">Pdf(Professor $committeeLeader,</text>
+<text text-anchor="start" x="6379.5" y="-1021" font-family="Helvetica,sans-Serif" font-size="10.00"> array $reportState)</text>
+<text text-anchor="start" x="6366.5" y="-1006" font-family="Helvetica,sans-Serif" font-size="10.00">#</text>
+<text text-anchor="start" x="6379.5" y="-1006" font-family="Helvetica,sans-Serif" font-size="10.00">ensureProjectBelongsToCommittee</text>
+<text text-anchor="start" x="6379.5" y="-995" font-family="Helvetica,sans-Serif" font-size="10.00">Program(Project $project,</text>
+<text text-anchor="start" x="6379.5" y="-984" font-family="Helvetica,sans-Serif" font-size="10.00"> int $cityProgramId)</text>
+<text text-anchor="start" x="6366.5" y="-969" font-family="Helvetica,sans-Serif" font-size="10.00">#</text>
+<text text-anchor="start" x="6379.5" y="-969" font-family="Helvetica,sans-Serif" font-size="10.00">isPendingEvaluation</text>
+<text text-anchor="start" x="6379.5" y="-958" font-family="Helvetica,sans-Serif" font-size="10.00">(Project $project)</text>
 <text text-anchor="start" x="6366.5" y="-943" font-family="Helvetica,sans-Serif" font-size="10.00">#</text>
 <text text-anchor="start" x="6379.5" y="-943" font-family="Helvetica,sans-Serif" font-size="10.00">normalizeComments</text>
 <text text-anchor="start" x="6379.5" y="-932" font-family="Helvetica,sans-Serif" font-size="10.00">(?string $comments)</text>
@@ -1621,10 +1624,13 @@
 <text text-anchor="start" x="6379.5" y="-891" font-family="Helvetica,sans-Serif" font-size="10.00">publicAssetDataUri</text>
 <text text-anchor="start" x="6379.5" y="-880" font-family="Helvetica,sans-Serif" font-size="10.00">(string $relativePath)</text>
 <text text-anchor="start" x="6366.5" y="-865" font-family="Helvetica,sans-Serif" font-size="10.00">#</text>
-<text text-anchor="start" x="6379.5" y="-865" font-family="Helvetica,sans-Serif" font-size="10.00">resolveCommitteeLeader()</text>
-<polygon fill="#666666" stroke="#666666" points="6362.5,-1235 6362.5,-1235 6555.5,-1235 6555.5,-1235 6362.5,-1235"/>
-<polygon fill="#666666" stroke="#666666" points="6362.5,-1220 6362.5,-1220 6555.5,-1220 6555.5,-1220 6362.5,-1220"/>
-<polygon fill="none" stroke="#666666" points="6362,-858.5 6362,-1263.5 6555,-1263.5 6555,-858.5 6362,-858.5"/>
+<text text-anchor="start" x="6379.5" y="-865" font-family="Helvetica,sans-Serif" font-size="10.00">redirectAlreadyEvaluated</text>
+<text text-anchor="start" x="6379.5" y="-854" font-family="Helvetica,sans-Serif" font-size="10.00">(Project $project)</text>
+<text text-anchor="start" x="6366.5" y="-839" font-family="Helvetica,sans-Serif" font-size="10.00">#</text>
+<text text-anchor="start" x="6379.5" y="-839" font-family="Helvetica,sans-Serif" font-size="10.00">resolveCommitteeLeader()</text>
+<polygon fill="#666666" stroke="#666666" points="6362.5,-1261 6362.5,-1261 6555.5,-1261 6555.5,-1261 6362.5,-1261"/>
+<polygon fill="#666666" stroke="#666666" points="6362.5,-1246 6362.5,-1246 6555.5,-1246 6555.5,-1246 6362.5,-1246"/>
+<polygon fill="none" stroke="#666666" points="6362,-832.5 6362,-1289.5 6555,-1289.5 6555,-832.5 6362,-832.5"/>
 </a>
 </g>
 </g>
@@ -1632,7 +1638,7 @@
 <g id="edge33_Node000002_Node000034" class="edge">
 <title>Node2&#45;&gt;Node34</title>
 <g id="a_edge33_Node000002_Node000034"><a xlink:title=" ">
-<path fill="none" stroke="#63b8ff" d="M4181.37,-2203.53C4604.39,-2203.24 6272.25,-2197.29 6352.5,-2122 6583.06,-1905.69 6552.98,-1505.64 6507.53,-1263.68"/>
+<path fill="none" stroke="#63b8ff" d="M4181.37,-2203.53C4604.39,-2203.24 6272.25,-2197.29 6352.5,-2122 6574.96,-1913.28 6554.77,-1533.5 6512.25,-1289.72"/>
 <polygon fill="none" stroke="#63b8ff" points="4181.3,-2200.03 4171.31,-2203.54 4181.31,-2207.03 4181.3,-2200.03"/>
 </a>
 </g>
