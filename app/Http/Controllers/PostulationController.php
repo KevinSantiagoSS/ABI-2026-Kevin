@@ -94,7 +94,7 @@ class PostulationController extends Controller
             ->where('semester', $student->semester)
             ->where('id', '!=', $student->id)
             ->whereDoesntHave('projects', function ($q) {
-                $q->whereHas('projectStatus', fn ($s) => $s->whereNotIn('name', ['Rechazado', 'Devuelto para correccion']));
+                $q->whereHas('projectStatus', fn ($s) => $s->whereNotIn('name', Student::INACTIVE_PROJECT_STATUSES));
             })
             ->orderBy('name')
             ->orderBy('last_name')
