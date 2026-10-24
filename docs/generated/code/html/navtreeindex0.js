@@ -112,6 +112,8 @@ var NAVTREEINDEX0 =
 "2026__05__22__000001__add__profile__photo__path__to__users__table_8php_source.html":[2,0,0,0,0,0,0,1,1,54],
 "2026__05__29__212020__add__notification__tracking__to__academic__process__windows__table_8php.html":[2,0,0,0,0,0,0,1,1,55],
 "2026__05__29__212020__add__notification__tracking__to__academic__process__windows__table_8php_source.html":[2,0,0,0,0,0,0,1,1,55],
+"2026__10__22__000001__add__requires__evaluation__to__academic__process__windows__table_8php.html":[2,0,0,0,0,0,0,1,1,56],
+"2026__10__22__000001__add__requires__evaluation__to__academic__process__windows__table_8php_source.html":[2,0,0,0,0,0,0,1,1,56],
 "AcademicCalendarService_8php.html":[2,0,0,0,0,0,0,0,10,0,0],
 "AcademicCalendarService_8php_source.html":[2,0,0,0,0,0,0,0,10,0,0],
 "AcademicPeriodController_8php.html":[2,0,0,0,0,0,0,0,5,0,2],
@@ -247,7 +249,5 @@ var NAVTREEINDEX0 =
 "Http_2Kernel_8php.html":[2,0,0,0,0,0,0,0,5,3],
 "Http_2Kernel_8php_source.html":[2,0,0,0,0,0,0,0,5,3],
 "IdeaDemandController_8php.html":[2,0,0,0,0,0,0,0,5,0,17],
-"IdeaDemandController_8php_source.html":[2,0,0,0,0,0,0,0,5,0,17],
-"IdeaDemandProjectionService_8php.html":[2,0,0,0,0,0,0,0,10,1,0],
-"IdeaDemandProjectionService_8php_source.html":[2,0,0,0,0,0,0,0,10,1,0]
+"IdeaDemandController_8php_source.html":[2,0,0,0,0,0,0,0,5,0,17]
 };
