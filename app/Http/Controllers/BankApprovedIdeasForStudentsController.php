@@ -106,14 +106,11 @@ if (! $this->academicProgress->canAccessIdeaBank($student, $activeAcademicPeriod
         ->with('error', $this->academicProgress->blockedIdeaBankMessage($student, $activeAcademicPeriod));
 }
 
-        $sameProgram = $project->students()
-                ->where('city_program_id', $student->city_program_id)
-                ->exists()
-            || $project->professors()
-                ->where('city_program_id', $student->city_program_id)
-                ->exists();
+        // Ideas aprobadas de su programa (banco) o proyectos en los que participa.
+        $canView = $project->isAvailableForStudent($student)
+            || $project->students()->where('students.id', $student->id)->exists();
 
-        if (! $sameProgram) {
+        if (! $canView) {
             abort(403, 'No tienes permiso para ver este proyecto.');
         }
 

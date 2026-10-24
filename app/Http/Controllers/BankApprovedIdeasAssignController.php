@@ -47,7 +47,7 @@ class BankApprovedIdeasAssignController extends Controller
 }
 
         if (! $project->isAvailableForStudent($student)) {
-            abort(403, 'Solo puedes seleccionar ideas que esten en estado Aprobado.');
+            abort(403, 'Solo puedes seleccionar ideas aprobadas de tu programa academico.');
         }
 
         $availableStudents = Student::query()
@@ -93,7 +93,7 @@ class BankApprovedIdeasAssignController extends Controller
         ]);
 
         if (! $project->isAvailableForStudent($student)) {
-            abort(403, 'Este proyecto ya no esta disponible para asignacion.');
+            abort(403, 'Este proyecto no esta disponible para asignacion.');
         }
 
         $hasActiveUser = $student->projects()

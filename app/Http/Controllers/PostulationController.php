@@ -67,6 +67,10 @@ class PostulationController extends Controller
             return $unavailable;
         }
 
+        if ($unavailable = $this->ensureProjectIsPostulable($project, $student)) {
+            return $unavailable;
+        }
+
         if ($student->hasActiveProject()) {
             return redirect()->route('students.projects.approved.index')
                 ->with('error', 'Ya tienes un proyecto activo asignado.');
@@ -123,6 +127,16 @@ class PostulationController extends Controller
     {
         $student = Student::where('user_id', Auth::id())->firstOrFail();
         $project = Project::findOrFail($request->project_id);
+        $activePeriod = AcademicCalendarService::currentActivePeriod();
+
+        if (! $this->academicProgress->canAccessIdeaBank($student, $activePeriod)) {
+            abort(403, $this->academicProgress->blockedIdeaBankMessage($student, $activePeriod));
+        }
+
+        // Debe validarse antes de tocar datos: el borrado de abajo es destructivo.
+        if ($unavailable = $this->ensureProjectIsPostulable($project, $student)) {
+            return $unavailable;
+        }
 
         if ($unavailable = $this->ensureProjectIsAvailable($project, $student)) {
             return $unavailable;
@@ -262,19 +276,20 @@ class PostulationController extends Controller
     }
 
     /**
-     * Aplica las mismas reglas del Banco de Ideas Aprobadas: la idea debe estar
-     * "Aprobado", ser del programa del estudiante y la ventana de selección abierta.
+     * Aplica las mismas reglas del banco de ideas: ventana de selección abierta,
+     * proyecto aprobado y perteneciente al programa del estudiante.
      */
-    private function ensureProjectIsAvailable(Project $project, Student $student)
+    private function ensureProjectIsPostulable(Project $project, Student $student): ?\Illuminate\Contracts\View\View
     {
         if (! AcademicCalendarService::currentWindowForProcess(AcademicProcessWindow::PROCESS_IDEA_SELECTION)) {
-            return redirect()->route('students.projects.approved.index')
-                ->with('error', 'La ventana de selección de ideas no está abierta.');
+            return view(
+                'academic-calendar.unavailable',
+                AcademicCalendarService::unavailableActivityViewData(AcademicProcessWindow::PROCESS_IDEA_SELECTION)
+            );
         }
 
         if (! $project->isAvailableForStudent($student)) {
-            return redirect()->route('students.projects.approved.index')
-                ->with('error', 'Este proyecto no está disponible para postulación.');
+            abort(403, 'Solo puedes postularte a ideas aprobadas de tu programa académico.');
         }
 
         return null;
