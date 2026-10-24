@@ -48,7 +48,7 @@ class PostulationEvaluationController extends Controller
         return view('postulations.evaluation.show', compact('postulation', 'canApprove'));
     }
 
-    public function evaluate(Request $request, Postulation $postulation)
+     public function evaluate(Request $request, Postulation $postulation)
     {
         $user = Auth::user();
         $professor = Professor::where('user_id', $user->id)->firstOrFail();
@@ -175,10 +175,13 @@ class PostulationEvaluationController extends Controller
         } catch (\Exception $e) {
             DB::rollBack();
 
-            return back()->with('error', 'Error al evaluar la postulación: '.$e->getMessage());
+            // Guardamos el error real en el log (solo lo ven los programadores)
+            \Log::error('Error al evaluar la postulación: ' . $e->getMessage(), ['exception' => $e]);
+            
+            // Al comité le mostramos un mensaje amigable sin el SQL
+            return back()->with('error', 'Ocurrió un error inesperado al evaluar la postulación. Por favor, inténtalo de nuevo.');
         }
     }
-
     /**
      * Libera y reordena las prioridades de un estudiante cuando una postulación es rechazada.
      */

@@ -119,7 +119,7 @@ class PostulationController extends Controller
         return view('postulations.student.create', compact('project', 'student', 'availableStudents', 'availablePriorities', 'maxStudents'));
     }
 
-    public function store(Request $request)
+        public function store(Request $request)
     {
         $student = Student::where('user_id', Auth::id())->firstOrFail();
         $project = Project::findOrFail($request->project_id);
@@ -156,11 +156,17 @@ class PostulationController extends Controller
             'teammates' => ['required_if:modality,team', 'array', 'max:'.($maxStudents - 1)],
             'teammates.*.id' => [
                 'nullable',
+                'distinct', // REGLA NUEVA: Evita que el mismo ID se repita en el arreglo
+                Rule::notIn([$student->id]), // REGLA NUEVA: Evita que el líder se agregue a sí mismo
                 Rule::exists('students', 'id')
                     ->where('city_program_id', $student->city_program_id)
                     ->where('semester', $student->semester),
             ],
             'teammates.*.role' => 'required_with:teammates.*.id|nullable|string|max:255',
+        ], [
+            // MENSAJES NUEVOS: Para avisarle al estudiante qué pasó
+            'teammates.*.id.distinct' => 'No puedes seleccionar al mismo compañero más de una vez.',
+            'teammates.*.id.not_in' => 'No puedes seleccionarte a ti mismo como compañero de equipo.',
         ]);
 
         if ($student->hasActiveProject()) {
@@ -247,7 +253,11 @@ class PostulationController extends Controller
                 Storage::disk('local')->delete($filePath);
             }
 
-            return back()->with('error', 'Ocurrió un error al procesar tu postulación: '.$e->getMessage());
+            // Guardamos el error técnico en laravel.log para los programadores
+            \Log::error('Error al procesar postulación: ' . $e->getMessage(), ['exception' => $e]);
+            
+            // Al estudiante le mostramos un mensaje amigable y conservamos sus datos con withInput()
+            return back()->withInput()->with('error', 'Ocurrió un error inesperado al procesar tu postulación. Por favor, verifica los datos e inténtalo de nuevo.');
         }
     }
 
