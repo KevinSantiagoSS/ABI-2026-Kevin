@@ -55,6 +55,11 @@ class ProjectEvaluationController extends Controller
     {
         $committeeLeader = $this->resolveCommitteeLeader();
         $this->ensureProjectBelongsToCommitteeProgram($project, $committeeLeader->city_program_id);
+
+        if (! $this->isPendingEvaluation($project)) {
+            return $this->redirectAlreadyEvaluated($project);
+        }
+
         $project->load([
             'thematicArea.investigationLine',
             'projectStatus',
@@ -82,6 +87,12 @@ class ProjectEvaluationController extends Controller
     {
         $committeeLeader = $this->resolveCommitteeLeader();
         $this->ensureProjectBelongsToCommitteeProgram($project, $committeeLeader->city_program_id);
+
+        // Solo se pueden evaluar proyectos que siguen pendientes de aprobacion.
+        if (! $this->isPendingEvaluation($project)) {
+            return $this->redirectAlreadyEvaluated($project);
+        }
+
         $validated = $request->validate([
             'status' => 'required|string|in:Aprobado,Rechazado,Devuelto para correccion,Devuelto para corrección',
             'comments' => 'nullable|string',
@@ -368,6 +379,26 @@ class ProjectEvaluationController extends Controller
             $stage === 'returned_for_correction' => 'Devuelto para correccion',
             default => 'Sin estado final',
         };
+    }
+
+    protected function isPendingEvaluation(Project $project): bool
+    {
+        $statusName = Str::of((string) $project->projectStatus?->name)
+            ->ascii()
+            ->lower()
+            ->squish()
+            ->toString();
+
+        return $statusName === 'pendiente de aprobacion';
+    }
+
+    protected function redirectAlreadyEvaluated(Project $project)
+    {
+        $statusName = $project->projectStatus?->name ?? 'Sin estado';
+
+        return redirect()
+            ->route('projects.evaluation.index')
+            ->with('error', "El proyecto '{$project->title}' ya fue evaluado (estado actual: $statusName) y no puede reevaluarse.");
     }
 
     protected function ensureProjectBelongsToCommitteeProgram(Project $project, int $cityProgramId): void
