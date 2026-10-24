@@ -128,12 +128,13 @@ class PostulationController extends Controller
             return $unavailable;
         }
 
-        // Si ya existe una postulación rechazada para este mismo proyecto y este estudiante,
-        // la eliminamos ANTES de validar para liberar la prioridad y evitar conflictos UNIQUE
-        Postulation::where('project_id', $project->id)
+        // Postulaciones rechazadas de este estudiante al mismo proyecto. Se reemplazan
+        // (UNIQUE project_id + lead_student_id) solo cuando la nueva se guarda bien.
+        $rejectedPostulations = Postulation::where('project_id', $project->id)
             ->where('lead_student_id', $student->id)
             ->where('status', 'rejected')
-            ->delete();
+            ->get();
+        $rejectedIds = $rejectedPostulations->pluck('postulation_id')->all();
 
         $maxStudents = $project->maxStudents();
 
@@ -148,7 +149,9 @@ class PostulationController extends Controller
                 'required',
                 'integer',
                 'in:1,2,3',
-                Rule::unique('postulation_priorities', 'priority_order')->where('student_id', $student->id),
+                Rule::unique('postulation_priorities', 'priority_order')
+                    ->where('student_id', $student->id)
+                    ->whereNotIn('postulation_id', $rejectedIds),
             ],
             'teammates' => ['required_if:modality,team', 'array', 'max:'.($maxStudents - 1)],
             'teammates.*.id' => [
@@ -182,6 +185,10 @@ class PostulationController extends Controller
 
         DB::beginTransaction();
         try {
+            // Se borran dentro de la transacción: si algo falla, el rollback las conserva.
+            // Sus miembros y prioridades se eliminan en cascada.
+            Postulation::whereIn('postulation_id', $rejectedIds)->delete();
+
             $filePath = $request->file('grades_file')->store('postulations/grades', 'local');
 
             $postulation = Postulation::create([
@@ -223,6 +230,13 @@ class PostulationController extends Controller
             ]);
 
             DB::commit();
+
+            // Los PDF de notas de las postulaciones reemplazadas ya no tienen registro que los use
+            foreach ($rejectedPostulations as $rejected) {
+                if ($rejected->grades_file && $rejected->grades_file !== $filePath) {
+                    Storage::disk('local')->delete($rejected->grades_file);
+                }
+            }
 
             return redirect()->route('students.postulations.index')
                 ->with('success', 'Tu postulación ha sido enviada exitosamente.');
