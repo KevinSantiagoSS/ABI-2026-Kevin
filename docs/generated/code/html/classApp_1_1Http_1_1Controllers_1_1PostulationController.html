@@ -134,9 +134,9 @@ Protected Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
-<tr class="memitem:a8ed4546215d097bf350bac3729adbf5a" id="r_a8ed4546215d097bf350bac3729adbf5a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classApp_1_1Http_1_1Controllers_1_1PostulationController.html#a8ed4546215d097bf350bac3729adbf5a">ensureProjectIsAvailable</a> (<a class="el" href="classApp_1_1Models_1_1Project.html">Project</a> $project, <a class="el" href="classApp_1_1Models_1_1Student.html">Student</a> $student)</td></tr>
-<tr class="memdesc:a8ed4546215d097bf350bac3729adbf5a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Aplica las mismas reglas del Banco de Ideas Aprobadas: la idea debe estar "Aprobado", ser del programa del estudiante y la ventana de selección abierta.  <br /></td></tr>
-<tr class="separator:a8ed4546215d097bf350bac3729adbf5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ab21fd08d8232f7ff9bc0facdfdcad2" id="r_a8ab21fd08d8232f7ff9bc0facdfdcad2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classApp_1_1Http_1_1Controllers_1_1PostulationController.html#a8ab21fd08d8232f7ff9bc0facdfdcad2">ensureProjectIsPostulable</a> (<a class="el" href="classApp_1_1Models_1_1Project.html">Project</a> $project, <a class="el" href="classApp_1_1Models_1_1Student.html">Student</a> $student)</td></tr>
+<tr class="memdesc:a8ab21fd08d8232f7ff9bc0facdfdcad2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Aplica las mismas reglas del banco de ideas: ventana de selección abierta, proyecto aprobado y perteneciente al programa del estudiante.  <br /></td></tr>
+<tr class="separator:a8ab21fd08d8232f7ff9bc0facdfdcad2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
@@ -233,13 +233,13 @@ Private Member Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="PostulationController_8php_source.html#l00056">56</a> of file <a class="el" href="PostulationController_8php_source.html">PostulationController.php</a>.</p>
 
-<p class="reference">References <a class="el" href="PostulationController_8php_source.html#l00268">ensureProjectIsAvailable()</a>, <a class="el" href="Student_8php_source.html#l00029">App::Models::Student::INACTIVE_PROJECT_STATUSES</a>, and <a class="el" href="Project_8php_source.html#l00140">App::Models::Project::maxStudents()</a>.</p>
+<p class="reference">References <a class="el" href="PostulationController_8php_source.html#l00282">ensureProjectIsPostulable()</a>, <a class="el" href="Student_8php_source.html#l00029">App::Models::Student::INACTIVE_PROJECT_STATUSES</a>, and <a class="el" href="Project_8php_source.html#l00159">App::Models::Project::maxStudents()</a>.</p>
 <div id="dynsection-3" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-3-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-3-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-3-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classApp_1_1Http_1_1Controllers_1_1PostulationController_a4cc7fecbc9a1b921ffd2871bd763a1d1_cgraph.svg" width="635" height="131"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classApp_1_1Http_1_1Controllers_1_1PostulationController_a4cc7fecbc9a1b921ffd2871bd763a1d1_cgraph.svg" width="643" height="131"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -260,12 +260,12 @@ Private Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="PostulationController_8php_source.html#l00283">283</a> of file <a class="el" href="PostulationController_8php_source.html">PostulationController.php</a>.</p>
+<p class="definition">Definition at line <a class="el" href="PostulationController_8php_source.html#l00298">298</a> of file <a class="el" href="PostulationController_8php_source.html">PostulationController.php</a>.</p>
 
 </div>
 </div>
-<a id="a8ed4546215d097bf350bac3729adbf5a" name="a8ed4546215d097bf350bac3729adbf5a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8ed4546215d097bf350bac3729adbf5a">&#9670;&#160;</a></span>ensureProjectIsAvailable()</h2>
+<a id="a8ab21fd08d8232f7ff9bc0facdfdcad2" name="a8ab21fd08d8232f7ff9bc0facdfdcad2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ab21fd08d8232f7ff9bc0facdfdcad2">&#9670;&#160;</a></span>ensureProjectIsPostulable()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -274,7 +274,7 @@ Private Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">App::Http::Controllers::PostulationController::ensureProjectIsAvailable </td>
+          <td class="memname">App::Http::Controllers::PostulationController::ensureProjectIsPostulable </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classApp_1_1Models_1_1Project.html">Project</a>&#160;</td>
           <td class="paramname"><em>$project</em>, </td>
@@ -298,26 +298,26 @@ Private Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Aplica las mismas reglas del Banco de Ideas Aprobadas: la idea debe estar "Aprobado", ser del programa del estudiante y la ventana de selección abierta. </p>
+<p>Aplica las mismas reglas del banco de ideas: ventana de selección abierta, proyecto aprobado y perteneciente al programa del estudiante. </p>
 
-<p class="definition">Definition at line <a class="el" href="PostulationController_8php_source.html#l00268">268</a> of file <a class="el" href="PostulationController_8php_source.html">PostulationController.php</a>.</p>
+<p class="definition">Definition at line <a class="el" href="PostulationController_8php_source.html#l00282">282</a> of file <a class="el" href="PostulationController_8php_source.html">PostulationController.php</a>.</p>
 
-<p class="reference">References <a class="el" href="Project_8php_source.html#l00088">App::Models::Project::isAvailableForStudent()</a>.</p>
+<p class="reference">References <a class="el" href="Project_8php_source.html#l00083">App::Models::Project::isAvailableForStudent()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="PostulationController_8php_source.html#l00056">create()</a>, and <a class="el" href="PostulationController_8php_source.html#l00122">store()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="PostulationController_8php_source.html#l00056">create()</a>, and <a class="el" href="PostulationController_8php_source.html#l00126">store()</a>.</p>
 <div id="dynsection-4" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-4-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-4-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-4-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classApp_1_1Http_1_1Controllers_1_1PostulationController_a8ed4546215d097bf350bac3729adbf5a_cgraph.svg" width="420" height="66"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classApp_1_1Http_1_1Controllers_1_1PostulationController_a8ab21fd08d8232f7ff9bc0facdfdcad2_cgraph.svg" width="428" height="66"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <div id="dynsection-5" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-5-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-5-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-5-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classApp_1_1Http_1_1Controllers_1_1PostulationController_a8ed4546215d097bf350bac3729adbf5a_icgraph.svg" width="416" height="144"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classApp_1_1Http_1_1Controllers_1_1PostulationController_a8ab21fd08d8232f7ff9bc0facdfdcad2_icgraph.svg" width="424" height="144"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -386,15 +386,15 @@ Private Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="PostulationController_8php_source.html#l00122">122</a> of file <a class="el" href="PostulationController_8php_source.html">PostulationController.php</a>.</p>
+<p class="definition">Definition at line <a class="el" href="PostulationController_8php_source.html#l00126">126</a> of file <a class="el" href="PostulationController_8php_source.html">PostulationController.php</a>.</p>
 
-<p class="reference">References <a class="el" href="PostulationController_8php_source.html#l00268">ensureProjectIsAvailable()</a>.</p>
+<p class="reference">References <a class="el" href="PostulationController_8php_source.html#l00282">ensureProjectIsPostulable()</a>.</p>
 <div id="dynsection-7" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-7-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-7-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-7-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classApp_1_1Http_1_1Controllers_1_1PostulationController_a4626d798cedd76d73332685f7e877448_cgraph.svg" width="635" height="66"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classApp_1_1Http_1_1Controllers_1_1PostulationController_a4626d798cedd76d73332685f7e877448_cgraph.svg" width="643" height="66"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>

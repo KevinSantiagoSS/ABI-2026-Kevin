@@ -7,7 +7,7 @@ var searchData=
   ['schedule_4',['schedule',['../classApp_1_1Console_1_1Kernel.html#a4e57d9b00bfd13f26d964ad7e522a165',1,'App::Console::Kernel']]],
   ['scopeactive_5',['scopeActive',['../classApp_1_1Models_1_1AcademicPeriod.html#a3af0f6d1e4da1b3c7505042d53164411',1,'App::Models::AcademicPeriod']]],
   ['scopeapproved_6',['scopeApproved',['../classApp_1_1Models_1_1Postulation.html#af99acb270466c76dea4249e11bc6603f',1,'App::Models::Postulation']]],
-  ['scopeavailableforstudent_7',['scopeAvailableForStudent',['../classApp_1_1Models_1_1Project.html#a3b6959ac1dbe6fc91c8ac805d4e5de2e',1,'App::Models::Project']]],
+  ['scopeavailableforstudent_7',['scopeavailableforstudent',['../classApp_1_1Models_1_1Project.html#a3b6959ac1dbe6fc91c8ac805d4e5de2e',1,'App::Models::Project::scopeAvailableForStudent(Builder $query, Student $student)'],['../classApp_1_1Models_1_1Project.html#a3b6959ac1dbe6fc91c8ac805d4e5de2e',1,'App::Models::Project::scopeAvailableForStudent(Builder $query, Student $student)']]],
   ['scopechronological_8',['scopeChronological',['../classApp_1_1Models_1_1AcademicPeriod.html#a8dc7e6d0fa0f0b7ceee2e7261e9d7586',1,'App::Models::AcademicPeriod']]],
   ['scopepending_9',['scopePending',['../classApp_1_1Models_1_1Postulation.html#a2115c07a11e7a6810c923a84bc001e1b',1,'App::Models::Postulation']]],
   ['scopependingreviewduetoage_10',['scopePendingReviewDueToAge',['../classApp_1_1Models_1_1Project.html#a5c5339392461a6b85ccbeae49706e949',1,'App::Models::Project']]],
