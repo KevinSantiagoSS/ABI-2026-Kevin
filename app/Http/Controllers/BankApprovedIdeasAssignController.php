@@ -45,18 +45,13 @@ class BankApprovedIdeasAssignController extends Controller
                 ->with('error', $this->academicProgress->blockedIdeaBankMessage($student, $activeAcademicPeriod));
         }
 
-        // VALIDACIÓN EXPLÍCITA DE PROGRAMA (Bug 3)
-        if ((int) $project->city_program_id !== (int) $student->city_program_id) {
+        // VALIDACIÓN CORRECTA: Confía en el método nativo que revisa el programa del profesor
+        if (! $project->isAvailableForStudent($student)) {
             return redirect()->route('students.projects.approved.index')
                 ->with('error', 'Solo puedes seleccionar ideas aprobadas de tu mismo programa académico.');
         }
 
-        if (! $project->isAvailableForStudent($student)) {
-            return redirect()->route('students.projects.approved.index')
-                ->with('error', 'Este proyecto no está disponible para asignación.');
-        }
-
-        // Dejamos la lista vacía o quitamos la opción de compañeros en la vista
+        // Dejamos la lista vacía porque quitamos la opción de compañeros
         $availableStudents = collect(); 
 
         return view('projects.student.select', compact('project', 'availableStudents', 'selectionWindow', 'activeAcademicPeriod'));
@@ -84,20 +79,9 @@ class BankApprovedIdeasAssignController extends Controller
             return back()->with('error', $this->academicProgress->blockedIdeaBankMessage($student, $activePeriod));
         }
 
-        // 1. VALIDACIÓN EXPLÍCITA DE PROGRAMA
-        if ((int) $project->city_program_id !== (int) $student->city_program_id) {
-            return back()->with('error', 'No puedes asignarte a un proyecto de otro programa.');
-        }
-
-        // 2. CUPO DINÁMICO (usamos el máximo real del proyecto)
-        $maxTeammates = max(0, $project->maxStudents() - 1);
-        $validated = $request->validate([
-            'teammate_ids' => ['nullable', 'array', 'max:' . $maxTeammates],
-            'teammate_ids.*' => ['integer', Rule::exists('students', 'id')->where(fn ($q) => $q->where('city_program_id', $student->city_program_id))],
-        ]);
-
+        // VALIDACIÓN CORRECTA
         if (! $project->isAvailableForStudent($student)) {
-            return back()->with('error', 'Este proyecto no está disponible para asignación.');
+            return back()->with('error', 'No puedes asignarte a un proyecto que no pertenece a tu programa académico o no está disponible.');
         }
 
         $hasActiveUser = $student->projects()
@@ -107,17 +91,6 @@ class BankApprovedIdeasAssignController extends Controller
 
         if ($hasActiveUser) {
             return back()->with('error', 'No puedes asignarte a este proyecto porque ya tienes un proyecto activo.');
-        }
-
-        if (! empty($validated['teammate_ids'])) {
-            $hasActiveTeammates = Student::query()
-                ->whereIn('id', $validated['teammate_ids'])
-                ->whereHas('projects', fn ($query) => $query->where('projects.id', '!=', $project->id)->whereHas('projectStatus', fn ($status) => $status->whereNotIn('name', Student::INACTIVE_PROJECT_STATUSES)))
-                ->exists();
-
-            if ($hasActiveTeammates) {
-                return back()->with('error', 'Uno o más compañeros seleccionados ya tienen un proyecto activo.');
-            }
         }
 
         DB::beginTransaction();
@@ -130,17 +103,7 @@ class BankApprovedIdeasAssignController extends Controller
                 'assigned_at' => now(),
             ]);
 
-            // 3. ASIGNACIÓN: Si quieres evitar el problema del consentimiento, 
-            // lo ideal es que solo se asigne al líder (quitando los teammate_ids).
-            // Si el líder del proyecto quiere permitir equipos, debería ser con invitaciones.
-            
-            $studentIds = collect($validated['teammate_ids'] ?? [])->push($student->id)->unique()->values()->all();
-            
-            // Para no inscribir a la fuerza, si decides dejar los compañeros,
-            // el sistema debería enviarles una notificación. Como no existe esa tabla,
-            // la recomendación de seguridad es asignar solo al líder.
-            // Para el Bug 3, vamos a asignar solo al líder:
-            
+            // ASIGNACIÓN SEGURA: Solo asigna al estudiante líder (sin compañeros forzados)
             $project->students()->syncWithoutDetaching([$student->id]);
 
             AcademicCalendarService::recordProjectStage(
