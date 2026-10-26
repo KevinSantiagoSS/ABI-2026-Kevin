@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\ProjectIdeaEvaluated; // We can reuse this or create IdeaStatusChanged
+use App\Events\ProjectIdeaEvaluated;
 use App\Models\AcademicProcessWindow;
 use App\Models\Project;
 use App\Models\ProjectStatus;
@@ -30,7 +30,6 @@ class BankApprovedIdeasAssignController extends Controller
             return $this->academicProcessUnavailableView(AcademicProcessWindow::PROCESS_IDEA_SELECTION);
         }
 
-        // Si la ventana requiere evaluación, NO permitimos entrar a la vista de selección directa
         if ($selectionWindow->requires_evaluation) {
             return redirect()->route('students.postulations.create', $project);
         }
@@ -42,25 +41,23 @@ class BankApprovedIdeasAssignController extends Controller
         $activeAcademicPeriod = AcademicCalendarService::currentActivePeriod();
 
         if (! $this->academicProgress->canAccessIdeaBank($student, $activeAcademicPeriod)) {
-    return redirect('/students/projects/postulations')
-        ->with('error', $this->academicProgress->blockedIdeaBankMessage($student, $activeAcademicPeriod));
-}
-
-        if (! $project->isAvailableForStudent($student)) {
-            abort(403, 'Solo puedes seleccionar ideas aprobadas de tu programa academico.');
+            return redirect('/students/projects/postulations')
+                ->with('error', $this->academicProgress->blockedIdeaBankMessage($student, $activeAcademicPeriod));
         }
 
-        $availableStudents = Student::query()
-            ->where('city_program_id', $student->city_program_id)
-            ->where('id', '!=', $student->id)
-            ->whereDoesntHave('projects', function ($q) {
-                $q->whereHas('projectStatus', fn ($s) => $s->whereNotIn('name', Student::INACTIVE_PROJECT_STATUSES));
-            })
-            ->orderBy('last_name')
-            ->orderBy('name')
-            ->get();
+        // VALIDACIÓN EXPLÍCITA DE PROGRAMA (Bug 3)
+        if ((int) $project->city_program_id !== (int) $student->city_program_id) {
+            return redirect()->route('students.projects.approved.index')
+                ->with('error', 'Solo puedes seleccionar ideas aprobadas de tu mismo programa académico.');
+        }
 
-        $selectionWindow = AcademicCalendarService::currentWindowForProcess(AcademicProcessWindow::PROCESS_IDEA_SELECTION);
+        if (! $project->isAvailableForStudent($student)) {
+            return redirect()->route('students.projects.approved.index')
+                ->with('error', 'Este proyecto no está disponible para asignación.');
+        }
+
+        // Dejamos la lista vacía o quitamos la opción de compañeros en la vista
+        $availableStudents = collect(); 
 
         return view('projects.student.select', compact('project', 'availableStudents', 'selectionWindow', 'activeAcademicPeriod'));
     }
@@ -87,13 +84,20 @@ class BankApprovedIdeasAssignController extends Controller
             return back()->with('error', $this->academicProgress->blockedIdeaBankMessage($student, $activePeriod));
         }
 
+        // 1. VALIDACIÓN EXPLÍCITA DE PROGRAMA
+        if ((int) $project->city_program_id !== (int) $student->city_program_id) {
+            return back()->with('error', 'No puedes asignarte a un proyecto de otro programa.');
+        }
+
+        // 2. CUPO DINÁMICO (usamos el máximo real del proyecto)
+        $maxTeammates = max(0, $project->maxStudents() - 1);
         $validated = $request->validate([
-            'teammate_ids' => ['nullable', 'array', 'max:2'],
+            'teammate_ids' => ['nullable', 'array', 'max:' . $maxTeammates],
             'teammate_ids.*' => ['integer', Rule::exists('students', 'id')->where(fn ($q) => $q->where('city_program_id', $student->city_program_id))],
         ]);
 
         if (! $project->isAvailableForStudent($student)) {
-            abort(403, 'Este proyecto no esta disponible para asignacion.');
+            return back()->with('error', 'Este proyecto no está disponible para asignación.');
         }
 
         $hasActiveUser = $student->projects()
@@ -112,7 +116,7 @@ class BankApprovedIdeasAssignController extends Controller
                 ->exists();
 
             if ($hasActiveTeammates) {
-                return back()->with('error', 'Uno o mas companeros seleccionados ya tienen un proyecto activo.');
+                return back()->with('error', 'Uno o más compañeros seleccionados ya tienen un proyecto activo.');
             }
         }
 
@@ -126,26 +130,35 @@ class BankApprovedIdeasAssignController extends Controller
                 'assigned_at' => now(),
             ]);
 
+            // 3. ASIGNACIÓN: Si quieres evitar el problema del consentimiento, 
+            // lo ideal es que solo se asigne al líder (quitando los teammate_ids).
+            // Si el líder del proyecto quiere permitir equipos, debería ser con invitaciones.
+            
             $studentIds = collect($validated['teammate_ids'] ?? [])->push($student->id)->unique()->values()->all();
-            $project->students()->syncWithoutDetaching($studentIds);
+            
+            // Para no inscribir a la fuerza, si decides dejar los compañeros,
+            // el sistema debería enviarles una notificación. Como no existe esa tabla,
+            // la recomendación de seguridad es asignar solo al líder.
+            // Para el Bug 3, vamos a asignar solo al líder:
+            
+            $project->students()->syncWithoutDetaching([$student->id]);
 
             AcademicCalendarService::recordProjectStage(
                 $project,
                 'assigned',
                 $activePeriod,
                 Auth::id(),
-                'Proyecto asignado durante la ventana de seleccion.',
-                ['selection_window_id' => $selectionWindow?->id, 'student_ids' => $studentIds]
+                'Proyecto asignado durante la ventana de selección.',
+                ['selection_window_id' => $selectionWindow?->id, 'student_ids' => [$student->id]]
             );
 
             DB::commit();
         } catch (\Throwable $e) {
             DB::rollBack();
-
+            \Log::error('Error al asignar el proyecto: ' . $e->getMessage(), ['exception' => $e]);
             return back()->with('error', 'Error al asignar el proyecto. Intenta de nuevo.');
         }
 
-        // Disparar evento de notificación después del commit
         event(new ProjectIdeaEvaluated(
             $project->load(['students.user', 'professors.user']),
             'Asignado',
