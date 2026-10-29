@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\ProjectIdeaEvaluated; // We can reuse this or create IdeaStatusChanged
+use App\Events\ProjectIdeaEvaluated;
 use App\Models\AcademicProcessWindow;
 use App\Models\Project;
 use App\Models\ProjectStatus;
@@ -30,7 +30,6 @@ class BankApprovedIdeasAssignController extends Controller
             return $this->academicProcessUnavailableView(AcademicProcessWindow::PROCESS_IDEA_SELECTION);
         }
 
-        // Si la ventana requiere evaluación, NO permitimos entrar a la vista de selección directa
         if ($selectionWindow->requires_evaluation) {
             return redirect()->route('students.postulations.create', $project);
         }
@@ -42,25 +41,18 @@ class BankApprovedIdeasAssignController extends Controller
         $activeAcademicPeriod = AcademicCalendarService::currentActivePeriod();
 
         if (! $this->academicProgress->canAccessIdeaBank($student, $activeAcademicPeriod)) {
-    return redirect('/students/projects/postulations')
-        ->with('error', $this->academicProgress->blockedIdeaBankMessage($student, $activeAcademicPeriod));
-}
-
-        if (! $project->isAvailableForStudent($student)) {
-            abort(403, 'Solo puedes seleccionar ideas aprobadas de tu programa academico.');
+            return redirect('/students/projects/postulations')
+                ->with('error', $this->academicProgress->blockedIdeaBankMessage($student, $activeAcademicPeriod));
         }
 
-        $availableStudents = Student::query()
-            ->where('city_program_id', $student->city_program_id)
-            ->where('id', '!=', $student->id)
-            ->whereDoesntHave('projects', function ($q) {
-                $q->whereHas('projectStatus', fn ($s) => $s->whereNotIn('name', Student::INACTIVE_PROJECT_STATUSES));
-            })
-            ->orderBy('last_name')
-            ->orderBy('name')
-            ->get();
+        // VALIDACIÓN CORRECTA: Confía en el método nativo que revisa el programa del profesor
+        if (! $project->isAvailableForStudent($student)) {
+            return redirect()->route('students.projects.approved.index')
+                ->with('error', 'Solo puedes seleccionar ideas aprobadas de tu mismo programa académico.');
+        }
 
-        $selectionWindow = AcademicCalendarService::currentWindowForProcess(AcademicProcessWindow::PROCESS_IDEA_SELECTION);
+        // Dejamos la lista vacía porque quitamos la opción de compañeros
+        $availableStudents = collect(); 
 
         return view('projects.student.select', compact('project', 'availableStudents', 'selectionWindow', 'activeAcademicPeriod'));
     }
@@ -87,13 +79,9 @@ class BankApprovedIdeasAssignController extends Controller
             return back()->with('error', $this->academicProgress->blockedIdeaBankMessage($student, $activePeriod));
         }
 
-        $validated = $request->validate([
-            'teammate_ids' => ['nullable', 'array', 'max:2'],
-            'teammate_ids.*' => ['integer', Rule::exists('students', 'id')->where(fn ($q) => $q->where('city_program_id', $student->city_program_id))],
-        ]);
-
+        // VALIDACIÓN CORRECTA
         if (! $project->isAvailableForStudent($student)) {
-            abort(403, 'Este proyecto no esta disponible para asignacion.');
+            return back()->with('error', 'No puedes asignarte a un proyecto que no pertenece a tu programa académico o no está disponible.');
         }
 
         $hasActiveUser = $student->projects()
@@ -103,17 +91,6 @@ class BankApprovedIdeasAssignController extends Controller
 
         if ($hasActiveUser) {
             return back()->with('error', 'No puedes asignarte a este proyecto porque ya tienes un proyecto activo.');
-        }
-
-        if (! empty($validated['teammate_ids'])) {
-            $hasActiveTeammates = Student::query()
-                ->whereIn('id', $validated['teammate_ids'])
-                ->whereHas('projects', fn ($query) => $query->where('projects.id', '!=', $project->id)->whereHas('projectStatus', fn ($status) => $status->whereNotIn('name', Student::INACTIVE_PROJECT_STATUSES)))
-                ->exists();
-
-            if ($hasActiveTeammates) {
-                return back()->with('error', 'Uno o mas companeros seleccionados ya tienen un proyecto activo.');
-            }
         }
 
         DB::beginTransaction();
@@ -126,26 +103,25 @@ class BankApprovedIdeasAssignController extends Controller
                 'assigned_at' => now(),
             ]);
 
-            $studentIds = collect($validated['teammate_ids'] ?? [])->push($student->id)->unique()->values()->all();
-            $project->students()->syncWithoutDetaching($studentIds);
+            // ASIGNACIÓN SEGURA: Solo asigna al estudiante líder (sin compañeros forzados)
+            $project->students()->syncWithoutDetaching([$student->id]);
 
             AcademicCalendarService::recordProjectStage(
                 $project,
                 'assigned',
                 $activePeriod,
                 Auth::id(),
-                'Proyecto asignado durante la ventana de seleccion.',
-                ['selection_window_id' => $selectionWindow?->id, 'student_ids' => $studentIds]
+                'Proyecto asignado durante la ventana de selección.',
+                ['selection_window_id' => $selectionWindow?->id, 'student_ids' => [$student->id]]
             );
 
             DB::commit();
         } catch (\Throwable $e) {
             DB::rollBack();
-
+            \Log::error('Error al asignar el proyecto: ' . $e->getMessage(), ['exception' => $e]);
             return back()->with('error', 'Error al asignar el proyecto. Intenta de nuevo.');
         }
 
-        // Disparar evento de notificación después del commit
         event(new ProjectIdeaEvaluated(
             $project->load(['students.user', 'professors.user']),
             'Asignado',

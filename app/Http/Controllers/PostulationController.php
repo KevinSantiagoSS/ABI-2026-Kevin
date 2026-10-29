@@ -63,10 +63,6 @@ class PostulationController extends Controller
         ->with('error', $this->academicProgress->blockedIdeaBankMessage($student, $activePeriod));
 }
 
-        if ($unavailable = $this->ensureProjectIsAvailable($project, $student)) {
-            return $unavailable;
-        }
-
         if ($unavailable = $this->ensureProjectIsPostulable($project, $student)) {
             return $unavailable;
         }
@@ -138,7 +134,7 @@ class PostulationController extends Controller
             return $unavailable;
         }
 
-        if ($unavailable = $this->ensureProjectIsAvailable($project, $student)) {
+        if ($unavailable = $this->ensureProjectIsPostulable($project, $student)) {
             return $unavailable;
         }
 
@@ -279,7 +275,7 @@ class PostulationController extends Controller
      * Aplica las mismas reglas del banco de ideas: ventana de selección abierta,
      * proyecto aprobado y perteneciente al programa del estudiante.
      */
-    private function ensureProjectIsPostulable(Project $project, Student $student): ?\Illuminate\Contracts\View\View
+    private function ensureProjectIsPostulable(Project $project, Student $student)
     {
         if (! AcademicCalendarService::currentWindowForProcess(AcademicProcessWindow::PROCESS_IDEA_SELECTION)) {
             return view(
@@ -288,8 +284,9 @@ class PostulationController extends Controller
             );
         }
 
-        if (! $project->isAvailableForStudent($student)) {
-            abort(403, 'Solo puedes postularte a ideas aprobadas de tu programa académico.');
+                if (! $project->isAvailableForStudent($student)) {
+            return redirect()->route('students.projects.approved.index')
+                ->with('error', 'Solo puedes postularte a ideas aprobadas de tu programa académico.');
         }
 
         return null;
