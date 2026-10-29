@@ -1,0 +1,7 @@
+<map id="App::Http::Controllers::ResearchStaffAcademicProcessWindow" name="App::Http::Controllers::ResearchStaffAcademicProcessWindow">
+<area shape="rect" id="Node000001" title=" " alt="" coords="18,549,241,678"/>
+<area shape="rect" id="Node000002" href="$classApp_1_1Models_1_1AcademicProcessWindow.html" title=" " alt="" coords="5,126,254,501"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="131,513,132,550,127,548,129,518"/>
+<area shape="rect" id="Node000003" href="$classModel.html" title=" " alt="" coords="104,5,155,78"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="130,90,132,126,127,126,130,95"/>
+</map>

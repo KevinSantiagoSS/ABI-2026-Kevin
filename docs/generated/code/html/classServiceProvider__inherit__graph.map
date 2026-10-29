@@ -1,0 +1,13 @@
+<map id="ServiceProvider" name="ServiceProvider">
+<area shape="rect" id="Node000001" title=" " alt="" coords="462,5,574,78"/>
+<area shape="rect" id="Node000002" href="$classApp_1_1Providers_1_1AppServiceProvider.html" title=" " alt="" coords="5,126,191,237"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="445,58,332,87,203,128,192,133,190,128,201,123,330,82,450,56"/>
+<area shape="rect" id="Node000003" href="$classApp_1_1Providers_1_1AuthServiceProvider.html" title=" " alt="" coords="215,137,406,226"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="456,85,377,139,374,135,451,87"/>
+<area shape="rect" id="Node000004" href="$classApp_1_1Providers_1_1BroadcastServiceProvider.html" title=" " alt="" coords="429,137,607,226"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="520,91,520,139,516,136,516,95"/>
+<area shape="rect" id="Node000005" href="$classApp_1_1Providers_1_1EventServiceProvider.html" title=" " alt="" coords="631,126,829,237"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="585,83,649,126,643,125,584,88"/>
+<area shape="rect" id="Node000006" href="$classApp_1_1Providers_1_1RouteServiceProvider.html" title=" " alt="" coords="854,126,1052,237"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="589,54,709,82,842,123,856,131,851,130,840,128,707,87,589,59"/>
+</map>

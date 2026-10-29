@@ -1,0 +1,197 @@
+<map id="Model" name="Model">
+<area shape="rect" id="Node000001" title=" " alt="" coords="6150,5,6200,78"/>
+<area shape="rect" id="Node000002" href="$classApp_1_1Models_1_1AcademicPeriod.html" title=" " alt="" coords="50,170,281,674"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="6132,43,5063,52,3185,68,2217,79,1375,93,768,110,588,119,508,128,445,158,386,197,331,241,283,286,279,283,328,237,382,193,442,154,506,123,587,113,768,104,1374,88,2216,74,3185,63,5063,47,6137,43"/>
+<area shape="rect" id="Node000004" href="$classApp_1_1Models_1_1AcademicProcessWindow.html" title=" " alt="" coords="518,235,767,610"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="6132,43,5128,51,3376,65,2474,76,1691,90,1127,107,960,117,886,128,850,149,816,175,757,237,753,233,813,171,847,145,885,123,960,112,1127,102,1691,85,2474,71,3376,60,5128,46,6137,43"/>
+<area shape="rect" id="Node000006" href="$classApp_1_1Models_1_1City.html" title=" " alt="" coords="898,364,1022,481"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="6132,43,5238,48,3682,58,2876,68,2166,83,1640,103,1474,115,1386,128,1331,149,1277,176,1176,238,1088,306,1019,366,1016,362,1084,302,1173,234,1275,171,1329,144,1385,123,1473,109,1640,97,2166,78,2875,63,3682,53,5238,42,6138,43"/>
+<area shape="rect" id="Node000010" href="$classApp_1_1Models_1_1CityProgram.html" title="city_program table model, manages communication with the database using the root user,..." alt="" coords="1397,342,1577,503"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="6132,43,5335,50,3968,64,3261,75,2640,89,2179,107,2034,117,1957,128,1903,147,1849,170,1747,226,1655,287,1578,346,1575,341,1651,283,1744,222,1847,166,1901,142,1956,123,2033,112,2179,101,2639,84,3261,70,3968,59,5335,45,6137,43"/>
+<area shape="rect" id="Node000014" href="$classApp_1_1Models_1_1Content.html" title="content table model, manages communication with the database using the root user, should not be used ..." alt="" coords="1968,353,2147,492"/>
+<area shape="poly" id="edge13_Node000001_Node000014" title=" " alt="" coords="6132,43,5445,53,4288,70,3691,82,3168,95,2780,111,2658,119,2593,128,2529,148,2466,173,2345,232,2237,297,2148,356,2146,351,2234,292,2343,228,2464,168,2528,143,2592,123,2657,114,2780,106,3168,90,3691,77,4288,65,5445,48,6137,43"/>
+<area shape="rect" id="Node000018" href="$classApp_1_1Models_1_1ContentFramework.html" title="content_frameworks table model, manages communication with the database using the root user,..." alt="" coords="2605,364,2828,481"/>
+<area shape="poly" id="edge17_Node000001_Node000018" title=" " alt="" coords="6132,43,5603,50,4727,63,4271,73,3860,87,3539,106,3425,116,3351,128,3274,149,3197,176,3048,239,2915,306,2808,366,2807,361,2913,301,3046,234,3195,171,3273,144,3350,123,3425,111,3538,100,3859,82,4270,68,4727,57,5603,45,6137,43"/>
+<area shape="rect" id="Node000022" href="$classApp_1_1Models_1_1ContentFrameworkProject.html" title="content_framework_project table model, manages communication with the database using the root user,..." alt="" coords="3364,333,3586,512"/>
+<area shape="poly" id="edge21_Node000001_Node000022" title=" " alt="" coords="6132,44,5722,53,5067,68,4728,79,4425,93,4188,109,4105,118,4050,128,3986,148,3921,171,3796,228,3683,289,3587,348,3585,343,3680,285,3794,223,3919,167,3984,143,4049,123,4104,113,4188,104,4424,88,4728,74,5067,63,5722,47,6137,43"/>
+<area shape="rect" id="Node000026" href="$classApp_1_1Models_1_1ContentVersion.html" title="content_version table model, manages communication with the database using the root user,..." alt="" coords="4061,364,4259,481"/>
+<area shape="poly" id="edge25_Node000001_Node000026" title=" " alt="" coords="6132,44,5822,55,5345,71,4884,96,4715,111,4656,119,4617,128,4559,150,4502,177,4395,239,4300,306,4225,366,4223,361,4297,302,4392,235,4500,172,4557,145,4615,123,4655,114,4714,106,4884,91,5345,66,5822,49,6137,43"/>
+<area shape="rect" id="Node000030" href="$classApp_1_1Models_1_1Department.html" title="departments table model, manages communication with the database using the root user,..." alt="" coords="4628,375,4804,470"/>
+<area shape="poly" id="edge29_Node000001_Node000030" title=" " alt="" coords="6132,43,5865,50,5467,62,5266,72,5088,86,4952,105,4905,116,4876,128,4845,152,4819,181,4795,213,4776,248,4747,316,4728,377,4724,373,4742,315,4771,245,4791,210,4814,178,4842,148,4873,123,4904,111,4951,100,5088,81,5266,67,5467,56,5865,44,6137,43"/>
+<area shape="rect" id="Node000034" href="$classApp_1_1Models_1_1FormatoCampo.html" title=" " alt="" coords="4888,364,5086,481"/>
+<area shape="poly" id="edge33_Node000001_Node000034" title=" " alt="" coords="6132,44,5906,51,5578,65,5414,75,5269,89,5159,107,5122,117,5099,128,5074,151,5052,179,5035,209,5021,241,5003,306,4992,366,4989,362,4997,305,5016,239,5030,207,5048,176,5070,147,5096,123,5120,112,5158,101,5269,84,5413,70,5578,59,5906,46,6137,43"/>
+<area shape="rect" id="Node000035" href="$classApp_1_1Models_1_1FormatoRegistro.html" title=" " alt="" coords="5110,353,5317,492"/>
+<area shape="poly" id="edge34_Node000001_Node000035" title=" " alt="" coords="6132,45,5951,55,5696,72,5570,83,5460,96,5376,111,5347,119,5330,128,5305,150,5285,176,5254,235,5234,297,5222,355,5218,351,5228,295,5249,233,5280,173,5302,146,5327,123,5345,114,5374,106,5459,90,5570,77,5696,66,5950,50,6137,44"/>
+<area shape="rect" id="Node000036" href="$classApp_1_1Models_1_1FormatoTipo.html" title=" " alt="" coords="5340,333,5521,512"/>
+<area shape="poly" id="edge35_Node000001_Node000036" title=" " alt="" coords="6132,43,6001,48,5821,58,5731,69,5648,83,5580,103,5554,115,5534,128,5513,148,5495,171,5467,224,5450,280,5439,335,5435,331,5444,279,5462,222,5490,168,5509,144,5531,124,5552,110,5579,98,5647,78,5730,64,5821,53,6000,42,6137,42"/>
+<area shape="rect" id="Node000037" href="$classApp_1_1Models_1_1FormatoValor.html" title=" " alt="" coords="5545,364,5730,481"/>
+<area shape="poly" id="edge36_Node000001_Node000037" title=" " alt="" coords="6132,46,6041,56,5925,72,5815,95,5773,110,5743,128,5719,152,5700,180,5670,243,5653,308,5643,366,5639,362,5647,307,5665,242,5695,178,5715,149,5740,124,5770,106,5814,90,5924,67,6041,51,6137,45"/>
+<area shape="rect" id="Node000038" href="$classApp_1_1Models_1_1Framework.html" title="framework table model, manages communication with the database using the root user,..." alt="" coords="5754,342,5932,503"/>
+<area shape="poly" id="edge37_Node000001_Node000038" title=" " alt="" coords="6137,46,6091,57,6040,72,5990,95,5967,110,5946,127,5909,176,5883,232,5865,289,5853,344,5849,340,5859,288,5878,230,5905,173,5942,124,5963,105,5987,90,6039,67,6090,52,6132,47"/>
+<area shape="rect" id="Node000042" href="$classApp_1_1Models_1_1InvestigationLine.html" title="investigation_lines table model, manages communication with the database using the root user,..." alt="" coords="5956,336,6167,509"/>
+<area shape="poly" id="edge41_Node000001_Node000042" title=" " alt="" coords="6162,90,6089,338,6085,334,6158,94"/>
+<area shape="rect" id="Node000046" href="$classApp_1_1Models_1_1LoadProjection.html" title=" " alt="" coords="6191,342,6386,503"/>
+<area shape="poly" id="edge45_Node000001_Node000046" title=" " alt="" coords="6191,90,6267,343,6262,340,6188,94"/>
+<area shape="rect" id="Node000048" href="$classApp_1_1Models_1_1Postulation.html" title=" " alt="" coords="6516,263,6698,581"/>
+<area shape="poly" id="edge47_Node000001_Node000048" title=" " alt="" coords="6215,48,6304,73,6353,95,6399,124,6434,154,6467,188,6523,264,6518,262,6463,192,6431,158,6396,128,6351,100,6302,78,6214,53"/>
+<area shape="rect" id="Node000052" href="$classApp_1_1Models_1_1PostulationMember.html" title=" " alt="" coords="7198,333,7370,512"/>
+<area shape="poly" id="edge51_Node000001_Node000052" title=" " alt="" coords="6215,42,6306,49,6430,63,6570,87,6641,103,6710,123,6849,176,6983,240,7103,306,7201,366,7196,365,7100,310,6981,245,6847,181,6709,128,6640,108,6569,92,6429,68,6305,54,6215,47"/>
+<area shape="rect" id="Node000056" href="$classApp_1_1Models_1_1PostulationPriority.html" title=" " alt="" coords="7970,344,8142,500"/>
+<area shape="poly" id="edge55_Node000001_Node000056" title=" " alt="" coords="6215,41,6442,48,6781,63,7129,87,7274,104,7382,123,7466,147,7551,175,7714,241,7858,310,7973,373,7968,371,7856,315,7712,246,7549,180,7465,152,7381,128,7273,109,7128,92,6781,68,6442,53,6215,46"/>
+<area shape="rect" id="Node000060" href="$classApp_1_1Models_1_1Professor.html" title="professors table model, manages communication with the database using the root user,..." alt="" coords="8679,342,8857,503"/>
+<area shape="poly" id="edge59_Node000001_Node000060" title=" " alt="" coords="6215,41,6602,49,7211,66,7806,90,8026,106,8103,114,8154,123,8229,145,8304,171,8449,234,8578,301,8682,365,8677,363,8575,306,8447,239,8302,176,8228,150,8153,128,8102,119,8025,111,7806,96,7210,71,6602,54,6215,46"/>
+<area shape="rect" id="Node000064" href="$classApp_1_1Models_1_1Program.html" title="program table model, manages communication with the database using the root user, should not be used ..." alt="" coords="9297,324,9450,520"/>
+<area shape="poly" id="edge63_Node000001_Node000064" title=" " alt="" coords="6215,40,6726,43,7561,53,7996,63,8387,78,8692,97,8800,109,8870,123,8932,144,8994,170,9111,231,9215,297,9299,360,9294,359,9212,301,9109,236,8992,175,8931,149,8869,128,8799,115,8692,103,8387,83,7996,69,7561,58,6726,48,6215,46"/>
+<area shape="rect" id="Node000068" href="$classApp_1_1Models_1_1Project.html" title=" " alt="" coords="9752,126,9970,719"/>
+<area shape="poly" id="edge67_Node000001_Node000068" title=" " alt="" coords="6215,40,6854,47,7915,62,8461,73,8939,87,9292,104,9404,113,9464,123,9545,159,9623,205,9693,257,9755,312,9750,310,9690,261,9620,210,9543,164,9462,128,9403,118,9292,109,8939,92,8460,79,7915,67,6854,52,6215,46"/>
+<area shape="rect" id="Node000072" href="$classApp_1_1Models_1_1ProjectStageHistory.html" title=" " alt="" coords="9995,344,10176,500"/>
+<area shape="poly" id="edge71_Node000001_Node000072" title=" " alt="" coords="6215,40,6962,46,8220,61,8862,72,9417,86,9815,103,9932,112,9984,123,10008,145,10029,170,10058,227,10076,287,10084,346,10080,343,10071,289,10053,229,10024,173,10005,148,9982,128,9931,118,9814,108,9417,91,8862,77,8220,66,6962,51,6215,46"/>
+<area shape="rect" id="Node000073" href="$classApp_1_1Models_1_1ProjectStatus.html" title="project_statuses table model, manages communication with the database using the root user,..." alt="" coords="10513,386,10698,458"/>
+<area shape="poly" id="edge72_Node000001_Node000073" title=" " alt="" coords="6215,40,6981,45,8281,58,8952,68,9541,83,9977,101,10116,111,10189,123,10250,147,10309,178,10365,212,10418,249,10509,323,10575,387,10570,385,10506,327,10415,254,10363,217,10306,182,10248,152,10187,128,10115,117,9977,106,9541,88,8952,74,8281,63,6981,50,6216,46"/>
+<area shape="rect" id="Node000077" href="$classApp_1_1Models_1_1ResearchGroup.html" title="research_groups table model, manages communication with the database using the root user,..." alt="" coords="11107,316,11304,529"/>
+<area shape="poly" id="edge76_Node000001_Node000077" title=" " alt="" coords="6215,40,7069,45,8540,58,9302,69,9972,83,10469,101,10626,111,10710,123,10767,142,10823,165,10930,220,11027,281,11109,342,11104,340,11024,285,10928,225,10821,170,10765,147,10709,128,10626,117,10469,106,9972,88,9302,74,8540,63,7069,50,6215,46"/>
+<area shape="rect" id="Node000081" href="$classApp_1_1Models_1_1ResearchStaff.html" title="research_staff table model, manages communication with the database using the root user,..." alt="" coords="11728,386,11917,458"/>
+<area shape="poly" id="edge80_Node000001_Node000081" title=" " alt="" coords="6215,40,7172,43,8843,55,9711,65,10475,80,11041,99,11221,110,11317,123,11388,147,11458,177,11526,212,11590,249,11702,323,11783,387,11778,385,11699,327,11587,253,11524,216,11456,182,11386,152,11316,128,11221,115,11041,104,10475,85,9711,70,8843,60,7172,49,6215,46"/>
+<area shape="rect" id="Node000085" href="$classApp_1_1Models_1_1Student.html" title="students table model, manages communication with the database using the root user,..." alt="" coords="12325,244,12520,601"/>
+<area shape="poly" id="edge84_Node000001_Node000085" title=" " alt="" coords="6215,40,7276,41,9148,50,10124,60,10983,75,11621,96,11823,108,11889,115,11930,123,11987,142,12043,165,12150,220,12247,281,12328,342,12323,341,12244,286,12147,225,12040,170,11985,147,11929,128,11888,121,11822,114,11620,101,10983,80,10124,66,9148,56,7276,47,6215,45"/>
+<area shape="rect" id="Node000089" href="$classApp_1_1Models_1_1TeacherAssignment.html" title=" " alt="" coords="12751,330,12977,514"/>
+<area shape="poly" id="edge88_Node000001_Node000089" title=" " alt="" coords="6215,40,7404,45,9514,59,10605,71,11554,85,12238,102,12441,112,12533,123,12573,141,12611,163,12682,215,12745,273,12797,331,12792,329,12741,276,12679,219,12608,167,12570,146,12531,128,12441,117,12237,107,11554,90,10604,76,9514,65,7404,51,6215,46"/>
+<area shape="rect" id="Node000091" href="$classApp_1_1Models_1_1ThematicArea.html" title="thematic_areas table model, manages communication with the database using the root user,..." alt="" coords="13204,336,13394,509"/>
+<area shape="poly" id="edge90_Node000001_Node000091" title=" " alt="" coords="6215,40,7482,44,9746,56,10918,67,11938,81,12673,100,12892,111,12957,117,12990,123,13029,142,13066,164,13135,218,13193,277,13242,337,13237,335,13190,281,13131,222,13063,169,13027,146,12989,128,12957,122,12892,116,12673,105,11938,87,10918,72,9746,62,7482,49,6215,46"/>
+<area shape="rect" id="Node000095" href="$classApp_1_1Models_1_1Version.html" title="version table model, manages communication with the database using the root user, should not be used ..." alt="" coords="13818,342,13964,503"/>
+<area shape="poly" id="edge94_Node000001_Node000095" title=" " alt="" coords="6215,40,7553,47,9955,63,11200,74,12284,88,13067,104,13301,113,13406,123,13467,144,13526,169,13640,230,13740,296,13820,360,13815,358,13737,301,13637,235,13524,174,13465,148,13405,128,13300,119,13067,110,12284,93,11200,80,9955,68,7553,52,6215,46"/>
+<area shape="rect" id="Node000003" href="$classApp_1_1Models_1_1ResearchStaff_1_1ResearchStaffAcademicPeriod.html" title=" " alt="" coords="5,820,219,932"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="136,687,121,821,116,820,132,691"/>
+<area shape="rect" id="Node000005" href="$classApp_1_1Models_1_1ResearchStaff_1_1ResearchStaffAcademicProcessWindow.html" title=" " alt="" coords="243,820,518,932"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="529,622,414,822,410,819,525,624"/>
+<area shape="rect" id="Node000007" href="$classApp_1_1Models_1_1Professor_1_1ProfessorCity.html" title="Extended model that routes city queries through the professor connection so faculty work inside their..." alt="" coords="542,820,701,932"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="929,493,867,606,826,666,781,721,764,736,748,746,715,769,665,823,662,818,712,765,745,742,760,732,777,717,822,662,862,603,925,496"/>
+<area shape="rect" id="Node000008" href="$classApp_1_1Models_1_1ResearchStaff_1_1ResearchStaffCity.html" title="Extended model that applies the research staff connection when retrieving city records so the limited..." alt="" coords="726,809,914,943"/>
+<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="940,494,843,811,838,808,936,497"/>
+<area shape="rect" id="Node000009" href="$classApp_1_1Models_1_1Student_1_1StudentCity.html" title="Extended model that limits city queries to the student connection so learners operate strictly within..." alt="" coords="939,820,1088,932"/>
+<area shape="poly" id="edge8_Node000006_Node000009" title=" " alt="" coords="971,494,1010,821,1005,820,967,498"/>
+<area shape="rect" id="Node000011" href="$classApp_1_1Models_1_1Professor_1_1ProfessorCityProgram.html" title="Extended model that reads city&#45;program data through the professor connection, limiting operations to ..." alt="" coords="1112,820,1272,932"/>
+<area shape="poly" id="edge10_Node000010_Node000011" title=" " alt="" coords="1429,514,1229,823,1226,818,1424,516"/>
+<area shape="rect" id="Node000012" href="$classApp_1_1Models_1_1ResearchStaff_1_1ResearchStaffCityProgram.html" title="Extended model that restricts city&#45;program lookups to the research staff connection,..." alt="" coords="1296,809,1486,943"/>
+<area shape="poly" id="edge11_Node000010_Node000012" title=" " alt="" coords="1469,516,1407,811,1403,808,1465,519"/>
+<area shape="rect" id="Node000013" href="$classApp_1_1Models_1_1Student_1_1StudentCityProgram.html" title="Extended model that accesses city&#45;program data through the student connection, maintaining the permis..." alt="" coords="1509,820,1659,932"/>
+<area shape="poly" id="edge12_Node000010_Node000013" title=" " alt="" coords="1509,516,1575,822,1570,819,1505,520"/>
+<area shape="rect" id="Node000015" href="$classApp_1_1Models_1_1Professor_1_1ProfessorContent.html" title="Extended model that routes content management through the professor connection, aligning with the per..." alt="" coords="1683,820,1843,932"/>
+<area shape="poly" id="edge14_Node000014_Node000015" title=" " alt="" coords="2007,503,1800,822,1797,818,2002,505"/>
+<area shape="rect" id="Node000016" href="$classApp_1_1Models_1_1ResearchStaff_1_1ResearchStaffContent.html" title="Extended model that routes content queries through the research staff connection to enforce the limit..." alt="" coords="1867,820,2056,932"/>
+<area shape="poly" id="edge15_Node000014_Node000016" title=" " alt="" coords="2042,505,1975,822,1971,819,2038,508"/>
+<area shape="rect" id="Node000017" href="$classApp_1_1Models_1_1Student_1_1StudentContent.html" title="Extended model that keeps content queries on the student connection so learners adhere to their restr..." alt="" coords="2080,820,2229,932"/>
+<area shape="poly" id="edge16_Node000014_Node000017" title=" " alt="" coords="2077,504,2145,822,2141,819,2074,508"/>
+<area shape="rect" id="Node000019" href="$classApp_1_1Models_1_1Professor_1_1ProfessorContentFramework.html" title="Extended model that channels content&#45;framework queries through the professor connection to respect fa..." alt="" coords="2253,820,2457,932"/>
+<area shape="poly" id="edge18_Node000018_Node000019" title=" " alt="" coords="2663,491,2400,823,2397,818,2659,494"/>
+<area shape="rect" id="Node000020" href="$classApp_1_1Models_1_1ResearchStaff_1_1ResearchStaffContentFramework.html" title="Extended model that keeps content&#45;framework queries within the research staff connection so permissio..." alt="" coords="2481,820,2714,932"/>
+<area shape="poly" id="edge19_Node000018_Node000020" title=" " alt="" coords="2699,494,2614,822,2610,819,2695,497"/>
+<area shape="rect" id="Node000021" href="$classApp_1_1Models_1_1Student_1_1StudentContentFramework.html" title="Extended model that keeps content&#45;framework operations on the student connection, aligning actions wi..." alt="" coords="2738,820,2931,932"/>
+<area shape="poly" id="edge20_Node000018_Node000021" title=" " alt="" coords="2737,493,2823,822,2818,819,2733,497"/>
+<area shape="rect" id="Node000023" href="$classApp_1_1Models_1_1Professor_1_1ProfessorContentFrameworkProject.html" title="Extended model that executes content&#45;framework&#45;project operations via the professor connection,..." alt="" coords="2956,820,3204,932"/>
+<area shape="poly" id="edge22_Node000022_Node000023" title=" " alt="" coords="3391,522,3129,823,3126,818,3386,524"/>
+<area shape="rect" id="Node000024" href="$classApp_1_1Models_1_1ResearchStaff_1_1ResearchStaffContentFrameworkProject.html" title="Extended model that limits content&#45;framework&#45;project access to the research staff connection,..." alt="" coords="3229,812,3462,940"/>
+<area shape="poly" id="edge23_Node000022_Node000024" title=" " alt="" coords="3448,524,3365,814,3362,810,3443,527"/>
+<area shape="rect" id="Node000025" href="$classApp_1_1Models_1_1Student_1_1StudentContentFrameworkProject.html" title="Extended model that executes content&#45;framework&#45;project queries on the student connection to respect t..." alt="" coords="3485,820,3723,932"/>
+<area shape="poly" id="edge24_Node000022_Node000025" title=" " alt="" coords="3506,523,3591,822,3586,819,3502,528"/>
+<area shape="rect" id="Node000027" href="$classApp_1_1Models_1_1Professor_1_1ProfessorContentVersion.html" title="Extended model that keeps content&#45;version access on the professor connection so updates respect the r..." alt="" coords="3747,820,3926,932"/>
+<area shape="poly" id="edge26_Node000026_Node000027" title=" " alt="" coords="4113,492,3877,823,3874,818,4108,494"/>
+<area shape="rect" id="Node000028" href="$classApp_1_1Models_1_1ResearchStaff_1_1ResearchStaffContentVersion.html" title="Extended model that keeps content&#45;version queries on the research staff connection,..." alt="" coords="3950,820,4157,932"/>
+<area shape="poly" id="edge27_Node000026_Node000028" title=" " alt="" coords="4145,494,4068,822,4064,819,4141,497"/>
+<area shape="rect" id="Node000029" href="$classApp_1_1Models_1_1Student_1_1StudentContentVersion.html" title="Extended model that keeps content&#45;version access on the student connection so permissions remain alig..." alt="" coords="4182,820,4349,932"/>
+<area shape="poly" id="edge28_Node000026_Node000029" title=" " alt="" coords="4179,493,4255,822,4251,819,4175,497"/>
+<area shape="rect" id="Node000031" href="$classApp_1_1Models_1_1Professor_1_1ProfessorDepartment.html" title="Extended model that keeps department access on the professor connection so faculty operate under thei..." alt="" coords="4374,820,4533,932"/>
+<area shape="poly" id="edge30_Node000030_Node000031" title=" " alt="" coords="4684,481,4487,823,4484,818,4680,484"/>
+<area shape="rect" id="Node000032" href="$classApp_1_1Models_1_1ResearchStaff_1_1ResearchStaffDepartment.html" title="Extended model that confines department access to the research staff connection, ensuring the scoped ..." alt="" coords="4558,820,4746,932"/>
+<area shape="poly" id="edge31_Node000030_Node000032" title=" " alt="" coords="4710,483,4662,822,4658,819,4705,486"/>
+<area shape="rect" id="Node000033" href="$classApp_1_1Models_1_1Student_1_1StudentDepartment.html" title="Extended model that restricts department records to the student connection, making sure learners only..." alt="" coords="4771,820,4920,932"/>
+<area shape="poly" id="edge32_Node000030_Node000033" title=" " alt="" coords="4735,482,4832,822,4828,819,4732,486"/>
+<area shape="rect" id="Node000039" href="$classApp_1_1Models_1_1Professor_1_1ProfessorFramework.html" title="Extended model that ensures framework queries go through the professor connection,..." alt="" coords="4944,820,5104,932"/>
+<area shape="poly" id="edge38_Node000038_Node000039" title=" " alt="" coords="5839,516,5830,572,5812,627,5784,678,5766,701,5744,721,5720,735,5690,746,5616,756,5529,758,5435,754,5340,749,5251,748,5175,753,5143,760,5117,769,5085,793,5058,823,5056,818,5082,789,5115,765,5142,754,5174,748,5251,742,5340,744,5435,749,5529,752,5616,751,5689,740,5718,731,5741,717,5762,698,5780,676,5807,625,5825,570,5835,520"/>
+<area shape="rect" id="Node000040" href="$classApp_1_1Models_1_1ResearchStaff_1_1ResearchStaffFramework.html" title="Extended model that channels framework operations through the research staff connection to honor the ..." alt="" coords="5128,820,5317,932"/>
+<area shape="poly" id="edge39_Node000038_Node000040" title=" " alt="" coords="5839,516,5829,572,5811,626,5784,678,5766,701,5745,721,5718,740,5692,754,5666,762,5641,767,5592,767,5544,759,5495,750,5444,744,5390,749,5361,757,5331,769,5295,793,5265,823,5262,818,5292,789,5328,765,5359,752,5389,744,5444,739,5496,744,5545,754,5593,761,5641,762,5665,757,5690,749,5715,736,5741,717,5762,697,5779,675,5806,624,5824,570,5835,520"/>
+<area shape="rect" id="Node000041" href="$classApp_1_1Models_1_1Student_1_1StudentFramework.html" title="Extended model that executes framework operations on the student connection, aligning with the role&#39;s..." alt="" coords="5342,820,5490,932"/>
+<area shape="poly" id="edge40_Node000038_Node000041" title=" " alt="" coords="5837,516,5827,571,5809,625,5782,677,5765,700,5745,721,5714,742,5684,751,5656,754,5627,751,5568,748,5537,754,5504,769,5475,793,5449,823,5447,818,5471,789,5501,765,5536,749,5568,743,5627,746,5656,748,5683,746,5712,737,5741,717,5761,697,5778,674,5804,623,5822,569,5833,519"/>
+<area shape="rect" id="Node000043" href="$classApp_1_1Models_1_1Professor_1_1ProfessorInvestigationLine.html" title="Extended model that limits investigation line access to the professor connection, matching the permis..." alt="" coords="5515,820,5707,932"/>
+<area shape="poly" id="edge42_Node000042_Node000043" title=" " alt="" coords="6049,522,6035,576,6014,629,5985,679,5946,721,5917,740,5889,750,5862,753,5836,752,5781,751,5752,756,5720,769,5686,793,5655,823,5653,818,5682,789,5718,765,5750,751,5781,746,5836,747,5862,748,5888,745,5915,736,5942,717,5980,675,6009,626,6030,574,6044,525"/>
+<area shape="rect" id="Node000044" href="$classApp_1_1Models_1_1ResearchStaff_1_1ResearchStaffInvestigationLine.html" title="Extended model that keeps investigation line queries within the research staff connection,..." alt="" coords="5731,820,5952,932"/>
+<area shape="poly" id="edge43_Node000042_Node000044" title=" " alt="" coords="6030,521,5993,620,5947,720,5916,773,5882,823,5880,818,5911,771,5942,718,5988,618,6026,524"/>
+<area shape="rect" id="Node000045" href="$classApp_1_1Models_1_1Student_1_1StudentInvestigationLine.html" title="Extended model that restricts investigation line queries to the student connection,..." alt="" coords="5976,820,6157,932"/>
+<area shape="poly" id="edge44_Node000042_Node000045" title=" " alt="" coords="6065,522,6068,822,6064,819,6061,525"/>
+<area shape="rect" id="Node000047" href="$classApp_1_1Models_1_1ResearchStaff_1_1ResearchStaffLoadProjection.html" title=" " alt="" coords="6182,820,6386,932"/>
+<area shape="poly" id="edge46_Node000046_Node000047" title=" " alt="" coords="6289,516,6287,822,6283,819,6285,519"/>
+<area shape="rect" id="Node000049" href="$classApp_1_1Models_1_1Professors_1_1ResearchStaffPostularion.html" title=" " alt="" coords="6411,820,6592,932"/>
+<area shape="poly" id="edge48_Node000048_Node000049" title=" " alt="" coords="6569,594,6516,822,6512,818,6565,597"/>
+<area shape="rect" id="Node000050" href="$classApp_1_1Models_1_1ResearchStaff_1_1ResearchStaffPostularion.html" title=" " alt="" coords="6616,820,6805,932"/>
+<area shape="poly" id="edge49_Node000048_Node000050" title=" " alt="" coords="6648,593,6700,822,6696,819,6645,598"/>
+<area shape="rect" id="Node000051" href="$classApp_1_1Models_1_1Student_1_1ResearchStaffPostularion.html" title=" " alt="" coords="6829,820,7011,932"/>
+<area shape="poly" id="edge50_Node000048_Node000051" title=" " alt="" coords="6707,564,6885,822,6880,819,6705,569"/>
+<area shape="rect" id="Node000053" href="$classApp_1_1Models_1_1Professor_1_1ResearchStaffPostulationMember.html" title=" " alt="" coords="7036,820,7271,932"/>
+<area shape="poly" id="edge52_Node000052_Node000053" title=" " alt="" coords="7257,524,7171,823,7167,819,7253,527"/>
+<area shape="rect" id="Node000054" href="$classApp_1_1Models_1_1ResearchStaff_1_1ResearchStaffPostulationMember.html" title=" " alt="" coords="7296,820,7531,932"/>
+<area shape="poly" id="edge53_Node000052_Node000054" title=" " alt="" coords="7315,523,7400,822,7396,819,7312,528"/>
+<area shape="rect" id="Node000055" href="$classApp_1_1Models_1_1Student_1_1ResearchStaffPostulationMember.html" title=" " alt="" coords="7556,820,7791,932"/>
+<area shape="poly" id="edge54_Node000052_Node000055" title=" " alt="" coords="7371,520,7629,822,7624,820,7369,525"/>
+<area shape="rect" id="Node000057" href="$classApp_1_1Models_1_1Professor_1_1ResearchStaffPostulationPriority.html" title=" " alt="" coords="7815,820,8044,932"/>
+<area shape="poly" id="edge56_Node000056_Node000057" title=" " alt="" coords="8033,513,7946,823,7943,818,8029,516"/>
+<area shape="rect" id="Node000058" href="$classApp_1_1Models_1_1ResearchStaff_1_1ResearchStaffPostulationPriority.html" title=" " alt="" coords="8068,820,8297,932"/>
+<area shape="poly" id="edge57_Node000056_Node000058" title=" " alt="" coords="8083,512,8170,822,8165,819,8080,517"/>
+<area shape="rect" id="Node000059" href="$classApp_1_1Models_1_1Student_1_1ResearchStaffPostulationPriority.html" title=" " alt="" coords="8322,820,8550,932"/>
+<area shape="poly" id="edge58_Node000056_Node000059" title=" " alt="" coords="8131,509,8393,822,8388,819,8129,514"/>
+<area shape="rect" id="Node000061" href="$classApp_1_1Models_1_1Professor_1_1ProfessorProfessor.html" title="Extended model that enforces the professor connection while accessing the professors table,..." alt="" coords="8575,820,8753,932"/>
+<area shape="poly" id="edge60_Node000060_Node000061" title=" " alt="" coords="8749,516,8678,823,8675,818,8744,519"/>
+<area shape="rect" id="Node000062" href="$classApp_1_1Models_1_1ResearchStaff_1_1ResearchStaffProfessor.html" title="Extended model that forces the research staff connection when accessing professor data,..." alt="" coords="8778,820,8966,932"/>
+<area shape="poly" id="edge61_Node000060_Node000062" title=" " alt="" coords="8792,516,8862,822,8858,819,8788,520"/>
+<area shape="rect" id="Node000063" href="$classApp_1_1Models_1_1Student_1_1StudentProfessor.html" title="Extended model that restricts professor lookups to the student connection so learners interact only w..." alt="" coords="8991,820,9169,932"/>
+<area shape="poly" id="edge62_Node000060_Node000063" title=" " alt="" coords="8833,513,9045,822,9040,819,8830,518"/>
+<area shape="rect" id="Node000065" href="$classApp_1_1Models_1_1Professor_1_1ProfessorProgram.html" title="Extended model that keeps program operations under the professor connection, ensuring faculty stay wi..." alt="" coords="9194,820,9353,932"/>
+<area shape="poly" id="edge64_Node000064_Node000065" title=" " alt="" coords="9351,533,9287,822,9284,818,9347,536"/>
+<area shape="rect" id="Node000066" href="$classApp_1_1Models_1_1ResearchStaff_1_1ResearchStaffProgram.html" title="Extended model that keeps program queries under the research staff connection so actions respect thei..." alt="" coords="9378,767,9566,985"/>
+<area shape="poly" id="edge65_Node000064_Node000066" title=" " alt="" coords="9399,533,9451,769,9447,766,9396,537"/>
+<area shape="rect" id="Node000067" href="$classApp_1_1Models_1_1Student_1_1StudentProgram.html" title="Extended model that executes program queries using the student connection, preventing operations outs..." alt="" coords="9591,820,9740,932"/>
+<area shape="poly" id="edge66_Node000064_Node000067" title=" " alt="" coords="9445,530,9633,821,9628,819,9443,535"/>
+<area shape="rect" id="Node000069" href="$classApp_1_1Models_1_1Professor_1_1ProfessorProject.html" title="Extended model that routes queries through the professor connection so professors and committee leade..." alt="" coords="9764,809,9958,943"/>
+<area shape="poly" id="edge68_Node000068_Node000069" title=" " alt="" coords="9863,732,9863,811,9860,807,9860,736"/>
+<area shape="rect" id="Node000070" href="$classApp_1_1Models_1_1ResearchStaff_1_1ResearchStaffProject.html" title="Extended model that forces the research staff database connection so the role operates under its rest..." alt="" coords="9983,809,10177,943"/>
+<area shape="poly" id="edge69_Node000068_Node000070" title=" " alt="" coords="9979,706,9985,718,10038,810,10033,808,9980,720,9976,710"/>
+<area shape="rect" id="Node000071" href="$classApp_1_1Models_1_1Student_1_1StudentProject.html" title="Extended model that leverages the student connection so learners access only the permissions granted ..." alt="" coords="10202,809,10396,943"/>
+<area shape="poly" id="edge70_Node000068_Node000071" title=" " alt="" coords="9982,715,9984,717,10010,734,10034,743,10058,746,10082,746,10133,746,10161,752,10191,765,10220,784,10247,810,10242,808,10217,788,10188,769,10159,757,10132,752,10082,752,10058,752,10033,748,10008,739,9981,721,9980,720"/>
+<area shape="rect" id="Node000074" href="$classApp_1_1Models_1_1Professor_1_1ProfessorProjectStatus.html" title="Extended model that performs project status queries via the professor connection so catalog reads adh..." alt="" coords="10420,820,10586,932"/>
+<area shape="poly" id="edge73_Node000073_Node000074" title=" " alt="" coords="10596,471,10517,822,10513,818,10592,475"/>
+<area shape="rect" id="Node000075" href="$classApp_1_1Models_1_1ResearchStaff_1_1ResearchStaffProjectStatus.html" title="Extended model that binds project status lookups to the research staff connection so catalog queries ..." alt="" coords="10610,820,10804,932"/>
+<area shape="poly" id="edge74_Node000073_Node000075" title=" " alt="" coords="10618,471,10697,822,10692,819,10615,475"/>
+<area shape="rect" id="Node000076" href="$classApp_1_1Models_1_1Student_1_1StudentProjectStatus.html" title="Extended model that keeps project status reads on the student connection to respect the privileges as..." alt="" coords="10828,820,10983,932"/>
+<area shape="poly" id="edge75_Node000073_Node000076" title=" " alt="" coords="10638,469,10872,822,10867,819,10636,473"/>
+<area shape="rect" id="Node000078" href="$classApp_1_1Models_1_1Professor_1_1ProfessorResearchGroup.html" title="Extended model that funnels research group queries through the professor connection to respect the pe..." alt="" coords="11007,820,11186,932"/>
+<area shape="poly" id="edge77_Node000077_Node000078" title=" " alt="" coords="11179,541,11111,823,11108,819,11174,545"/>
+<area shape="rect" id="Node000079" href="$classApp_1_1Models_1_1ResearchStaff_1_1ResearchStaffResearchGroup.html" title="Extended model that executes research group queries via the research staff connection to match the pe..." alt="" coords="11210,820,11417,932"/>
+<area shape="poly" id="edge78_Node000077_Node000079" title=" " alt="" coords="11236,541,11303,822,11298,819,11232,545"/>
+<area shape="rect" id="Node000080" href="$classApp_1_1Models_1_1Student_1_1StudentResearchGroup.html" title="Extended model that queries research groups through the student connection so learners stay within th..." alt="" coords="11442,820,11609,932"/>
+<area shape="poly" id="edge79_Node000077_Node000080" title=" " alt="" coords="11289,538,11490,822,11485,819,11287,543"/>
+<area shape="rect" id="Node000082" href="$classApp_1_1Models_1_1Professor_1_1ProfessorResearchStaff.html" title="Extended model that keeps research staff access bound to the professor connection,..." alt="" coords="11634,820,11804,932"/>
+<area shape="poly" id="edge81_Node000081_Node000082" title=" " alt="" coords="11814,471,11733,822,11730,818,11809,475"/>
+<area shape="rect" id="Node000083" href="$classApp_1_1Models_1_1ResearchStaff_1_1ResearchStaffResearchStaff.html" title="Extended model that forces the research staff connection while reading research staff records,..." alt="" coords="11828,820,12026,932"/>
+<area shape="poly" id="edge82_Node000081_Node000083" title=" " alt="" coords="11836,471,11916,822,11912,819,11833,475"/>
+<area shape="rect" id="Node000084" href="$classApp_1_1Models_1_1Student_1_1StudentResearchStaff.html" title="Extended model that queries research staff through the student connection, keeping access limited to ..." alt="" coords="12050,820,12209,932"/>
+<area shape="poly" id="edge83_Node000081_Node000084" title=" " alt="" coords="11856,468,12095,822,12090,819,11853,473"/>
+<area shape="rect" id="Node000086" href="$classApp_1_1Models_1_1Professor_1_1ProfessorStudent.html" title="Extended model that keeps student lookups under the professor connection so assigned faculty only acc..." alt="" coords="12232,820,12410,932"/>
+<area shape="poly" id="edge85_Node000085_Node000086" title=" " alt="" coords="12382,614,12335,822,12332,818,12378,617"/>
+<area shape="rect" id="Node000087" href="$classApp_1_1Models_1_1ResearchStaff_1_1ResearchStaffStudent.html" title="Extended model that ensures student queries run on the research staff connection, preserving the limi..." alt="" coords="12435,820,12624,932"/>
+<area shape="poly" id="edge86_Node000085_Node000087" title=" " alt="" coords="12470,613,12519,822,12515,819,12467,618"/>
+<area shape="rect" id="Node000088" href="$classApp_1_1Models_1_1Student_1_1StudentStudent.html" title="Extended model that keeps the student connection active so database permissions remain aligned with t..." alt="" coords="12648,820,12826,932"/>
+<area shape="poly" id="edge87_Node000085_Node000088" title=" " alt="" coords="12530,573,12702,822,12697,819,12528,578"/>
+<area shape="rect" id="Node000090" href="$classApp_1_1Models_1_1ResearchStaff_1_1ResearchStaffTeacherAssignment.html" title=" " alt="" coords="12850,820,13086,932"/>
+<area shape="poly" id="edge89_Node000089_Node000090" title=" " alt="" coords="12890,527,12958,822,12954,819,12887,531"/>
+<area shape="rect" id="Node000092" href="$classApp_1_1Models_1_1Professor_1_1ProfessorThematicArea.html" title="Extended model that ensures thematic area reads occur through the professor connection so catalog acc..." alt="" coords="13110,820,13280,932"/>
+<area shape="poly" id="edge91_Node000091_Node000092" title=" " alt="" coords="13278,522,13209,823,13206,819,13274,525"/>
+<area shape="rect" id="Node000093" href="$classApp_1_1Models_1_1ResearchStaff_1_1ResearchStaffThematicArea.html" title="Extended model that reuses the research staff connection when fetching thematic areas,..." alt="" coords="13304,820,13504,932"/>
+<area shape="poly" id="edge92_Node000091_Node000093" title=" " alt="" coords="13324,521,13394,822,13389,819,13320,525"/>
+<area shape="rect" id="Node000094" href="$classApp_1_1Models_1_1Student_1_1StudentThematicArea.html" title="Extended model that keeps thematic area queries limited to the student connection so learners read on..." alt="" coords="13528,820,13688,932"/>
+<area shape="poly" id="edge93_Node000091_Node000094" title=" " alt="" coords="13367,519,13574,822,13569,819,13364,523"/>
+<area shape="rect" id="Node000096" href="$classApp_1_1Models_1_1Professor_1_1ProfessorVersion.html" title="Extended model that ensures version records are handled via the professor connection,..." alt="" coords="13712,820,13872,932"/>
+<area shape="poly" id="edge95_Node000095_Node000096" title=" " alt="" coords="13872,516,13806,823,13802,818,13868,519"/>
+<area shape="rect" id="Node000097" href="$classApp_1_1Models_1_1ResearchStaff_1_1ResearchStaffVersion.html" title="Extended model that enforces the research staff connection when handling version records so they stay..." alt="" coords="13896,820,14085,932"/>
+<area shape="poly" id="edge96_Node000095_Node000097" title=" " alt="" coords="13913,516,13981,822,13977,819,13910,520"/>
+<area shape="rect" id="Node000098" href="$classApp_1_1Models_1_1Student_1_1StudentVersion.html" title="Extended model that forces the student connection for version records so learners operate under their..." alt="" coords="14110,820,14258,932"/>
+<area shape="poly" id="edge97_Node000095_Node000098" title=" " alt="" coords="13952,513,14151,822,14147,819,13949,518"/>
+</map>

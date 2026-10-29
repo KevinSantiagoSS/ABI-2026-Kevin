@@ -1,7 +1,7 @@
 <map id="App::Providers::RouteServiceProvider" name="App::Providers::RouteServiceProvider">
-<area shape="rect" id="Node000001" title=" " alt="" coords="15,133,218,233"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,121,71"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="82,83,101,132,96,134,77,85"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="145,5,195,71"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="161,72,143,119,138,117,156,70"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="13,151,212,262"/>
+<area shape="rect" id="Node000002" href="$classServiceProvider.html" title=" " alt="" coords="5,5,118,78"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="78,90,98,151,93,151,76,94"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="142,5,187,78"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="155,76,137,136,132,134,152,80"/>
 </map>

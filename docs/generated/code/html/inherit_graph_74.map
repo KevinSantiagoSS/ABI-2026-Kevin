@@ -1,0 +1,5 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" href="$classRuntimeException.html" title=" " alt="" coords="5,14,146,42"/>
+<area shape="rect" id="Node000001" href="$classApp_1_1Services_1_1Projects_1_1Exceptions_1_1ProjectIdeaException.html" title="Domain specific exception used to bubble business rule violations to the controllers." alt="" coords="194,5,439,50"/>
+<area shape="poly" id="edge171_Node000000_Node000001" title=" " alt="" coords="161,25,196,27,191,28,161,30"/>
+</map>

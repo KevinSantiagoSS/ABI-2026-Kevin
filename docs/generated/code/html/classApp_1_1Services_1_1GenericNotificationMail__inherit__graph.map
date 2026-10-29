@@ -1,0 +1,5 @@
+<map id="App::Services::GenericNotificationMail" name="App::Services::GenericNotificationMail">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,126,265,316"/>
+<area shape="rect" id="Node000002" href="$classMailable.html" title=" " alt="" coords="102,5,168,78"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="136,90,138,127,133,125,134,95"/>
+</map>

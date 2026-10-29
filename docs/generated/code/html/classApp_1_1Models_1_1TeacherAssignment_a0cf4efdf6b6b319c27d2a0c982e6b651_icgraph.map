@@ -1,7 +1,10 @@
 <map id="App::Models::TeacherAssignment::program" name="App::Models::TeacherAssignment::program">
-<area shape="rect" id="Node000001" title=" " alt="" coords="360,53,597,93"/>
-<area shape="rect" id="Node000002" href="$classApp_1_1Http_1_1Controllers_1_1ProjectionProfessorController.html#a8392be9d98b313ad3b86a5481a4a2bcc" title=" " alt="" coords="16,5,301,60"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="346,59,301,53,302,48,347,53"/>
-<area shape="rect" id="Node000003" href="$classApp_1_1Http_1_1Controllers_1_1ProjectionProfessorController.html#a89aa3cb8190669296babfe1e8bafbcca" title=" " alt="" coords="5,84,312,139"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="346,91,312,95,312,90,346,86"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="699,56,935,101"/>
+<area shape="rect" id="Node000002" href="$classApp_1_1Http_1_1Controllers_1_1ProjectionProfessorController.html#a8392be9d98b313ad3b86a5481a4a2bcc" title=" " alt="" coords="356,5,640,67"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="681,61,641,58,641,53,686,61"/>
+<area shape="rect" id="Node000004" href="$classApp_1_1Http_1_1Controllers_1_1ProjectionProfessorController.html#a89aa3cb8190669296babfe1e8bafbcca" title=" " alt="" coords="345,91,651,152"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="686,96,652,104,651,98,681,97"/>
+<area shape="rect" id="Node000003" href="$classApp_1_1Http_1_1Controllers_1_1ProjectionProfessorController.html#a8413e0b8150c938c1225f47f9b56db80" title=" " alt="" coords="5,48,297,110"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="338,56,298,63,297,58,343,55"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="326,101,297,99,297,94,332,101"/>
 </map>

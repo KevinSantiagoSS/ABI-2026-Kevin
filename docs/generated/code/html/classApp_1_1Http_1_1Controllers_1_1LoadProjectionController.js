@@ -1,7 +1,6 @@
 var classApp_1_1Http_1_1Controllers_1_1LoadProjectionController =
 [
     [ "__construct", "classApp_1_1Http_1_1Controllers_1_1LoadProjectionController.html#a59dcddfe6b8fc47697881d895d899deb", null ],
-    [ "academicProcessUnavailableView", "classApp_1_1Http_1_1Controllers_1_1LoadProjectionController.html#a5737da7f2852861bc3eae90310c17ab4", null ],
     [ "buildLoadHoursReportState", "classApp_1_1Http_1_1Controllers_1_1LoadProjectionController.html#abf48c3fa25f17b4fde7b75d983a183b6", null ],
     [ "buildLoadProjectionReportState", "classApp_1_1Http_1_1Controllers_1_1LoadProjectionController.html#a99332b8076a1493b508dc02fdffaaf4c", null ],
     [ "buildLoadStageMixReportState", "classApp_1_1Http_1_1Controllers_1_1LoadProjectionController.html#aafc03d47569f9809d3e51d7c57a943de", null ],

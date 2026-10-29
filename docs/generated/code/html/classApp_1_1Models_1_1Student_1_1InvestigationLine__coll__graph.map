@@ -1,0 +1,5 @@
+<map id="App::Models::Student::InvestigationLine" name="App::Models::Student::InvestigationLine">
+<area shape="rect" id="Node000001" title="investigation_lines table model, manages communication with the database using the root user,..." alt="" coords="5,126,183,316"/>
+<area shape="rect" id="Node000002" href="$classModel.html" title=" " alt="" coords="69,5,120,78"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="95,90,97,126,92,126,94,95"/>
+</map>

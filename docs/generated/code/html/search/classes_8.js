@@ -1,9 +1,9 @@
 var searchData=
 [
-  ['ideademandcontroller_0',['IdeaDemandController',['../classApp_1_1Http_1_1Controllers_1_1IdeaDemandController.html',1,'App::Http::Controllers']]],
-  ['ideademandprojectionservice_1',['IdeaDemandProjectionService',['../classApp_1_1Services_1_1Projections_1_1IdeaDemandProjectionService.html',1,'App::Services::Projections']]],
+  ['ideademandcontroller_0',['IdeaDemandController',['../classApp_1_1Http_1_1Controllers_1_1IdeaDemandController.html',1,'App::Http::Controllers::IdeaDemandController'],['../classIdeaDemandController.html',1,'IdeaDemandController']]],
+  ['ideademandprojectionservice_1',['IdeaDemandProjectionService',['../classApp_1_1Http_1_1Controllers_1_1IdeaDemandProjectionService.html',1,'App::Http::Controllers::IdeaDemandProjectionService'],['../classApp_1_1Services_1_1Projections_1_1IdeaDemandProjectionService.html',1,'App::Services::Projections::IdeaDemandProjectionService']]],
   ['illuminate_2',['Illuminate',['../classIlluminate.html',1,'']]],
-  ['investigationline_3',['InvestigationLine',['../classApp_1_1Models_1_1InvestigationLine.html',1,'App::Models']]],
-  ['investigationlinecontroller_4',['InvestigationLineController',['../classApp_1_1Http_1_1Controllers_1_1InvestigationLineController.html',1,'App::Http::Controllers']]],
+  ['investigationline_3',['InvestigationLine',['../classApp_1_1Http_1_1Controllers_1_1InvestigationLine.html',1,'App::Http::Controllers::InvestigationLine'],['../classApp_1_1Models_1_1InvestigationLine.html',1,'App::Models::InvestigationLine'],['../classApp_1_1Models_1_1Professor_1_1InvestigationLine.html',1,'App::Models::Professor::InvestigationLine'],['../classApp_1_1Models_1_1ResearchStaff_1_1InvestigationLine.html',1,'App::Models::ResearchStaff::InvestigationLine'],['../classApp_1_1Models_1_1Student_1_1InvestigationLine.html',1,'App::Models::Student::InvestigationLine'],['../classApp_1_1Services_1_1Projects_1_1InvestigationLine.html',1,'App::Services::Projects::InvestigationLine']]],
+  ['investigationlinecontroller_4',['InvestigationLineController',['../classApp_1_1Http_1_1Controllers_1_1InvestigationLineController.html',1,'App::Http::Controllers::InvestigationLineController'],['../classInvestigationLineController.html',1,'InvestigationLineController']]],
   ['investigationlinestableseeder_5',['InvestigationLinesTableSeeder',['../classDatabase_1_1Seeders_1_1InvestigationLinesTableSeeder.html',1,'Database::Seeders']]]
 ];

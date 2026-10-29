@@ -1,6 +1,5 @@
 var classApp_1_1Http_1_1Controllers_1_1Api_1_1ProjectApiController =
 [
-    [ "academicProcessUnavailableView", "classApp_1_1Http_1_1Controllers_1_1Api_1_1ProjectApiController.html#a5737da7f2852861bc3eae90310c17ab4", null ],
     [ "destroy", "classApp_1_1Http_1_1Controllers_1_1Api_1_1ProjectApiController.html#aa29f0fa9d8cd374259c22fae513967c0", null ],
     [ "index", "classApp_1_1Http_1_1Controllers_1_1Api_1_1ProjectApiController.html#ae9f60c9e75c31a2cc926d301604f39d1", null ],
     [ "meta", "classApp_1_1Http_1_1Controllers_1_1Api_1_1ProjectApiController.html#a53e33056d09a48387d6f76f7df38e35c", null ],

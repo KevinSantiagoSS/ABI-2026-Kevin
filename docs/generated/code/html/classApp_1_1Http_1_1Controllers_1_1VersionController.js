@@ -1,6 +1,5 @@
 var classApp_1_1Http_1_1Controllers_1_1VersionController =
 [
-    [ "academicProcessUnavailableView", "classApp_1_1Http_1_1Controllers_1_1VersionController.html#a5737da7f2852861bc3eae90310c17ab4", null ],
     [ "destroy", "classApp_1_1Http_1_1Controllers_1_1VersionController.html#a570b2924e90956b8c92dc65bc3d9a1ad", null ],
     [ "index", "classApp_1_1Http_1_1Controllers_1_1VersionController.html#a27f2b7fb14d7e2fe6ce6bd2d1f11fb3f", null ],
     [ "restore", "classApp_1_1Http_1_1Controllers_1_1VersionController.html#a5e0b05d4d71441ce62a8a3c844ccf9ed", null ],

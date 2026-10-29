@@ -1,0 +1,7 @@
+<map id="TeacherLoadController" name="TeacherLoadController">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,263,293,409"/>
+<area shape="rect" id="Node000002" href="$classApp_1_1Http_1_1Controllers_1_1Controller.html" title=" " alt="" coords="74,126,225,215"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="151,228,152,264,147,263,148,233"/>
+<area shape="rect" id="Node000003" href="$classBaseController.html" title=" " alt="" coords="96,5,203,78"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="150,90,152,126,147,125,149,96"/>
+</map>

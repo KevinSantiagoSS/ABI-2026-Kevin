@@ -1,0 +1,7 @@
+<map id="App::Http::Controllers::ResearchStaffCity" name="App::Http::Controllers::ResearchStaffCity">
+<area shape="rect" id="Node000001" title="Extended model that applies the research staff connection when retrieving city records so the limited..." alt="" coords="5,291,156,425"/>
+<area shape="rect" id="Node000002" href="$classApp_1_1Models_1_1City.html" title=" " alt="" coords="18,126,143,243"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="82,255,83,291,78,290,80,260"/>
+<area shape="rect" id="Node000003" href="$classModel.html" title=" " alt="" coords="55,5,106,78"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="81,90,83,126,78,125,80,95"/>
+</map>

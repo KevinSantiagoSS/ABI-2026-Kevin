@@ -1,5 +1,5 @@
 <map id="App::Models::ProjectStatus" name="App::Models::ProjectStatus">
-<area shape="rect" id="Node000001" title="project_statuses table model, manages communication with the database using the root user,..." alt="" coords="5,119,193,184"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="72,5,127,71"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="102,84,102,119,97,119,97,84"/>
+<area shape="rect" id="Node000001" title="project_statuses table model, manages communication with the database using the root user,..." alt="" coords="5,126,190,198"/>
+<area shape="rect" id="Node000002" href="$classModel.html" title=" " alt="" coords="72,5,123,78"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="99,90,100,126,95,125,96,95"/>
 </map>

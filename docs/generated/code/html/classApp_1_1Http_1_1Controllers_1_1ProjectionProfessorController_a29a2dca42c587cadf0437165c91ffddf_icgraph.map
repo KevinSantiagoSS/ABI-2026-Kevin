@@ -1,5 +1,8 @@
 <map id="App::Http::Controllers::ProjectionProfessorController::professorProjectionReportModules" name="App::Http::Controllers::ProjectionProfessorController::professorProjectionReportModules">
-<area shape="rect" id="Node000001" title=" " alt="" coords="273,5,528,60"/>
-<area shape="rect" id="Node000002" href="$classApp_1_1Http_1_1Controllers_1_1ProjectionProfessorController.html#a56d9b2cf311355ada289c324c9857b18" title=" " alt="" coords="5,5,225,60"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="260,35,226,35,226,30,260,30"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="585,40,838,102"/>
+<area shape="rect" id="Node000002" href="$classApp_1_1Http_1_1Controllers_1_1ProjectionProfessorController.html#afb7bfd440ea9ab9e7c38584637ef24a4" title=" " alt="" coords="273,5,537,67"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="567,55,537,54,537,48,572,55"/>
+<area shape="rect" id="Node000003" href="$classApp_1_1Http_1_1Controllers_1_1ProjectionProfessorController.html#a56d9b2cf311355ada289c324c9857b18" title=" " alt="" coords="5,40,225,102"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="567,78,537,81,405,84,273,81,225,80,225,74,273,76,405,78,537,76,572,78"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="254,54,226,60,225,55,260,53"/>
 </map>

@@ -1,0 +1,67 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" href="$classSeeder.html" title=" " alt="" coords="5,1086,72,1114"/>
+<area shape="rect" id="Node000001" href="$classDatabase_1_1Seeders_1_1CsvUpsertSeeder.html" title=" " alt="" coords="120,973,271,1018"/>
+<area shape="poly" id="edge172_Node000000_Node000001" title=" " alt="" coords="62,1074,118,1028,142,1016,139,1021,121,1033,67,1076"/>
+<area shape="rect" id="Node000030" href="$classDatabase_1_1Seeders_1_1DatabaseSeeder.html" title="Main database seeder." alt="" coords="120,1043,271,1087"/>
+<area shape="poly" id="edge201_Node000000_Node000030" title=" " alt="" coords="85,1087,121,1080,117,1084,89,1091"/>
+<area shape="rect" id="Node000031" href="$classDatabase_1_1Seeders_1_1FormatoSeeder.html" title=" " alt="" coords="120,1112,271,1157"/>
+<area shape="poly" id="edge202_Node000000_Node000031" title=" " alt="" coords="85,1108,121,1116,117,1119,88,1112"/>
+<area shape="rect" id="Node000032" href="$classDatabase_1_1Seeders_1_1UsersTableSeeder.html" title="Seeder for populating the users table from a CSV file." alt="" coords="120,1181,271,1226"/>
+<area shape="poly" id="edge203_Node000000_Node000032" title=" " alt="" coords="64,1122,121,1167,143,1180,138,1182,118,1171,65,1127"/>
+<area shape="rect" id="Node000002" href="$classDatabase_1_1Seeders_1_1AcademicPeriodsTableSeeder.html" title=" " alt="" coords="330,5,542,50"/>
+<area shape="poly" id="edge173_Node000001_Node000002" title=" " alt="" coords="194,958,196,771,201,642,211,503,226,364,248,238,261,182,277,133,296,92,317,61,333,48,331,53,321,64,301,95,282,135,267,183,253,239,231,365,216,503,207,642,201,771,199,958"/>
+<area shape="rect" id="Node000003" href="$classDatabase_1_1Seeders_1_1AcademicProcessWindowsTableSeeder.html" title=" " alt="" coords="322,74,550,136"/>
+<area shape="poly" id="edge174_Node000001_Node000003" title=" " alt="" coords="194,957,200,786,218,545,233,420,254,306,282,212,298,175,317,146,332,134,329,139,321,149,303,177,287,214,259,308,239,421,223,545,205,787,200,958"/>
+<area shape="rect" id="Node000004" href="$classDatabase_1_1Seeders_1_1CitiesTableSeeder.html" title=" " alt="" coords="360,160,512,205"/>
+<area shape="poly" id="edge175_Node000001_Node000004" title=" " alt="" coords="195,958,201,799,220,577,236,464,256,360,283,274,299,241,317,215,336,199,362,189,359,194,339,204,321,219,304,244,288,276,262,361,241,464,225,577,207,799,200,958"/>
+<area shape="rect" id="Node000005" href="$classDatabase_1_1Seeders_1_1CityProgramTableSeeder.html" title=" " alt="" coords="346,229,527,274"/>
+<area shape="poly" id="edge176_Node000001_Node000005" title=" " alt="" coords="195,957,204,811,224,610,240,508,260,415,286,338,301,308,317,284,347,265,344,269,321,288,305,310,291,340,266,416,245,509,230,610,209,811,201,958"/>
+<area shape="rect" id="Node000006" href="$classDatabase_1_1Seeders_1_1ContentFrameworkProjectTableSeeder.html" title=" " alt="" coords="324,298,548,360"/>
+<area shape="poly" id="edge177_Node000001_Node000006" title=" " alt="" coords="197,958,208,828,231,653,247,564,267,483,290,417,317,370,332,358,330,363,321,373,295,419,272,485,252,565,236,654,214,828,202,958"/>
+<area shape="rect" id="Node000007" href="$classDatabase_1_1Seeders_1_1ContentFrameworksTableSeeder.html" title=" " alt="" coords="320,384,552,429"/>
+<area shape="poly" id="edge178_Node000001_Node000007" title=" " alt="" coords="197,958,211,840,234,686,250,608,269,537,292,479,317,439,334,427,332,432,321,443,296,482,275,539,256,609,240,687,216,841,203,958"/>
+<area shape="rect" id="Node000008" href="$classDatabase_1_1Seeders_1_1ContentVersionTableSeeder.html" title=" " alt="" coords="336,453,536,498"/>
+<area shape="poly" id="edge179_Node000001_Node000008" title=" " alt="" coords="199,958,214,854,239,720,255,653,274,593,294,543,317,509,338,494,335,499,321,512,299,545,279,594,260,655,244,721,219,855,204,959"/>
+<area shape="rect" id="Node000009" href="$classDatabase_1_1Seeders_1_1ContentsTableSeeder.html" title=" " alt="" coords="357,523,515,567"/>
+<area shape="poly" id="edge180_Node000001_Node000009" title=" " alt="" coords="194,958,199,879,216,778,232,724,253,671,281,621,317,578,335,564,358,555,355,559,338,569,321,582,286,624,258,673,237,725,221,779,204,880,199,958"/>
+<area shape="rect" id="Node000010" href="$classDatabase_1_1Seeders_1_1DepartmentsTableSeeder.html" title=" " alt="" coords="344,592,529,637"/>
+<area shape="poly" id="edge181_Node000001_Node000010" title=" " alt="" coords="196,957,205,891,226,808,241,764,261,722,286,682,317,647,344,630,341,635,321,651,291,685,266,724,246,766,231,809,211,892,202,958"/>
+<area shape="rect" id="Node000011" href="$classDatabase_1_1Seeders_1_1FrameworksTableSeeder.html" title=" " alt="" coords="346,661,526,706"/>
+<area shape="poly" id="edge182_Node000001_Node000011" title=" " alt="" coords="200,957,213,904,236,839,270,773,292,743,317,716,347,699,344,704,321,720,296,746,274,776,241,841,218,905,206,959"/>
+<area shape="rect" id="Node000012" href="$classDatabase_1_1Seeders_1_1InvestigationLinesTableSeeder.html" title=" " alt="" coords="326,731,546,775"/>
+<area shape="poly" id="edge183_Node000001_Node000012" title=" " alt="" coords="206,958,223,917,247,871,278,825,317,786,339,774,336,778,321,790,282,828,251,874,228,920,211,959"/>
+<area shape="rect" id="Node000013" href="$classDatabase_1_1Seeders_1_1LoadProjectionsTableSeeder.html" title=" " alt="" coords="334,800,538,845"/>
+<area shape="poly" id="edge184_Node000001_Node000013" title=" " alt="" coords="217,959,260,905,287,878,318,855,343,843,339,847,320,859,291,882,264,909,222,962"/>
+<area shape="rect" id="Node000014" href="$classDatabase_1_1Seeders_1_1PostulationMemberSeeder.html" title=" " alt="" coords="340,869,533,914"/>
+<area shape="poly" id="edge185_Node000001_Node000014" title=" " alt="" coords="243,963,318,924,352,912,349,916,320,929,247,967"/>
+<area shape="rect" id="Node000015" href="$classDatabase_1_1Seeders_1_1PostulationPrioritySeeder.html" title=" " alt="" coords="343,939,529,983"/>
+<area shape="poly" id="edge186_Node000001_Node000015" title=" " alt="" coords="285,981,344,973,340,976,288,985"/>
+<area shape="rect" id="Node000016" href="$classDatabase_1_1Seeders_1_1PostulationSeeder.html" title=" " alt="" coords="360,1008,512,1053"/>
+<area shape="poly" id="edge187_Node000001_Node000016" title=" " alt="" coords="285,1006,362,1018,358,1021,288,1011"/>
+<area shape="rect" id="Node000017" href="$classDatabase_1_1Seeders_1_1ProfessorProjectTableSeeder.html" title=" " alt="" coords="333,1077,539,1122"/>
+<area shape="poly" id="edge188_Node000001_Node000017" title=" " alt="" coords="261,1023,272,1028,296,1046,320,1063,349,1076,345,1078,318,1067,293,1050,270,1033,263,1028"/>
+<area shape="rect" id="Node000018" href="$classDatabase_1_1Seeders_1_1ProfessorsTableSeeder.html" title=" " alt="" coords="352,1147,520,1191"/>
+<area shape="poly" id="edge189_Node000001_Node000018" title=" " alt="" coords="267,1025,273,1029,284,1042,291,1056,297,1083,303,1108,310,1120,321,1132,354,1153,349,1155,317,1136,305,1123,298,1110,291,1084,286,1058,280,1045,269,1032,269,1030"/>
+<area shape="rect" id="Node000019" href="$classDatabase_1_1Seeders_1_1ProgramsTableSeeder.html" title=" " alt="" coords="355,1216,517,1261"/>
+<area shape="poly" id="edge190_Node000001_Node000019" title=" " alt="" coords="269,1026,273,1029,288,1052,295,1075,296,1118,298,1161,305,1181,321,1202,337,1214,357,1225,352,1227,334,1219,317,1206,301,1184,293,1162,291,1119,290,1076,283,1054,269,1032,270,1031"/>
+<area shape="rect" id="Node000020" href="$classDatabase_1_1Seeders_1_1ProjectStageHistoriesTableSeeder.html" title=" " alt="" coords="338,1285,534,1346"/>
+<area shape="poly" id="edge191_Node000001_Node000020" title=" " alt="" coords="269,1026,273,1029,292,1061,300,1093,300,1123,296,1153,293,1182,294,1212,302,1241,321,1271,341,1289,335,1290,317,1275,297,1243,288,1212,288,1182,291,1152,295,1123,294,1093,287,1063,269,1032,270,1031"/>
+<area shape="rect" id="Node000021" href="$classDatabase_1_1Seeders_1_1ProjectStatusesTableSeeder.html" title=" " alt="" coords="336,1371,537,1415"/>
+<area shape="poly" id="edge192_Node000001_Node000021" title=" " alt="" coords="270,1026,273,1029,287,1051,297,1073,305,1116,302,1157,294,1197,287,1237,286,1276,295,1316,306,1336,321,1357,338,1372,333,1373,317,1360,301,1339,290,1318,281,1277,282,1236,289,1196,297,1156,299,1116,292,1075,283,1054,269,1032,271,1032"/>
+<area shape="rect" id="Node000022" href="$classDatabase_1_1Seeders_1_1ProjectsTableSeeder.html" title=" " alt="" coords="360,1440,512,1485"/>
+<area shape="poly" id="edge193_Node000001_Node000022" title=" " alt="" coords="270,1026,273,1029,290,1056,301,1082,307,1108,309,1134,304,1184,294,1233,284,1281,280,1328,284,1352,291,1376,303,1401,321,1426,339,1441,362,1453,357,1454,336,1445,317,1429,298,1404,286,1378,278,1353,275,1329,278,1280,289,1231,299,1183,304,1134,302,1109,296,1084,285,1058,269,1032,271,1032"/>
+<area shape="rect" id="Node000023" href="$classDatabase_1_1Seeders_1_1ResearchGroupsTableSeeder.html" title=" " alt="" coords="333,1509,539,1554"/>
+<area shape="poly" id="edge194_Node000001_Node000023" title=" " alt="" coords="270,1026,273,1029,292,1061,305,1092,312,1122,313,1152,307,1211,293,1268,280,1324,275,1380,278,1408,286,1437,300,1466,321,1495,335,1509,330,1510,317,1499,296,1469,281,1439,273,1409,270,1380,275,1323,288,1267,302,1210,308,1152,306,1123,300,1093,288,1063,269,1032,271,1032"/>
+<area shape="rect" id="Node000024" href="$classDatabase_1_1Seeders_1_1ResearchStaffTableSeeder.html" title=" " alt="" coords="341,1579,531,1623"/>
+<area shape="poly" id="edge195_Node000001_Node000024" title=" " alt="" coords="270,1027,273,1029,285,1050,292,1077,300,1142,299,1219,295,1300,291,1382,292,1457,301,1520,309,1545,321,1565,343,1584,338,1584,317,1568,304,1547,295,1521,287,1457,286,1382,290,1300,294,1218,294,1142,287,1078,280,1052,269,1032,271,1032"/>
+<area shape="rect" id="Node000025" href="$classDatabase_1_1Seeders_1_1StudentProjectTableSeeder.html" title=" " alt="" coords="338,1648,534,1693"/>
+<area shape="poly" id="edge196_Node000001_Node000025" title=" " alt="" coords="270,1027,273,1029,286,1053,294,1083,302,1157,300,1243,295,1335,289,1427,289,1512,298,1583,308,1612,321,1634,341,1652,335,1652,317,1637,303,1614,293,1585,284,1513,284,1427,289,1335,295,1243,296,1157,289,1084,281,1055,269,1032,271,1032"/>
+<area shape="rect" id="Node000026" href="$classDatabase_1_1Seeders_1_1StudentsTableSeeder.html" title=" " alt="" coords="358,1717,515,1762"/>
+<area shape="poly" id="edge197_Node000001_Node000026" title=" " alt="" coords="270,1027,273,1029,287,1056,296,1090,304,1171,302,1267,294,1370,288,1473,286,1567,290,1609,296,1647,306,1678,321,1703,338,1718,360,1730,355,1731,335,1722,317,1707,301,1681,291,1648,284,1610,281,1568,282,1473,289,1370,296,1267,299,1172,291,1091,282,1058,269,1032,271,1032"/>
+<area shape="rect" id="Node000027" href="$classDatabase_1_1Seeders_1_1TeacherAssignmentsTableSeeder.html" title=" " alt="" coords="319,1787,553,1831"/>
+<area shape="poly" id="edge198_Node000001_Node000027" title=" " alt="" coords="270,1027,273,1029,288,1059,298,1096,304,1138,306,1186,303,1292,294,1405,286,1518,284,1623,287,1669,294,1710,305,1745,321,1773,334,1786,328,1786,317,1776,300,1747,289,1711,282,1670,278,1623,280,1518,289,1405,297,1292,301,1186,299,1139,293,1097,283,1061,269,1032,271,1032"/>
+<area shape="rect" id="Node000028" href="$classDatabase_1_1Seeders_1_1ThematicAreasTableSeeder.html" title=" " alt="" coords="337,1856,535,1901"/>
+<area shape="poly" id="edge199_Node000001_Node000028" title=" " alt="" coords="270,1027,273,1029,290,1062,300,1102,306,1149,308,1201,304,1316,294,1440,284,1564,281,1678,284,1728,291,1773,304,1812,321,1842,339,1860,334,1859,317,1845,299,1814,286,1775,279,1729,276,1678,279,1563,288,1440,299,1316,303,1201,301,1149,295,1103,285,1064,269,1032,271,1032"/>
+<area shape="rect" id="Node000029" href="$classDatabase_1_1Seeders_1_1VersionsTableSeeder.html" title=" " alt="" coords="358,1925,514,1970"/>
+<area shape="poly" id="edge200_Node000001_Node000029" title=" " alt="" coords="270,1027,273,1029,291,1064,302,1108,309,1159,310,1215,305,1341,293,1475,282,1609,278,1733,282,1788,289,1837,302,1878,321,1911,338,1926,361,1939,356,1939,335,1931,317,1915,297,1881,284,1838,276,1788,273,1733,277,1609,288,1475,300,1340,305,1215,303,1159,297,1109,286,1066,269,1032,271,1032"/>
+</map>

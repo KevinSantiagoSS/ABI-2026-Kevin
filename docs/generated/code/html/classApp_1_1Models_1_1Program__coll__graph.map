@@ -1,5 +1,5 @@
 <map id="App::Models::Program" name="App::Models::Program">
-<area shape="rect" id="Node000001" title="program table model, manages communication with the database using the root user, should not be used ..." alt="" coords="5,119,163,293"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="57,5,111,71"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="87,84,87,119,81,119,81,84"/>
+<area shape="rect" id="Node000001" title="program table model, manages communication with the database using the root user, should not be used ..." alt="" coords="5,126,159,321"/>
+<area shape="rect" id="Node000002" href="$classModel.html" title=" " alt="" coords="57,5,108,78"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="83,90,85,126,80,125,82,95"/>
 </map>

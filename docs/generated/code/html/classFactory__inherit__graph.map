@@ -1,0 +1,5 @@
+<map id="Factory" name="Factory">
+<area shape="rect" id="Node000001" title=" " alt="" coords="66,5,123,78"/>
+<area shape="rect" id="Node000002" href="$classDatabase_1_1Factories_1_1UserFactory.html" title="\Databaseloquent\Factories\Factory&lt;\App\Models\User&gt;" alt="" coords="5,126,183,237"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="95,90,97,126,92,125,93,95"/>
+</map>

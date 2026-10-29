@@ -1,5 +1,5 @@
 <map id="App::Providers::RouteServiceProvider" name="App::Providers::RouteServiceProvider">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,119,208,219"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="49,5,165,71"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="109,84,109,119,104,119,104,84"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,126,204,237"/>
+<area shape="rect" id="Node000002" href="$classServiceProvider.html" title=" " alt="" coords="48,5,161,78"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="106,90,107,126,102,125,104,95"/>
 </map>

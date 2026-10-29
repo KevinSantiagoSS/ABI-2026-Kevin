@@ -1,4 +1,5 @@
 var ResearchStaffPostulationPriority_8php =
 [
+    [ "App::Models::ResearchStaff::PostulationPriority", "classApp_1_1Models_1_1ResearchStaff_1_1PostulationPriority.html", "classApp_1_1Models_1_1ResearchStaff_1_1PostulationPriority" ],
     [ "App::Models::ResearchStaff::ResearchStaffPostulationPriority", "classApp_1_1Models_1_1ResearchStaff_1_1ResearchStaffPostulationPriority.html", "classApp_1_1Models_1_1ResearchStaff_1_1ResearchStaffPostulationPriority" ]
 ];

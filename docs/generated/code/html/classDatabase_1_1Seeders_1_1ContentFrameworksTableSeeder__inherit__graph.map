@@ -1,7 +1,7 @@
 <map id="Database::Seeders::ContentFrameworksTableSeeder" name="Database::Seeders::ContentFrameworksTableSeeder">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,396,229,496"/>
-<area shape="rect" id="Node000002" href="$classDatabase_1_1Seeders_1_1CsvUpsertSeeder.html" title=" " alt="" coords="23,119,211,348"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="120,362,120,396,115,396,115,362"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="88,5,147,71"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="120,84,120,119,115,119,115,84"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,431,226,543"/>
+<area shape="rect" id="Node000002" href="$classDatabase_1_1Seeders_1_1CsvUpsertSeeder.html" title=" " alt="" coords="23,126,209,383"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="117,395,118,432,113,430,114,400"/>
+<area shape="rect" id="Node000003" href="$classSeeder.html" title=" " alt="" coords="88,5,144,78"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="116,90,118,126,113,126,115,95"/>
 </map>

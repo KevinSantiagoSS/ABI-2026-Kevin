@@ -1,0 +1,5 @@
+<map id="App::Models::Student::ContentFramework" name="App::Models::Student::ContentFramework">
+<area shape="rect" id="Node000001" title="content_frameworks table model, manages communication with the database using the root user,..." alt="" coords="5,126,216,260"/>
+<area shape="rect" id="Node000002" href="$classModel.html" title=" " alt="" coords="86,5,136,78"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="112,91,113,126,108,125,110,95"/>
+</map>

@@ -6,6 +6,7 @@ var namespaceApp_1_1Http_1_1Middleware =
     [ "PreventRequestsDuringMaintenance", "classApp_1_1Http_1_1Middleware_1_1PreventRequestsDuringMaintenance.html", "classApp_1_1Http_1_1Middleware_1_1PreventRequestsDuringMaintenance" ],
     [ "RedirectIfAuthenticated", "classApp_1_1Http_1_1Middleware_1_1RedirectIfAuthenticated.html", "classApp_1_1Http_1_1Middleware_1_1RedirectIfAuthenticated" ],
     [ "RoleMiddleware", "classApp_1_1Http_1_1Middleware_1_1RoleMiddleware.html", "classApp_1_1Http_1_1Middleware_1_1RoleMiddleware" ],
+    [ "RouteServiceProvider", "classApp_1_1Http_1_1Middleware_1_1RouteServiceProvider.html", "classApp_1_1Http_1_1Middleware_1_1RouteServiceProvider" ],
     [ "TrimStrings", "classApp_1_1Http_1_1Middleware_1_1TrimStrings.html", "classApp_1_1Http_1_1Middleware_1_1TrimStrings" ],
     [ "TrustHosts", "classApp_1_1Http_1_1Middleware_1_1TrustHosts.html", "classApp_1_1Http_1_1Middleware_1_1TrustHosts" ],
     [ "TrustProxies", "classApp_1_1Http_1_1Middleware_1_1TrustProxies.html", "classApp_1_1Http_1_1Middleware_1_1TrustProxies" ],

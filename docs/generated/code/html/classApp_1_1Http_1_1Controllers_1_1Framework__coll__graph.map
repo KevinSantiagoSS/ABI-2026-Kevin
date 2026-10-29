@@ -1,0 +1,7 @@
+<map id="App::Http::Controllers::Framework" name="App::Http::Controllers::Framework">
+<area shape="rect" id="Node000001" title="framework table model, manages communication with the database using the root user,..." alt="" coords="5,151,171,324"/>
+<area shape="rect" id="Node000002" href="$classModel.html" title=" " alt="" coords="27,5,78,78"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="62,90,75,151,70,151,61,95"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="102,5,149,78"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="120,75,111,134,106,133,118,80"/>
+</map>

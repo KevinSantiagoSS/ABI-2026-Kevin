@@ -1,0 +1,7 @@
+<map id="App::Http::Controllers::ResearchStaffProgram" name="App::Http::Controllers::ResearchStaffProgram">
+<area shape="rect" id="Node000001" title="Extended model that keeps program queries under the research staff connection so actions respect thei..." alt="" coords="5,369,176,587"/>
+<area shape="rect" id="Node000002" href="$classApp_1_1Models_1_1Program.html" title="program table model, manages communication with the database using the root user, should not be used ..." alt="" coords="14,126,168,321"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="91,334,93,370,88,369,90,339"/>
+<area shape="rect" id="Node000003" href="$classModel.html" title=" " alt="" coords="66,5,116,78"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="91,90,93,126,88,126,91,95"/>
+</map>

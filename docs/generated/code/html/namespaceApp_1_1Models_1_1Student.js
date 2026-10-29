@@ -1,5 +1,21 @@
 var namespaceApp_1_1Models_1_1Student =
 [
+    [ "City", "classApp_1_1Models_1_1Student_1_1City.html", "classApp_1_1Models_1_1Student_1_1City" ],
+    [ "CityProgram", "classApp_1_1Models_1_1Student_1_1CityProgram.html", "classApp_1_1Models_1_1Student_1_1CityProgram" ],
+    [ "Content", "classApp_1_1Models_1_1Student_1_1Content.html", "classApp_1_1Models_1_1Student_1_1Content" ],
+    [ "ContentFramework", "classApp_1_1Models_1_1Student_1_1ContentFramework.html", "classApp_1_1Models_1_1Student_1_1ContentFramework" ],
+    [ "ContentFrameworkProject", "classApp_1_1Models_1_1Student_1_1ContentFrameworkProject.html", "classApp_1_1Models_1_1Student_1_1ContentFrameworkProject" ],
+    [ "ContentVersion", "classApp_1_1Models_1_1Student_1_1ContentVersion.html", "classApp_1_1Models_1_1Student_1_1ContentVersion" ],
+    [ "Department", "classApp_1_1Models_1_1Student_1_1Department.html", "classApp_1_1Models_1_1Student_1_1Department" ],
+    [ "Framework", "classApp_1_1Models_1_1Student_1_1Framework.html", "classApp_1_1Models_1_1Student_1_1Framework" ],
+    [ "InvestigationLine", "classApp_1_1Models_1_1Student_1_1InvestigationLine.html", "classApp_1_1Models_1_1Student_1_1InvestigationLine" ],
+    [ "Postulation", "classApp_1_1Models_1_1Student_1_1Postulation.html", "classApp_1_1Models_1_1Student_1_1Postulation" ],
+    [ "PostulationMember", "classApp_1_1Models_1_1Student_1_1PostulationMember.html", "classApp_1_1Models_1_1Student_1_1PostulationMember" ],
+    [ "PostulationPriority", "classApp_1_1Models_1_1Student_1_1PostulationPriority.html", "classApp_1_1Models_1_1Student_1_1PostulationPriority" ],
+    [ "Program", "classApp_1_1Models_1_1Student_1_1Program.html", "classApp_1_1Models_1_1Student_1_1Program" ],
+    [ "Project", "classApp_1_1Models_1_1Student_1_1Project.html", "classApp_1_1Models_1_1Student_1_1Project" ],
+    [ "ProjectStatus", "classApp_1_1Models_1_1Student_1_1ProjectStatus.html", null ],
+    [ "ResearchGroup", "classApp_1_1Models_1_1Student_1_1ResearchGroup.html", "classApp_1_1Models_1_1Student_1_1ResearchGroup" ],
     [ "ResearchStaffPostularion", "classApp_1_1Models_1_1Student_1_1ResearchStaffPostularion.html", "classApp_1_1Models_1_1Student_1_1ResearchStaffPostularion" ],
     [ "ResearchStaffPostulationMember", "classApp_1_1Models_1_1Student_1_1ResearchStaffPostulationMember.html", "classApp_1_1Models_1_1Student_1_1ResearchStaffPostulationMember" ],
     [ "ResearchStaffPostulationPriority", "classApp_1_1Models_1_1Student_1_1ResearchStaffPostulationPriority.html", "classApp_1_1Models_1_1Student_1_1ResearchStaffPostulationPriority" ],
@@ -21,5 +37,7 @@ var namespaceApp_1_1Models_1_1Student =
     [ "StudentStudent", "classApp_1_1Models_1_1Student_1_1StudentStudent.html", "classApp_1_1Models_1_1Student_1_1StudentStudent" ],
     [ "StudentThematicArea", "classApp_1_1Models_1_1Student_1_1StudentThematicArea.html", "classApp_1_1Models_1_1Student_1_1StudentThematicArea" ],
     [ "StudentUser", "classApp_1_1Models_1_1Student_1_1StudentUser.html", "classApp_1_1Models_1_1Student_1_1StudentUser" ],
-    [ "StudentVersion", "classApp_1_1Models_1_1Student_1_1StudentVersion.html", "classApp_1_1Models_1_1Student_1_1StudentVersion" ]
+    [ "StudentVersion", "classApp_1_1Models_1_1Student_1_1StudentVersion.html", "classApp_1_1Models_1_1Student_1_1StudentVersion" ],
+    [ "ThematicArea", "classApp_1_1Models_1_1Student_1_1ThematicArea.html", "classApp_1_1Models_1_1Student_1_1ThematicArea" ],
+    [ "Version", "classApp_1_1Models_1_1Student_1_1Version.html", "classApp_1_1Models_1_1Student_1_1Version" ]
 ];

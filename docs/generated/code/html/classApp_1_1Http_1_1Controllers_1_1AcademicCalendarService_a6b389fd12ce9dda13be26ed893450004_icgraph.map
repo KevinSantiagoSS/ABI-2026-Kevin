@@ -1,0 +1,15 @@
+<map id="App::Http::Controllers::AcademicCalendarService::currentActivePeriod" name="App::Http::Controllers::AcademicCalendarService::currentActivePeriod">
+<area shape="rect" id="Node000001" title=" " alt="" coords="320,207,519,268"/>
+<area shape="rect" id="Node000002" href="$classApp_1_1Http_1_1Controllers_1_1PostulationController.html#a4cc7fecbc9a1b921ffd2871bd763a1d1" title=" " alt="" coords="55,5,222,67"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="385,194,336,136,304,107,270,81,223,58,222,53,273,77,308,103,340,133,391,194"/>
+<area shape="rect" id="Node000003" href="$classApp_1_1Http_1_1Controllers_1_1BankApprovedIdeasForStudentsController.html#a1d95cf226b9e9fa658f49169791221e9" title="Muestra los proyectos aprobados relacionados con el estudiante autenticado." alt="" coords="20,91,257,152"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="344,200,271,167,243,156,242,150,273,162,350,198"/>
+<area shape="rect" id="Node000004" href="$classApp_1_1Http_1_1Controllers_1_1ProjectController.html#aac69c9e81382317b0b0b45f650744332" title="Display a paginated list of projects for the authenticated user." alt="" coords="47,176,230,221"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="302,223,231,214,229,209,306,220"/>
+<area shape="rect" id="Node000005" href="$classApp_1_1Http_1_1Controllers_1_1BankApprovedIdeasAssignController.html#ace082f57e826cf6392e975e360d43e8e" title=" " alt="" coords="5,245,272,307"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="302,254,273,260,271,255,307,252"/>
+<area shape="rect" id="Node000006" href="$classApp_1_1Http_1_1Controllers_1_1BankApprovedIdeasForStudentsController.html#a1da16a4a5c61221cfdcd5ec9887a8a9e" title=" " alt="" coords="20,331,257,392"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="352,278,273,321,245,332,242,328,271,316,357,275"/>
+<area shape="rect" id="Node000007" href="$classApp_1_1Http_1_1Controllers_1_1PostulationController.html#a4626d798cedd76d73332685f7e877448" title=" " alt="" coords="55,416,222,478"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="392,280,341,346,309,379,273,406,223,430,221,425,270,402,305,375,337,343,388,282"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="App::Services::Projects::ProjectIdeaException" name="App::Services::Projects::ProjectIdeaException">
+<area shape="rect" id="Node000001" title="Domain specific exception used to bubble business rule violations to the controllers." alt="" coords="5,126,164,215"/>
+<area shape="rect" id="Node000002" href="$classRuntimeException.html" title=" " alt="" coords="20,5,150,78"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="86,91,87,126,82,125,83,95"/>
+</map>

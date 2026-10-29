@@ -1,0 +1,5 @@
+<map id="App::Http::Controllers::Version" name="App::Http::Controllers::Version">
+<area shape="rect" id="Node000001" title="version table model, manages communication with the database using the root user, should not be used ..." alt="" coords="5,126,156,304"/>
+<area shape="rect" id="Node000002" href="$classModel.html" title=" " alt="" coords="55,5,106,78"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="81,90,83,126,78,125,80,95"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="App::Services::Projections::ResearchStaffInvestigationLine" name="App::Services::Projections::ResearchStaffInvestigationLine">
+<area shape="rect" id="Node000001" title="Extended model that keeps investigation line queries within the research staff connection,..." alt="" coords="5,347,226,459"/>
+<area shape="rect" id="Node000002" href="$classApp_1_1Models_1_1InvestigationLine.html" title="investigation_lines table model, manages communication with the database using the root user,..." alt="" coords="10,126,221,299"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="117,312,118,348,113,347,114,316"/>
+<area shape="rect" id="Node000003" href="$classModel.html" title=" " alt="" coords="90,5,141,78"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="116,90,118,126,113,126,115,95"/>
+</map>

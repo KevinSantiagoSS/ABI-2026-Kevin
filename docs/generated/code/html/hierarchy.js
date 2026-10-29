@@ -1,8 +1,17 @@
 var hierarchy =
 [
+    [ "App::Filters::AcademicCalendarService", "classApp_1_1Filters_1_1AcademicCalendarService.html", null ],
+    [ "App::Http::Controllers::AcademicCalendarService", "classApp_1_1Http_1_1Controllers_1_1AcademicCalendarService.html", null ],
     [ "App::Services::AcademicCalendar::AcademicCalendarService", "classApp_1_1Services_1_1AcademicCalendar_1_1AcademicCalendarService.html", null ],
+    [ "App::Services::Projects::AcademicCalendarService", "classApp_1_1Services_1_1Projects_1_1AcademicCalendarService.html", null ],
+    [ "App::Console::Commands::AcademicProcessWindowClosing", "classApp_1_1Console_1_1Commands_1_1AcademicProcessWindowClosing.html", null ],
     [ "App::Events::AcademicProcessWindowClosing", "classApp_1_1Events_1_1AcademicProcessWindowClosing.html", null ],
+    [ "App::Listeners::AcademicProcessWindowClosing", "classApp_1_1Listeners_1_1AcademicProcessWindowClosing.html", null ],
+    [ "App::Providers::AcademicProcessWindowClosing", "classApp_1_1Providers_1_1AcademicProcessWindowClosing.html", null ],
+    [ "App::Console::Commands::AcademicProcessWindowOpened", "classApp_1_1Console_1_1Commands_1_1AcademicProcessWindowOpened.html", null ],
     [ "App::Events::AcademicProcessWindowOpened", "classApp_1_1Events_1_1AcademicProcessWindowOpened.html", null ],
+    [ "App::Listeners::AcademicProcessWindowOpened", "classApp_1_1Listeners_1_1AcademicProcessWindowOpened.html", null ],
+    [ "App::Providers::AcademicProcessWindowOpened", "classApp_1_1Providers_1_1AcademicProcessWindowOpened.html", null ],
     [ "Authenticatable", "classAuthenticatable.html", [
       [ "App::Models::User", "classApp_1_1Models_1_1User.html", [
         [ "App::Models::Professor::ProfessorUser", "classApp_1_1Models_1_1Professor_1_1ProfessorUser.html", null ],
@@ -12,6 +21,9 @@ var hierarchy =
       ] ]
     ] ],
     [ "App::Helpers::AuthUserHelper", "classApp_1_1Helpers_1_1AuthUserHelper.html", null ],
+    [ "App::Http::Controllers::AuthUserHelper", "classApp_1_1Http_1_1Controllers_1_1AuthUserHelper.html", null ],
+    [ "App::Providers::AuthUserHelper", "classApp_1_1Providers_1_1AuthUserHelper.html", null ],
+    [ "App::Services::Projects::AuthUserHelper", "classApp_1_1Services_1_1Projects_1_1AuthUserHelper.html", null ],
     [ "BaseController", "classBaseController.html", [
       [ "App::Http::Controllers::Controller", "classApp_1_1Http_1_1Controllers_1_1Controller.html", [
         [ "App::Http::Controllers::AcademicPeriodController", "classApp_1_1Http_1_1Controllers_1_1AcademicPeriodController.html", null ],
@@ -57,62 +69,22 @@ var hierarchy =
         [ "App::Http::Controllers::VersionController", "classApp_1_1Http_1_1Controllers_1_1VersionController.html", null ]
       ] ]
     ] ],
+    [ "Command", "classCommand.html", [
+      [ "App::Console::Commands::NotifyProcessWindows", "classApp_1_1Console_1_1Commands_1_1NotifyProcessWindows.html", null ]
+    ] ],
     [ "ConsoleKernel", "classConsoleKernel.html", [
       [ "App::Console::Kernel", "classApp_1_1Console_1_1Kernel.html", null ]
     ] ],
     [ "ExceptionHandler", "classExceptionHandler.html", [
       [ "App::Exceptions::Handler", "classApp_1_1Exceptions_1_1Handler.html", null ]
     ] ],
-    [ "HttpKernel", "classHttpKernel.html", [
-      [ "App::Http::Kernel", "classApp_1_1Http_1_1Kernel.html", null ]
-    ] ],
-    [ "App::Services::Projections::IdeaDemandProjectionService", "classApp_1_1Services_1_1Projections_1_1IdeaDemandProjectionService.html", null ],
-    [ "Illuminate", "classIlluminate.html", [
+    [ "Factory", "classFactory.html", [
       [ "Database::Factories::UserFactory", "classDatabase_1_1Factories_1_1UserFactory.html", null ]
     ] ],
-    [ "App::Services::Projections::LoadProjectionService", "classApp_1_1Services_1_1Projections_1_1LoadProjectionService.html", null ],
-    [ "Middleware", "classMiddleware.html", [
-      [ "App::Http::Middleware::Authenticate", "classApp_1_1Http_1_1Middleware_1_1Authenticate.html", null ],
-      [ "App::Http::Middleware::EncryptCookies", "classApp_1_1Http_1_1Middleware_1_1EncryptCookies.html", null ],
-      [ "App::Http::Middleware::PreventRequestsDuringMaintenance", "classApp_1_1Http_1_1Middleware_1_1PreventRequestsDuringMaintenance.html", null ],
-      [ "App::Http::Middleware::TrimStrings", "classApp_1_1Http_1_1Middleware_1_1TrimStrings.html", null ],
-      [ "App::Http::Middleware::TrustHosts", "classApp_1_1Http_1_1Middleware_1_1TrustHosts.html", null ],
-      [ "App::Http::Middleware::TrustProxies", "classApp_1_1Http_1_1Middleware_1_1TrustProxies.html", null ],
-      [ "App::Http::Middleware::ValidateSignature", "classApp_1_1Http_1_1Middleware_1_1ValidateSignature.html", null ],
-      [ "App::Http::Middleware::VerifyCsrfToken", "classApp_1_1Http_1_1Middleware_1_1VerifyCsrfToken.html", null ]
-    ] ],
-    [ "Migration", "classMigration.html", null ],
-    [ "App::Services::NotificationService", "classApp_1_1Services_1_1NotificationService.html", null ],
-    [ "App::Http::Middleware::PreventBackHistory", "classApp_1_1Http_1_1Middleware_1_1PreventBackHistory.html", null ],
-    [ "App::Services::Projects::ProjectAgeReviewService", "classApp_1_1Services_1_1Projects_1_1ProjectAgeReviewService.html", null ],
-    [ "App::Events::ProjectIdeaEvaluated", "classApp_1_1Events_1_1ProjectIdeaEvaluated.html", null ],
-    [ "App::Services::Projects::ProjectIdeaResult", "classApp_1_1Services_1_1Projects_1_1ProjectIdeaResult.html", null ],
-    [ "App::Services::Projects::ProjectIdeaService", "classApp_1_1Services_1_1Projects_1_1ProjectIdeaService.html", null ],
-    [ "App::Services::Projections::ProjectionPeriodService", "classApp_1_1Services_1_1Projections_1_1ProjectionPeriodService.html", null ],
-    [ "App::Services::Projects::ProjectParticipantService", "classApp_1_1Services_1_1Projects_1_1ProjectParticipantService.html", null ],
-    [ "App::Http::Middleware::RedirectIfAuthenticated", "classApp_1_1Http_1_1Middleware_1_1RedirectIfAuthenticated.html", null ],
-    [ "App::Services::Projects::RoleContext", "classApp_1_1Services_1_1Projects_1_1RoleContext.html", null ],
-    [ "App::Services::Projects::RoleContextResolver", "classApp_1_1Services_1_1Projects_1_1RoleContextResolver.html", null ],
-    [ "App::Http::Middleware::RoleMiddleware", "classApp_1_1Http_1_1Middleware_1_1RoleMiddleware.html", null ],
-    [ "App::Listeners::SendNotificationListener", "classApp_1_1Listeners_1_1SendNotificationListener.html", null ],
-    [ "App::Services::Students::StudentAcademicProgressService", "classApp_1_1Services_1_1Students_1_1StudentAcademicProgressService.html", null ],
-    [ "App::Services::Projections::StudentProjectionService", "classApp_1_1Services_1_1Projections_1_1StudentProjectionService.html", null ],
-    [ "App::Services::Projects::TeacherIdeaBalanceService", "classApp_1_1Services_1_1Projects_1_1TeacherIdeaBalanceService.html", null ],
-    [ "App::Services::Projections::TeacherProjectionService", "classApp_1_1Services_1_1Projections_1_1TeacherProjectionService.html", null ],
-    [ "App::Services::Projects::TeacherWorkloadService", "classApp_1_1Services_1_1Projects_1_1TeacherWorkloadService.html", null ],
-    [ "App::Events::UserCreated", "classApp_1_1Events_1_1UserCreated.html", null ],
-    [ "App::Helpers::UserRoleHelper", "classApp_1_1Helpers_1_1UserRoleHelper.html", null ],
-    [ "App::Services::Reports::VisualReportService", "classApp_1_1Services_1_1Reports_1_1VisualReportService.html", null ],
-    [ "Command", null, [
-      [ "App::Console::Commands::NotifyProcessWindows", "classApp_1_1Console_1_1Commands_1_1NotifyProcessWindows.html", null ]
-    ] ],
-    [ "Factory", null, [
-      [ "Database::Factories::UserFactory", "classDatabase_1_1Factories_1_1UserFactory.html", null ]
-    ] ],
-    [ "FilterInterface", null, [
+    [ "FilterInterface", "classFilterInterface.html", [
       [ "App::Filters::RolePermissionMenuFilter", "classApp_1_1Filters_1_1RolePermissionMenuFilter.html", null ]
     ] ],
-    [ "FormRequest", null, [
+    [ "FormRequest", "classFormRequest.html", [
       [ "App::Http::Requests::AcademicPeriodRequest", "classApp_1_1Http_1_1Requests_1_1AcademicPeriodRequest.html", null ],
       [ "App::Http::Requests::AcademicProcessWindowRequest", "classApp_1_1Http_1_1Requests_1_1AcademicProcessWindowRequest.html", null ],
       [ "App::Http::Requests::ContentFrameworkRequest", "classApp_1_1Http_1_1Requests_1_1ContentFrameworkRequest.html", null ],
@@ -124,10 +96,31 @@ var hierarchy =
       [ "App::Http::Requests::TeacherAssignmentRequest", "classApp_1_1Http_1_1Requests_1_1TeacherAssignmentRequest.html", null ],
       [ "App::Http::Requests::VersionRequest", "classApp_1_1Http_1_1Requests_1_1VersionRequest.html", null ]
     ] ],
-    [ "Mailable", null, [
+    [ "HttpKernel", "classHttpKernel.html", [
+      [ "App::Http::Kernel", "classApp_1_1Http_1_1Kernel.html", null ]
+    ] ],
+    [ "App::Http::Controllers::IdeaDemandProjectionService", "classApp_1_1Http_1_1Controllers_1_1IdeaDemandProjectionService.html", null ],
+    [ "App::Services::Projections::IdeaDemandProjectionService", "classApp_1_1Services_1_1Projections_1_1IdeaDemandProjectionService.html", null ],
+    [ "Illuminate", "classIlluminate.html", [
+      [ "Database::Factories::UserFactory", "classDatabase_1_1Factories_1_1UserFactory.html", null ]
+    ] ],
+    [ "App::Http::Controllers::LoadProjectionService", "classApp_1_1Http_1_1Controllers_1_1LoadProjectionService.html", null ],
+    [ "App::Services::Projections::LoadProjectionService", "classApp_1_1Services_1_1Projections_1_1LoadProjectionService.html", null ],
+    [ "Mailable", "classMailable.html", [
       [ "App::Mail::GenericNotificationMail", "classApp_1_1Mail_1_1GenericNotificationMail.html", null ]
     ] ],
-    [ "Model", null, [
+    [ "Middleware", "classMiddleware.html", [
+      [ "App::Http::Middleware::Authenticate", "classApp_1_1Http_1_1Middleware_1_1Authenticate.html", null ],
+      [ "App::Http::Middleware::EncryptCookies", "classApp_1_1Http_1_1Middleware_1_1EncryptCookies.html", null ],
+      [ "App::Http::Middleware::PreventRequestsDuringMaintenance", "classApp_1_1Http_1_1Middleware_1_1PreventRequestsDuringMaintenance.html", null ],
+      [ "App::Http::Middleware::TrimStrings", "classApp_1_1Http_1_1Middleware_1_1TrimStrings.html", null ],
+      [ "App::Http::Middleware::TrustHosts", "classApp_1_1Http_1_1Middleware_1_1TrustHosts.html", null ],
+      [ "App::Http::Middleware::TrustProxies", "classApp_1_1Http_1_1Middleware_1_1TrustProxies.html", null ],
+      [ "App::Http::Middleware::ValidateSignature", "classApp_1_1Http_1_1Middleware_1_1ValidateSignature.html", null ],
+      [ "App::Http::Middleware::VerifyCsrfToken", "classApp_1_1Http_1_1Middleware_1_1VerifyCsrfToken.html", null ]
+    ] ],
+    [ "Migration", "classMigration.html", null ],
+    [ "Model", "classModel.html", [
       [ "App::Models::AcademicPeriod", "classApp_1_1Models_1_1AcademicPeriod.html", [
         [ "App::Models::ResearchStaff::ResearchStaffAcademicPeriod", "classApp_1_1Models_1_1ResearchStaff_1_1ResearchStaffAcademicPeriod.html", null ]
       ] ],
@@ -251,10 +244,30 @@ var hierarchy =
         [ "App::Models::Student::StudentVersion", "classApp_1_1Models_1_1Student_1_1StudentVersion.html", null ]
       ] ]
     ] ],
-    [ "RuntimeException", null, [
+    [ "App::Listeners::NotificationService", "classApp_1_1Listeners_1_1NotificationService.html", null ],
+    [ "App::Services::NotificationService", "classApp_1_1Services_1_1NotificationService.html", null ],
+    [ "App::Http::Middleware::PreventBackHistory", "classApp_1_1Http_1_1Middleware_1_1PreventBackHistory.html", null ],
+    [ "App::Http::Controllers::ProjectAgeReviewService", "classApp_1_1Http_1_1Controllers_1_1ProjectAgeReviewService.html", null ],
+    [ "App::Services::Projects::ProjectAgeReviewService", "classApp_1_1Services_1_1Projects_1_1ProjectAgeReviewService.html", null ],
+    [ "App::Events::ProjectIdeaEvaluated", "classApp_1_1Events_1_1ProjectIdeaEvaluated.html", null ],
+    [ "App::Http::Controllers::ProjectIdeaEvaluated", "classApp_1_1Http_1_1Controllers_1_1ProjectIdeaEvaluated.html", null ],
+    [ "App::Listeners::ProjectIdeaEvaluated", "classApp_1_1Listeners_1_1ProjectIdeaEvaluated.html", null ],
+    [ "App::Providers::ProjectIdeaEvaluated", "classApp_1_1Providers_1_1ProjectIdeaEvaluated.html", null ],
+    [ "App::Services::Projects::ProjectIdeaResult", "classApp_1_1Services_1_1Projects_1_1ProjectIdeaResult.html", null ],
+    [ "App::Services::Projects::ProjectIdeaService", "classApp_1_1Services_1_1Projects_1_1ProjectIdeaService.html", null ],
+    [ "App::Http::Controllers::ProjectionPeriodService", "classApp_1_1Http_1_1Controllers_1_1ProjectionPeriodService.html", null ],
+    [ "App::Http::Requests::ProjectionPeriodService", "classApp_1_1Http_1_1Requests_1_1ProjectionPeriodService.html", null ],
+    [ "App::Services::Projections::ProjectionPeriodService", "classApp_1_1Services_1_1Projections_1_1ProjectionPeriodService.html", null ],
+    [ "App::Services::Students::ProjectionPeriodService", "classApp_1_1Services_1_1Students_1_1ProjectionPeriodService.html", null ],
+    [ "App::Services::Projects::ProjectParticipantService", "classApp_1_1Services_1_1Projects_1_1ProjectParticipantService.html", null ],
+    [ "App::Http::Middleware::RedirectIfAuthenticated", "classApp_1_1Http_1_1Middleware_1_1RedirectIfAuthenticated.html", null ],
+    [ "App::Services::Projects::RoleContext", "classApp_1_1Services_1_1Projects_1_1RoleContext.html", null ],
+    [ "App::Services::Projects::RoleContextResolver", "classApp_1_1Services_1_1Projects_1_1RoleContextResolver.html", null ],
+    [ "App::Http::Middleware::RoleMiddleware", "classApp_1_1Http_1_1Middleware_1_1RoleMiddleware.html", null ],
+    [ "RuntimeException", "classRuntimeException.html", [
       [ "App::Services::Projects::Exceptions::ProjectIdeaException", "classApp_1_1Services_1_1Projects_1_1Exceptions_1_1ProjectIdeaException.html", null ]
     ] ],
-    [ "Seeder", null, [
+    [ "Seeder", "classSeeder.html", [
       [ "Database::Seeders::CsvUpsertSeeder", "classDatabase_1_1Seeders_1_1CsvUpsertSeeder.html", [
         [ "Database::Seeders::AcademicPeriodsTableSeeder", "classDatabase_1_1Seeders_1_1AcademicPeriodsTableSeeder.html", null ],
         [ "Database::Seeders::AcademicProcessWindowsTableSeeder", "classDatabase_1_1Seeders_1_1AcademicProcessWindowsTableSeeder.html", null ],
@@ -289,11 +302,32 @@ var hierarchy =
       [ "Database::Seeders::FormatoSeeder", "classDatabase_1_1Seeders_1_1FormatoSeeder.html", null ],
       [ "Database::Seeders::UsersTableSeeder", "classDatabase_1_1Seeders_1_1UsersTableSeeder.html", null ]
     ] ],
-    [ "ServiceProvider", null, [
+    [ "App::Listeners::SendNotificationListener", "classApp_1_1Listeners_1_1SendNotificationListener.html", null ],
+    [ "App::Providers::SendNotificationListener", "classApp_1_1Providers_1_1SendNotificationListener.html", null ],
+    [ "ServiceProvider", "classServiceProvider.html", [
       [ "App::Providers::AppServiceProvider", "classApp_1_1Providers_1_1AppServiceProvider.html", null ],
       [ "App::Providers::AuthServiceProvider", "classApp_1_1Providers_1_1AuthServiceProvider.html", null ],
       [ "App::Providers::BroadcastServiceProvider", "classApp_1_1Providers_1_1BroadcastServiceProvider.html", null ],
       [ "App::Providers::EventServiceProvider", "classApp_1_1Providers_1_1EventServiceProvider.html", null ],
       [ "App::Providers::RouteServiceProvider", "classApp_1_1Providers_1_1RouteServiceProvider.html", null ]
-    ] ]
+    ] ],
+    [ "App::Http::Controllers::StudentAcademicProgressService", "classApp_1_1Http_1_1Controllers_1_1StudentAcademicProgressService.html", null ],
+    [ "App::Services::Projections::StudentAcademicProgressService", "classApp_1_1Services_1_1Projections_1_1StudentAcademicProgressService.html", null ],
+    [ "App::Services::Students::StudentAcademicProgressService", "classApp_1_1Services_1_1Students_1_1StudentAcademicProgressService.html", null ],
+    [ "App::Http::Controllers::StudentProjectionService", "classApp_1_1Http_1_1Controllers_1_1StudentProjectionService.html", null ],
+    [ "App::Services::Projections::StudentProjectionService", "classApp_1_1Services_1_1Projections_1_1StudentProjectionService.html", null ],
+    [ "App::Http::Controllers::TeacherIdeaBalanceService", "classApp_1_1Http_1_1Controllers_1_1TeacherIdeaBalanceService.html", null ],
+    [ "App::Services::Projects::TeacherIdeaBalanceService", "classApp_1_1Services_1_1Projects_1_1TeacherIdeaBalanceService.html", null ],
+    [ "App::Http::Controllers::TeacherProjectionService", "classApp_1_1Http_1_1Controllers_1_1TeacherProjectionService.html", null ],
+    [ "App::Services::Projections::TeacherProjectionService", "classApp_1_1Services_1_1Projections_1_1TeacherProjectionService.html", null ],
+    [ "App::Http::Controllers::TeacherWorkloadService", "classApp_1_1Http_1_1Controllers_1_1TeacherWorkloadService.html", null ],
+    [ "App::Services::Projects::TeacherWorkloadService", "classApp_1_1Services_1_1Projects_1_1TeacherWorkloadService.html", null ],
+    [ "App::Events::UserCreated", "classApp_1_1Events_1_1UserCreated.html", null ],
+    [ "App::Http::Controllers::Auth::UserCreated", "classApp_1_1Http_1_1Controllers_1_1Auth_1_1UserCreated.html", null ],
+    [ "App::Listeners::UserCreated", "classApp_1_1Listeners_1_1UserCreated.html", null ],
+    [ "App::Providers::UserCreated", "classApp_1_1Providers_1_1UserCreated.html", null ],
+    [ "App::Helpers::UserRoleHelper", "classApp_1_1Helpers_1_1UserRoleHelper.html", null ],
+    [ "App::Http::Controllers::UserRoleHelper", "classApp_1_1Http_1_1Controllers_1_1UserRoleHelper.html", null ],
+    [ "App::Http::Controllers::VisualReportService", "classApp_1_1Http_1_1Controllers_1_1VisualReportService.html", null ],
+    [ "App::Services::Reports::VisualReportService", "classApp_1_1Services_1_1Reports_1_1VisualReportService.html", null ]
 ];

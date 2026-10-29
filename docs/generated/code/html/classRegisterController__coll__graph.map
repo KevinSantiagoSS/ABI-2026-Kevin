@@ -1,0 +1,7 @@
+<map id="RegisterController" name="RegisterController">
+<area shape="rect" id="Node000001" title="Registration controller for research staff user." alt="" coords="5,263,188,481"/>
+<area shape="rect" id="Node000002" href="$classApp_1_1Http_1_1Controllers_1_1Controller.html" title=" " alt="" coords="22,126,172,215"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="97,227,99,263,94,263,96,233"/>
+<area shape="rect" id="Node000003" href="$classBaseController.html" title=" " alt="" coords="44,5,150,78"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="97,90,99,126,94,125,96,96"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="RuntimeException" name="RuntimeException">
+<area shape="rect" id="Node000001" title=" " alt="" coords="58,5,188,78"/>
+<area shape="rect" id="Node000002" href="$classApp_1_1Services_1_1Projects_1_1Exceptions_1_1ProjectIdeaException.html" title="Domain specific exception used to bubble business rule violations to the controllers." alt="" coords="5,126,240,215"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="124,91,125,127,120,125,121,95"/>
+</map>

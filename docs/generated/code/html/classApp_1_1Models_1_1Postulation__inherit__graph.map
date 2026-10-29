@@ -1,11 +1,11 @@
 <map id="App::Models::Postulation" name="App::Models::Postulation">
-<area shape="rect" id="Node000001" title=" " alt="" coords="219,119,403,404"/>
-<area shape="rect" id="Node000003" href="$classApp_1_1Models_1_1Professors_1_1ResearchStaffPostularion.html" title=" " alt="" coords="5,452,191,552"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="212,377,144,453,140,450,208,374"/>
-<area shape="rect" id="Node000004" href="$classApp_1_1Models_1_1ResearchStaff_1_1ResearchStaffPostularion.html" title=" " alt="" coords="215,452,407,552"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="314,418,314,452,309,452,309,418"/>
-<area shape="rect" id="Node000005" href="$classApp_1_1Models_1_1Student_1_1ResearchStaffPostularion.html" title=" " alt="" coords="432,452,617,552"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="414,374,483,450,479,453,411,377"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="284,5,339,71"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="314,84,314,119,309,119,309,84"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="214,126,396,444"/>
+<area shape="rect" id="Node000003" href="$classApp_1_1Models_1_1Professors_1_1ResearchStaffPostularion.html" title=" " alt="" coords="5,492,187,603"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="207,409,142,494,138,490,203,412"/>
+<area shape="rect" id="Node000004" href="$classApp_1_1Models_1_1ResearchStaff_1_1ResearchStaffPostularion.html" title=" " alt="" coords="211,492,400,603"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="307,456,308,493,303,491,304,461"/>
+<area shape="rect" id="Node000005" href="$classApp_1_1Models_1_1Student_1_1ResearchStaffPostularion.html" title=" " alt="" coords="424,492,606,603"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="407,408,474,492,468,492,405,413"/>
+<area shape="rect" id="Node000002" href="$classModel.html" title=" " alt="" coords="280,5,331,78"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="306,90,308,127,303,125,305,95"/>
 </map>

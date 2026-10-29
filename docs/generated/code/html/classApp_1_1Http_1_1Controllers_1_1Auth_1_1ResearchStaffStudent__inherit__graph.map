@@ -1,0 +1,7 @@
+<map id="App::Http::Controllers::Auth::ResearchStaffStudent" name="App::Http::Controllers::Auth::ResearchStaffStudent">
+<area shape="rect" id="Node000001" title="Extended model that ensures student queries run on the research staff connection, preserving the limi..." alt="" coords="5,531,202,643"/>
+<area shape="rect" id="Node000002" href="$classApp_1_1Models_1_1Student.html" title="students table model, manages communication with the database using the root user,..." alt="" coords="6,126,201,483"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="105,496,106,532,101,531,103,500"/>
+<area shape="rect" id="Node000003" href="$classModel.html" title=" " alt="" coords="78,5,129,78"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="104,90,106,126,101,126,103,95"/>
+</map>

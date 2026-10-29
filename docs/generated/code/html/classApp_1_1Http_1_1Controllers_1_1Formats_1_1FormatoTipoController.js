@@ -1,6 +1,5 @@
 var classApp_1_1Http_1_1Controllers_1_1Formats_1_1FormatoTipoController =
 [
-    [ "academicProcessUnavailableView", "classApp_1_1Http_1_1Controllers_1_1Formats_1_1FormatoTipoController.html#a5737da7f2852861bc3eae90310c17ab4", null ],
     [ "create", "classApp_1_1Http_1_1Controllers_1_1Formats_1_1FormatoTipoController.html#a3f97b0694a3de22141bafdd536f3d45c", null ],
     [ "destroy", "classApp_1_1Http_1_1Controllers_1_1Formats_1_1FormatoTipoController.html#a890b461342081946a0b0ade35b236352", null ],
     [ "edit", "classApp_1_1Http_1_1Controllers_1_1Formats_1_1FormatoTipoController.html#a1d2d156654ab10b82e147106a8bb095e", null ],

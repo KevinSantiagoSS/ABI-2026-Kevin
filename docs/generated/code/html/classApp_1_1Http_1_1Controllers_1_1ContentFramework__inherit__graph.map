@@ -1,0 +1,11 @@
+<map id="App::Http::Controllers::ContentFramework" name="App::Http::Controllers::ContentFramework">
+<area shape="rect" id="Node000001" title="content_frameworks table model, manages communication with the database using the root user,..." alt="" coords="244,126,455,260"/>
+<area shape="rect" id="Node000003" href="$classApp_1_1Models_1_1Professor_1_1ProfessorContentFramework.html" title="Extended model that channels content&#45;framework queries through the professor connection to respect fa..." alt="" coords="5,308,209,419"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="245,267,187,310,184,306,241,270"/>
+<area shape="rect" id="Node000004" href="$classApp_1_1Models_1_1ResearchStaff_1_1ResearchStaffContentFramework.html" title="Extended model that keeps content&#45;framework queries within the research staff connection so permissio..." alt="" coords="234,308,466,419"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="351,273,352,309,348,307,348,277"/>
+<area shape="rect" id="Node000005" href="$classApp_1_1Models_1_1Student_1_1StudentContentFramework.html" title="Extended model that keeps content&#45;framework operations on the student connection, aligning actions wi..." alt="" coords="491,308,684,419"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="455,266,513,308,508,308,454,271"/>
+<area shape="rect" id="Node000002" href="$classModel.html" title=" " alt="" coords="324,5,375,78"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="351,91,352,127,347,125,349,95"/>
+</map>

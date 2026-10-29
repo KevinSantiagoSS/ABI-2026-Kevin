@@ -1,0 +1,13 @@
+<map id="App::Http::Controllers::AcademicProcessWindow::processOptions" name="App::Http::Controllers::AcademicProcessWindow::processOptions">
+<area shape="rect" id="Node000001" title=" " alt="" coords="355,160,550,222"/>
+<area shape="rect" id="Node000002" href="$classApp_1_1Http_1_1Controllers_1_1AcademicProcessWindowController.html#a460b874acda1cb4a4a7ca41ad5d6c77e" title=" " alt="" coords="26,5,286,67"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="404,150,359,115,305,81,282,70,281,65,308,76,362,110,410,149"/>
+<area shape="rect" id="Node000003" href="$classApp_1_1Http_1_1Controllers_1_1AcademicProcessWindowController.html#a294ad1bd47976910772e9a47e883a042" title=" " alt="" coords="10,91,302,136"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="337,158,306,151,260,139,260,134,307,146,342,157"/>
+<area shape="rect" id="Node000004" href="$classApp_1_1Http_1_1Controllers_1_1AcademicProcessWindowController.html#a3c8fe92c36e11f4d5b7a994118d286fd" title=" " alt="" coords="26,160,286,222"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="337,192,287,193,286,188,342,190"/>
+<area shape="rect" id="Node000005" href="$classApp_1_1Http_1_1Controllers_1_1AcademicPeriodController.html#af9af738dccac4262c29752e812ec3bf2" title=" " alt="" coords="36,246,276,290"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="337,225,307,236,261,248,259,243,306,231,342,224"/>
+<area shape="rect" id="Node000006" href="$classApp_1_1Http_1_1Controllers_1_1AcademicProcessWindowController.html#a5557d5b5dbb7f1ba74aef5ea56f33056" title=" " alt="" coords="5,315,307,360"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="410,231,363,272,308,305,278,317,276,312,305,300,360,268,406,233"/>
+</map>

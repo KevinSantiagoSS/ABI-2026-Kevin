@@ -1,0 +1,23 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" href="$classFormRequest.html" title=" " alt="" coords="5,326,113,354"/>
+<area shape="rect" id="Node000001" href="$classApp_1_1Http_1_1Requests_1_1AcademicPeriodRequest.html" title=" " alt="" coords="191,5,378,50"/>
+<area shape="poly" id="edge54_Node000000_Node000001" title=" " alt="" coords="60,310,67,257,84,190,113,120,134,88,159,60,192,41,189,46,162,64,138,92,118,123,89,192,72,258,65,311"/>
+<area shape="rect" id="Node000002" href="$classApp_1_1Http_1_1Requests_1_1AcademicProcessWindowRequest.html" title=" " alt="" coords="161,75,409,119"/>
+<area shape="poly" id="edge55_Node000000_Node000002" title=" " alt="" coords="64,310,75,270,94,221,121,172,139,149,159,130,180,118,177,122,162,134,143,153,126,175,99,223,80,272,69,312"/>
+<area shape="rect" id="Node000003" href="$classApp_1_1Http_1_1Requests_1_1ContentFrameworkRequest.html" title=" " alt="" coords="182,144,388,189"/>
+<area shape="poly" id="edge56_Node000000_Node000003" title=" " alt="" coords="71,311,106,254,130,224,159,199,183,187,179,191,162,203,134,228,110,257,76,313"/>
+<area shape="rect" id="Node000004" href="$classApp_1_1Http_1_1Requests_1_1ContentRequest.html" title=" " alt="" coords="210,213,360,258"/>
+<area shape="poly" id="edge57_Node000000_Node000004" title=" " alt="" coords="87,314,121,290,160,268,211,250,208,254,162,273,124,294,91,318"/>
+<area shape="rect" id="Node000005" href="$classApp_1_1Http_1_1Requests_1_1ContentVersionRequest.html" title=" " alt="" coords="194,283,376,327"/>
+<area shape="poly" id="edge58_Node000000_Node000005" title=" " alt="" coords="126,327,196,317,192,321,129,331"/>
+<area shape="rect" id="Node000006" href="$classApp_1_1Http_1_1Requests_1_1FrameworkRequest.html" title=" " alt="" coords="207,352,362,397"/>
+<area shape="poly" id="edge59_Node000000_Node000006" title=" " alt="" coords="127,348,209,361,205,364,129,353"/>
+<area shape="rect" id="Node000007" href="$classApp_1_1Http_1_1Requests_1_1LoadProjectionRequest.html" title=" " alt="" coords="196,421,374,466"/>
+<area shape="poly" id="edge60_Node000000_Node000007" title=" " alt="" coords="88,361,124,385,162,407,198,422,193,424,160,411,121,389,89,366"/>
+<area shape="rect" id="Node000008" href="$classApp_1_1Http_1_1Requests_1_1ProjectRequest.html" title=" " alt="" coords="210,491,360,535"/>
+<area shape="poly" id="edge61_Node000000_Node000008" title=" " alt="" coords="73,365,110,423,134,452,162,476,185,489,212,500,207,501,183,494,159,481,130,455,106,426,73,370"/>
+<area shape="rect" id="Node000009" href="$classApp_1_1Http_1_1Requests_1_1TeacherAssignmentRequest.html" title=" " alt="" coords="180,560,390,605"/>
+<area shape="poly" id="edge62_Node000000_Node000009" title=" " alt="" coords="66,366,80,408,99,456,126,504,143,526,162,546,182,560,177,561,159,550,139,530,121,507,94,458,75,409,66,371"/>
+<area shape="rect" id="Node000010" href="$classApp_1_1Http_1_1Requests_1_1VersionRequest.html" title=" " alt="" coords="210,629,360,674"/>
+<area shape="poly" id="edge63_Node000000_Node000010" title=" " alt="" coords="63,366,72,421,89,488,118,556,138,588,162,615,185,630,212,643,207,643,182,635,159,619,134,591,113,559,84,489,67,422,62,371"/>
+</map>

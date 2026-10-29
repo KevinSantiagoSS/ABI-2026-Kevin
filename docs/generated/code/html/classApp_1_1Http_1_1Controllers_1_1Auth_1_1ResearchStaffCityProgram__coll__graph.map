@@ -1,0 +1,7 @@
+<map id="App::Http::Controllers::Auth::ResearchStaffCityProgram" name="App::Http::Controllers::Auth::ResearchStaffCityProgram">
+<area shape="rect" id="Node000001" title="Extended model that restricts city&#45;program lookups to the research staff connection,..." alt="" coords="5,335,233,469"/>
+<area shape="rect" id="Node000002" href="$classApp_1_1Models_1_1CityProgram.html" title="city_program table model, manages communication with the database using the root user,..." alt="" coords="29,126,209,287"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="120,300,122,337,117,335,118,304"/>
+<area shape="rect" id="Node000003" href="$classModel.html" title=" " alt="" coords="94,5,144,78"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="120,90,122,126,117,125,119,95"/>
+</map>

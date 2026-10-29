@@ -1,0 +1,7 @@
+<map id="App::Models::ResearchStaff::LoadProjection" name="App::Models::ResearchStaff::LoadProjection">
+<area shape="rect" id="Node000001" title=" " alt="" coords="13,126,202,304"/>
+<area shape="rect" id="Node000003" href="$classApp_1_1Models_1_1ResearchStaff_1_1ResearchStaffLoadProjection.html" title=" " alt="" coords="5,352,210,464"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="109,317,110,353,105,352,106,321"/>
+<area shape="rect" id="Node000002" href="$classModel.html" title=" " alt="" coords="82,5,133,78"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="108,90,110,126,105,125,107,95"/>
+</map>

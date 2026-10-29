@@ -1,5 +1,5 @@
 <map id="App::Providers::BroadcastServiceProvider" name="App::Providers::BroadcastServiceProvider">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,119,187,199"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="38,5,154,71"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="99,85,99,118,93,118,93,85"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,126,183,215"/>
+<area shape="rect" id="Node000002" href="$classServiceProvider.html" title=" " alt="" coords="38,5,150,78"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="95,91,97,126,92,125,93,95"/>
 </map>

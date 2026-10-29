@@ -1,0 +1,11 @@
+<map id="App::Models::Student::ProjectStatus" name="App::Models::Student::ProjectStatus">
+<area shape="rect" id="Node000001" title="project_statuses table model, manages communication with the database using the root user,..." alt="" coords="218,126,366,215"/>
+<area shape="rect" id="Node000003" href="$classApp_1_1Models_1_1Professor_1_1ProfessorProjectStatus.html" title="Extended model that performs project status queries via the professor connection so catalog reads adh..." alt="" coords="5,263,171,375"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="222,222,166,265,163,261,218,225"/>
+<area shape="rect" id="Node000004" href="$classApp_1_1Models_1_1ResearchStaff_1_1ResearchStaffProjectStatus.html" title="Extended model that binds project status lookups to the research staff connection so catalog queries ..." alt="" coords="195,263,390,375"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="294,228,294,265,290,262,291,232"/>
+<area shape="rect" id="Node000005" href="$classApp_1_1Models_1_1Student_1_1StudentProjectStatus.html" title="Extended model that keeps project status reads on the student connection to respect the privileges as..." alt="" coords="414,263,568,375"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="363,221,419,263,414,263,362,226"/>
+<area shape="rect" id="Node000002" href="$classModel.html" title=" " alt="" coords="267,5,318,78"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="293,91,295,127,290,125,291,95"/>
+</map>
