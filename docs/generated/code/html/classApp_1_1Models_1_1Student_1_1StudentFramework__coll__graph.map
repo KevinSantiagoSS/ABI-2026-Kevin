@@ -1,9 +1,9 @@
 <map id="App::Models::Student::StudentFramework" name="App::Models::Student::StudentFramework">
-<area shape="rect" id="Node000001" title="Extended model that executes framework operations on the student connection, aligning with the role&#39;s..." alt="" coords="19,308,171,408"/>
-<area shape="rect" id="Node000002" href="$classApp_1_1Models_1_1Framework.html" title="framework table model, manages communication with the database using the root user,..." alt="" coords="5,133,185,259"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="98,272,98,308,93,308,93,272"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="29,5,84,71"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="70,83,83,132,77,134,65,85"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="109,5,159,71"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="129,71,117,118,112,117,124,70"/>
+<area shape="rect" id="Node000001" title="Extended model that executes framework operations on the student connection, aligning with the role&#39;s..." alt="" coords="20,339,169,451"/>
+<area shape="rect" id="Node000002" href="$classApp_1_1Models_1_1Framework.html" title="framework table model, manages communication with the database using the root user,..." alt="" coords="5,151,183,290"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="95,303,97,340,92,339,93,307"/>
+<area shape="rect" id="Node000003" href="$classModel.html" title=" " alt="" coords="33,5,84,78"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="69,89,83,151,78,151,68,95"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="108,5,155,78"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="125,75,115,135,110,133,124,80"/>
 </map>

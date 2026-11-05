@@ -1,0 +1,5 @@
+<map id="App::Services::Projects::ContentVersion" name="App::Services::Projects::ContentVersion">
+<area shape="rect" id="Node000001" title="content_version table model, manages communication with the database using the root user,..." alt="" coords="5,126,164,260"/>
+<area shape="rect" id="Node000002" href="$classModel.html" title=" " alt="" coords="59,5,110,78"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="86,90,87,126,82,125,84,96"/>
+</map>

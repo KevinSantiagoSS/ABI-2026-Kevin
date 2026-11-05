@@ -1,7 +1,6 @@
 var classApp_1_1Http_1_1Controllers_1_1ProjectionProfessorController =
 [
     [ "__construct", "classApp_1_1Http_1_1Controllers_1_1ProjectionProfessorController.html#a18ad569742b88a54c8f1863191bdf003", null ],
-    [ "academicProcessUnavailableView", "classApp_1_1Http_1_1Controllers_1_1ProjectionProfessorController.html#a5737da7f2852861bc3eae90310c17ab4", null ],
     [ "buildProfessorHoursReportState", "classApp_1_1Http_1_1Controllers_1_1ProjectionProfessorController.html#add8fe38cc8fab9dbe7abe94661b0e488", null ],
     [ "buildProfessorMissingIdeasReportState", "classApp_1_1Http_1_1Controllers_1_1ProjectionProfessorController.html#a8392be9d98b313ad3b86a5481a4a2bcc", null ],
     [ "buildProfessorProgramBalanceReportState", "classApp_1_1Http_1_1Controllers_1_1ProjectionProfessorController.html#a89aa3cb8190669296babfe1e8bafbcca", null ],

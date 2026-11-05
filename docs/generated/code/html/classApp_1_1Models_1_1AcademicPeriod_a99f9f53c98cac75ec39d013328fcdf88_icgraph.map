@@ -1,0 +1,7 @@
+<map id="App::Models::AcademicPeriod::formDateConstraints" name="App::Models::AcademicPeriod::formDateConstraints">
+<area shape="rect" id="Node000001" title=" " alt="" coords="285,52,499,97"/>
+<area shape="rect" id="Node000002" href="$classApp_1_1Http_1_1Controllers_1_1AcademicPeriodController.html#a6db493c934d8a2c99071258080dcf4c5" title=" " alt="" coords="22,5,220,67"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="267,58,221,53,221,48,272,57"/>
+<area shape="rect" id="Node000003" href="$classApp_1_1Http_1_1Controllers_1_1AcademicPeriodController.html#aca15fdc6339d64bd46c794104bb04af8" title=" " alt="" coords="5,91,237,136"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="266,93,237,100,237,94,272,92"/>
+</map>

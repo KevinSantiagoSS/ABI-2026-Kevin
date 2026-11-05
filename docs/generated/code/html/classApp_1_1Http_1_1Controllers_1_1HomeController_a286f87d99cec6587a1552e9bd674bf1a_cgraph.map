@@ -1,0 +1,9 @@
+<map id="App::Http::Controllers::HomeController::index" name="App::Http::Controllers::HomeController::index">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,75,182,119"/>
+<area shape="rect" id="Node000002" href="$classApp_1_1Http_1_1Controllers_1_1AuthUserHelper.html#af3e2bf58fc386ace81837e88a35e15f6" title=" " alt="" coords="230,5,456,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="176,72,248,53,243,56,178,76"/>
+<area shape="rect" id="Node000003" href="$classApp_1_1Http_1_1Controllers_1_1UserRoleHelper.html#a11a691ff2ddcfa383ab54f44545f0947" title=" " alt="" coords="230,75,456,119"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="182,94,217,96,212,98,183,100"/>
+<area shape="rect" id="Node000004" href="$classApp_1_1Http_1_1Controllers_1_1AuthUserHelper.html#af9167179e446f9581f0cbecf6ffaf63e" title=" " alt="" coords="247,144,438,189"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="177,117,248,139,243,140,176,123"/>
+</map>

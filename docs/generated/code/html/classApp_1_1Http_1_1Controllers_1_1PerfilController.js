@@ -1,6 +1,5 @@
 var classApp_1_1Http_1_1Controllers_1_1PerfilController =
 [
-    [ "academicProcessUnavailableView", "classApp_1_1Http_1_1Controllers_1_1PerfilController.html#a5737da7f2852861bc3eae90310c17ab4", null ],
     [ "canManageProfileFields", "classApp_1_1Http_1_1Controllers_1_1PerfilController.html#aef4b978bd064c247366616f1e4d6efeb", null ],
     [ "edit", "classApp_1_1Http_1_1Controllers_1_1PerfilController.html#a22a47bc9936ec088641c820ee6776efc", null ],
     [ "isObviousNumericSequence", "classApp_1_1Http_1_1Controllers_1_1PerfilController.html#ab694e8a87dfe33654837238ef3fad3d5", null ],

@@ -1,9 +1,9 @@
 <map id="App::Http::Controllers::VersionController" name="App::Http::Controllers::VersionController">
-<area shape="rect" id="Node000001" title="Controlador para la gestión de versiones de proyectos." alt="" coords="125,307,361,560"/>
-<area shape="rect" id="Node000002" href="$classApp_1_1Http_1_1Controllers_1_1Controller.html" title=" " alt="" coords="5,120,236,244"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="159,255,184,305,179,308,154,258"/>
-<area shape="rect" id="Node000003" href="$classBaseController.html" title=" " alt="" coords="65,5,176,71"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="123,84,123,120,118,120,118,84"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="260,149,309,215"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="282,215,270,291,264,290,277,214"/>
+<area shape="rect" id="Node000001" title="Controlador para la gestión de versiones de proyectos." alt="" coords="25,289,259,575"/>
+<area shape="rect" id="Node000002" href="$classApp_1_1Http_1_1Controllers_1_1Controller.html" title=" " alt="" coords="5,127,156,216"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="95,228,111,290,106,290,94,234"/>
+<area shape="rect" id="Node000003" href="$classBaseController.html" title=" " alt="" coords="27,5,134,78"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="81,90,83,127,78,127,80,95"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="180,136,226,208"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="196,205,182,274,177,272,194,210"/>
 </map>

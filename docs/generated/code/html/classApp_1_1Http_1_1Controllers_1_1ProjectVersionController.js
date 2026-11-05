@@ -1,6 +1,5 @@
 var classApp_1_1Http_1_1Controllers_1_1ProjectVersionController =
 [
-    [ "academicProcessUnavailableView", "classApp_1_1Http_1_1Controllers_1_1ProjectVersionController.html#a5737da7f2852861bc3eae90310c17ab4", null ],
     [ "authorizeHistoryAccess", "classApp_1_1Http_1_1Controllers_1_1ProjectVersionController.html#adacb95202c38fa936cb57ac339917dc0", null ],
     [ "contentDisplayName", "classApp_1_1Http_1_1Controllers_1_1ProjectVersionController.html#a4b3a381ffcac9bfb0a3f9fec87d6faf0", null ],
     [ "create", "classApp_1_1Http_1_1Controllers_1_1ProjectVersionController.html#a1e7a29698c8e8059016e3c415930966d", null ],

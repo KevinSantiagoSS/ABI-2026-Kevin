@@ -1,0 +1,7 @@
+<map id="App::Listeners::ResearchStaffUser" name="App::Listeners::ResearchStaffUser">
+<area shape="rect" id="Node000001" title="Extended model that runs user queries through the research staff connection so authentication data re..." alt="" coords="26,425,197,536"/>
+<area shape="rect" id="Node000002" href="$classApp_1_1Models_1_1User.html" title="user table model, manages communication with the database using the root user, should not be used by ..." alt="" coords="5,126,217,377"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="113,389,114,426,109,424,110,394"/>
+<area shape="rect" id="Node000003" href="$classAuthenticatable.html" title=" " alt="" coords="54,5,168,78"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="112,90,114,126,109,125,111,95"/>
+</map>

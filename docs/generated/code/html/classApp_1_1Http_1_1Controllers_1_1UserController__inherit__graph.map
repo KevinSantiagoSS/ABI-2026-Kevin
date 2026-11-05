@@ -1,7 +1,7 @@
 <map id="App::Http::Controllers::UserController" name="App::Http::Controllers::UserController">
-<area shape="rect" id="Node000001" title=" " alt="" coords="17,291,224,756"/>
-<area shape="rect" id="Node000002" href="$classApp_1_1Http_1_1Controllers_1_1Controller.html" title=" " alt="" coords="5,119,236,243"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="123,256,123,291,118,291,118,256"/>
-<area shape="rect" id="Node000003" href="$classBaseController.html" title=" " alt="" coords="65,5,176,71"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="123,84,123,118,118,118,118,84"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,263,210,791"/>
+<area shape="rect" id="Node000002" href="$classApp_1_1Http_1_1Controllers_1_1Controller.html" title=" " alt="" coords="32,126,183,215"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="108,227,110,263,105,263,108,233"/>
+<area shape="rect" id="Node000003" href="$classBaseController.html" title=" " alt="" coords="54,5,161,78"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="108,90,110,126,105,126,108,96"/>
 </map>

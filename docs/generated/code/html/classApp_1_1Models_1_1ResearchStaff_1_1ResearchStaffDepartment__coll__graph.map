@@ -1,7 +1,7 @@
 <map id="App::Models::ResearchStaff::ResearchStaffDepartment" name="App::Models::ResearchStaff::ResearchStaffDepartment">
-<area shape="rect" id="Node000001" title="Extended model that confines department access to the research staff connection, ensuring the scoped ..." alt="" coords="5,252,197,352"/>
-<area shape="rect" id="Node000002" href="$classApp_1_1Models_1_1Department.html" title="departments table model, manages communication with the database using the root user,..." alt="" coords="11,119,191,204"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="104,217,104,252,99,252,99,217"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="74,5,129,71"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="104,85,104,119,99,119,99,85"/>
+<area shape="rect" id="Node000001" title="Extended model that confines department access to the research staff connection, ensuring the scoped ..." alt="" coords="5,268,194,380"/>
+<area shape="rect" id="Node000002" href="$classApp_1_1Models_1_1Department.html" title="departments table model, manages communication with the database using the root user,..." alt="" coords="11,126,188,220"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="101,233,102,269,97,268,99,238"/>
+<area shape="rect" id="Node000003" href="$classModel.html" title=" " alt="" coords="74,5,125,78"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="100,90,102,126,97,126,99,95"/>
 </map>

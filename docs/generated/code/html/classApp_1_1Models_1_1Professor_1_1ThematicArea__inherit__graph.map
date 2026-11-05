@@ -1,0 +1,11 @@
+<map id="App::Models::Professor::ThematicArea" name="App::Models::Professor::ThematicArea">
+<area shape="rect" id="Node000001" title="thematic_areas table model, manages communication with the database using the root user,..." alt="" coords="211,126,389,316"/>
+<area shape="rect" id="Node000003" href="$classApp_1_1Models_1_1Professor_1_1ProfessorThematicArea.html" title="Extended model that ensures thematic area reads occur through the professor connection so catalog acc..." alt="" coords="5,364,176,476"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="202,314,150,366,147,362,198,317"/>
+<area shape="rect" id="Node000004" href="$classApp_1_1Models_1_1ResearchStaff_1_1ResearchStaffThematicArea.html" title="Extended model that reuses the research staff connection when fetching thematic areas,..." alt="" coords="200,364,400,476"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="302,329,302,365,298,363,298,333"/>
+<area shape="rect" id="Node000005" href="$classApp_1_1Models_1_1Student_1_1StudentThematicArea.html" title="Extended model that keeps thematic area queries limited to the student connection so learners read on..." alt="" coords="424,364,584,476"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="401,316,450,365,445,364,399,321"/>
+<area shape="rect" id="Node000002" href="$classModel.html" title=" " alt="" coords="275,5,325,78"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="301,90,303,127,297,125,299,95"/>
+</map>

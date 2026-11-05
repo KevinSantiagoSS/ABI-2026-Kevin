@@ -1,0 +1,13 @@
+<map id="App::Services::Projects::AcademicCalendarService::currentActivePeriod" name="App::Services::Projects::AcademicCalendarService::currentActivePeriod">
+<area shape="rect" id="Node000001" title=" " alt="" coords="792,73,992,135"/>
+<area shape="rect" id="Node000002" href="$classApp_1_1Services_1_1Projects_1_1TeacherIdeaBalanceService.html#ac47b6ecbc7d8c97f2995c0f199b1b00d" title=" " alt="" coords="537,73,744,135"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="774,104,745,107,745,102,779,104"/>
+<area shape="rect" id="Node000003" href="$classApp_1_1Services_1_1Projects_1_1TeacherIdeaBalanceService.html#a12ca986abc2c4cc0941c9746f26130d5" title=" " alt="" coords="261,5,489,67"/>
+<area shape="poly" id="edge5_Node000001_Node000003" title=" " alt="" coords="776,69,744,64,612,48,490,40,489,35,613,42,745,59,782,69"/>
+<area shape="rect" id="Node000005" href="$classApp_1_1Services_1_1Projects_1_1TeacherWorkloadService.html#a74b39a9a99a70fa6cfd47b8689db4646" title=" " alt="" coords="546,159,735,220"/>
+<area shape="poly" id="edge6_Node000001_Node000005" title=" " alt="" coords="788,140,734,161,733,155,782,141"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="519,74,489,68,489,63,525,74"/>
+<area shape="rect" id="Node000004" href="$classApp_1_1Services_1_1Projects_1_1TeacherIdeaBalanceService.html#ac9598103ab1490175c9e4541228a944d" title=" " alt="" coords="5,40,213,102"/>
+<area shape="poly" id="edge4_Node000002_Node000004" title=" " alt="" coords="520,99,213,80,213,75,523,94"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="243,54,214,60,212,55,248,52"/>
+</map>

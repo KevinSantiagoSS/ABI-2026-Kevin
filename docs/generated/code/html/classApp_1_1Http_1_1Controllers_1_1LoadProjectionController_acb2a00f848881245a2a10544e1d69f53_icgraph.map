@@ -1,0 +1,10 @@
+<map id="App::Http::Controllers::LoadProjectionController::projectionCountsByProgram" name="App::Http::Controllers::LoadProjectionController::projectionCountsByProgram">
+<area shape="rect" id="Node000001" title=" " alt="" coords="647,48,858,110"/>
+<area shape="rect" id="Node000002" href="$classApp_1_1Http_1_1Controllers_1_1LoadProjectionController.html#abf48c3fa25f17b4fde7b75d983a183b6" title=" " alt="" coords="353,5,560,67"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="629,62,561,54,561,48,634,61"/>
+<area shape="rect" id="Node000004" href="$classApp_1_1Http_1_1Controllers_1_1LoadProjectionController.html#ad9c9711e7c557e1d05ddf159573fe1d0" title=" " alt="" coords="315,91,599,152"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="635,96,600,104,599,98,629,97"/>
+<area shape="rect" id="Node000003" href="$classApp_1_1Http_1_1Controllers_1_1LoadProjectionController.html#a9b714122293b83715faeef014bbc97dd" title=" " alt="" coords="5,48,267,110"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="335,53,268,64,267,59,340,51"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="296,101,267,99,267,94,302,100"/>
+</map>

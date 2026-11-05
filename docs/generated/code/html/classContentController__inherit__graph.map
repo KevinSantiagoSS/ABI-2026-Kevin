@@ -1,0 +1,7 @@
+<map id="ContentController" name="ContentController">
+<area shape="rect" id="Node000001" title="Controlador para la gestión de contenidos del catálogo." alt="" coords="5,263,242,532"/>
+<area shape="rect" id="Node000002" href="$classApp_1_1Http_1_1Controllers_1_1Controller.html" title=" " alt="" coords="48,126,199,215"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="124,227,126,264,121,263,123,233"/>
+<area shape="rect" id="Node000003" href="$classBaseController.html" title=" " alt="" coords="70,5,177,78"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="124,90,126,126,121,125,123,96"/>
+</map>

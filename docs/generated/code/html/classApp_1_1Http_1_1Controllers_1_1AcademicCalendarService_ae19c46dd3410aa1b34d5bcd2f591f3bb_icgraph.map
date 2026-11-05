@@ -1,0 +1,19 @@
+<map id="App::Http::Controllers::AcademicCalendarService::currentWindowForProcess" name="App::Http::Controllers::AcademicCalendarService::currentWindowForProcess">
+<area shape="rect" id="Node000001" title=" " alt="" coords="534,215,733,276"/>
+<area shape="rect" id="Node000002" href="$classApp_1_1Http_1_1Controllers_1_1BankApprovedIdeasAssignController.html#aaa40633f6ad94204084042152841fb74" title=" " alt="" coords="220,5,486,67"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="602,202,552,140,520,108,485,81,466,70,466,65,487,77,523,104,556,137,607,202"/>
+<area shape="rect" id="Node000003" href="$classApp_1_1Http_1_1Controllers_1_1PostulationController.html#a8ab21fd08d8232f7ff9bc0facdfdcad2" title="Aplica las mismas reglas del banco de ideas: ventana de selección abierta, proyecto aprobado y perten..." alt="" coords="254,91,452,152"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="566,207,485,167,452,154,452,148,487,162,571,206"/>
+<area shape="rect" id="Node000006" href="$classApp_1_1Http_1_1Controllers_1_1BankApprovedIdeasForStudentsController.html#a1d95cf226b9e9fa658f49169791221e9" title="Muestra los proyectos aprobados relacionados con el estudiante autenticado." alt="" coords="235,176,471,238"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="516,230,472,226,471,220,521,229"/>
+<area shape="rect" id="Node000007" href="$classApp_1_1Http_1_1Controllers_1_1ProjectController.html#aac69c9e81382317b0b0b45f650744332" title="Display a paginated list of projects for the authenticated user." alt="" coords="262,262,444,306"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="516,262,445,274,444,269,521,261"/>
+<area shape="rect" id="Node000008" href="$classApp_1_1Http_1_1Controllers_1_1BankApprovedIdeasAssignController.html#ace082f57e826cf6392e975e360d43e8e" title=" " alt="" coords="220,331,486,392"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="564,283,487,321,457,333,456,328,485,316,559,285"/>
+<area shape="rect" id="Node000009" href="$classApp_1_1Http_1_1Controllers_1_1BankApprovedIdeasForStudentsController.html#a1da16a4a5c61221cfdcd5ec9887a8a9e" title=" " alt="" coords="235,416,471,478"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="605,288,554,350,522,380,487,406,467,418,465,413,485,402,519,376,550,347,600,290"/>
+<area shape="rect" id="Node000004" href="$classApp_1_1Http_1_1Controllers_1_1PostulationController.html#a4cc7fecbc9a1b921ffd2871bd763a1d1" title=" " alt="" coords="5,48,172,110"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="237,105,173,95,171,90,241,102"/>
+<area shape="rect" id="Node000005" href="$classApp_1_1Http_1_1Controllers_1_1PostulationController.html#a4626d798cedd76d73332685f7e877448" title=" " alt="" coords="5,133,172,195"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="237,142,173,153,171,148,241,138"/>
+</map>

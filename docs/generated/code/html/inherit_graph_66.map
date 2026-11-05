@@ -1,0 +1,7 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" href="$classFactory.html" title=" " alt="" coords="15,5,83,33"/>
+<area shape="rect" id="Node000001" href="$classDatabase_1_1Factories_1_1UserFactory.html" title="\Databaseloquent\Factories\Factory&lt;\App\Models\User&gt;" alt="" coords="141,24,290,68"/>
+<area shape="poly" id="edge51_Node000000_Node000001" title=" " alt="" coords="98,24,143,33,138,35,99,30"/>
+<area shape="rect" id="Node000002" href="$classIlluminate.html" title=" " alt="" coords="5,57,93,85"/>
+<area shape="poly" id="edge52_Node000002_Node000001" title=" " alt="" coords="107,60,143,57,138,58,108,65"/>
+</map>

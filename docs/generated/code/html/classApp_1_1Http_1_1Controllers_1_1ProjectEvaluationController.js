@@ -1,6 +1,5 @@
 var classApp_1_1Http_1_1Controllers_1_1ProjectEvaluationController =
 [
-    [ "academicProcessUnavailableView", "classApp_1_1Http_1_1Controllers_1_1ProjectEvaluationController.html#a5737da7f2852861bc3eae90310c17ab4", null ],
     [ "buildCommitteeReportState", "classApp_1_1Http_1_1Controllers_1_1ProjectEvaluationController.html#af7cb0e60d2182440b97fa54f0d25a327", null ],
     [ "committeeReportInsights", "classApp_1_1Http_1_1Controllers_1_1ProjectEvaluationController.html#a9a7be54ee204441cf1530d8860640b34", null ],
     [ "committeeReportVisuals", "classApp_1_1Http_1_1Controllers_1_1ProjectEvaluationController.html#a0f7ac35118f4ddc956d27d98072a95dc", null ],

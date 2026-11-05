@@ -1,13 +1,13 @@
 <map id="Database::Seeders::AcademicPeriodsTableSeeder" name="Database::Seeders::AcademicPeriodsTableSeeder">
-<area shape="rect" id="Node000001" title=" " alt="" coords="134,376,340,456"/>
-<area shape="rect" id="Node000002" href="$classDatabase_1_1Seeders_1_1CsvUpsertSeeder.html" title=" " alt="" coords="144,177,330,327"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="240,340,240,376,234,376,234,340"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="200,5,258,71"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="233,85,237,177,231,177,228,85"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="20,5,70,71"/>
-<area shape="poly" id="edge5_Node000001_Node000004" title=" " alt="" coords="35,72,20,124,9,191,8,226,12,261,21,294,36,325,53,345,73,362,120,387,117,392,70,366,49,349,32,328,16,296,7,262,3,226,4,190,15,123,30,70"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="68,70,97,110,131,152,142,163,138,167,127,155,92,113,64,73"/>
-<area shape="rect" id="Node000005" title=" " alt="" coords="318,5,366,71"/>
-<area shape="poly" id="edge6_Node000001_Node000005" title=" " alt="" coords="357,71,362,94,364,158,359,233,345,328,331,349,313,367,309,363,326,345,340,326,354,232,359,158,357,95,351,72"/>
-<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="320,55,296,73,276,96,261,128,250,162,245,161,256,126,272,93,293,69,316,51"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="148,435,350,524"/>
+<area shape="rect" id="Node000002" href="$classDatabase_1_1Seeders_1_1CsvUpsertSeeder.html" title=" " alt="" coords="157,218,340,386"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="250,399,251,437,246,434,247,403"/>
+<area shape="rect" id="Node000003" href="$classSeeder.html" title=" " alt="" coords="209,5,265,78"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="240,90,248,218,242,218,238,95"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="28,5,75,78"/>
+<area shape="poly" id="edge5_Node000001_Node000004" title=" " alt="" coords="38,80,23,140,10,220,8,263,13,306,23,347,42,384,60,406,82,424,134,452,130,454,79,429,56,410,38,387,18,348,7,307,3,263,4,220,17,139,39,75"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="65,75,94,133,131,192,148,213,143,214,127,195,89,135,65,80"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="328,5,372,78"/>
+<area shape="poly" id="edge6_Node000001_Node000005" title=" " alt="" coords="365,75,373,101,387,182,393,248,391,279,385,312,373,347,355,387,326,425,323,421,350,384,368,345,380,311,386,279,388,248,381,183,367,102,363,80"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="326,58,305,77,284,103,265,151,254,202,250,200,260,149,280,100,302,74,330,54"/>
 </map>

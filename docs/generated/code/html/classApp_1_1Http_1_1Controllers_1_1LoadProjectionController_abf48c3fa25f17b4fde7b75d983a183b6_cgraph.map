@@ -1,5 +1,8 @@
 <map id="App::Http::Controllers::LoadProjectionController::buildLoadHoursReportState" name="App::Http::Controllers::LoadProjectionController::buildLoadHoursReportState">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,213,60"/>
-<area shape="rect" id="Node000002" href="$classApp_1_1Models_1_1LoadProjection.html#ada727c25d735f12b2d1b8d055f07f5ed" title=" " alt="" coords="261,13,468,53"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="213,30,248,30,248,35,213,35"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,213,67"/>
+<area shape="rect" id="Node000002" href="$classApp_1_1Models_1_1LoadProjection.html#ada727c25d735f12b2d1b8d055f07f5ed" title=" " alt="" coords="520,14,725,58"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="213,26,261,24,366,22,472,24,507,28,501,28,472,29,366,27,261,29,213,32"/>
+<area shape="rect" id="Node000003" href="$classApp_1_1Http_1_1Controllers_1_1LoadProjectionController.html#acb2a00f848881245a2a10544e1d69f53" title=" " alt="" coords="261,39,472,100"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="213,47,248,54,242,54,213,52"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="472,53,502,52,507,51,473,58"/>
 </map>

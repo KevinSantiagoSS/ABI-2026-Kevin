@@ -1,0 +1,7 @@
+<map id="App::Http::Controllers::ResearchStaffThematicArea" name="App::Http::Controllers::ResearchStaffThematicArea">
+<area shape="rect" id="Node000001" title="Extended model that reuses the research staff connection when fetching thematic areas,..." alt="" coords="5,347,205,459"/>
+<area shape="rect" id="Node000002" href="$classApp_1_1Models_1_1ThematicArea.html" title="thematic_areas table model, manages communication with the database using the root user,..." alt="" coords="10,126,200,299"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="106,312,108,348,103,347,104,316"/>
+<area shape="rect" id="Node000003" href="$classModel.html" title=" " alt="" coords="80,5,130,78"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="106,90,108,126,103,126,105,95"/>
+</map>

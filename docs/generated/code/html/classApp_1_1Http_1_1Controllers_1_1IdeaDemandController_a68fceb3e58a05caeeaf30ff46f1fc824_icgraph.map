@@ -1,5 +1,8 @@
 <map id="App::Http::Controllers::IdeaDemandController::ideaDemandReportModules" name="App::Http::Controllers::IdeaDemandController::ideaDemandReportModules">
-<area shape="rect" id="Node000001" title=" " alt="" coords="231,5,441,60"/>
-<area shape="rect" id="Node000002" href="$classApp_1_1Http_1_1Controllers_1_1IdeaDemandController.html#a7b6a7b8fd72337676dfdfd34fcb02521" title=" " alt="" coords="5,5,183,60"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="217,35,183,35,183,30,217,30"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="499,40,709,102"/>
+<area shape="rect" id="Node000002" href="$classApp_1_1Http_1_1Controllers_1_1IdeaDemandController.html#a703e3857a4ded6599dc1dd4046f00c5d" title=" " alt="" coords="230,5,451,67"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="481,55,451,53,451,48,486,55"/>
+<area shape="rect" id="Node000003" href="$classApp_1_1Http_1_1Controllers_1_1IdeaDemandController.html#a7b6a7b8fd72337676dfdfd34fcb02521" title=" " alt="" coords="5,40,182,102"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="481,78,451,81,340,84,230,81,182,79,182,74,230,76,340,78,451,76,486,78"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="211,54,183,61,182,56,217,53"/>
 </map>

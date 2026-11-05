@@ -1,0 +1,87 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" href="$classBaseController.html" title=" " alt="" coords="5,1432,123,1460"/>
+<area shape="rect" id="Node000001" href="$classApp_1_1Http_1_1Controllers_1_1Controller.html" title=" " alt="" coords="171,1424,332,1469"/>
+<area shape="poly" id="edge6_Node000000_Node000001" title=" " alt="" coords="137,1444,172,1445,168,1448,140,1448"/>
+<area shape="rect" id="Node000002" href="$classApp_1_1Http_1_1Controllers_1_1AcademicPeriodController.html" title=" " alt="" coords="414,5,612,50"/>
+<area shape="poly" id="edge7_Node000001_Node000002" title=" " alt="" coords="251,1409,260,1125,283,696,299,479,321,287,346,141,361,92,378,61,394,46,415,37,412,41,397,51,382,64,366,94,352,143,326,288,305,480,288,697,266,1125,256,1409"/>
+<area shape="rect" id="Node000003" href="$classApp_1_1Http_1_1Controllers_1_1AcademicProcessWindowController.html" title=" " alt="" coords="384,75,643,119"/>
+<area shape="poly" id="edge8_Node000001_Node000003" title=" " alt="" coords="251,1409,262,1137,285,731,302,526,323,344,348,206,362,159,378,130,394,117,392,122,382,133,367,161,353,208,328,345,307,526,290,732,267,1138,256,1409"/>
+<area shape="rect" id="Node000004" href="$classApp_1_1Http_1_1Controllers_1_1Api_1_1ProjectApiController.html" title=" " alt="" coords="419,144,607,189"/>
+<area shape="poly" id="edge9_Node000001_Node000004" title=" " alt="" coords="251,1408,263,1149,287,765,304,572,325,401,349,271,363,227,378,199,396,184,420,174,417,178,399,188,382,203,368,229,354,272,330,402,309,572,292,766,268,1150,257,1409"/>
+<area shape="rect" id="Node000005" href="$classApp_1_1Http_1_1Controllers_1_1Auth_1_1ConfirmPasswordController.html" title=" " alt="" coords="392,213,635,258"/>
+<area shape="poly" id="edge10_Node000001_Node000005" title=" " alt="" coords="252,1409,264,1163,289,801,306,619,327,458,350,336,364,295,378,269,394,256,392,261,382,272,369,297,356,337,332,459,312,619,294,801,269,1163,257,1409"/>
+<area shape="rect" id="Node000006" href="$classApp_1_1Http_1_1Controllers_1_1Auth_1_1ForgotPasswordController.html" title=" " alt="" coords="396,283,630,327"/>
+<area shape="poly" id="edge11_Node000001_Node000006" title=" " alt="" coords="252,1408,265,1175,291,836,309,665,329,515,352,401,364,362,378,338,397,323,395,328,382,341,369,364,357,402,334,516,314,666,297,836,271,1176,257,1409"/>
+<area shape="rect" id="Node000007" href="$classApp_1_1Http_1_1Controllers_1_1Auth_1_1LoginController.html" title=" " alt="" coords="430,352,596,397"/>
+<area shape="poly" id="edge12_Node000001_Node000007" title=" " alt="" coords="252,1409,267,1189,293,871,311,712,331,572,353,466,365,430,378,407,401,389,431,378,428,382,404,393,382,411,370,432,358,468,336,573,316,713,299,872,272,1189,257,1409"/>
+<area shape="rect" id="Node000008" href="$classApp_1_1Http_1_1Controllers_1_1Auth_1_1RegisterController.html" title="Registration controller for research staff user." alt="" coords="420,421,606,466"/>
+<area shape="poly" id="edge13_Node000001_Node000008" title=" " alt="" coords="250,1408,252,1215,257,1080,266,936,282,792,305,660,319,602,336,551,356,509,378,477,397,461,421,451,418,455,400,465,382,480,360,512,341,553,324,604,310,661,287,793,272,936,262,1081,257,1215,255,1409"/>
+<area shape="rect" id="Node000009" href="$classApp_1_1Http_1_1Controllers_1_1Auth_1_1ResetPasswordController.html" title=" " alt="" coords="398,491,628,535"/>
+<area shape="poly" id="edge14_Node000001_Node000009" title=" " alt="" coords="250,1408,254,1227,260,1102,271,969,286,836,309,715,323,661,339,615,357,576,378,546,400,530,397,535,382,549,362,578,344,617,328,663,314,716,292,837,276,969,265,1103,259,1227,255,1408"/>
+<area shape="rect" id="Node000010" href="$classApp_1_1Http_1_1Controllers_1_1Auth_1_1VerificationController.html" title=" " alt="" coords="411,560,615,605"/>
+<area shape="poly" id="edge15_Node000001_Node000010" title=" " alt="" coords="251,1408,256,1240,275,1002,291,881,313,770,341,678,359,643,378,615,393,603,412,593,409,598,396,607,382,619,363,645,346,680,318,771,296,881,280,1003,262,1240,256,1409"/>
+<area shape="rect" id="Node000011" href="$classApp_1_1Http_1_1Controllers_1_1BankApprovedIdeasAssignController.html" title=" " alt="" coords="380,629,646,674"/>
+<area shape="poly" id="edge16_Node000001_Node000011" title=" " alt="" coords="251,1408,259,1252,279,1036,295,925,317,824,344,742,360,709,378,685,395,672,393,677,382,688,365,712,349,744,322,826,301,926,284,1036,264,1253,256,1409"/>
+<area shape="rect" id="Node000012" href="$classApp_1_1Http_1_1Controllers_1_1BankApprovedIdeasForProfessorsController.html" title=" " alt="" coords="390,698,637,760"/>
+<area shape="poly" id="edge17_Node000001_Node000012" title=" " alt="" coords="252,1408,263,1268,286,1078,303,981,323,893,348,820,362,792,378,770,393,758,391,763,382,773,367,795,353,822,328,895,308,982,291,1079,269,1269,257,1409"/>
+<area shape="rect" id="Node000013" href="$classApp_1_1Http_1_1Controllers_1_1BankApprovedIdeasForStudentsController.html" title=" " alt="" coords="395,784,631,845"/>
+<area shape="poly" id="edge18_Node000001_Node000013" title=" " alt="" coords="253,1408,267,1285,291,1120,308,1036,328,961,351,898,378,855,396,842,393,846,382,859,356,901,333,962,313,1038,297,1121,272,1285,259,1409"/>
+<area shape="rect" id="Node000014" href="$classApp_1_1Http_1_1Controllers_1_1CityController.html" title=" " alt="" coords="432,869,594,914"/>
+<area shape="poly" id="edge19_Node000001_Node000014" title=" " alt="" coords="254,1409,269,1298,295,1153,312,1081,331,1015,353,961,378,924,403,907,434,896,430,900,405,911,382,928,358,964,336,1017,317,1082,300,1154,274,1299,259,1409"/>
+<area shape="rect" id="Node000015" href="$classApp_1_1Http_1_1Controllers_1_1CityProgramController.html" title=" " alt="" coords="426,939,600,983"/>
+<area shape="poly" id="edge20_Node000001_Node000015" title=" " alt="" coords="249,1409,253,1324,259,1270,269,1212,286,1153,308,1095,339,1041,378,994,400,978,427,968,424,972,402,983,382,998,343,1044,313,1098,291,1155,275,1214,264,1271,258,1324,254,1409"/>
+<area shape="rect" id="Node000016" href="$classApp_1_1Http_1_1Controllers_1_1ContentController.html" title="Controlador para la gestión de contenidos del catálogo." alt="" coords="432,1008,594,1053"/>
+<area shape="poly" id="edge21_Node000001_Node000016" title=" " alt="" coords="251,1408,259,1335,279,1242,295,1193,317,1146,344,1102,378,1063,403,1046,434,1036,430,1040,405,1051,382,1067,348,1105,321,1149,300,1195,284,1244,264,1336,257,1409"/>
+<area shape="rect" id="Node000017" href="$classApp_1_1Http_1_1Controllers_1_1ContentFrameworkController.html" title=" " alt="" coords="404,1077,622,1122"/>
+<area shape="poly" id="edge22_Node000001_Node000017" title=" " alt="" coords="255,1408,266,1347,289,1273,305,1235,325,1197,349,1163,378,1132,405,1117,402,1121,382,1136,353,1166,329,1200,310,1237,294,1275,271,1349,260,1409"/>
+<area shape="rect" id="Node000018" href="$classApp_1_1Http_1_1Controllers_1_1ContentFrameworkProjectController.html" title=" " alt="" coords="382,1147,644,1191"/>
+<area shape="poly" id="edge23_Node000001_Node000018" title=" " alt="" coords="259,1409,275,1361,299,1305,333,1249,354,1224,378,1202,400,1189,397,1194,382,1206,358,1227,338,1252,304,1308,280,1363,264,1410"/>
+<area shape="rect" id="Node000019" href="$classApp_1_1Http_1_1Controllers_1_1ContentVersionController.html" title="Controlador para la gestión de versiones de contenido." alt="" coords="417,1216,609,1261"/>
+<area shape="poly" id="edge24_Node000001_Node000019" title=" " alt="" coords="267,1409,311,1338,342,1302,379,1271,418,1253,415,1257,381,1275,346,1306,315,1342,272,1411"/>
+<area shape="rect" id="Node000020" href="$classApp_1_1Http_1_1Controllers_1_1DepartmentController.html" title=" " alt="" coords="428,1285,599,1330"/>
+<area shape="poly" id="edge25_Node000001_Node000020" title=" " alt="" coords="283,1411,327,1374,379,1340,429,1322,425,1326,381,1345,330,1378,288,1414"/>
+<area shape="rect" id="Node000021" href="$classApp_1_1Http_1_1Controllers_1_1Formats_1_1FormatoRegistroController.html" title=" " alt="" coords="382,1355,644,1399"/>
+<area shape="poly" id="edge26_Node000001_Node000021" title=" " alt="" coords="345,1419,379,1409,426,1398,422,1402,381,1414,349,1422"/>
+<area shape="rect" id="Node000022" href="$classApp_1_1Http_1_1Controllers_1_1Formats_1_1FormatoTipoController.html" title=" " alt="" coords="395,1424,631,1469"/>
+<area shape="poly" id="edge27_Node000001_Node000022" title=" " alt="" coords="346,1444,397,1445,393,1448,349,1448"/>
+<area shape="rect" id="Node000023" href="$classApp_1_1Http_1_1Controllers_1_1FrameworkController.html" title="Controlador para la gestión de frameworks." alt="" coords="430,1493,596,1538"/>
+<area shape="poly" id="edge28_Node000001_Node000023" title=" " alt="" coords="346,1470,381,1478,432,1493,427,1496,379,1484,348,1474"/>
+<area shape="rect" id="Node000024" href="$classApp_1_1Http_1_1Controllers_1_1HomeController.html" title=" " alt="" coords="432,1563,594,1607"/>
+<area shape="poly" id="edge29_Node000001_Node000024" title=" " alt="" coords="285,1477,330,1515,381,1548,434,1569,430,1571,379,1553,327,1519,286,1482"/>
+<area shape="rect" id="Node000025" href="$classApp_1_1Http_1_1Controllers_1_1IdeaDemandController.html" title=" " alt="" coords="425,1632,601,1677"/>
+<area shape="poly" id="edge30_Node000001_Node000025" title=" " alt="" coords="269,1480,315,1551,346,1587,381,1617,427,1639,422,1641,379,1622,342,1591,311,1554,270,1485"/>
+<area shape="rect" id="Node000026" href="$classApp_1_1Http_1_1Controllers_1_1InvestigationLineController.html" title="Controlador para la gestión de líneas de investigación." alt="" coords="410,1701,616,1746"/>
+<area shape="poly" id="edge31_Node000001_Node000026" title=" " alt="" coords="262,1481,280,1530,304,1585,338,1640,358,1665,382,1687,413,1705,408,1707,378,1691,354,1669,333,1643,299,1588,275,1532,262,1486"/>
+<area shape="rect" id="Node000027" href="$classApp_1_1Http_1_1Controllers_1_1LoadProjectionController.html" title=" " alt="" coords="418,1771,608,1815"/>
+<area shape="poly" id="edge32_Node000001_Node000027" title=" " alt="" coords="257,1482,271,1544,294,1618,310,1656,329,1693,353,1727,382,1756,399,1769,421,1779,416,1781,397,1773,378,1760,349,1730,325,1695,305,1658,289,1620,266,1545,257,1487"/>
+<area shape="rect" id="Node000028" href="$classApp_1_1Http_1_1Controllers_1_1PerfilController.html" title=" " alt="" coords="432,1840,594,1885"/>
+<area shape="poly" id="edge33_Node000001_Node000028" title=" " alt="" coords="254,1482,264,1557,284,1649,300,1697,321,1744,348,1788,382,1826,405,1842,434,1853,429,1856,403,1847,378,1830,344,1791,317,1747,295,1699,279,1650,259,1558,254,1487"/>
+<area shape="rect" id="Node000029" href="$classApp_1_1Http_1_1Controllers_1_1PostulationController.html" title=" " alt="" coords="430,1909,596,1954"/>
+<area shape="poly" id="edge34_Node000001_Node000029" title=" " alt="" coords="252,1481,258,1568,264,1622,275,1679,291,1738,313,1795,343,1848,382,1895,404,1911,432,1923,427,1925,402,1916,378,1899,339,1851,308,1797,286,1739,269,1680,259,1623,253,1569,251,1487"/>
+<area shape="rect" id="Node000030" href="$classApp_1_1Http_1_1Controllers_1_1PostulationEvaluationController.html" title=" " alt="" coords="396,1979,631,2023"/>
+<area shape="poly" id="edge35_Node000001_Node000030" title=" " alt="" coords="257,1481,274,1594,300,1739,317,1811,336,1876,358,1929,382,1965,397,1978,392,1979,378,1968,353,1931,331,1877,312,1812,295,1740,269,1595,257,1486"/>
+<area shape="rect" id="Node000031" href="$classApp_1_1Http_1_1Controllers_1_1ProgramController.html" title=" " alt="" coords="432,2048,594,2093"/>
+<area shape="poly" id="edge36_Node000001_Node000031" title=" " alt="" coords="256,1482,271,1608,295,1773,312,1856,332,1931,355,1992,382,2034,405,2051,434,2063,429,2065,403,2056,378,2037,351,1995,327,1933,307,1857,290,1774,266,1609,256,1487"/>
+<area shape="rect" id="Node000032" href="$classApp_1_1Http_1_1Controllers_1_1ProjectController.html" title=" " alt="" coords="432,2117,594,2162"/>
+<area shape="poly" id="edge37_Node000001_Node000032" title=" " alt="" coords="255,1482,268,1622,291,1807,307,1901,328,1986,353,2056,367,2083,382,2103,405,2120,434,2133,430,2134,403,2125,378,2107,362,2086,348,2058,323,1988,302,1902,286,1808,263,1622,255,1487"/>
+<area shape="rect" id="Node000033" href="$classApp_1_1Http_1_1Controllers_1_1ProjectEvaluationController.html" title=" " alt="" coords="410,2187,617,2231"/>
+<area shape="poly" id="edge38_Node000001_Node000033" title=" " alt="" coords="254,1482,266,1634,286,1841,303,1946,324,2042,350,2120,365,2150,382,2172,412,2194,407,2196,378,2176,361,2153,345,2122,319,2043,298,1947,281,1842,260,1635,254,1487"/>
+<area shape="rect" id="Node000034" href="$classApp_1_1Http_1_1Controllers_1_1ProjectVersionController.html" title=" " alt="" coords="420,2256,606,2301"/>
+<area shape="poly" id="edge39_Node000001_Node000034" title=" " alt="" coords="254,1482,263,1647,282,1874,298,1991,320,2096,348,2183,364,2217,382,2242,400,2256,422,2268,417,2269,397,2261,378,2245,359,2219,343,2185,315,2098,293,1991,277,1875,258,1647,253,1487"/>
+<area shape="rect" id="Node000035" href="$classApp_1_1Http_1_1Controllers_1_1ProjectionProfessorController.html" title=" " alt="" coords="404,2325,623,2370"/>
+<area shape="poly" id="edge40_Node000001_Node000035" title=" " alt="" coords="253,1482,260,1660,267,1780,278,1908,294,2035,316,2151,345,2247,362,2283,382,2311,406,2331,401,2331,378,2315,358,2286,340,2249,311,2153,288,2036,272,1909,262,1780,255,1660,253,1487"/>
+<area shape="rect" id="Node000036" href="$classApp_1_1Http_1_1Controllers_1_1ProjectionStudentController.html" title=" " alt="" coords="409,2395,617,2439"/>
+<area shape="poly" id="edge41_Node000001_Node000036" title=" " alt="" coords="253,1481,258,1672,264,1801,274,1941,289,2079,312,2206,326,2262,342,2310,361,2350,382,2380,411,2403,406,2403,378,2384,356,2353,337,2312,321,2263,307,2207,284,2080,268,1941,258,1802,253,1672,252,1487"/>
+<area shape="rect" id="Node000037" href="$classApp_1_1Http_1_1Controllers_1_1ResearchGroupController.html" title="Controlador para la gestión de grupos de investigación." alt="" coords="417,2464,609,2509"/>
+<area shape="poly" id="edge42_Node000001_Node000037" title=" " alt="" coords="252,1482,256,1685,260,1824,269,1975,285,2124,308,2261,323,2321,340,2374,360,2417,382,2450,398,2464,419,2476,414,2477,395,2468,378,2453,355,2420,335,2376,317,2323,303,2262,279,2125,264,1975,255,1825,250,1685,252,1487"/>
+<area shape="rect" id="Node000038" href="$classApp_1_1Http_1_1Controllers_1_1TeacherAssignmentController.html" title=" " alt="" coords="403,2533,623,2578"/>
+<area shape="poly" id="edge43_Node000001_Node000038" title=" " alt="" coords="255,1482,271,1712,298,2041,315,2206,335,2350,358,2460,370,2497,382,2519,405,2539,400,2539,378,2523,365,2499,352,2462,330,2351,310,2206,292,2041,266,1712,254,1487"/>
+<area shape="rect" id="Node000039" href="$classApp_1_1Http_1_1Controllers_1_1TeacherLoadController.html" title=" " alt="" coords="426,2603,600,2647"/>
+<area shape="poly" id="edge44_Node000001_Node000039" title=" " alt="" coords="255,1481,270,1724,295,2075,313,2252,333,2407,356,2525,369,2565,382,2589,402,2605,428,2618,423,2618,399,2609,378,2592,364,2567,351,2527,328,2408,307,2253,290,2076,265,1724,254,1487"/>
+<area shape="rect" id="Node000040" href="$classApp_1_1Http_1_1Controllers_1_1ThematicAreaController.html" title=" " alt="" coords="421,2672,605,2717"/>
+<area shape="poly" id="edge45_Node000001_Node000040" title=" " alt="" coords="254,1482,269,1738,293,2111,310,2299,331,2465,355,2590,368,2633,382,2658,400,2673,423,2686,418,2686,397,2678,378,2661,363,2635,350,2592,326,2465,305,2300,288,2111,263,1738,254,1487"/>
+<area shape="rect" id="Node000041" href="$classApp_1_1Http_1_1Controllers_1_1UserController.html" title=" " alt="" coords="432,2741,594,2786"/>
+<area shape="poly" id="edge46_Node000001_Node000041" title=" " alt="" coords="254,1482,268,1751,291,2146,308,2346,329,2522,354,2655,367,2700,382,2727,405,2745,435,2759,429,2759,402,2750,378,2731,363,2702,348,2657,324,2523,303,2346,286,2147,262,1751,254,1487"/>
+<area shape="rect" id="Node000042" href="$classApp_1_1Http_1_1Controllers_1_1VersionController.html" title="Controlador para la gestión de versiones de proyectos." alt="" coords="432,2811,594,2855"/>
+<area shape="poly" id="edge47_Node000001_Node000042" title=" " alt="" coords="254,1481,266,1763,289,2180,306,2392,327,2578,352,2720,367,2768,382,2797,405,2815,435,2828,429,2828,402,2819,378,2800,362,2770,347,2721,322,2579,301,2392,284,2181,261,1763,253,1487"/>
+</map>

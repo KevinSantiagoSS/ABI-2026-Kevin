@@ -1,0 +1,13 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" href="$classServiceProvider.html" title=" " alt="" coords="5,152,129,180"/>
+<area shape="rect" id="Node000001" href="$classApp_1_1Providers_1_1AppServiceProvider.html" title=" " alt="" coords="183,5,380,50"/>
+<area shape="poly" id="edge204_Node000000_Node000001" title=" " alt="" coords="87,139,125,99,175,60,202,49,198,52,178,65,129,103,91,143"/>
+<area shape="rect" id="Node000002" href="$classApp_1_1Providers_1_1AuthServiceProvider.html" title=" " alt="" coords="181,75,382,119"/>
+<area shape="poly" id="edge205_Node000000_Node000002" title=" " alt="" coords="125,145,212,118,208,122,128,150"/>
+<area shape="rect" id="Node000003" href="$classApp_1_1Providers_1_1BroadcastServiceProvider.html" title=" " alt="" coords="187,144,376,189"/>
+<area shape="poly" id="edge206_Node000000_Node000003" title=" " alt="" coords="143,164,189,165,184,168,145,169"/>
+<area shape="rect" id="Node000004" href="$classApp_1_1Providers_1_1EventServiceProvider.html" title=" " alt="" coords="177,213,386,258"/>
+<area shape="poly" id="edge207_Node000000_Node000004" title=" " alt="" coords="127,183,212,211,208,214,127,188"/>
+<area shape="rect" id="Node000005" href="$classApp_1_1Providers_1_1RouteServiceProvider.html" title=" " alt="" coords="177,283,386,327"/>
+<area shape="poly" id="edge208_Node000000_Node000005" title=" " alt="" coords="89,189,129,230,178,268,203,282,197,282,175,273,125,234,88,194"/>
+</map>

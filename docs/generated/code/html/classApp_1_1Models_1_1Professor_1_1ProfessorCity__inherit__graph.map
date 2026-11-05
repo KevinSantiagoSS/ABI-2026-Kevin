@@ -1,7 +1,7 @@
 <map id="App::Models::Professor::ProfessorCity" name="App::Models::Professor::ProfessorCity">
-<area shape="rect" id="Node000001" title="Extended model that routes city queries through the professor connection so faculty work inside their..." alt="" coords="5,272,168,372"/>
-<area shape="rect" id="Node000002" href="$classApp_1_1Models_1_1City.html" title=" " alt="" coords="23,119,151,224"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="89,237,89,272,84,272,84,237"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="59,5,114,71"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="89,85,89,118,84,118,84,85"/>
+<area shape="rect" id="Node000001" title="Extended model that routes city queries through the professor connection so faculty work inside their..." alt="" coords="5,291,165,402"/>
+<area shape="rect" id="Node000002" href="$classApp_1_1Models_1_1City.html" title=" " alt="" coords="23,126,148,243"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="86,255,88,291,83,290,84,260"/>
+<area shape="rect" id="Node000003" href="$classModel.html" title=" " alt="" coords="60,5,110,78"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="86,90,88,126,83,125,85,95"/>
 </map>

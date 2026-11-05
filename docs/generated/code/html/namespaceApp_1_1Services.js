@@ -5,5 +5,6 @@ var namespaceApp_1_1Services =
     [ "Projects", "namespaceApp_1_1Services_1_1Projects.html", "namespaceApp_1_1Services_1_1Projects" ],
     [ "Reports", "namespaceApp_1_1Services_1_1Reports.html", "namespaceApp_1_1Services_1_1Reports" ],
     [ "Students", "namespaceApp_1_1Services_1_1Students.html", "namespaceApp_1_1Services_1_1Students" ],
+    [ "GenericNotificationMail", "classApp_1_1Services_1_1GenericNotificationMail.html", "classApp_1_1Services_1_1GenericNotificationMail" ],
     [ "NotificationService", "classApp_1_1Services_1_1NotificationService.html", "classApp_1_1Services_1_1NotificationService" ]
 ];

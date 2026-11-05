@@ -1,7 +1,18 @@
 <map id="App::Models::TeacherAssignment::professor" name="App::Models::TeacherAssignment::professor">
-<area shape="rect" id="Node000001" title=" " alt="" coords="273,53,511,93"/>
-<area shape="rect" id="Node000002" href="$classApp_1_1Services_1_1Projections_1_1TeacherProjectionService.html#abb2e2de2eaeb4e30ab9cb413e3477d3a" title=" " alt="" coords="19,5,212,60"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="259,56,212,49,213,44,260,51"/>
-<area shape="rect" id="Node000003" href="$classApp_1_1Http_1_1Controllers_1_1ProjectionProfessorController.html#a2ed4d6f2f37d70e090507d07bc3ecdf0" title=" " alt="" coords="5,84,225,139"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="260,94,226,99,225,93,259,88"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="1212,56,1448,101"/>
+<area shape="rect" id="Node000002" href="$classApp_1_1Services_1_1Projections_1_1TeacherProjectionService.html#abb2e2de2eaeb4e30ab9cb413e3477d3a" title=" " alt="" coords="958,5,1150,67"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1194,58,1150,54,1151,48,1199,58"/>
+<area shape="rect" id="Node000003" href="$classApp_1_1Http_1_1Controllers_1_1ProjectionProfessorController.html#a2ed4d6f2f37d70e090507d07bc3ecdf0" title=" " alt="" coords="944,91,1164,152"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="1199,99,1164,107,1164,102,1193,100"/>
+<area shape="rect" id="Node000004" href="$classApp_1_1Http_1_1Controllers_1_1ProjectionProfessorController.html#add8fe38cc8fab9dbe7abe94661b0e488" title=" " alt="" coords="368,48,606,110"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="936,87,896,81,821,74,745,71,606,73,606,68,746,66,822,69,897,76,941,87"/>
+<area shape="rect" id="Node000006" href="$classApp_1_1Http_1_1Controllers_1_1ProjectionProfessorController.html#a8392be9d98b313ad3b86a5481a4a2bcc" title=" " alt="" coords="345,133,629,195"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="941,156,897,167,760,177,630,176,629,171,759,172,896,162,936,157"/>
+<area shape="rect" id="Node000007" href="$classApp_1_1Http_1_1Controllers_1_1ProjectionProfessorController.html#adef35a9bc9a8011132bce95647998fb8" title=" " alt="" coords="677,91,896,152"/>
+<area shape="poly" id="edge7_Node000003_Node000007" title=" " alt="" coords="926,122,897,124,897,119,931,121"/>
+<area shape="rect" id="Node000005" href="$classApp_1_1Http_1_1Controllers_1_1ProjectionProfessorController.html#a8413e0b8150c938c1225f47f9b56db80" title=" " alt="" coords="5,91,297,152"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="350,97,297,106,296,100,355,95"/>
+<area shape="poly" id="edge6_Node000006_Node000005" title=" " alt="" coords="326,144,297,143,297,137,332,144"/>
+<area shape="poly" id="edge8_Node000007_Node000004" title=" " alt="" coords="659,104,606,98,606,93,664,104"/>
+<area shape="poly" id="edge9_Node000007_Node000006" title=" " alt="" coords="664,139,630,147,629,141,659,140"/>
 </map>

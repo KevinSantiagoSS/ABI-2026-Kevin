@@ -1,0 +1,9 @@
+<map id="App::Http::Controllers::StudentProjectionService" name="App::Http::Controllers::StudentProjectionService">
+<area shape="rect" id="Node000001" title=" " alt="" coords="84,173,336,640"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,51,78"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="33,75,44,112,56,148,78,197,73,198,51,150,39,113,34,80"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="187,5,232,78"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="210,75,212,156,207,155,209,80"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="368,5,443,78"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="400,75,392,113,379,150,346,213,342,210,374,148,387,112,398,80"/>
+</map>

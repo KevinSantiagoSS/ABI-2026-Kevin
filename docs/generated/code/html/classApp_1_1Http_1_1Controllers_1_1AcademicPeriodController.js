@@ -1,6 +1,5 @@
 var classApp_1_1Http_1_1Controllers_1_1AcademicPeriodController =
 [
-    [ "academicProcessUnavailableView", "classApp_1_1Http_1_1Controllers_1_1AcademicPeriodController.html#a5737da7f2852861bc3eae90310c17ab4", null ],
     [ "activate", "classApp_1_1Http_1_1Controllers_1_1AcademicPeriodController.html#a2c6f8d86ffd935ff03c3c18125c68ddc", null ],
     [ "close", "classApp_1_1Http_1_1Controllers_1_1AcademicPeriodController.html#ae8807f4f1bd6913ea422af207564e006", null ],
     [ "create", "classApp_1_1Http_1_1Controllers_1_1AcademicPeriodController.html#a6db493c934d8a2c99071258080dcf4c5", null ],

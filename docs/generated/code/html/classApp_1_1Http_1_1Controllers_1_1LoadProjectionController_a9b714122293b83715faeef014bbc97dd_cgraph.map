@@ -1,0 +1,16 @@
+<map id="App::Http::Controllers::LoadProjectionController::composeLoadProjectionReportState" name="App::Http::Controllers::LoadProjectionController::composeLoadProjectionReportState">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,91,267,152"/>
+<area shape="rect" id="Node000002" href="$classApp_1_1Http_1_1Controllers_1_1LoadProjectionController.html#abf48c3fa25f17b4fde7b75d983a183b6" title=" " alt="" coords="353,5,560,67"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="254,88,341,66,336,69,255,93"/>
+<area shape="rect" id="Node000005" href="$classApp_1_1Http_1_1Controllers_1_1LoadProjectionController.html#aafc03d47569f9809d3e51d7c57a943de" title=" " alt="" coords="342,91,572,152"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="267,119,329,121,324,122,268,124"/>
+<area shape="rect" id="Node000006" href="$classApp_1_1Http_1_1Controllers_1_1LoadProjectionController.html#ad9c9711e7c557e1d05ddf159573fe1d0" title=" " alt="" coords="315,176,599,238"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="255,150,327,171,321,172,254,156"/>
+<area shape="rect" id="Node000003" href="$classApp_1_1Models_1_1LoadProjection.html#ada727c25d735f12b2d1b8d055f07f5ed" title=" " alt="" coords="906,91,1112,136"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="561,37,703,47,859,68,926,86,921,86,858,73,702,52,561,42"/>
+<area shape="rect" id="Node000004" href="$classApp_1_1Http_1_1Controllers_1_1LoadProjectionController.html#acb2a00f848881245a2a10544e1d69f53" title=" " alt="" coords="647,83,858,144"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="561,61,635,82,629,82,561,66"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="858,111,893,113,888,114,859,116"/>
+<area shape="poly" id="edge7_Node000006_Node000003" title=" " alt="" coords="599,192,725,176,858,154,918,141,924,140,859,159,726,181,600,197"/>
+<area shape="poly" id="edge8_Node000006_Node000004" title=" " alt="" coords="563,173,598,162,641,150,646,149,600,167,564,178"/>
+</map>

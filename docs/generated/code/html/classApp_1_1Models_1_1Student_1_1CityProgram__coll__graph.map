@@ -1,0 +1,5 @@
+<map id="App::Models::Student::CityProgram" name="App::Models::Student::CityProgram">
+<area shape="rect" id="Node000001" title="city_program table model, manages communication with the database using the root user,..." alt="" coords="5,126,154,304"/>
+<area shape="rect" id="Node000002" href="$classModel.html" title=" " alt="" coords="54,5,105,78"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="80,90,82,126,77,125,79,95"/>
+</map>

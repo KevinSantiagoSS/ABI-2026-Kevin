@@ -1,0 +1,7 @@
+<map id="App::Services::Projects::Content" name="App::Services::Projects::Content">
+<area shape="rect" id="Node000001" title="content table model, manages communication with the database using the root user, should not be used ..." alt="" coords="5,151,164,285"/>
+<area shape="rect" id="Node000002" href="$classModel.html" title=" " alt="" coords="23,5,74,78"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="60,90,74,151,68,151,58,95"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="98,5,144,78"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="115,75,104,135,99,133,112,80"/>
+</map>

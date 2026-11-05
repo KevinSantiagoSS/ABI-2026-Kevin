@@ -1,5 +1,5 @@
 <map id="App::Console::Commands::NotifyProcessWindows" name="App::Console::Commands::NotifyProcessWindows">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,119,187,288"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="55,5,137,71"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="99,84,99,118,93,118,93,84"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,126,183,316"/>
+<area shape="rect" id="Node000002" href="$classCommand.html" title=" " alt="" coords="56,5,133,78"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="95,90,97,126,92,126,94,95"/>
 </map>

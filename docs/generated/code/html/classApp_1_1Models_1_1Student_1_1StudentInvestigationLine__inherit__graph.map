@@ -1,7 +1,7 @@
 <map id="App::Models::Student::StudentInvestigationLine" name="App::Models::Student::StudentInvestigationLine">
-<area shape="rect" id="Node000001" title="Extended model that restricts investigation line queries to the student connection,..." alt="" coords="21,321,205,421"/>
-<area shape="rect" id="Node000002" href="$classApp_1_1Models_1_1InvestigationLine.html" title="investigation_lines table model, manages communication with the database using the root user,..." alt="" coords="5,119,220,273"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="115,287,115,321,110,321,110,287"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="85,5,140,71"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="115,84,115,118,110,118,110,84"/>
+<area shape="rect" id="Node000001" title="Extended model that restricts investigation line queries to the student connection,..." alt="" coords="20,347,201,459"/>
+<area shape="rect" id="Node000002" href="$classApp_1_1Models_1_1InvestigationLine.html" title="investigation_lines table model, manages communication with the database using the root user,..." alt="" coords="5,126,216,299"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="112,312,113,348,108,347,109,316"/>
+<area shape="rect" id="Node000003" href="$classModel.html" title=" " alt="" coords="85,5,136,78"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="111,90,113,126,108,126,110,95"/>
 </map>

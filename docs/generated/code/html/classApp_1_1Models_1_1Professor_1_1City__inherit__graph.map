@@ -1,0 +1,11 @@
+<map id="App::Models::Professor::City" name="App::Models::Professor::City">
+<area shape="rect" id="Node000001" title=" " alt="" coords="204,126,364,260"/>
+<area shape="rect" id="Node000003" href="$classApp_1_1Models_1_1Professor_1_1ProfessorCity.html" title="Extended model that routes city queries through the professor connection so faculty work inside their..." alt="" coords="5,319,165,430"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="202,268,147,321,144,317,198,271"/>
+<area shape="rect" id="Node000004" href="$classApp_1_1Models_1_1ResearchStaff_1_1ResearchStaffCity.html" title="Extended model that applies the research staff connection when retrieving city records so the limited..." alt="" coords="190,308,378,442"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="285,272,286,309,281,307,282,277"/>
+<area shape="rect" id="Node000005" href="$classApp_1_1Models_1_1Student_1_1StudentCity.html" title="Extended model that limits city queries to the student connection so learners operate strictly within..." alt="" coords="403,319,552,430"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="366,267,421,319,416,319,364,272"/>
+<area shape="rect" id="Node000002" href="$classModel.html" title=" " alt="" coords="258,5,309,78"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="285,91,286,127,281,125,283,95"/>
+</map>

@@ -1,7 +1,7 @@
 <map id="App::Http::Controllers::AcademicProcessWindowController" name="App::Http::Controllers::AcademicProcessWindowController">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,291,331,623"/>
-<area shape="rect" id="Node000002" href="$classApp_1_1Http_1_1Controllers_1_1Controller.html" title=" " alt="" coords="53,119,283,243"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="171,257,171,290,165,290,165,257"/>
-<area shape="rect" id="Node000003" href="$classBaseController.html" title=" " alt="" coords="113,5,223,71"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="171,84,171,118,165,118,165,84"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,263,328,639"/>
+<area shape="rect" id="Node000002" href="$classApp_1_1Http_1_1Controllers_1_1Controller.html" title=" " alt="" coords="92,126,242,215"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="167,227,169,264,164,263,166,232"/>
+<area shape="rect" id="Node000003" href="$classBaseController.html" title=" " alt="" coords="114,5,220,78"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="167,90,169,126,164,125,166,96"/>
 </map>

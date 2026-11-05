@@ -1,5 +1,16 @@
 var namespaceApp_1_1Models_1_1Professor =
 [
+    [ "City", "classApp_1_1Models_1_1Professor_1_1City.html", "classApp_1_1Models_1_1Professor_1_1City" ],
+    [ "CityProgram", "classApp_1_1Models_1_1Professor_1_1CityProgram.html", "classApp_1_1Models_1_1Professor_1_1CityProgram" ],
+    [ "Content", "classApp_1_1Models_1_1Professor_1_1Content.html", "classApp_1_1Models_1_1Professor_1_1Content" ],
+    [ "ContentFramework", "classApp_1_1Models_1_1Professor_1_1ContentFramework.html", "classApp_1_1Models_1_1Professor_1_1ContentFramework" ],
+    [ "ContentFrameworkProject", "classApp_1_1Models_1_1Professor_1_1ContentFrameworkProject.html", "classApp_1_1Models_1_1Professor_1_1ContentFrameworkProject" ],
+    [ "ContentVersion", "classApp_1_1Models_1_1Professor_1_1ContentVersion.html", "classApp_1_1Models_1_1Professor_1_1ContentVersion" ],
+    [ "Department", "classApp_1_1Models_1_1Professor_1_1Department.html", "classApp_1_1Models_1_1Professor_1_1Department" ],
+    [ "Framework", "classApp_1_1Models_1_1Professor_1_1Framework.html", "classApp_1_1Models_1_1Professor_1_1Framework" ],
+    [ "InvestigationLine", "classApp_1_1Models_1_1Professor_1_1InvestigationLine.html", "classApp_1_1Models_1_1Professor_1_1InvestigationLine" ],
+    [ "PostulationMember", "classApp_1_1Models_1_1Professor_1_1PostulationMember.html", "classApp_1_1Models_1_1Professor_1_1PostulationMember" ],
+    [ "PostulationPriority", "classApp_1_1Models_1_1Professor_1_1PostulationPriority.html", "classApp_1_1Models_1_1Professor_1_1PostulationPriority" ],
     [ "ProfessorCity", "classApp_1_1Models_1_1Professor_1_1ProfessorCity.html", "classApp_1_1Models_1_1Professor_1_1ProfessorCity" ],
     [ "ProfessorCityProgram", "classApp_1_1Models_1_1Professor_1_1ProfessorCityProgram.html", "classApp_1_1Models_1_1Professor_1_1ProfessorCityProgram" ],
     [ "ProfessorContent", "classApp_1_1Models_1_1Professor_1_1ProfessorContent.html", "classApp_1_1Models_1_1Professor_1_1ProfessorContent" ],
@@ -19,6 +30,12 @@ var namespaceApp_1_1Models_1_1Professor =
     [ "ProfessorThematicArea", "classApp_1_1Models_1_1Professor_1_1ProfessorThematicArea.html", "classApp_1_1Models_1_1Professor_1_1ProfessorThematicArea" ],
     [ "ProfessorUser", "classApp_1_1Models_1_1Professor_1_1ProfessorUser.html", "classApp_1_1Models_1_1Professor_1_1ProfessorUser" ],
     [ "ProfessorVersion", "classApp_1_1Models_1_1Professor_1_1ProfessorVersion.html", "classApp_1_1Models_1_1Professor_1_1ProfessorVersion" ],
+    [ "Program", "classApp_1_1Models_1_1Professor_1_1Program.html", "classApp_1_1Models_1_1Professor_1_1Program" ],
+    [ "Project", "classApp_1_1Models_1_1Professor_1_1Project.html", "classApp_1_1Models_1_1Professor_1_1Project" ],
+    [ "ProjectStatus", "classApp_1_1Models_1_1Professor_1_1ProjectStatus.html", null ],
+    [ "ResearchGroup", "classApp_1_1Models_1_1Professor_1_1ResearchGroup.html", "classApp_1_1Models_1_1Professor_1_1ResearchGroup" ],
     [ "ResearchStaffPostulationMember", "classApp_1_1Models_1_1Professor_1_1ResearchStaffPostulationMember.html", "classApp_1_1Models_1_1Professor_1_1ResearchStaffPostulationMember" ],
-    [ "ResearchStaffPostulationPriority", "classApp_1_1Models_1_1Professor_1_1ResearchStaffPostulationPriority.html", "classApp_1_1Models_1_1Professor_1_1ResearchStaffPostulationPriority" ]
+    [ "ResearchStaffPostulationPriority", "classApp_1_1Models_1_1Professor_1_1ResearchStaffPostulationPriority.html", "classApp_1_1Models_1_1Professor_1_1ResearchStaffPostulationPriority" ],
+    [ "ThematicArea", "classApp_1_1Models_1_1Professor_1_1ThematicArea.html", "classApp_1_1Models_1_1Professor_1_1ThematicArea" ],
+    [ "Version", "classApp_1_1Models_1_1Professor_1_1Version.html", "classApp_1_1Models_1_1Professor_1_1Version" ]
 ];

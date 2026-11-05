@@ -25,6 +25,7 @@ var namespaceApp_1_1Models =
     [ "PostulationMember", "classApp_1_1Models_1_1PostulationMember.html", "classApp_1_1Models_1_1PostulationMember" ],
     [ "PostulationPriority", "classApp_1_1Models_1_1PostulationPriority.html", "classApp_1_1Models_1_1PostulationPriority" ],
     [ "Professor", "classApp_1_1Models_1_1Professor.html", "classApp_1_1Models_1_1Professor" ],
+    [ "ProfessorProject", "classApp_1_1Models_1_1ProfessorProject.html", "classApp_1_1Models_1_1ProfessorProject" ],
     [ "Program", "classApp_1_1Models_1_1Program.html", "classApp_1_1Models_1_1Program" ],
     [ "Project", "classApp_1_1Models_1_1Project.html", "classApp_1_1Models_1_1Project" ],
     [ "ProjectStageHistory", "classApp_1_1Models_1_1ProjectStageHistory.html", "classApp_1_1Models_1_1ProjectStageHistory" ],

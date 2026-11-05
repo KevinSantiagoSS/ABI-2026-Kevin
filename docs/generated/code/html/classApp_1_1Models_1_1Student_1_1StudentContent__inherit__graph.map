@@ -1,7 +1,7 @@
 <map id="App::Models::Student::StudentContent" name="App::Models::Student::StudentContent">
-<area shape="rect" id="Node000001" title="Extended model that keeps content queries on the student connection so learners adhere to their restr..." alt="" coords="20,292,172,392"/>
-<area shape="rect" id="Node000002" href="$classApp_1_1Models_1_1Content.html" title="content table model, manages communication with the database using the root user, should not be used ..." alt="" coords="5,119,187,244"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="99,258,99,292,93,292,93,258"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="69,5,123,71"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="99,85,99,119,93,119,93,85"/>
+<area shape="rect" id="Node000001" title="Extended model that keeps content queries on the student connection so learners adhere to their restr..." alt="" coords="20,313,169,425"/>
+<area shape="rect" id="Node000002" href="$classApp_1_1Models_1_1Content.html" title="content table model, manages communication with the database using the root user, should not be used ..." alt="" coords="5,126,184,265"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="96,277,97,314,92,313,94,282"/>
+<area shape="rect" id="Node000003" href="$classModel.html" title=" " alt="" coords="70,5,120,78"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="95,90,97,126,92,126,94,95"/>
 </map>
